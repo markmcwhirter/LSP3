@@ -1,10 +1,226 @@
 ﻿@page
 @model IndexModel
 @{
+    Layout = "_Layout";
     ViewData["Title"] = "Home page";
+    var books = Model.Books;
 }
+<asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+            //syntax highlighter
+            hljs.tabReplace = '    ';
+            hljs.initHighlightingOnLoad();
+
+            //collapsible management
+            $('.collapsible').collapsible({
+                defaultOpen: 'section1',
+                cookieName: 'nav'
+            });
+            $('.page_collapsible').collapsible({
+                defaultOpen: 'body-section1',
+                cookieName: 'body'
+            });
+
+            //assign open/close all to functions
+            function openAll() {
+                $('.page_collapsible').collapsible('open');
+            }
+            function closeAll() {
+                $('.page_collapsible').collapsible('close');
+            }
+
+            //listen for close/open all
+            $('#closeAll').click(function (event) {
+                event.preventDefault();
+                closeAll();
+
+            });
+            $('#openAll').click(function (event) {
+                event.preventDefault();
+                openAll();
+
+            });
+
+        });
+    </script>
+</asp:Content>
+
+<style type="text/css">
+    table {
+        width: 600px;
+    }
+
+        table tbody {
+            border: none;
+        }
+
+        table td {
+            padding: 1px;
+            height: 10px;
+            vertical-align: baseline;
+        }
+
+    .collapsible,
+    .page_collapsible,
+    .accordion {
+        margin: 0;
+        padding: 10px;
+        height: 20px;
+        border-top: #f0f0f0 1px solid;
+        background: #cccccc;
+        font-family: Arial, Helvetica, sans-serif;
+        text-decoration: none;
+        text-transform: uppercase;
+        color: #000;
+        font-size: 1em;
+    }
+
+    .accordion-open,
+    .collapse-open {
+        background: #000;
+        color: #fff;
+    }
+
+        .accordion-open span,
+        .collapse-open span {
+            display: block;
+            float: right;
+        }
+
+        .accordion-open span,
+        .collapse-open span {
+            background: url(images/sprite.png) no-repeat;
+            width: 18px;
+            height: 17px;
+            background-position: -435px 0px;
+        }
+
+    .accordion-close span,
+    .collapse-close span {
+        display: block;
+        float: right;
+        background: url(images/sprite.png) no-repeat;
+        width: 18px;
+        height: 17px;
+        background-position: -453px 0px;
+    }
+
+    div.container {
+        padding: 0;
+        margin: 0;
+        border: 1px solid lightgrey;
+    }
+
+    div.content {
+        background-color: White;
+        margin: 0;
+        padding: 10px;
+        font-size: .9em;
+        line-height: 1.5em;
+    }
+
+        div.content ul, div.content p {
+            padding: 0;
+            margin: 0;
+            padding: 3px;
+        }
+
+            div.content ul li {
+                list-style-position: inside;
+                line-height: 25px;
+            }
+
+                div.content ul li a {
+                    color: #555555;
+                }
+
+    code {
+        overflow: auto;
+    }
+
+    .button.green {
+        color: white;
+    }
+
+    a:link {
+        color: black;
+    }
+
+    .linkreport a:link {
+        color: blue;
+    }
+
+    .loginDisplay, a.loginDisplay, .loginDisplay a {
+        color: white;
+    }
+</style>
+
+<h3 class=collapsible id=section1>Author Information<span></span></h3>
+<div class=container>
+    <div class=content>
+        <table cellspacing=0 style=border-collapse:collapse;>
+            <tr>
+                <td>Author:</td>
+                <td><div class=NameHeading>
+                        @Html.DisplayFor(IndexModel => IndexModel.Author.Prefix)
+                        @Html.DisplayFor(IndexModel => IndexModel.Author.FirstName) 
+                        @Html.DisplayFor(IndexModel => IndexModel.Author.MiddleName) 
+                        @Html.DisplayFor(IndexModel => IndexModel.Author.LastName)
+                    </div>
+                </td>
+
+            </tr>
+            <tr>
+                <td >Username:</td>
+                <td>@Html.DisplayFor(IndexModel => IndexModel.Author.Username)</td>
+                <td>Business Phone:</td>
+                <td>@Html.DisplayFor(IndexModel => IndexModel.Author.BusinessPhone)</td>
+            </tr>
+            <tr>
+                <td >Address:</td>
+                <td>@Html.DisplayFor(IndexModel => IndexModel.Author.Address1)</td>
+                <td>Home Phone:</td>
+                <td>@Html.DisplayFor(IndexModel => IndexModel.Author.HomePhone)</td>
+            </tr>
+            <tr>
+                <td ></td>
+                <td>@Html.DisplayFor(IndexModel => IndexModel.Author.Address2)</td>
+                <td>Cell Phone:</td>
+                <td>@Html.DisplayFor(IndexModel => IndexModel.Author.CellPhone)</td>
+            </tr>
+            <tr>
+                <td ></td>
+                <td>
+                    <div>
+                        @Html.DisplayFor(IndexModel => IndexModel.Author.City),
+                        @Html.DisplayFor(IndexModel => IndexModel.Author.State) &nbsp;
+                        @Html.DisplayFor(IndexModel => IndexModel.Author.ZIP) &nbsp;
+                        @Html.DisplayFor(IndexModel => IndexModel.Author.Country)
+                    </div>
+                </td>
+                <td>EMail:</td>
+                <td>@Html.DisplayFor(IndexModel => IndexModel.Author.Email)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Edit Profile:</td>
+                <td>LINK</td>
+            </tr>
+        </table>
+
+        <br /><br />
+        @* @foreach (var book in books)
+        {
+            <div>
+                @Html.Label(book.Title)
+            </div>
+
+        } *@
+    </div>
 </div>
+
+   
+

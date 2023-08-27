@@ -1,12 +1,22 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - LSP3</title>
+    <title>LightSwitch</title>
+   @*  <meta http-equiv="refresh" content="1200;url=http://www.lightswitchpress.com/Author/Account/login.aspx"> *@
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="http://www.lightswitchpress.com/">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="language" content="en-us">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LSP3.styles.css" asp-append-version="true" />
+    @RenderSection("HeadContent", required: false)
 </head>
 <body>
     <header>
@@ -19,6 +29,9 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            @ViewBag.Link
+                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
@@ -38,7 +51,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - LSP3 - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2023 - Light Speed Press - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 

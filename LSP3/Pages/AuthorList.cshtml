@@ -1,0 +1,25 @@
+﻿@page
+@model LSP3.Pages.AuthorListModel
+@{
+
+}
+
+
+<table>
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>EMail</td>
+            <td>ID</td>
+        </tr>
+    </thead>
+    @foreach (var author in Model.AuthorList)
+    {
+        <tr>
+            <td>@Html.Label(author.LastName), @Html.Label(author.FirstName)</td>
+            <td>@Html.Label(author.AuthorID.ToString())</td>
+            <td>@Html.Label(author.Email)</td>
+        </tr>
+    }
+</table>
+

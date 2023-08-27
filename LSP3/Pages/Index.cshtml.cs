@@ -1,42 +1,99 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LSP3.Model;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-using System.Web;
+using System.Text.Json;
 
 namespace LSP3.Pages;
 
-public class IndexModel : PageModel
+public class IndexModel : MasterModel
 {
-    private readonly ILogger<IndexModel> _logger;
-    private readonly IHttpContextAccessor _httpContextAccessor;
+    [BindProperty]
+    public AuthorDto Author { get; set; }
 
-    public IndexModel(ILogger<IndexModel> logger, IHttpContextAccessor httpContextAccessor)
+    [BindProperty]
+    public List<BookDto> Books { get; set; }
+
+
+    public IndexModel(ILogger<IndexModel> logger, IHttpContextAccessor httpContextAccessor) : base(logger, httpContextAccessor)
     {
-        _logger = logger;
-        _httpContextAccessor = httpContextAccessor;
     }
 
-    public IActionResult OnGet()
+    public async Task<IActionResult> OnGet()
     {
-        bool IsAuthenticated = false;
 
-        var sessionValue = _httpContextAccessor.HttpContext.Session.GetString("Authenticated");
-        var currentUser = _httpContextAccessor.HttpContext.Session.GetString("currentuser");
-
-        if (sessionValue != null) IsAuthenticated = bool.Parse(sessionValue);
-
-        string url = "/Account/Login";
-
-        if (IsAuthenticated)
+        try
         {
-            if (currentUser == null)
-                return Redirect(url);
-            else
-                return Page();
+
+            if (!base.IsAuthenticated)
+                return Redirect("/Account/Login");
+
+
+           // var session = _httpContextAccessor.HttpContext.Session.GetString("userSession");
+
+            //if (IsAuthenticated)
+            //{
+            //    ViewBag.Link = "Welcome " + Author.FirstName + "! " + "[<a href=\"Account/Logout.aspx\" ' class=\"loginDisplay\">Logout</a>]";
+            //}
+            //else
+            //{
+            //    ViewBag.Link = "[<a href=\"Account/Login.aspx\">Login</a>]";
+            //}
+
+
+            //if ( session != null )
+            //    Author = JsonSerializer.Deserialize<AuthorDto>(session, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+
+            string apiResponse = await new HttpHelper().Get($"https://localhost:7253/api/book/author/{base.Author.AuthorID}");
+            if (!string.IsNullOrEmpty(apiResponse))
+            {
+                Books = JsonSerializer.Deserialize<List<BookDto>>(apiResponse, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+                //bookRepeater.DataSource = Books;
+                //bookRepeater.DataBind();
+               // try
+                //{
+                //    // Create a new instance of the Repeater control
+                //    Repeater repeater = new Repeater();
+
+                //    // Set the data source for the repeater control
+                //    repeater.DataSource = Books;
+
+                //    // Set the event handler for the ItemDataBound event
+                //    repeater.ItemDataBound += Repeater_ItemDataBound;
+
+                //    // Set the template for the repeater control
+                //    repeater.ItemTemplate = new CustomRepeaterTemplate();
+
+                //    // Bind the data to the repeater control
+                //    repeater.DataBind();
+
+                //    // Add the repeater control to the page
+                //    // Replace "page" with the actual page object
+                //    page.Controls.Add(repeater);
+                //}
+                //catch (Exception ex)
+                //{
+                //    // Log the error
+                //    Console.WriteLine("An error occurred: " + ex.Message);
+                //}
+
+            }
         }
-        else
-            return Redirect(url);
+        catch (Exception ex)
+        {
+            string error = ex.Message;
+        }
+
+        return Page();
+
     }
 
+
+
+
+    //public void OnPost()
+    //{
+    //    Console.WriteLine("Received a post request.");
+    //}
 
 }
