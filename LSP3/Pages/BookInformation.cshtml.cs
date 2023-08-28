@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace LSP3.Pages.Shared
+namespace LSP3.Pages
 {
-    public class MasterModel : PageModel
+    public class BookInformationModel : PageModel
     {
         public void OnGet()
         {

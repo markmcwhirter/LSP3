@@ -1,4 +1,3 @@
-
 html {
     box-sizing: border-box;
 }
@@ -29,14 +28,14 @@ a {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 50px auto 20px;
-    overflow: auto;
+    overflow: hidden;
     min-height: 100vh; /* Changes in media query to double this */
     max-height: 100vh;
 }
 
 .page-main {
     flex-grow: 1; /* can grow as big as needed */
-    overflow: auto; /* The magic dust that is needed to make it scroll - see http://geon.github.io/programming/2016/02/24/flexbox-full-page-web-app-layout */
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .page-header {
@@ -48,45 +47,34 @@ a {
 .page-footer {
     background-color: white;
     grid-column: 1 / span 1;
-    grid-row: 5 / 5;
+    grid-row-start: -1; /* Change to -1 to align with last row */
 }
 
 .page-content {
-    height: 100%;
-    grid-column: 1 / span 1;
-    grid-row: 2 / 2;
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    grid-template-rows: 1fr;
+    height: calc(100% - 70px); /* Subtract header and footer heights from total height */
+    display: flex; /* Add flex display for columns */
 }
 
 
 #col1 {
     background-color: white;
-    grid-column-start: 1;
-    grid-column-end: 1;
-    grid-row-start: 1;
-    grid-row-end: 1;
-    overflow: auto;
-    height: 100%;
+    width: 150px; /* Set a fixed width for the first column */
+    overflow-y: auto; /* Enable vertical scrolling for the first column if needed */
+    padding-right: 10px; /* Add some padding to avoid content overlapping with scrollbar */
 }
 
-    #col1.collapsed {
-        display: none;
-    }
 
 #col2 {
     background-color: white;
-    grid-column-start: 2;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 1;
+    flex-grow: 1; /* Allow the second column to grow and take remaining space */
+    overflow-y: auto; /* Enable vertical scrolling for the second column if needed */
+    padding-left: 10px; /* Add some padding to avoid content overlapping with scrollbar */
 }
 
 #content {
     max-height: 100%;
     background-color: white;
-    overflow: auto;
+    overflow: hidden;
     height: 100%;
 }
 
@@ -102,6 +90,7 @@ a {
     width: 100px;
     background-color: white;
 }
+
 /* When we hit the small width breakpoint, double the height of the wrapper to 2 x vp height, 
 make the page content flex wrap, and make the page content columns 100% width to force the wrap. Also
 noe make the  page content columns 40% height to retain their original height now the patent is double height. 
@@ -119,18 +108,11 @@ noe make the  page content columns 40% height to retain their original height no
 
     #col1 {
         grid-column-start: 1;
-        grid-column-end: 1;
-        grid-row-start: 1;
-        grid-row-end: 1;
-    }
+        grid-column-end: 1; /* Change to -1 to span across all columns */
+        grid-row-start: 1; /* Change to -2 to align with second last row */
+        grid-row-end: 1; /* Change to -2 to align with second last row */
 
-    #col2 {
-        background-color: white;
-        grid-column-start: 1;
-        grid-column-end: 1;
-        grid-row-start: 2;
-        grid-row-end: 2;
-        overflow-y: auto;
+        overflow-y: auto; /* Enable vertical scrolling for the first column if needed */
     }
 }
 

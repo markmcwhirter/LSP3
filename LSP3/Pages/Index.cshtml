@@ -5,49 +5,49 @@
     ViewData["Title"] = "Home page";
     var books = Model.Books;
 }
-<asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
-    <script type="text/javascript">
-        $(document).ready(function () {
+@* <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent"> *@
+<script type="text/javascript">
+    $(document).ready(function () {
 
-            //syntax highlighter
-            hljs.tabReplace = '    ';
-            hljs.initHighlightingOnLoad();
+        //syntax highlighter
+        hljs.tabReplace = '    ';
+        hljs.initHighlightingOnLoad();
 
-            //collapsible management
-            $('.collapsible').collapsible({
-                defaultOpen: 'section1',
-                cookieName: 'nav'
-            });
-            $('.page_collapsible').collapsible({
-                defaultOpen: 'body-section1',
-                cookieName: 'body'
-            });
+        //collapsible management
+        $('.collapsible').collapsible({
+            defaultOpen: 'section1',
+            cookieName: 'nav'
+        });
+        $('.page_collapsible').collapsible({
+            defaultOpen: 'body-section1',
+            cookieName: 'body'
+        });
 
-            //assign open/close all to functions
-            function openAll() {
-                $('.page_collapsible').collapsible('open');
-            }
-            function closeAll() {
-                $('.page_collapsible').collapsible('close');
-            }
+        //assign open/close all to functions
+        function openAll() {
+            $('.page_collapsible').collapsible('open');
+        }
+        function closeAll() {
+            $('.page_collapsible').collapsible('close');
+        }
 
-            //listen for close/open all
-            $('#closeAll').click(function (event) {
-                event.preventDefault();
-                closeAll();
-
-            });
-            $('#openAll').click(function (event) {
-                event.preventDefault();
-                openAll();
-
-            });
+        //listen for close/open all
+        $('#closeAll').click(function (event) {
+            event.preventDefault();
+            closeAll();
 
         });
-    </script>
-</asp:Content>
+        $('#openAll').click(function (event) {
+            event.preventDefault();
+            openAll();
 
-<style type="text/css">
+        });
+
+    });
+</script>
+@* <asp:Content />
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server"> *@
+@* <style type="text/css">
     table {
         width: 600px;
     }
@@ -155,49 +155,51 @@
     .loginDisplay, a.loginDisplay, .loginDisplay a {
         color: white;
     }
-</style>
+</style> *@
 
-<h3 class=collapsible id=section1>Author Information<span></span></h3>
+
 <div class=container>
     <div class=content>
-        <table cellspacing=0 style=border-collapse:collapse;>
+        <h3 class=collapsible id=section1>Author Information<span></span></h3>
+        <table id="author-table" cellspacing=0>
             <tr>
                 <td>Author:</td>
-                <td><div class=NameHeading>
+                <td>
+                    <div class=NameHeading>
                         @Html.DisplayFor(IndexModel => IndexModel.Author.Prefix)
-                        @Html.DisplayFor(IndexModel => IndexModel.Author.FirstName) 
-                        @Html.DisplayFor(IndexModel => IndexModel.Author.MiddleName) 
+                        @Html.DisplayFor(IndexModel => IndexModel.Author.FirstName)
+                        @Html.DisplayFor(IndexModel => IndexModel.Author.MiddleName)
                         @Html.DisplayFor(IndexModel => IndexModel.Author.LastName)
                     </div>
                 </td>
 
             </tr>
             <tr>
-                <td >Username:</td>
+                <td>Username:</td>
                 <td>@Html.DisplayFor(IndexModel => IndexModel.Author.Username)</td>
                 <td>Business Phone:</td>
                 <td>@Html.DisplayFor(IndexModel => IndexModel.Author.BusinessPhone)</td>
             </tr>
             <tr>
-                <td >Address:</td>
+                <td>Address:</td>
                 <td>@Html.DisplayFor(IndexModel => IndexModel.Author.Address1)</td>
                 <td>Home Phone:</td>
                 <td>@Html.DisplayFor(IndexModel => IndexModel.Author.HomePhone)</td>
             </tr>
             <tr>
-                <td ></td>
+                <td></td>
                 <td>@Html.DisplayFor(IndexModel => IndexModel.Author.Address2)</td>
                 <td>Cell Phone:</td>
                 <td>@Html.DisplayFor(IndexModel => IndexModel.Author.CellPhone)</td>
             </tr>
             <tr>
-                <td ></td>
+                <td></td>
                 <td>
                     <div>
                         @Html.DisplayFor(IndexModel => IndexModel.Author.City),
-                        @Html.DisplayFor(IndexModel => IndexModel.Author.State) &nbsp;
-                        @Html.DisplayFor(IndexModel => IndexModel.Author.ZIP) &nbsp;
-                        @Html.DisplayFor(IndexModel => IndexModel.Author.Country)
+                        @Html.DisplayFor(IndexModel => IndexModel.Author.State)
+                        @Html.DisplayFor(IndexModel => IndexModel.Author.ZIP)
+
                     </div>
                 </td>
                 <td>EMail:</td>
@@ -205,22 +207,46 @@
             </tr>
             <tr>
                 <td></td>
-                <td></td>
+                <td>@Html.DisplayFor(IndexModel => IndexModel.Author.Country)</td>
                 <td>Edit Profile:</td>
                 <td>LINK</td>
             </tr>
         </table>
 
         <br /><br />
-        @* @foreach (var book in books)
+        @foreach (var book in books)
         {
-            <div>
-                @Html.Label(book.Title)
+            <div class="zoomTarget">
+                <div class="content">
+                    <h3 class="collapsible" id="section<%# SectionNo %>">Book Information:  @Html.Label(book.Title)<span></span></h3>
+
+                    <table cellspacing='0' style='border-collapse:collapse;'>
+                        <tr><td width="250">Title:</td><td>@Html.Label(book.Title)</td></tr>
+
+                        <tr><td>Subtitle:</td><td>@Html.Label(book.Subtitle)</td></tr>
+
+                        <tr><td>ISBN:</td><td>@Html.Label(book.ISBN)</td></tr>
+
+                        <tr><td>Cover</td><td><a target="_blank" href="Display.aspx?target='@Html.Raw(book.Title)'">@Html.Raw(book.Title)</td></tr>
+
+                        <tr><td>Description</td><td><a target="_blank" href="DisplayText.aspx?field=description&bookid=@Html.Raw(book.BookID.ToString())">View Description</a></td></tr>
+
+                        <tr><td>Author Photo</td><td><a target="_blank" href="Display.aspx?target =@Html.Raw(book.AuthorPhoto)">@Html.Raw(book.AuthorPhoto)</td></tr>
+
+                        <tr><td>Interior</td><td><a target="_blank" href="Display.aspx?target =@Html.Raw(book.Interior)">@Html.Raw(book.Interior)</td></tr>"
+
+                        <tr><td>Author Bio</td><td><a target="_blank" href="DisplayText.aspx?bookid =@Html.Raw(book.BookID.ToString())&field =authorbio">View Author Biography</a></td></tr>
+
+                        <tr><td>Cover Idea</td><td><a target="_blank" href="DisplayText.aspx?bookid =@Html.Raw(book.BookID.ToString())&field =coveridea">View Cover Idea</a></td></tr>
+                    </table>
+                </div>
             </div>
 
-        } *@
+        }
+        <br /><br />
     </div>
 </div>
 
-   
+
+
 

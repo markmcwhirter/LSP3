@@ -19,6 +19,8 @@ public class AuthorListModel : MasterModel
 
     public async Task<IActionResult> OnGet()
     {
+        HttpHelper helper = new HttpHelper();
+        Extensions<List<AuthorDto>> extensions = new Extensions<List<AuthorDto>>();
 
         try
         {
@@ -26,10 +28,12 @@ public class AuthorListModel : MasterModel
             if (!base.IsAuthenticated)
                 return Redirect("/Account/Login");
 
-            string apiResponse = await new HttpHelper().Get($"https://localhost:7253/api/author");
-            if (!string.IsNullOrEmpty(apiResponse))
+            string apiResponse = await helper.Get($"https://localhost:7253/api/author");
+            AuthorList = extensions.Deserialize(apiResponse);
+            foreach( var author in AuthorList )
             {
-                AuthorList = JsonSerializer.Deserialize<List<AuthorDto>>(apiResponse, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+                author.Email = string.IsNullOrEmpty(author.Email) ? string.Empty : author.Email;
+                //author.Email = author.Email.Replace("@", "_");
             }
         }
         catch (Exception ex)

@@ -1,5 +1,7 @@
 using LSP3.Model;
 using Microsoft.AspNetCore.Mvc;
+
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace LSP3.Pages
@@ -17,6 +19,8 @@ namespace LSP3.Pages
 
         public async Task<IActionResult> OnGet()
         {
+            HttpHelper helper = new HttpHelper();
+            Extensions<List<BookDto>> extensions = new Extensions<List<BookDto>>();
 
             try
             {
@@ -24,18 +28,12 @@ namespace LSP3.Pages
                 if (!base.IsAuthenticated)
                     return Redirect("/Account/Login");
 
-
-                string apiResponse = await new HttpHelper().Get($"https://localhost:7253/api/book/author/{Author.AuthorID}");
-                if (!string.IsNullOrEmpty(apiResponse))
-                {
-                    Books = JsonSerializer.Deserialize<List<BookDto>>(apiResponse, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
-
-
-                }
+                string apiResponse = await helper.Get($"https://localhost:7253/api/book/author/{Author.AuthorID}");
+                Books = extensions.Deserialize(apiResponse);
             }
             catch (Exception ex)
             {
-                string error = ex.Message;
+                _logger.LogError($"Error: {ex.Message}: {ex.InnerException}: {ex.StackTrace}");
             }
 
             return Page();

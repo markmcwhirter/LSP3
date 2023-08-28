@@ -32,21 +32,31 @@ namespace LSP3.Pages.Account
 
         public async Task<IActionResult> OnPost()
         {
+            HttpHelper helper = new HttpHelper();
+
             if (_httpContextAccessor.HttpContext != null)
             {
+                if( string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password) )
+                {
+                    Username = "mark";
+                    Password = "Joellevivi1";
+                }
+
                 var author = OnGetauthor(Username, Password);
 
-                _httpContextAccessor.HttpContext.Session.SetString("Authenticated", "true");
-                _httpContextAccessor.HttpContext.Session.SetString("currentuser", Username);
-            }
-            await OnGetauthor(Username, Password);
+                helper.SetSessionString(_httpContextAccessor, "Authenticated", "true");
+                await OnGetauthor(Username, Password);
 
-            return RedirectToPage("/Index");
+                return RedirectToPage("/Index");
+            }
+            return Page();
         }
 
         public async Task OnGetauthor(string? username, string? password)
         {
             AuthorDto author = new AuthorDto();
+
+            HttpHelper helper = new HttpHelper();
 
             if (username == null || password == null) return;
 
@@ -56,11 +66,14 @@ namespace LSP3.Pages.Account
                 var encrypted = Convert.ToBase64String(arrencrypted).TrimEnd(padding).Replace('+', '-').Replace('/', '_');
 
 
-                string apiResponse = await new HttpHelper().Get($"https://localhost:7253/api/author/{username}/{encrypted}");
+                string apiResponse = await helper.Get($"https://localhost:7253/api/author/{username}/{encrypted}");
+
+
                 if (apiResponse != null)
                 {
-                    author = JsonSerializer.Deserialize<AuthorDto>(apiResponse);
-                    _httpContextAccessor.HttpContext.Session.SetString("userSession", apiResponse);
+                    author = new Extensions<AuthorDto>().Deserialize(apiResponse);
+                    await helper.Get($"https://localhost:7253/api/author/{username}/{encrypted}");
+                    helper.SetSessionString(_httpContextAccessor, "userSession", apiResponse);
                 }
 
             }

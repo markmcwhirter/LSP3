@@ -13,52 +13,88 @@
     <meta name="robots" content="noindex, nofollow" />
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LSP3.styles.css" asp-append-version="true" />
     @RenderSection("HeadContent", required: false)
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">LSP3</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            @ViewBag.Link
-                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <div class="wrapper">
+        <header class="page-header">
+            <center>
+                <a href="http://www.lightswitchpress.com/Author/Default.aspx">
+                    <div class="logo"></div>
+                </a>
+            </center>
+            <div class="loginDisplay">
+                <asp:Literal ID="LoginLiteral" runat="server"></asp:Literal>
+            </div>
+        </header>
+        <main class="page-main">
+            <div class='page-content'>
+                <div id='col1' class='col'>
+                    <div id='content'>
+                        <div id="contentInner">
+                            <ul>
+                                <li>
+                                    <a href="http://www.lightswitchpress.com">LSP Home</a>
+                                </li>
+                                <li>
+                                    <a href="Index">Author Information</a>
+                                </li>
+
+                                <li>
+                                    <a href="Profile?add=1" target="_blank">Add Author</a>
+                                </li>
+
+                                <li>
+                                    <a href="BookInformation?Add=1" target="_blank">Add Book</a>
+                                </li>
+
+                                <li>
+                                    <a href="SalesEntry" target="_blank">Sales Entry</a>
+                                </li>
+
+                                <li>
+                                    <a href="BulkSalesEntry" target="_blank">Bulk Sales Entry</a>
+                                </li>
+                                <li>
+                                    <a href="Account/Logout">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div id='col2' class='col'>
+                    @RenderBody()
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
+
         </main>
+        <footer class="page-footer">
+            <button onclick="toggleColumn()" class="button">Toggle Menu</button
+                &copy; @DateTime.Now.Year Light Speed Press.  All rights reserved.
+        </footer>
+       
+
+
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - Light Speed Press - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
+    <asp:ContentPlaceHolder ID="ScriptPlaceHolder" runat="server">
+        <script>
+            function toggleColumn() {
+                var col1 = document.getElementById('col1');
+                if (col1.classList.contains('collapsed')) {
+                    col1.classList.remove('collapsed');
+                } else {
+                    col1.classList.add('collapsed');
+                }
+            }
+        </script>
+    </asp:ContentPlaceHolder>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
 
-    @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

@@ -3,14 +3,15 @@
 @{
 
 }
-
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
 <table>
     <thead>
         <tr>
-            <td>Name</td>
-            <td>EMail</td>
-            <td>ID</td>
+            <td width="250">Name</td>
+            <td width="250">ID</td>
+            <td width="250">EMail</td>
+            
         </tr>
     </thead>
     @foreach (var author in Model.AuthorList)
@@ -18,8 +19,10 @@
         <tr>
             <td>@Html.Label(author.LastName), @Html.Label(author.FirstName)</td>
             <td>@Html.Label(author.AuthorID.ToString())</td>
-            <td>@Html.Label(author.Email)</td>
+            <td><a href="mailto:">@author.Email</a></td>
         </tr>
     }
 </table>
+    <asp:Content />
+
 

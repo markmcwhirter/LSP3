@@ -34,25 +34,26 @@ public class MasterModel : PageModel
 
     public override void OnPageHandlerExecuting(PageHandlerExecutingContext context)
     {
+        HttpHelper helper = new HttpHelper();
 
         if (_httpContextAccessor != null && _httpContextAccessor.HttpContext != null && _httpContextAccessor.HttpContext.Session != null)
         {
 
-            authenticated = _httpContextAccessor.HttpContext.Session.GetString("Authenticated");
+
+            authenticated = helper.GetSessionString(_httpContextAccessor,"Authenticated");
+
             if (authenticated != null)
                 IsAuthenticated = authenticated == null ? false : bool.Parse(authenticated);
 
 
-            var tmpUserSession = _httpContextAccessor.HttpContext.Session.GetString("userSession");
+            var tmpUserSession = helper.GetSessionString(_httpContextAccessor, "userSession");
+
+
             if (tmpUserSession != null)
-                Author = JsonSerializer.Deserialize<AuthorDto>(tmpUserSession,
-                    new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
-
-
-            var tmpCurrentUser = _httpContextAccessor.HttpContext.Session.GetString("currentuser");
-
-            if (tmpCurrentUser != null)
-                CurrentUser = tmpCurrentUser;
+            {
+                Author = new Extensions<AuthorDto>().Deserialize(tmpUserSession);
+                CurrentUser = Author.Username;
+            }
         }
 
     }
