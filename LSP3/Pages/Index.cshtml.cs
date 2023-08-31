@@ -105,9 +105,12 @@ public class IndexModel : MasterModel
                 //    Console.WriteLine("An error occurred: " + ex.Message);
                 //}
                 #endregion
-
+                foreach (var b in Books)
+                {
+                    apiResponse = await helper.Get($"https://localhost:7253/api/sales/getsales/{Books}");
+                }
             }
-
+            
         }
         catch (Exception ex)
         {

@@ -23,6 +23,11 @@ ul {
 
 a {
     text-decoration: none;
+    /*font-weight: bold;
+    font-size: 14px;
+    color: #ed490a;
+    background-color: #c0c0c0;*/
+    /*border-bottom: 2px solid #a959c3;*/
 }
 
 .wrapper {
@@ -155,5 +160,5 @@ tbody tr td:nth-child(-n + 2) {
     border: black;
     border-color: black;
     border-bottom: black;
-    border-width: 1 !important;
+    border-width: 1px !important;
 }

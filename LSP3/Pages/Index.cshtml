@@ -2,10 +2,10 @@
 @model IndexModel
 @{
     Layout = "_Layout";
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Author Information";
     var books = Model.Books;
 }
-@* <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent"> *@
+
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -45,34 +45,19 @@
 
     });
 </script>
-@* <asp:Content />
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server"> *@
-@* <style type="text/css">
-    table {
-        width: 600px;
-    }
-
-        table tbody {
-            border: none;
-        }
-
-        table td {
-            padding: 1px;
-            height: 10px;
-            vertical-align: baseline;
-        }
+<style type="text/css">
 
     .collapsible,
     .page_collapsible,
     .accordion {
         margin: 0;
         padding: 10px;
-        height: 20px;
+        /* height: 20px; */
         border-top: #f0f0f0 1px solid;
         background: #cccccc;
         font-family: Arial, Helvetica, sans-serif;
-        text-decoration: none;
-        text-transform: uppercase;
+        /* text-decoration: none; */
+        /*text-transform: uppercase; */
         color: #000;
         font-size: 1em;
     }
@@ -106,7 +91,7 @@
         height: 17px;
         background-position: -453px 0px;
     }
-
+    /*
     div.container {
         padding: 0;
         margin: 0;
@@ -155,12 +140,13 @@
     .loginDisplay, a.loginDisplay, .loginDisplay a {
         color: white;
     }
-</style> *@
+        */
+</style> 
 
 
 <div class=container>
     <div class=content>
-        <h3 class=collapsible id=section1>Author Information<span></span></h3>
+        <h3 class='collapsible' id='section1'>Author Information<span></span></h3>
         <table id="author-table" cellspacing=0>
             <tr>
                 <td>Author:</td>
@@ -213,36 +199,37 @@
             </tr>
         </table>
 
-        <br /><br />
+
         @foreach (var book in books)
         {
             <div class="zoomTarget">
                 <div class="content">
-                    <h3 class="collapsible" id="section<%# SectionNo %>">Book Information:  @Html.Label(book.Title)<span></span></h3>
+                    <h3 class='collapsible'>Book:  @Html.Raw(book.Title)<span></span></h3>
 
                     <table cellspacing='0' style='border-collapse:collapse;'>
-                        <tr><td width="250">Title:</td><td>@Html.Label(book.Title)</td></tr>
+                        
+                        <tr><td >Title:</td><td>@Html.Raw(book.Title)</td></tr>
 
-                        <tr><td>Subtitle:</td><td>@Html.Label(book.Subtitle)</td></tr>
+                        <tr><td>Subtitle:</td><td>@Html.Raw(book.Subtitle)</td></tr>
 
-                        <tr><td>ISBN:</td><td>@Html.Label(book.ISBN)</td></tr>
+                        <tr><td>ISBN:</td><td>@Html.Raw(book.ISBN)</td></tr>
 
-                        <tr><td>Cover</td><td><a target="_blank" href="Display.aspx?target='@Html.Raw(book.Title)'">@Html.Raw(book.Title)</td></tr>
+                        <tr><td>Cover</td><td><a target="_blank" href="Display.aspx?target='@Html.Raw(book.Title)">@Html.Raw(book.Title)</td></tr>
 
                         <tr><td>Description</td><td><a target="_blank" href="DisplayText.aspx?field=description&bookid=@Html.Raw(book.BookID.ToString())">View Description</a></td></tr>
 
                         <tr><td>Author Photo</td><td><a target="_blank" href="Display.aspx?target =@Html.Raw(book.AuthorPhoto)">@Html.Raw(book.AuthorPhoto)</td></tr>
 
-                        <tr><td>Interior</td><td><a target="_blank" href="Display.aspx?target =@Html.Raw(book.Interior)">@Html.Raw(book.Interior)</td></tr>"
+                        <tr><td>Interior</td><td><a target="_blank" href="Display.aspx?target =@Html.Raw(book.Interior)">@Html.Raw(book.Interior)</td></tr>
 
-                        <tr><td>Author Bio</td><td><a target="_blank" href="DisplayText.aspx?bookid =@Html.Raw(book.BookID.ToString())&field =authorbio">View Author Biography</a></td></tr>
+                        <tr><td>Author Bio</td><td><a target="_blank" href="DisplayText.aspx?bookid =@Html.Raw(book.BookID.ToString())&field=authorbio">View Author Biography</a></td></tr>
 
-                        <tr><td>Cover Idea</td><td><a target="_blank" href="DisplayText.aspx?bookid =@Html.Raw(book.BookID.ToString())&field =coveridea">View Cover Idea</a></td></tr>
+                        <tr><td>Cover Idea</td><td><a target="_blank" href="DisplayText.aspx?bookid =@Html.Raw(book.BookID.ToString())&field=coveridea">View Cover Idea</a></td></tr>
                     </table>
                 </div>
             </div>
 
-        }
+        } 
         <br /><br />
     </div>
 </div>
