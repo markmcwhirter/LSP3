@@ -1,4 +1,72 @@
 ﻿@page
 @model LSP3.Pages.BookInformationModel
 @{
+    Layout = null;
+    ViewData["Title"] = "Add Author";
 }
+<link rel="stylesheet" href="css/addbook.css" type="text/css" />
+
+   <p class="Heading">BOOK INFORMATION</p>
+    <p>Once you upload mandatory components of your book, your book goes into production after 24 hours. 
+        <strong>ONLY upload or provide FINAL content for your book</strong>.
+    <p>If you feel you’ve uploaded or provided something incorrect, you have 24 hours to notify LSP.</p>
+    <p>Any changes or edits after the 24 hour grace period are subject to editorial fees.</p>
+<br />
+    <p>Items with an <strong>*</strong> are mandatory</p>
+    <br />
+<p class="Heading">STEP ONE</p>
+     <table width="100%">
+      <tr><td colspan="2"><Label name="lblError" id="lblError" class="error"/></td></tr>
+
+      <tr><td class="Heading"><Label id="Label1" for="txtTitle" />Title *</td>
+      <td class="auto-style2"><input type='text' id="txtTitle" MaxLength="300"   class="inputtext required"/></td></tr>
+      <tr><td>This is the title of your book</td></tr>
+      <tr><td></td></tr>
+
+    <tr>
+        <td class="Heading"><Label id="Label2" for="txtSubtitle">Subtitle</Label><td>
+      <td><input type='text' id="txtSubtitle" MaxLength="300" class="inputtext" /></td></tr>
+      <tr><td>If you have a subtitle for your book, please enter that here, if not leave blank.</td></tr>
+      <tr><td></td></tr>
+      
+      <tr><td class="Heading"><Label id="Label5" for="txtISBN"  ReadOnly>ISBN</Label></td>
+        <td><input type='text' id="txtISBN" MaxLength="50" ReadOnly /></td>
+    </tr>
+      <tr><td>Light Switch Press will assign your ISBN</td></tr>
+      <tr><td></td></tr>
+      
+     
+      <tr><td class="Heading"><Label id="AuthorLabel" for="Author_DropDownList">Author</Label></td>
+      <td><input type='text' id="txtAuthor"  ReadOnly ></asp:TextBox><asp:DropDownList ID="Author_DropDownList" DataValueField="AuthorID" DataTextField="Author" Visible="false"></asp:DropDownList></td></tr>
+<tr><td></td></tr>
+      <tr><td class="Heading" colspan="2" style="height: 38px"><Label id="Description_Label" for="txtDescription">Description *</Label></td></tr>
+      <tr><td>This is the description of your book. What customers will see online and what appears on the back of your book. Description should be two to three paragraphs.</td></tr>
+    <tr><td colspan="2"><input type='text' id="txtDescription"  maxlength="6000" rows="12" cols="100"  /></td></tr>
+      
+      <tr><td></td></tr>
+      
+      
+      <tr><td class="Heading" colspan="2" style="height: 38px"><Label id="Bio_Label" for="txtAuthorBio">Author Bio</Label></td></tr>
+      <tr><td>If you would like to include an author biography, please write up to one paragraph otherwise leave blank.</td></tr>
+      <tr><td colspan="2"><input type='text' id="txtAuthorBio" MaxLength="6000"  TextMode="MultiLine" Width="100%" Height="200px" /></td></tr>
+      
+      <tr><td class="Heading" colspan="2" style="height: 38px"><Label id="CoverIdea_Label" for="txtCoverIdea">Cover Idea</Label></td></tr>
+       <tr><td>If you have an idea for your cover please describe it in the space below, otherwise leave blank. LSP desigeners will do their best to duplicate your idea when possible.</td></tr>
+      <tr><td colspan="2"><input type='text' id="txtCoverIdea" MaxLength="6000"  TextMode="MultiLine" Width="100%" Height="200px" /></td></tr>
+
+
+     <tr><td colspan="2">&nbsp;</td></tr>
+    <tr><td colspan="2"><checkBox class="checkbox required" id="CheckTANDC">I understand the <a href="http://www.lightswitchpress.com/terms.php" target="_blank">Terms and Conditions</a></checkBox></td></tr>
+     <tr><td colspan="2">&nbsp;</td></tr>
+     <tr><td class="Heading" colspan="2">Please select ADD from the options below to proceed.</td></tr>
+   <tr>
+       <td  align="center">
+      <asp:Button Text="Add"  ID="AddButton"  class="submit" class="button green" Visible="false" OnClick="AddButton_Click"/>
+      <asp:Button Text="Update" ID="UpdateButton"  class="submit" class="button green" OnClick="UpdateButton_Click" />
+      <asp:Button Text="Delete" ID="DeleteButton" class="button green" class="submit"   Visible="false" OnClick="DeleteButton_Click"/>
+     <!-- <asp:Button ID="btnOK" class="button green"  OnClientClick="window.close(); return false;" Text="Close" /> -->
+      <asp:Button Text="Cancel" ID="Button1" class="button green" class="submit" OnClick="Button1_Click"   />
+
+      </td></tr>
+ </table>
+<br /><br /><br /><br />
