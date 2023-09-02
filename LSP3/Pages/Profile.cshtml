@@ -2,76 +2,19 @@
 @model LSP3.Pages.ProfileModel
 @{
     Layout = "_Layout";
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Add Author";
 
 }
-<style type="text/css">
-    * {
-        line-height: 1.2em;
-    }
-
-    input {
-        height: 35px;
-        width: 300px;
-    }
-
-    .textInput {
-        height: 30px;
-        width: 300px;
-        top: -8px;
-    }
-
-    select {
-        top: -5px;
-        height: 21px;
-        margin-left: 0px;
-    }
-
-    td {
-        height: 20px;
-    }
-
-    #MainContent_chkTandC {
-        width: 20px;
-        height: 10px;
-    }
-
-    .error {
-        color: red;
-    }
+<link rel="stylesheet" href="css/AddAuthor.css" type="text/css" />
 
 
-    thead tr th:first-child,
-    tbody tr td:first-child {
-        width: 150px;
-        min-width: 150px;
-        max-width: 150px;
-        word-break: break-all;
-    }
-
-    thead tr th:nth-child(-n + 2),
-    tbody tr td:nth-child(-n + 2) {
-        width: 200px;
-        min-width: 200px;
-        max-width: 200px;
-        word-break: break-all;
-        height:35px;
-    }
-
-
-</style>
-
-<form method="post">
+<form method="post" id="authorform">
     <table>
-
-        
-
-        <tr><td colspan="2"><label id="lblError"  class="error"></label></td></tr>
-
+        <tr><td colspan="2"><label id="lblError" class="error"></label></td></tr>
         <tr>
-            <td><label for="Prefix_DropDownList" class="textInput">Prefix</label></td>
+            <td><label for="Prefix" class="textInput">Prefix</label></td>
             <td width="300">
-                <select id="Prefix_DropDownList" class="textInput">
+                <select name="Prefix" id="Prefix" class="textInput">
                     <option selected value="">None</option>
                     <option value="Mr">Mr</option>
                     <option value="Mrs">Mrs</option>
@@ -83,24 +26,24 @@
         </tr>
 
         <tr>
-            <td><label id="FirstName_Label" for="FirstName_TextBox">First Name</label></td>
-            <td><input type='text'  ID="FirstName_TextBox"  class="textInput" MaxLength="50"  /></td>
+            <td><label id="FirstName_Label" for="FirstName">First Name</label></td>
+            <td><input type='text' name="FirstName" id="FirstName" class="textInput" MaxLength="50" /></td>
         </tr>
 
         <tr>
-            <td><label id="MiddleName_Label" for="MiddleName_TextBox">Middle Name</label></td>
-            <td><input type='text'  ID="MiddleName_TextBox"  class="textInput" MaxLength="50"  /></td>
+            <td><label id="MiddleName_Label" for="MiddleName">Middle Name</label></td>
+            <td><input type='text' name="MiddleName" id="MiddleName" class="textInput" MaxLength="50" /></td>
         </tr>
 
         <tr>
-            <td><label id="LastName_Label" for="LastName_TextBox">Last Name</label></td>
-            <td><input type='text'  ID="LastName_TextBox"  class="textInput" MaxLength="50"  /></td>
+            <td><label id="LastName_Label" for="LastName">Last Name</label></td>
+            <td><input type='text' name="LastName" id="LastName" class="textInput" MaxLength="50" /></td>
         </tr>
 
         <tr>
-            <td><label id="Suffix_Label" for="Suffix_DropDownList" Suffix>Suffix</label></td>
+            <td><label name="Suffix_Label" id="Suffix_Label" for="Suffix" Suffix>Suffix</label></td>
             <td>
-                <select id="Suffix_DropDownList" class="textInput">
+                <select name="Suffix" id="Suffix" class="textInput">
                     <option selected value="">None</option>
                     <option value="Jr">Jr</option>
                     <option value="Sr">Sr</option>
@@ -113,33 +56,36 @@
         </tr>
 
         <tr>
-            <td><label id="UserName_Label" for="UserName_TextBox">UserName</label></td>
-            <td><input type='text'  ID="UserName_TextBox"  class="textInput" MaxLength="10"  ReadOnly="true" /></td>
+            <td><label id="UserName_Label" for="UserName">UserName</label></td>
+            <td><input type='text' name="UserName" id="UserName" class="textInput" MaxLength="30" /></td>
         </tr>
 
         <tr>
-            <td><label id="Password_Label" for="Password_TextBox">Password</label></td>
-            <td><input type='text'  ID="Password_TextBox"  class="textInput" MaxLength="50"  TextMode="Password" /></td>
+            <td><label id="Password_Label" for="Password">Password</label></td>
+            <td><input type='password' name="Password" id="Password" class="textInput" MaxLength="50" /></td>
+        </tr>
+        <tr>
+            <td><label id="PasswordAgain_Label" for="Password">Reenter Password</label></td>
+            <td><input type='password' name="Password" id="AgainPassword" class="textInput" MaxLength="50" /></td>
+        </tr>
+        <tr>
+            <td><label id="Address1_Label" for="Address1">Address1</label></td>
+            <td><input type='text' name="Address1" id="Address1" class="textInput" MaxLength="255" /></td>
         </tr>
 
         <tr>
-            <td><label id="Address1_Label" for="Address1_TextBox">Address1</label></td>
-            <td><input type='text'  ID="Address1_TextBox"  class="textInput" MaxLength="255"  /></td>
+            <td><label id="Address2_Label" for="Address2">Address2</label></td>
+            <td><input type='text' name="Address2" id="Address2" class="textInput" MaxLength="255" />
+
+        <tr>
+            <td><label id="City_Label" for="City">City</label></td>
+            <td><input type='text' name="City" id="City" class="textInput" MaxLength="50" /></td>
         </tr>
 
         <tr>
-            <td><label id="Address2_Label" for="Address2_TextBox">Address2</label></td>
-            <td><input type='text'  ID="Address2_TextBox"  class="textInput" MaxLength="255"  />
-
-        <tr>
-            <td><label id="City_Label" for="City_TextBox">City</label></td>
-            <td><input type='text'  ID="City_TextBox"  class="textInput" MaxLength="50"  /></td>
-        </tr>
-
-        <tr>
-            <td><label id="State_Label"  for="State_DropDownList">State</label></td>
+            <td><label id="State_Label" for="State">State</label></td>
             <td>
-                <select id="State_DropDownList" class="textInput">
+                <select name="State"  id="State" class="textInput">
                     <option selected value="">-- Select State --</option>
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
@@ -197,14 +143,14 @@
         </tr>
 
         <tr>
-            <td><label id="ZIP_Label" for="ZIP_TextBox">ZIP</label></td>
-            <td><input type='text'  ID="ZIP_TextBox"  class="textInput" MaxLength="12"  /></td>
+            <td><label id="ZIP_Label" for="ZIP">ZIP</label></td>
+            <td><input type='text' name="ZIP"  id="ZIP" class="textInput" MaxLength="12" /></td>
         </tr>
 
         <tr>
-            <td><label id="Country_Label"  for="Country_DropDownList">Country</label></td>
+            <td><label id="Country_Label" for="Country">Country</label></td>
             <td>
-                <select id="Country_DropDownList"  class="textInput">
+                <select name="Country" id="Country" class="textInput">
                     <option value="US">United States</option>
                     <option value="AF">Afghanistan</option>
                     <option value="AL">Albania</option>
@@ -449,48 +395,75 @@
         </tr>
 
         <tr>
-            <td><label id="BusinessPhone_Label"  for="BusinessPhone_TextBox">Business Phone</label></td>
-            <td><input type='text'  ID="BusinessPhone_TextBox"  class="textInput" MaxLength="20"  /></td>
+            <td><label id="BusinessPhone_Label" for="BusinessPhone">Business Phone</label></td>
+            <td><input type='text' name="BusinessPhone" id="BusinessPhone" class="textInput" MaxLength="20" /></td>
         </tr>
 
         <tr>
-            <td><label id="HomePhone_Label"  for="HomePhone_TextBox">Home Phone</label></td>
-            <td><input type='text'  ID="HomePhone_TextBox"  class="textInput" MaxLength="20"  /></td>
+            <td><label id="HomePhone_Label" for="HomePhone">Home Phone</label></td>
+            <td><input type='text' name="HomePhone" id="HomePhone" class="textInput" MaxLength="20" /></td>
         </tr>
 
         <tr>
-            <td><label id="CellPhone_Label"  for="CellPhone_TextBox">Cell Phone</label></td>
-            <td><input type='text'  ID="CellPhone_TextBox"  class="textInput" MaxLength="20"  /></td>
+            <td><label id="CellPhone_Label" for="CellPhone">Cell Phone</label></td>
+            <td><input type='text' name="CellPhone"  id="CellPhone" class="textInput" MaxLength="20" /></td>
         </tr>
 
         <tr>
-            <td><label id="Email_Label"  for="Email_TextBox">Email</label></td>
-            <td><input type='text'  ID="Email_TextBox"  class="textInput" MaxLength="70"  /></td>
+            <td><label id="Email_Label" for="Email">Email</label></td>
+            <td><input type='text' name="Email"  id="Email" class="textInput" MaxLength="70" /></td>
         </tr>
-        <tr><td colspan="2"><checkBox  id="chkTandC" Text="I agree to the Terms and Conditions" /></td></tr>
+        <tr><td colspan="2"><checkBox name="chkTandC"  id="chkTandC" Text="I agree to the Terms and Conditions" /></td></tr>
 
 
         <tr><td colspan="2">&nbsp;</td></tr>
     </table>
 
-    <button type="button" id="AddButton" class="button blue">Add</button>&nbsp;&nbsp;
+    <button type="button" id="AddButton" onclick="return AddAuthorEventHandler(event);" class="button blue">Add</button>&nbsp;&nbsp;
     <button type="button" id="UpdateButton" onclick="UpdateButton_Click" class="button blue">Update</button>&nbsp;&nbsp;
     <button type="button" id="DeleteButton" onclick="DeleteButton_Click" class="button blue">Delete</button>&nbsp;&nbsp;
 
 </form>
+
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('.submitButton').css('margin-left', '237px');
-        $("[id$='_CreateUserButton']").css('height', '20px');
-        $("[id$='_CreateUserButton']").css('width', '158px');
+    function AddAuthorEventHandler(event) {
+        event.preventDefault();
+        debugger;
 
-        $('#AddButton').on('click', function () {
-            $('.my-dialog').dialog({
-                title: 'My Dialog',
-                width: 300
-            });
-        });
+        if (!Validate('FirstName', 'Please supply your first name')) return false;
+        if (!Validate('LastName', 'Please supply your last name')) return false;
+        if (!Validate('UserName', 'Please supply your username')) return false;
+        if (!Validate('Password', 'Please supply a password')) return false;
+        if (!Validate('AgainPassword', 'Please re-enter your password')) return false;
 
-    });
+        var password = document.getElementById('Password').value;
+        var againpassword = document.getElementById('AgainPassword').value;
+        if (password != againpassword) {
+            document.getElementById('lblError').innerHTML = 'Passwords must match';
+            return false;
+        }
+
+        if (!Validate('Email', 'Please supply your email')) return false;        
+
+        var formData = new FormData(document.getElementById("authorform"));
+
+       
+        var data = JSON.stringify(Object.fromEntries(formData));
+        var result = AddAuthor(data);
+        alert('Success!  Author has been created!');
+        window.location.href = "http://localhost/Index";
+        return false;
+    }
+
+    function Validate(field, message) {
+        var testvalue = document.getElementById(field).value;
+
+        if (testvalue == null || testvalue == '') {
+            // alert(message);
+            document.getElementById('lblError').innerHTML = message;
+            return false;
+        }
+        return true;
+    }
 </script>
 

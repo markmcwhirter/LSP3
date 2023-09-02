@@ -28,7 +28,7 @@ public class AuthorListModel : MasterModel
             if (!base.IsAuthenticated)
                 return Redirect("/Account/Login");
 
-            string apiResponse = await helper.Get($"https://localhost:7253/api/author");
+            string apiResponse = await helper.Get($"http://localhost:5253/api/author");
             AuthorList = extensions.Deserialize(apiResponse);
             foreach( var author in AuthorList )
             {

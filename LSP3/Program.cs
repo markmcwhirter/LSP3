@@ -1,15 +1,25 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-//builder.Services.AddRazorPages(options =>
-//{
-//    options.Conventions.AuthorizePage("/Index");
-//    options.Conventions.AuthorizeFolder("/BookContent");
-//    options.Conventions.AuthorizeFolder("/BookImages");
-//    //options.Conventions.AllowAnonymousToPage("/Private/PublicPage");
-//    //options.Conventions.AllowAnonymousToFolder("/Private/PublicPages");
-//});
+builder.Host.ConfigureAppConfiguration((builder, config) =>
+ {
+     var env = builder.HostingEnvironment;
 
+     config.SetBasePath(env.ContentRootPath)
+     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+     .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+     .AddEnvironmentVariables();
+ });
+
+
+    // Add services to the container.
+    //builder.Services.AddRazorPages(options =>
+    //{
+    //    options.Conventions.AuthorizePage("/Index");
+    //    options.Conventions.AuthorizeFolder("/BookContent");
+    //    options.Conventions.AuthorizeFolder("/BookImages");
+    //    //options.Conventions.AllowAnonymousToPage("/Private/PublicPage");
+    //    //options.Conventions.AllowAnonymousToFolder("/Private/PublicPages");
+    //});
 builder.Services.AddRazorPages();
 
 builder.Services.AddHttpContextAccessor();

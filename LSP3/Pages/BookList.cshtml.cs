@@ -28,7 +28,7 @@ namespace LSP3.Pages
                 if (!base.IsAuthenticated)
                     return Redirect("/Account/Login");
 
-                string apiResponse = await helper.Get($"https://localhost:7253/api/book/author/{Author.AuthorID}");
+                string apiResponse = await helper.Get($"http://localhost:5253/api/book/author/{Author.AuthorID}");
                 Books = extensions.Deserialize(apiResponse);
             }
             catch (Exception ex)

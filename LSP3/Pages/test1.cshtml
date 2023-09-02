@@ -1,0 +1,19 @@
+﻿@page
+@model LSP3.Pages.test1Model
+@{
+}
+
+<button id="opener">open the dialog</button>
+<div id="dialog1" title="Dialog Title" hidden="hidden">I'm a dialog</div>
+
+<script>
+    $(function () {
+        $("#dialog1").dialog({
+            autoOpen: false
+        });
+
+        $("#opener").click(function () {
+            $("#dialog1").dialog('open');
+        });
+    });
+</script>

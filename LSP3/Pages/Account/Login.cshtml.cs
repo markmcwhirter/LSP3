@@ -3,10 +3,6 @@ using LSP3.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-using System.Text.Json;
-
-using static System.Reflection.Metadata.BlobBuilder;
-
 namespace LSP3.Pages.Account
 {
     public class LoginModel : PageModel
@@ -66,13 +62,13 @@ namespace LSP3.Pages.Account
                 var encrypted = Convert.ToBase64String(arrencrypted).TrimEnd(padding).Replace('+', '-').Replace('/', '_');
 
 
-                string apiResponse = await helper.Get($"https://localhost:7253/api/author/{username}/{encrypted}");
+                string apiResponse = await helper.Get($"http://localhost:5253/api/author/{username}/{encrypted}");
 
 
                 if (apiResponse != null)
                 {
                     author = new Extensions<AuthorDto>().Deserialize(apiResponse);
-                    await helper.Get($"https://localhost:7253/api/author/{username}/{encrypted}");
+                    await helper.Get($"http://localhost:5253/api/author/{username}/{encrypted}");
                     helper.SetSessionString(_httpContextAccessor, "userSession", apiResponse);
                 }
 

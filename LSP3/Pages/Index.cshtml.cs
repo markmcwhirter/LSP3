@@ -31,7 +31,7 @@ public class IndexModel : MasterModel
             if (!base.IsAuthenticated)
                 return Redirect("/Account/Login");
 
-            string apiResponse = await helper.Get($"https://localhost:7253/api/author/{base.Author.AuthorID}");
+            string apiResponse = await helper.Get($"http://localhost:5253/api/author/{base.Author.AuthorID}");
 
             if (!string.IsNullOrEmpty(apiResponse))
             {
@@ -70,7 +70,7 @@ public class IndexModel : MasterModel
 
             }
 
-            apiResponse = await helper.Get($"https://localhost:7253/api/book/author/{base.Author.AuthorID}");
+            apiResponse = await helper.Get($"http://localhost:5253/api/book/author/{base.Author.AuthorID}");
             if (!string.IsNullOrEmpty(apiResponse))
             {
 
@@ -107,7 +107,7 @@ public class IndexModel : MasterModel
                 #endregion
                 foreach (var b in Books)
                 {
-                    apiResponse = await helper.Get($"https://localhost:7253/api/sales/getsales/{Books}");
+                    apiResponse = await helper.Get($"http://localhost:5253/api/sale/getsales/{b.BookID}");
                 }
             }
             
