@@ -12,9 +12,11 @@ public class AuthorListModel : MasterModel
     [BindProperty]
     public List<BookDto> Books { get; set; }
 
+    private readonly ILogger<AuthorListModel> _logger;
 
-    public AuthorListModel(ILogger<IndexModel> logger, IHttpContextAccessor httpContextAccessor) : base(logger, httpContextAccessor)
+    public AuthorListModel(ILogger<AuthorListModel> logger, IHttpContextAccessor httpContextAccessor) : base( httpContextAccessor)
     {
+        _logger = logger;
     }
 
     public async Task<IActionResult> OnGet()
@@ -38,7 +40,7 @@ public class AuthorListModel : MasterModel
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Error: {ex.Message}: {ex.InnerException}: {ex.StackTrace}");
+             _logger.LogError($"Error: {ex.Message}: {ex.InnerException}: {ex.StackTrace}");
         }
 
         return Page();
@@ -46,4 +48,37 @@ public class AuthorListModel : MasterModel
     }
 
 
+}
+
+public class OrdersDetails
+{
+    public OrdersDetails()
+    {
+
+    }
+    public OrdersDetails(int OrderID, string CustomerId, int EmployeeId, double Freight, bool Verified, DateTime OrderDate, string ShipCity, string ShipName, string ShipCountry, DateTime ShippedDate, string ShipAddress)
+    {
+        this.OrderID = OrderID;
+        this.CustomerID = CustomerId;
+        this.EmployeeID = EmployeeId;
+        this.Freight = Freight;
+        this.ShipCity = ShipCity;
+        this.Verified = Verified;
+        this.OrderDate = OrderDate;
+        this.ShipName = ShipName;
+        this.ShipCountry = ShipCountry;
+        this.ShippedDate = ShippedDate;
+        this.ShipAddress = ShipAddress;
+    }
+    public int? OrderID { get; set; }
+    public string CustomerID { get; set; }
+    public int? EmployeeID { get; set; }
+    public double? Freight { get; set; }
+    public string ShipCity { get; set; }
+    public bool Verified { get; set; }
+    public DateTime OrderDate { get; set; }
+    public string ShipName { get; set; }
+    public string ShipCountry { get; set; }
+    public DateTime ShippedDate { get; set; }
+    public string ShipAddress { get; set; }
 }

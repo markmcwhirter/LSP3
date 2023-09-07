@@ -41,7 +41,7 @@
 			
 			#login-wrapper {
 				margin: 0 0 0 -160px;
-				width: 320px;
+				/* width: 320px; */
 				text-align: center;
 				z-index: 99;
 				position: absolute;
@@ -77,7 +77,8 @@
 			}
 
 			.loginbutton {
-				margin-left:  90px;
+				margin-top: 25px;
+				margin-right: 15px;
 				float: left;
 				padding: 6px 10px;
 				color: #fff;
@@ -145,6 +146,10 @@
 				margin-left:  110px;
 				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FF3FA5), to(#FF4530));
 			}
+			.buttonspacing {
+				 display: block;
+				margin-right: 10px;
+			}
 		</style>		
     </head>
     <body>
@@ -167,22 +172,36 @@
 						 <label for="Password">Password</label>
 						<input type="password" id="Password" name="Password" class="text-input" />
 					</p>
-					<br style="clear: both;" />
-					<p>
-						 <button type="submit" class="button loginbutton"  >Log In</button>
-                       <!-- <asp:Button ID="signin" runat="server" CommandName="Login" Text="Log In" CssClass="button signinbutton" onclick="LoginButton_Click"></asp:Button>
-						<asp:Button ID="registerbutton" runat="server" CommandName="Register" Text="Register" CssClass="button registerbutton" OnClick="registerbutton_Click"></asp:Button>
-                        <br />
-                        <asp:Button ID="forgotbutton" runat="server" CommandName="Forgot Password?" Text="Forgot Password" CssClass="button forgotbutton" OnClick="forgotbutton_Click" ></asp:Button>
-						--> 
-					</p>
+
+
+					<button type="submit" class="button loginbutton"  >Log In</button>
+
+					<button type="button" class="button loginbutton"  onclick="return RegisterEventHandler(event);" >Register</button>
+					<button type="button" class="button loginbutton"  onclick="return ForgotLoginEventHandler(event);" >Forgot Password?</button>
+			
+			</div>
 					
 				
-			</div>
+
 		</div>
 
     </form>
 </body>
 </html>
+<script type="text/javascript">
+    function RegisterEventHandler(event) {
+        event.preventDefault();
+        window.location.href = "http://localhost:5123/Register";
+        return false;
+    }
+
+	function ForgotLoginEventHandler(event) {
+        event.preventDefault();
+        window.location.href = "http://localhost:5123/Account/Forgotten";
+        return false;
+    }
+</script>
+
+
 
 

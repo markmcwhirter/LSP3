@@ -8,7 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+        <PackageReference Include="Syncfusion.EJ2.JavaScript" Version="22.2.11" />
+        <PackageReference Include="Syncfusion.Licensing" Version="22.2.11" />
     </ItemGroup>
 
     <ItemGroup>

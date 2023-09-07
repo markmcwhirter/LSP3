@@ -1,28 +1,30 @@
-﻿@page
-@model LSP3.Pages.AuthorListModel
+﻿@page 
+@model AuthorListModel
 @{
+    Layout = null;
+    ViewData["Title"] = "Book Information";
 
-}
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-<table>
-    <thead>
-        <tr>
-            <td width="250">Name</td>
-            <td width="250">ID</td>
-            <td width="250">EMail</td>
-            
-        </tr>
-    </thead>
-    @foreach (var author in Model.AuthorList)
+    List<OrdersDetails> order = new List<OrdersDetails>();
+    if (order.Count() == 0)
     {
-        <tr>
-            <td>@Html.Label(author.LastName), @Html.Label(author.FirstName)</td>
-            <td>@Html.Label(author.AuthorID.ToString())</td>
-            <td><a href="mailto:">@author.Email</a></td>
-        </tr>
+        int code = 10000;
+        for (int i = 1; i < 5; i++)
+        {
+            order.Add(new OrdersDetails(code + 1, "ALFKI", i + 0, 2.3 * i, false, new DateTime(1991, 05, 15), "Berlin", "Simons bistro", "Denmark", new DateTime(1996, 7, 16), "Kirchgasse 6"));
+            order.Add(new OrdersDetails(code + 2, "ANATR", i + 2, 3.3 * i, true, new DateTime(1990, 04, 04), "Madrid", "Queen Cozinha", "Brazil", new DateTime(1996, 9, 11), "Avda. Azteca 123"));
+            order.Add(new OrdersDetails(code + 3, "ANTON", i + 1, 4.3 * i, true, new DateTime(1957, 11, 30), "Cholchester", "Frankenversand", "Germany", new DateTime(1996, 10, 7), "Carrera 52 con Ave. Bolívar #65-98 Llano Largo"));
+            order.Add(new OrdersDetails(code + 4, "BLONP", i + 3, 5.3 * i, false, new DateTime(1930, 10, 22), "Marseille", "Ernst Handel", "Austria", new DateTime(1996, 12, 30), "Magazinweg 7"));
+            order.Add(new OrdersDetails(code + 5, "BOLID", i + 4, 6.3 * i, true, new DateTime(1953, 02, 18), "Tsawassen", "Hanari Carnes", "Switzerland", new DateTime(1997, 12, 3), "1029 - 12th Ave. S."));
+            code += 5;
+        }
     }
-</table>
-    <asp:Content />
+}
 
-
+<ejs-grid id="Grid" dataSource="@order">
+    <e-grid-columns>
+        <e-grid-column field="OrderID" headerText="Order ID" textAlign="Right" width="120"></e-grid-column>
+        <e-grid-column field="CustomerID" headerText="Customer ID" width="150"></e-grid-column>
+        <e-grid-column field="OrderDate" headerText="Order Date" width="130" textAlign="Right" format="yMd"></e-grid-column>
+        <e-grid-column field="ShipCountry" headerText="Ship Country" width="120"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>

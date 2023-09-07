@@ -1,16 +1,35 @@
 ﻿@page
-@model LSP3.Pages.ProfileModel
+@model LSP3.Pages.RegisterModel
 @{
-    Layout = "_Layout";
-    ViewData["Title"] = "Add Author";
-
+    Layout = "_LayoutNoMenu";
+    ViewData["Title"] = "Registration";
 }
 <link rel="stylesheet" href="css/AddAuthor.css" type="text/css" />
 
-
 <form method="post" id="authorform">
     <table>
+        <tr><td colspan="2"><center><img src="images/logo.png" /></center></td></tr>
         <tr><td colspan="2"><label id="lblError" class="error"></label></td></tr>
+
+        <tr>
+            <td><label id="UserName_Label" for="UserName">UserName</label></td>
+            <td><input type='text' name="UserName" id="UserName" class="textInput" MaxLength="30" /></td>
+        </tr>
+        
+        <tr>
+            <td><label id="Email_Label" for="Email">Email</label></td>
+            <td><input type='text' name="Email" id="Email" class="textInput" MaxLength="70" /></td>
+        </tr>
+
+        <tr>
+            <td><label id="Password_Label" for="Password">Password</label></td>
+            <td><input type='password' name="Password" id="Password" class="textInput" MaxLength="50" /></td>
+        </tr>
+        <tr>
+            <td><label id="PasswordAgain_Label" for="Password">Reenter Password</label></td>
+            <td><input type='password' name="Password" id="AgainPassword" class="textInput" MaxLength="50" /></td>
+        </tr>
+
         <tr>
             <td><label for="Prefix" class="textInput">Prefix</label></td>
             <td width="300">
@@ -56,19 +75,7 @@
             </td>
         </tr>
 
-        <tr>
-            <td><label id="UserName_Label" for="UserName">UserName</label></td>
-            <td><input type='text' name="UserName" id="UserName" class="textInput" MaxLength="30" /></td>
-        </tr>
-
-        <tr>
-            <td><label id="Password_Label" for="Password">Password</label></td>
-            <td><input type='password' name="Password" id="Password" class="textInput" MaxLength="50" /></td>
-        </tr>
-        <tr>
-            <td><label id="PasswordAgain_Label" for="Password">Reenter Password</label></td>
-            <td><input type='password' name="Password" id="AgainPassword" class="textInput" MaxLength="50" /></td>
-        </tr>
+ 
         <tr>
             <td><label id="Address1_Label" for="Address1">Address1</label></td>
             <td><input type='text' name="Address1" id="Address1" class="textInput" MaxLength="255" /></td>
@@ -410,10 +417,7 @@
             <td><input type='text' name="CellPhone" id="CellPhone" class="textInput" MaxLength="20" /></td>
         </tr>
 
-        <tr>
-            <td><label id="Email_Label" for="Email">Email</label></td>
-            <td><input type='text' name="Email" id="Email" class="textInput" MaxLength="70" /></td>
-        </tr>
+
         <tr><td colspan="2"><checkBox name="chkTandC" id="chkTandC" Text="I agree to the Terms and Conditions" /></td></tr>
 
 
@@ -421,20 +425,18 @@
     </table>
 
     <button type="button" id="AddButton" onclick="return AddAuthorEventHandler(event);" class="button blue">Add</button>&nbsp;&nbsp;
-    <button type="button" id="UpdateButton" onclick="UpdateButton_Click" class="button blue">Update</button>&nbsp;&nbsp;
-    <button type="button" id="DeleteButton" onclick="DeleteButton_Click" class="button blue">Delete</button>&nbsp;&nbsp;
 
 </form>
-
 <script type="text/javascript">
     function AddAuthorEventHandler(event) {
         event.preventDefault();
 
-        if (!Validate('FirstName', 'Please supply your first name')) return false;
-        if (!Validate('LastName', 'Please supply your last name')) return false;
+
         if (!Validate('UserName', 'Please supply your username')) return false;
+        if (!Validate('Email', 'Please supply your email')) return false;
         if (!Validate('Password', 'Please supply a password')) return false;
         if (!Validate('AgainPassword', 'Please re-enter your password')) return false;
+
 
         var password = document.getElementById('Password').value;
         var againpassword = document.getElementById('AgainPassword').value;
@@ -443,15 +445,17 @@
             return false;
         }
 
-        if (!Validate('Email', 'Please supply your email')) return false;
 
+
+        if (!Validate('FirstName', 'Please supply your first name')) return false;
+        if (!Validate('LastName', 'Please supply your last name')) return false;
         var formData = new FormData(document.getElementById("authorform"));
 
 
         var data = JSON.stringify(Object.fromEntries(formData));
         var result = AddAuthor(data);
         alert('Success!  Author has been created!');
-        window.location.href = "http://localhost/Index";
+        window.location.href = "http://localhost:5123/Account/Login";
         return false;
     }
 
@@ -466,4 +470,3 @@
         return true;
     }
 </script>
-

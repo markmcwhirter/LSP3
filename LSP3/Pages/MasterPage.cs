@@ -1,18 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LSP3.Model;
+
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
-using System.Web;
-using LSP3.Model;
-using System.Text.Json;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace LSP3.Pages;
 
 
 public class MasterModel : PageModel
 {
-    public readonly ILogger<IndexModel> _logger;
+
     public readonly IHttpContextAccessor _httpContextAccessor;
 
     public string authenticated = "";
@@ -22,9 +18,8 @@ public class MasterModel : PageModel
     public AuthorDto Author = new AuthorDto();
     public string CurrentUser = "";
 
-    public MasterModel(ILogger<IndexModel> logger, IHttpContextAccessor httpContextAccessor)
+    public MasterModel(IHttpContextAccessor httpContextAccessor)
     {
-        _logger = logger;
         _httpContextAccessor = httpContextAccessor;
     }
     public override void OnPageHandlerSelected(PageHandlerSelectedContext context)

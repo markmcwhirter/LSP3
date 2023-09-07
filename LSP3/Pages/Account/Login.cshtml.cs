@@ -70,6 +70,10 @@ namespace LSP3.Pages.Account
                     author = new Extensions<AuthorDto>().Deserialize(apiResponse);
                     await helper.Get($"http://localhost:5253/api/author/{username}/{encrypted}");
                     helper.SetSessionString(_httpContextAccessor, "userSession", apiResponse);
+                    helper.SetSessionString(_httpContextAccessor, "Authenticated", "true");
+
+                    if ( author.Admin != null)
+                        helper.SetSessionString(_httpContextAccessor, "Admin", "true");
                 }
 
             }

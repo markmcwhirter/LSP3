@@ -1,12 +1,35 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using LSP3.Model;
 
-namespace LSP3.Pages
+using Microsoft.AspNetCore.Mvc;
+
+namespace LSP3.Pages;
+
+public class BookInformationModel : MasterModel
 {
-    public class BookInformationModel : PageModel
+    private readonly ILogger<BookInformationModel> _logger;
+    public BookInformationModel(ILogger<BookInformationModel> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
-        public void OnGet()
+        _logger = logger;
+    }
+
+    public async Task<IActionResult> OnGet()
+    {
+        HttpHelper helper = new HttpHelper();
+        Extensions<AuthorDto> authorextensions = new Extensions<AuthorDto>();
+        Extensions<List<BookDto>> bookextensions = new Extensions<List<BookDto>>();
+
+        try
         {
+
+            if (!base.IsAuthenticated)
+                return Redirect("/Account/Login");
+
         }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Error: {ex.Message}: {ex.InnerException}: {ex.StackTrace}");
+        }
+
+        return Page();
     }
 }

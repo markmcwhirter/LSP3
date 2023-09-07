@@ -1,8 +1,5 @@
 ﻿using LSP3.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-
-using System.Text.Json;
 
 namespace LSP3.Pages;
 
@@ -14,9 +11,10 @@ public class IndexModel : MasterModel
     [BindProperty]
     public List<BookDto> Books { get; set; }
 
-
-    public IndexModel(ILogger<IndexModel> logger, IHttpContextAccessor httpContextAccessor) : base(logger, httpContextAccessor)
+    private readonly ILogger<IndexModel> _logger;
+    public IndexModel(ILogger<IndexModel> logger, IHttpContextAccessor httpContextAccessor) : base( httpContextAccessor)
     {
+        _logger = logger;
     }
 
     public async Task<IActionResult> OnGet()

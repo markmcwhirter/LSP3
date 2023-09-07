@@ -12,8 +12,10 @@ namespace LSP3.Pages
         public List<BookDto> Books { get; set; }
 
 
-        public BookListModel(ILogger<IndexModel> logger, IHttpContextAccessor httpContextAccessor) : base(logger, httpContextAccessor)
+        private readonly ILogger<BookListModel> _logger;
+        public BookListModel(ILogger<BookListModel> logger, IHttpContextAccessor httpContextAccessor) : base( httpContextAccessor)
         {
+            _logger = logger;
         }
 
 
