@@ -1,0 +1,26 @@
+﻿@page
+@model LSP3.Pages.BookReportModel
+@{
+    var booksale = Model.BookSaleData;
+}
+
+<table cellspacing='0' style='border-collapse:collapse;'>
+@foreach (var sale in booksale)
+{
+
+        <tr>
+            <td>@Html.Raw(sale.SaleID)</td>
+            <td>@Html.Raw(sale.Author)</td>
+            <td>@Html.Raw(sale.Title)</td>
+            <td>@Html.Raw(sale.VendorName)</td>            
+            <td>@Html.Raw(sale.SalesDate)</td>
+            <td>@Html.Raw(sale.UnitsSold)</td>
+            <td>@Html.Raw(sale.UnitsToDate)</td>
+            <td>@Html.Raw(sale.SalesThisPeriod)</td>
+            <td>@Html.Raw(sale.SalesToDate)</td>
+            <td>@Html.Raw(sale.SaleID)</td>
+            <td>@Html.Raw(sale.SaleID)</td>
+            <td>@Html.Raw(sale.Royalty)</td>
+        </tr>
+}
+</table>
