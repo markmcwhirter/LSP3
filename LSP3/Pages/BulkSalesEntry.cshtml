@@ -1,4 +1,15 @@
 ﻿@page
 @model LSP3.Pages.BulkSalesEntryModel
 @{
+    Layout = "_Layout";
+    ViewData["Title"] = "Bulk Sales Entry";
+    var status = Model.Status;
 }
+<form method="post" enctype="multipart/form-data">
+    <input type="file" asp-for="Upload" />
+    <input type="submit" />
+</form>
+
+@Html.Raw(status)
+
+
