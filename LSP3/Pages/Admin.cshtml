@@ -1,0 +1,90 @@
+﻿@page
+@model LSP3.Pages.AdminModel
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Admin Page";
+}
+
+<div class=container>
+    <div class=content>
+        <div class="accordion" id="accordionPanels">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        Author Information
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                    <div class="accordion-body">
+                        <table id="author-table" cellspacing=0>
+                            <tr>
+                                <td>Author:</td>
+                                <td>
+                                    <div class=NameHeading>
+                                        @Html.DisplayFor(IndexModel => IndexModel.Author.Prefix)
+                                        @Html.DisplayFor(IndexModel => IndexModel.Author.FirstName)
+                                        @Html.DisplayFor(IndexModel => IndexModel.Author.MiddleName)
+                                        @Html.DisplayFor(IndexModel => IndexModel.Author.LastName)
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>Username:</td>
+                                <td>@Html.DisplayFor(IndexModel => IndexModel.Author.Username)</td>
+                                <td>Business Phone:</td>
+                                <td>@Html.DisplayFor(IndexModel => IndexModel.Author.BusinessPhone)</td>
+                            </tr>
+                            <tr>
+                                <td>Address:</td>
+                                <td>@Html.DisplayFor(IndexModel => IndexModel.Author.Address1)</td>
+                                <td>Home Phone:</td>
+                                <td>@Html.DisplayFor(IndexModel => IndexModel.Author.HomePhone)</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>@Html.DisplayFor(IndexModel => IndexModel.Author.Address2)</td>
+                                <td>Cell Phone:</td>
+                                <td>@Html.DisplayFor(IndexModel => IndexModel.Author.CellPhone)</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <div>
+                                        @Html.DisplayFor(IndexModel => IndexModel.Author.City),
+                                        @Html.DisplayFor(IndexModel => IndexModel.Author.State)
+                                        @Html.DisplayFor(IndexModel => IndexModel.Author.ZIP)
+
+                                    </div>
+                                </td>
+                                <td>EMail:</td>
+                                <td>@Html.DisplayFor(IndexModel => IndexModel.Author.Email)</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>@Html.DisplayFor(IndexModel => IndexModel.Author.Country)</td>
+                                <td>Edit Profile:</td>
+                                <td>LINK</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleColumn() {
+        var col1 = document.getElementById('col1');
+        if (col1.classList.contains('collapsed')) {
+            col1.classList.remove('collapsed');
+        } else {
+            col1.classList.add('collapsed');
+        }
+    }
+</script>
+
+
+
+

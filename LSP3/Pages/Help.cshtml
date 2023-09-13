@@ -1,0 +1,160 @@
+﻿@page
+@model LSP3.Pages.HelpModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Help";
+    var user = Model.From;
+    var useremail = Model.FromEmail;
+
+}
+<style type="text/css">
+    .Heading {
+        font-weight: bolder;
+    }
+
+    .inputtext {
+        width: 100%;
+    }
+
+    .textlabel {
+        width: 100px;
+        height: auto;
+    }
+
+    middle {
+        padding-top: 0px;
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+    }
+
+    .error {
+        color: red;
+    }
+
+    input.button {
+        margin-top: 20px;
+        color: #fff;
+        font-size: 14px;
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#a4d04a), to(#459300));
+        text-shadow: #050505 0 -1px 0;
+        background-color: #459300;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+        border: solid 1px transparent;
+        font-weight: bold;
+        cursor: pointer;
+        letter-spacing: 1px;
+    }
+
+    .auto_height {
+    }
+
+    width: 100%;
+    }
+</style>
+
+<div class=container>
+    <div class=content>
+        <div class="card" style="width: 100%;">
+            <div class="card-body">
+                <h5 class="card-title">Information</h5>
+                <h6 class="card-subtitle mb-2 text-muted">How to submit a book</h6>
+                <p class="card-text">
+                    Once you upload mandatory components of your book, your book goes into production after 24 hours.
+                    ONLY upload or provide FINAL content for your book.
+                    If you feel you’ve uploaded or provided something incorrect, you have 24 hours to notify LSP.
+                    Any changes or edits after the 24 hour grace period are subject to editorial fees.
+                </p>
+            </div>
+        </div>
+
+        <br /><br />
+        <div class="mb-3">
+            <label name="lblError" id="lblError" class="error"></label>
+        </div>
+        <div class="mb-3">
+            <label for="from" class="form-label">From:</label>
+            <label id="From" name="From" class="form-label">(@Model.From) @Model.FromEmail</label>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="subject" class="form-label">Subject:</label>
+
+            <select id="ddlSubject" name="ddlSubject" aria-describedby="subjectHelp" class="form-control">
+                <option selected value="">-- Select A Topic --</option>
+                <option value="Trouble Uploading">I'm having trouble uploading book...</option>
+                <option value="Upgrade to Expanding Distribution">I would like to upgrade to expanded distribution...</option>
+                <option value="Order Books">I would like to order books...</option>
+                <option value="Make Edits">I would like to make edits...</option>
+                <option value="Royalties Question">I have a question regarding royalties...</option>
+                <option value="Other">Other...</option>
+            </select>
+            <div id="subjectHelp" class="form-text">Please tell us the nature of your question</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="comments" class="form-label">Comments</label>
+            <<textarea rows="1" class="auto_height form-control" onInput="auto_height(this)" name="comments" id="comments" aria-describedby="commentsHelp"></textarea>
+            <div id="commentsHelp" class="form-text">Please add additional information</div>
+        </div>
+
+        <div class="mb-12">
+            <center><button type="submit" ID="SubmitButton" class="button green" onclick="return AddHelpEventHandler(event);">Submit</button></center>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<script>
+    function auto_height(elem) {  /* javascript */
+        elem.style.height = '1px';
+        elem.style.height = `${elem.scrollHeight}px`;
+    }
+
+    function AddHelpEventHandler(event) {
+
+        event.preventDefault();
+
+        if (!Validate('ddlSubject', 'Please select a subject')) return false;
+        if (!Validate('comments', 'Please add a comment')) return false;
+
+        const formData = new FormData();
+        formData.append('to', 'mark.mcwhirter@gmail.com');
+        formData.append('from', '@Model.FromEmail');
+
+        var e = document.getElementById("ddlSubject");
+        var value = e.value;
+        formData.append('subject', value);
+
+        formData.append('text', document.getElementById('comments').value);
+
+        var data = JSON.stringify(Object.fromEntries(formData));
+        var result = Help(data);
+        alert('Success!  Help form has been sent');
+        window.location.href = "http://localhost:5123/Index";
+        return false;
+
+    }
+    function toggleColumn() {
+        var col1 = document.getElementById('col1');
+        if (col1.classList.contains('collapsed')) {
+            col1.classList.remove('collapsed');
+        } else {
+            col1.classList.add('collapsed');
+        }
+    }
+    function Validate(field, message) {
+        var testvalue = document.getElementById(field).value;
+
+        if (testvalue == null || testvalue == '') {
+            // alert(message);
+            document.getElementById('lblError').innerHTML = message;
+            return false;
+        }
+        return true;
+    }
+</script>

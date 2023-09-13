@@ -14,6 +14,7 @@ public class MasterModel : PageModel
     public string authenticated = "";
     public string currentUser = "";
     public bool IsAuthenticated = false;
+    public bool IsAdmin = false;
 
     public AuthorDto Author = new AuthorDto();
     public string CurrentUser = "";
@@ -27,27 +28,28 @@ public class MasterModel : PageModel
         //...
     }
 
+    public override void OnPageHandlerExecuted(PageHandlerExecutedContext context)
+    {
+        base.OnPageHandlerExecuted(context);
+    }
+
+
     public override void OnPageHandlerExecuting(PageHandlerExecutingContext context)
     {
         HttpHelper helper = new HttpHelper();
 
         if (_httpContextAccessor != null && _httpContextAccessor.HttpContext != null && _httpContextAccessor.HttpContext.Session != null)
         {
+           
+            string tmpUserSession = helper.GetCookie(_httpContextAccessor, "userSession");
 
-
-            authenticated = helper.GetSessionString(_httpContextAccessor,"Authenticated");
-
-            if (authenticated != null)
-                IsAuthenticated = authenticated == null ? false : bool.Parse(authenticated);
-
-
-            var tmpUserSession = helper.GetSessionString(_httpContextAccessor, "userSession");
-
-
-            if (tmpUserSession != null)
+            if (!string.IsNullOrEmpty(tmpUserSession))
             {
                 Author = new Extensions<AuthorDto>().Deserialize(tmpUserSession);
                 CurrentUser = Author.Username;
+                IsAuthenticated = true;
+                if( Author.Admin != "")
+                    IsAdmin = true;
             }
         }
 

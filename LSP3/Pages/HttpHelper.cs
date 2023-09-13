@@ -1,6 +1,7 @@
 ﻿using LSP3.Model;
 using static System.Reflection.Metadata.BlobBuilder;
 using System.Text.Json;
+using Newtonsoft.Json.Linq;
 
 namespace LSP3.Pages
 {
@@ -21,5 +22,22 @@ namespace LSP3.Pages
         {
             if (ctx != null && ctx.HttpContext != null) ctx.HttpContext.Session.SetString(variable, value);
         }
+        public void SetCookie(IHttpContextAccessor ctx, string variable, string jsonstring)
+        {
+            ctx.HttpContext.Response.Cookies.Delete(variable);
+
+            ctx.HttpContext.Response.Cookies.Append(variable, jsonstring, new CookieOptions
+            {
+                Expires = DateTime.Now.AddHours(1)
+            });
+        }
+        public string GetCookie(IHttpContextAccessor ctx, string variable)
+        {
+            if (ctx != null && ctx.HttpContext != null && ctx.HttpContext.Request.Cookies[variable] != null)
+                return ctx.HttpContext.Request.Cookies[variable].ToString();
+            else
+                return "";
+        }
+        
     }
 }

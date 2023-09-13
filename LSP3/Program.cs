@@ -10,16 +10,6 @@ builder.Host.ConfigureAppConfiguration((builder, config) =>
      .AddEnvironmentVariables();
  });
 
-
-    // Add services to the container.
-    //builder.Services.AddRazorPages(options =>
-    //{
-    //    options.Conventions.AuthorizePage("/Index");
-    //    options.Conventions.AuthorizeFolder("/BookContent");
-    //    options.Conventions.AuthorizeFolder("/BookImages");
-    //    //options.Conventions.AllowAnonymousToPage("/Private/PublicPage");
-    //    //options.Conventions.AllowAnonymousToFolder("/Private/PublicPages");
-    //});
 builder.Services.AddRazorPages();
 
 builder.Services.AddHttpContextAccessor();

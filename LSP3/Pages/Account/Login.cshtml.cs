@@ -1,6 +1,7 @@
 using LSP3.Model;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace LSP3.Pages.Account
@@ -17,6 +18,8 @@ namespace LSP3.Pages.Account
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         static readonly char[] padding = { '=' };
+
+        private bool IsAdmin = false;
 
         public LoginModel(ILogger<IndexModel> logger, IHttpContextAccessor httpContextAccessor)
         {
@@ -35,7 +38,7 @@ namespace LSP3.Pages.Account
                 if( string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password) )
                 {
                     Username = "mark";
-                    Password = "Joellevivi1";
+                    Password = "joellevivi1";
                 }
 
                 var author = OnGetauthor(Username, Password);
@@ -43,7 +46,10 @@ namespace LSP3.Pages.Account
                 helper.SetSessionString(_httpContextAccessor, "Authenticated", "true");
                 await OnGetauthor(Username, Password);
 
-                return RedirectToPage("/Index");
+                if( IsAdmin )
+                    return RedirectToPage("/Admin");
+                else
+                    return RedirectToPage("/Index");
             }
             return Page();
         }
@@ -70,10 +76,22 @@ namespace LSP3.Pages.Account
                     author = new Extensions<AuthorDto>().Deserialize(apiResponse);
                     await helper.Get($"http://localhost:5253/api/author/{username}/{encrypted}");
                     helper.SetSessionString(_httpContextAccessor, "userSession", apiResponse);
+
+                    HttpContext.Response.Cookies.Append("userSession", apiResponse, new CookieOptions
+                    {
+                        Expires = DateTime.Now.AddHours(1)
+                    });
+
+                    helper.SetCookie(_httpContextAccessor, "userSession", apiResponse);
+                   
+
                     helper.SetSessionString(_httpContextAccessor, "Authenticated", "true");
 
-                    if ( author.Admin != null)
-                        helper.SetSessionString(_httpContextAccessor, "Admin", "true");
+                    if (author.Admin != null)
+                    {
+                        helper.SetCookie(_httpContextAccessor, "Admin", "true");
+                        IsAdmin = true;
+                    }
                 }
 
             }

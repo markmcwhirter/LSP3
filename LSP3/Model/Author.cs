@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 namespace LSP3.Model;
 public partial class AuthorDto
 {
+    [Display(Name = "AuthorID")]
     public int AuthorID { get; set; }
 
     [Display(Name = "Prefix")]

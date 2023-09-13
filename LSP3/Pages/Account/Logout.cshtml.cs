@@ -31,11 +31,10 @@ namespace LSP3.Pages.Account
 
             if (_httpContextAccessor.HttpContext != null)
             {
-                helper.SetSessionString(_httpContextAccessor, "Authenticated", "false");
-                helper.SetSessionString(_httpContextAccessor, "userSession", "");
+                helper.SetCookie(_httpContextAccessor, "userSession", "");
             }
 
-            return RedirectToPage("/Account/Login");
+            return Redirect("/Account/Login");
         }
     }
 }
