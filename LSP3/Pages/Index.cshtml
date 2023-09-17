@@ -23,13 +23,13 @@
                 <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                     <div class="accordion-body" style="background-color: lightgray">
                         <form method="post" id="authorform">
-                            @* <fieldset id="fieldset" name="fieldset"> *@
+                            <fieldset id="fieldset" name="fieldset" disabled>
 
                                 <input type="hidden" id="authorid" name="authorid" value="@Model.Author.AuthorID">
 
                                 <div class="row">
-                                    <div class="col-sm-2">
-                                        <label for="prefix" class="form-label">Prefix:</label>
+                                    <div class="col-sm-1">
+                                        <label for="prefix" class="form-label align-middle align-middle">Prefix:</label>
                                         <select asp-for="@Model.Author.Prefix" name="prefix" id="prefix" class="form-control">
                                             <option selected value="">None</option>
                                             <option value="Mr">Mr</option>
@@ -40,19 +40,19 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-3">
-                                        <label for="prefix" class="form-label">First Name:</label>
+                                        <label for="prefix" class="form-label align-middle">First Name:</label>
                                         <input type="text" asp-for="@Model.Author.FirstName" class="form-control" name="firstname" id="firstname" placeholder="Enter first name">
                                     </div>
                                     <div class="col-sm-2">
-                                        <label for="prefix" class="form-label">Middle Name</label>
+                                        <label for="prefix" class="form-label align-middle">Middle Name</label>
                                         <input type="text" asp-for="@Model.Author.MiddleName" class="form-control" name="middlename" id="middlename">
                                     </div>
-                                    <div class="col-sm-3">
-                                        <label for="prefix" class="form-label">Last Name</label>
+                                    <div class="col-sm-4">
+                                        <label for="prefix" class="form-label align-middle">Last Name</label>
                                         <input type="text" asp-for="@Model.Author.LastName" class="form-control" name="lastname" id="lastname">
                                     </div>
                                     <div class="col-sm-2">
-                                        <label for="suffix" class="form-label">Suffix</label>
+                                        <label for="suffix" class="form-label align-middle">Suffix</label>
                                         <select asp-for="@Model.Author.Suffix" name="suffix" id="suffix" class="form-control">
                                             <option selected value="">None</option>
                                             <option value="Jr">Jr</option>
@@ -65,54 +65,54 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-2">
-                                        <label for="prefix" class="form-label">Username:</label>
+                                    <div class="col-sm-1">
+                                        <label for="prefix" class="form-label align-middle">Username:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" asp-for="@Model.Author.Username" class="form-control" name="username" id="username">
                                     </div>
-                                    <div class="col-sm-2">
-                                        <label for="email" class="form-label">EMail:</label>
+                                    <div class="col-sm-1">
+                                        <label for="email" class="form-label align-middle">EMail:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" asp-for="@Model.Author.Email" class="form-control" name="email" id="email">
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-2">
-                                        <label for="businessphone" class="form-label">Business Phone:</label>
+                                    <div class="col-sm-1">
+                                        <label for="businessphone" class="form-label align-middle">Business Phone:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" asp-for="@Model.Author.BusinessPhone" class="form-control" name="businessphone" id="businessphone">
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-2">
-                                        <label for="homephone" class="form-label">Home Phone:</label>
+                                    <div class="col-sm-1">
+                                        <label for="homephone" class="form-label align-middle">Home Phone:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" asp-for="@Model.Author.HomePhone" class="form-control" name="homephone" id="homephone">
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-2">
-                                        <label for="cellphone" class="form-label">Cell Phone:</label>
+                                    <div class="col-sm-1">
+                                        <label for="cellphone" class="form-label align-middle">Cell Phone:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" asp-for="@Model.Author.CellPhone" class="form-control" name="cellphone" id="cellphone">
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-2">
-                                        <label for="address1" class="form-label">Address 1:</label>
+                                    <div class="col-sm-1">
+                                        <label for="address1" class="form-label align-middle">Address 1:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" asp-for="@Model.Author.Address1" class="form-control" name="address1" id="address1">
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-2">
-                                        <label for="address2" class="form-label">Address 2:</label>
+                                    <div class="col-sm-1">
+                                        <label for="address2" class="form-label align-middle">Address 2:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" asp-for="@Model.Author.Address2" class="form-control" name="address2" id="address2">
@@ -120,11 +120,11 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <label for="city" class="form-label">City:</label>
+                                        <label for="city" class="form-label align-middle">City:</label>
                                         <input type="text" asp-for="@Model.Author.City" class="form-control" name="city" id="city">
                                     </div>
                                     <div class="col-sm-3">
-                                        <label for="state" class="form-label">State (US):</label>
+                                        <label for="state" class="form-label align-middle">State (US):</label>
                                         <select asp-for="@Model.Author.State" name="state" id="state" class="form-control">
                                             <option selected value="">-- Select State --</option>
                                             <option value="AL">Alabama</option>
@@ -182,11 +182,11 @@
 
                                     </div>
                                     <div class="col-sm-3">
-                                        <label for="zip" class="form-label">ZIP:</label>
+                                        <label for="zip" class="form-label align-middle">ZIP:</label>
                                         <input type="text" asp-for="@Model.Author.ZIP" class="form-control" name="zip" id="zip">
                                     </div>
                                     <div class="col-sm-3">
-                                        <label for="country" class="form-label">Country:</label>
+                                        <label for="country" class="form-label align-middle">Country:</label>
                                         <select asp-for="@Model.Author.Country" name="country" id="country" class="form-control">
                                             <option value="US">United States</option>
                                             <option value="AF">Afghanistan</option>
@@ -430,13 +430,22 @@
                                         </select>
                                     </div>
                                 </div>
-                            @* </fieldset> *@
+                            </fieldset>
                             <div class="row">
-                                <div class="col-sm-5">
+                                <div class="col-sm-4">&nbsp;
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-4">
                                 </div>
                                 <div class="col-sm-1">
-                                    <button type="button" id="UpdateButton" onclick="return UpdateAuthorEventHandler(event);" class="button blue" style="color: white">Save</button>
+                                    <button type="button" id="UpdateButton" onclick="return UpdateAuthorEventHandler(event);" class="button blue" style="color: white">Update</button>
                                 </div>
+                                <div class="col-sm-1">
+                                    <button type="button" id="CancelButton" onclick="return CancelAuthorEventHandler(event);" class="button blue" style="color: white">Cancel</button>
+                                </div>
+
                             </div>
 
                         </form>
@@ -463,17 +472,17 @@
 
                         <tr><td>ISBN:</td><td>@Html.Raw(book.ISBN)</td></tr>
 
-                        <tr><td>Cover</td><td><a target="_blank" href="Display.aspx?target='@Html.Raw(book.Title)">@Html.Raw(book.Title)</td></tr>
+                        <tr><td>Cover</td><td><a target="_blank" href="Display?target='@Html.Raw(book.Title)">@Html.Raw(book.Title)</td></tr>
 
-                        <tr><td>Description</td><td><a target="_blank" href="DisplayText.aspx?field=description&bookid=@Html.Raw(book.BookID.ToString())">View Description</a></td></tr>
+                        <tr><td>Description</td><td><a target="_blank" href="DisplayText?field=description&bookid=@Html.Raw(book.BookID.ToString())">View Description</a></td></tr>
 
-                        <tr><td>Author Photo</td><td><a target="_blank" href="Display.aspx?target =@Html.Raw(book.AuthorPhoto)">@Html.Raw(book.AuthorPhoto)</td></tr>
+                        <tr><td>Author Photo</td><td><a target="_blank" href="Display?target =@Html.Raw(book.AuthorPhoto)">@Html.Raw(book.AuthorPhoto)</td></tr>
 
-                        <tr><td>Interior</td><td><a target="_blank" href="Display.aspx?target =@Html.Raw(book.Interior)">@Html.Raw(book.Interior)</td></tr>
+                        <tr><td>Interior</td><td><a target="_blank" href="Display?target =@Html.Raw(book.Interior)">@Html.Raw(book.Interior)</td></tr>
 
-                        <tr><td>Author Bio</td><td><a target="_blank" href="DisplayText.aspx?bookid =@Html.Raw(book.BookID.ToString())&field=authorbio">View Author Biography</a></td></tr>
+                        <tr><td>Author Bio</td><td><a target="_blank" href="DisplayText?bookid =@Html.Raw(book.BookID.ToString())&field=authorbio">View Author Biography</a></td></tr>
 
-                        <tr><td>Cover Idea</td><td><a target="_blank" href="DisplayText.aspx?bookid =@Html.Raw(book.BookID.ToString())&field=coveridea">View Cover Idea</a></td></tr>
+                        <tr><td>Cover Idea</td><td><a target="_blank" href="DisplayText?bookid =@Html.Raw(book.BookID.ToString())&field=coveridea">View Cover Idea</a></td></tr>
                     </table>
                 </div>
             </div>
@@ -483,9 +492,30 @@
 </div>
 
 
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <script type="text/javascript">
     debugger
-    @* document.getElementById("fieldset").disabled = true; *@
+
+   
 
     function toggleColumn() {
         var col1 = document.getElementById('col1');
@@ -496,10 +526,28 @@
         }
     }
 
+    function CancelAuthorEventHandler(event) {
+
+        event.preventDefault();
+        document.getElementById("fieldset").disabled = true;
+        var elem = document.getElementById('UpdateButton');
+        var txt = elem.textContent || elem.innerText;
+        elem.innerText = 'Update';
+        return;
+
+    }
 
     function UpdateAuthorEventHandler(event) {
 
         event.preventDefault();
+
+        if(  document.getElementById("fieldset").disabled == true) {
+            document.getElementById("fieldset").disabled = false;
+            var elem = document.getElementById('UpdateButton');
+            var txt = elem.textContent || elem.innerText;
+            elem.innerText = 'Save';
+            return;
+        }
 
         if (!Validate('username', 'Please supply your username')) return false;
         if (!Validate('email', 'Please supply your email')) return false;
@@ -510,8 +558,15 @@
 
 
         var data = JSON.stringify(Object.fromEntries(formData));
+
         var result = UpdateAuthor(data);
         alert('Author has been updated');
+
+         document.getElementById("fieldset").disabled = true;
+            var elem = document.getElementById('UpdateButton');
+            var txt = elem.textContent || elem.innerText;
+            elem.innerText = 'Update';
+            return;
 
         return false;
     }
@@ -526,7 +581,7 @@
         return true;
     }
 
-    function UpdateAuthor(data) {
+     function UpdateAuthor(data) {
 
         const author = JSON.parse(data);
 
@@ -541,11 +596,11 @@
 
         fetch("http://localhost:5253/api/author/update", options)
             .then(
-                response => { return response.statusText() }
+                response => { return 'Success'; }
             ).then(
                 html => console.log(html)
             );
     }
-
+ 
 
 </script>

@@ -1,3 +1,5 @@
+using Microsoft.Extensions.FileProviders;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.ConfigureAppConfiguration((builder, config) =>
@@ -35,8 +37,15 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
+// app.UseHttpsRedirection();
+app.UseStaticFiles()
+.UseStaticFiles(new StaticFileOptions()
+ {
+     FileProvider = new PhysicalFileProvider(
+                System.IO.Path.GetFullPath(@"C:\\LSP\\LSP3\\LSP3\\wwwroot\\data\")),
+     RequestPath = new PathString("/data"),
+     DefaultContentType = "application/octet-stream"
+ });
 
 app.UseRouting();
 

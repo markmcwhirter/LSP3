@@ -10,6 +10,7 @@
     <ItemGroup>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+        <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -22,6 +23,7 @@
       <Folder Include="BookImages\" />
       <Folder Include="BookContent\" />
       <Folder Include="Pages\images\" />
+      <Folder Include="wwwroot\data\" />
     </ItemGroup>
 
     <ItemGroup>

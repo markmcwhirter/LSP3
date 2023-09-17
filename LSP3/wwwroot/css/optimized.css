@@ -24,6 +24,7 @@ A:link
 
 .wrapper
 {
+  /* grid-template- */
   margin:0 auto;
   width:100%;
 }
@@ -428,5 +429,5 @@ a.footer_contact_flickr
   background-image:url(../images/logo.png);
   background-position:0 0;
   height:110px;
-  width:300px;
+  width:330px;
 }
