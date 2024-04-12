@@ -157,8 +157,28 @@ tbody tr td:nth-child(-n + 2) {
 
 #author-table {
     border-collapse: collapse;
-    border: black;
+/*    border: black;
     border-color: black;
     border-bottom: black;
-    border-width: 1px !important;
+    border-width: 1px !important;*/
 }
+.spannobreak {
+    white-space: nowrap;
+}
+#lastsearch {
+    width: 50px;
+}
+#firstsearch {
+    width: 50px;
+}
+#searchtable {
+    width: 500px; /* Adjust total table width as needed */
+    border-collapse: collapse;
+}
+
+#searchtd {
+    border: 1px solid black;
+    width: 100px; /* Width of each column */
+    text-align: center;
+}
+

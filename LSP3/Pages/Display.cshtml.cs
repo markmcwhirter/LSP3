@@ -20,26 +20,25 @@ public class DisplayModel : MasterModel
     }
 
     public IActionResult OnGet()
-    {
+    {       
+        string imageName = HttpContext.Request.Query["target"].ToString();
+        var fileExtension = Path.GetExtension(imageName).ToLower().Replace(".","");
 
-        string imageName = System.Web.HttpUtility.HtmlDecode(Request.Query["target"].ToString());
-        var fileExtension = Path.GetExtension(imageName).ToLower();
 
-
-        var filePath = "data/" + imageName;
+        var filePath = @"C:\\LSP\\LSP3\\LSP3\\Pages\\data\\" + imageName;
         if (!System.IO.File.Exists(filePath))
-            return BadRequest();
+            return Page();
 
 
         Byte[] myBuff = System.IO.File.ReadAllBytes(filePath);
         var fileLength = myBuff.Length;
 
         if (fileLength == 0)
-            return BadRequest();
+            return Page();
 
         string contentType = "";
 
-        switch (imageName)
+        switch (fileExtension)
         {
             case "txt":
                 contentType = "html/text";
@@ -73,7 +72,7 @@ public class DisplayModel : MasterModel
         if( contentType != "")
             return File(myBuff, contentType);
         else
-            return BadRequest();
+            return Page();
 
     }
 }

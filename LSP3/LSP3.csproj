@@ -17,13 +17,13 @@
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+      <Content Include="Pages\data\7_drinkcoffee.jpg" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="BookImages\" />
       <Folder Include="BookContent\" />
       <Folder Include="Pages\images\" />
-      <Folder Include="wwwroot\data\" />
     </ItemGroup>
 
     <ItemGroup>

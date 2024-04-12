@@ -1,0 +1,36 @@
+﻿@page
+@model LSP3.Pages.AuthorSearch
+
+<form method="get">
+    <p>
+        Last: <input asp-for="LastName" />  First: <input asp-for="FirstName" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </p>
+</form>
+<hr />
+@if (Model.Results != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Author ID</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var author in Model.Results)
+            {
+                <tr>
+                    <td>@author.AuthorID</td>
+                    <td>@author.LastName</td>
+                    <td>@author.FirstName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+

@@ -3,3 +3,9 @@ obj/
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
+/.vs
+/.idea/.idea.LSP3/.idea
+/LSP3/SalesData
+/LSP3/.config
+/LSP3/Properties/PublishProfiles
+*.jpg

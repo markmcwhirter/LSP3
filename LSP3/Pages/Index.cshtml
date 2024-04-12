@@ -472,17 +472,17 @@
 
                         <tr><td>ISBN:</td><td>@Html.Raw(book.ISBN)</td></tr>
 
-                        <tr><td>Cover</td><td><a target="_blank" href="Display?target='@Html.Raw(book.Title)">@Html.Raw(book.Title)</td></tr>
+                        <tr><td>Cover</td><td><a target="_blank" href="Display?target=@Html.Raw(book.Title)">@Html.Raw(book.Title)</td></tr>
 
                         <tr><td>Description</td><td><a target="_blank" href="DisplayText?field=description&bookid=@Html.Raw(book.BookID.ToString())">View Description</a></td></tr>
 
-                        <tr><td>Author Photo</td><td><a target="_blank" href="Display?target =@Html.Raw(book.AuthorPhoto)">@Html.Raw(book.AuthorPhoto)</td></tr>
+                        <tr><td>Author Photo</td><td><a target="_blank" href="Display?target=@Html.Raw(book.AuthorPhoto)">@Html.Raw(book.AuthorPhoto)</td></tr>
 
-                        <tr><td>Interior</td><td><a target="_blank" href="Display?target =@Html.Raw(book.Interior)">@Html.Raw(book.Interior)</td></tr>
+                        <tr><td>Interior</td><td><a target="_blank" href="Display?target=@Html.Raw(book.Interior)">@Html.Raw(book.Interior)</td></tr>
 
-                        <tr><td>Author Bio</td><td><a target="_blank" href="DisplayText?bookid =@Html.Raw(book.BookID.ToString())&field=authorbio">View Author Biography</a></td></tr>
+                        <tr><td>Author Bio</td><td><a target="_blank" href="DisplayText?bookid=@Html.Raw(book.BookID.ToString())&field=authorbio">View Author Biography</a></td></tr>
 
-                        <tr><td>Cover Idea</td><td><a target="_blank" href="DisplayText?bookid =@Html.Raw(book.BookID.ToString())&field=coveridea">View Cover Idea</a></td></tr>
+                        <tr><td>Cover Idea</td><td><a target="_blank" href="DisplayText?bookid=@Html.Raw(book.BookID.ToString())&field=coveridea">View Cover Idea</a></td></tr>
                     </table>
                 </div>
             </div>
