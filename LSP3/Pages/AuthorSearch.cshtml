@@ -8,15 +8,15 @@
     </p>
 </form>
 <hr />
-@if (Model.Results != null)
+@if (Model.Results.Count != 0)
 {
-    <table class="table">
+    <table class="table searchtable">
         <thead>
             <tr>
                 <th>Author ID</th>
                 <th>Last Name</th>
                 <th>First Name</th>
-
+                <th>&nbsp;</th>
             </tr>
         </thead>
         <tbody>
@@ -26,11 +26,36 @@
                     <td>@author.AuthorID</td>
                     <td>@author.LastName</td>
                     <td>@author.FirstName</td>
+                    <td><a href='ProfileModify?id=@author.AuthorID'>Edit</a></td>
+                    <td><a href="DeleteAuthor?id=@author.AuthorID" onclick="return confirmDelete()">Delete</a></td>
                 </tr>
             }
         </tbody>
     </table>
+    <nav>
+        <ul class="pagination">
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                    <a class="page-link" asp-page="./AuthorSearch"
+                       asp-route-sortOrder="@Model.SortOrder"
+                       asp-route-searchTerm="@Model.SearchTerm"
+                       asp-route-currentPage="@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
 }
+
+@section Scripts {
+    <script>
+        function confirmDelete() {
+            return confirm('Are you sure you want to proceed?');
+        }
+    </script>
+}
+
+
 
 
 

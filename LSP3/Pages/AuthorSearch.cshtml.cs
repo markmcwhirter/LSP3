@@ -1,60 +1,82 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using LSP3.Model;
+
+using Microsoft.Extensions.Options;
+
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 
-namespace LSP3.Pages
+namespace LSP3.Pages;
+
+public class AuthorSearch : MasterModel
 {
-    public class AuthorSearch : MasterModel
+    private readonly ILogger<AuthorSearch> _logger;
+    public AuthorSearchModel SearchTerm { get; set; }
+    public string LastName { get; set; }
+    public string FirstName { get; set; }
+
+    public string SortOrder { get; set; }
+    public int CurrentPage { get; set; } = 1;
+    public int PageSize { get; set; } = 10;
+    public int TotalPages { get; private set; }
+
+    public IList<AuthorListResultsModel> Results { get; set; }
+    HttpHelper helper = new HttpHelper();
+    Extensions<List<AuthorDto>> extensions = new Extensions<List<AuthorDto>>();
+    private readonly AppSettings _appSettings;
+
+    public AuthorSearch(IOptions<AppSettings> appSettings,ILogger<AuthorSearch> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
-        private readonly ILogger<AuthorSearch> _logger;
-        public AuthorSearchModel SearchTerm { get; set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
+        _appSettings = appSettings.Value;
+        _logger = logger;
+    }
 
-        public IList<AuthorListResultsModel> Results { get; set; }
-
-        HttpHelper helper = new HttpHelper();
-        Extensions<List<AuthorDto>> extensions = new Extensions<List<AuthorDto>>();
-
-        public AuthorSearch(ILogger<AuthorSearch> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+    
+    public async Task OnGetAsync(string LastName, string FirstName, string sortOrder, int? currentPage)
+    {
+        if (LastName == null && FirstName == null)
         {
-            _logger = logger;
+            Results = new List<AuthorListResultsModel>();
+            return;
         }
 
-        public async Task OnGetAsync(string LastName, string FirstName)
+        SearchTerm = new AuthorSearchModel();
+        SearchTerm.LastName = LastName == null ? " " : LastName; ;
+        SearchTerm.FirstName = FirstName == null ? " " : FirstName;
+
+
+
+        // Sorting
+        SortOrder = sortOrder ?? "LastName"; // Default to sorting by last  name
+
+
+        Extensions<List<AuthorListResultsModel>> listextensions = new Extensions<List<AuthorListResultsModel>>();
+        try
         {
-            if (LastName == null && FirstName == null)
+            SearchTerm.SortOrder = sortOrder ?? "LastName"; // Default to sorting by name
+
+            var response = await helper.PostAsync(_appSettings.HostUrl + $"author/search", SearchTerm);
+
+            response.EnsureSuccessStatusCode();
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            Results = JsonConvert.DeserializeObject<List<AuthorListResultsModel>>(responseString);
+
+
+            // Pagination
+            if (currentPage.HasValue)
             {
-                return;
+                CurrentPage = currentPage.Value;
             }
+            TotalPages = (int)Math.Ceiling((decimal) Results.Count / PageSize);
 
-            SearchTerm = new AuthorSearchModel();
-            SearchTerm.LastName = LastName == null ? " " : LastName; ;
-            SearchTerm.FirstName = FirstName == null ? " " : FirstName;
-
-
-
-            Extensions<List<AuthorListResultsModel>> listextensions = new Extensions<List<AuthorListResultsModel>>();
-            try
-            {
-
-                var response = await helper.PostAsync($"http://localhost:5253/api/author/search", SearchTerm);
-
-                response.EnsureSuccessStatusCode();
-
-                var responseString = await response.Content.ReadAsStringAsync();
-
-                Results = JsonConvert.DeserializeObject<List<AuthorListResultsModel>>(responseString);
-
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error: {ex.Message}: {ex.InnerException}: {ex.StackTrace}");
-            }
+            Results = Results.Skip((CurrentPage - 1) * PageSize)
+                             .Take(PageSize).ToList();
 
         }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Error: {ex.Message}: {ex.InnerException}: {ex.StackTrace}");
+        }
+
     }
 }

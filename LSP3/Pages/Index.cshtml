@@ -432,7 +432,8 @@
                                 </div>
                             </fieldset>
                             <div class="row">
-                                <div class="col-sm-4">&nbsp;
+                                <div class="col-sm-4">
+                                    &nbsp;
                                 </div>
                             </div>
 
@@ -454,39 +455,42 @@
             </div>
         </div>
     </div>
-    @foreach (var book in books)
+    @if (books != null)
     {
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                    Book:  @Html.Raw(book.Title)
-                </button>
-            </h2>
-            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-                <div class="accordion-body">
-                    <table cellspacing='0' style='border-collapse:collapse;'>
+        @foreach (var book in books)
+        {
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                        Book:  @Html.Raw(book.Title)
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                    <div class="accordion-body">
+                        <table cellspacing='0' style='border-collapse:collapse;'>
 
-                        <tr><td>Title:</td><td>@Html.Raw(book.Title)</td></tr>
+                            <tr><td>Title:</td><td>@Html.Raw(book.Title)</td></tr>
 
-                        <tr><td>Subtitle:</td><td>@Html.Raw(book.Subtitle)</td></tr>
+                            <tr><td>Subtitle:</td><td>@Html.Raw(book.Subtitle)</td></tr>
 
-                        <tr><td>ISBN:</td><td>@Html.Raw(book.ISBN)</td></tr>
+                            <tr><td>ISBN:</td><td>@Html.Raw(book.ISBN)</td></tr>
 
-                        <tr><td>Cover</td><td><a target="_blank" href="Display?target=@Html.Raw(book.Title)">@Html.Raw(book.Title)</td></tr>
+                            <tr><td>Cover</td><td><a target="_blank" href="Display?target=@Html.Raw(book.Title)">@Html.Raw(book.Title)</td></tr>
 
-                        <tr><td>Description</td><td><a target="_blank" href="DisplayText?field=description&bookid=@Html.Raw(book.BookID.ToString())">View Description</a></td></tr>
+                            <tr><td>Description</td><td><a target="_blank" href="DisplayText?field=description&bookid=@Html.Raw(book.BookID.ToString())">View Description</a></td></tr>
 
-                        <tr><td>Author Photo</td><td><a target="_blank" href="Display?target=@Html.Raw(book.AuthorPhoto)">@Html.Raw(book.AuthorPhoto)</td></tr>
+                            <tr><td>Author Photo</td><td><a target="_blank" href="Display?target=@Html.Raw(book.AuthorPhoto)">@Html.Raw(book.AuthorPhoto)</td></tr>
 
-                        <tr><td>Interior</td><td><a target="_blank" href="Display?target=@Html.Raw(book.Interior)">@Html.Raw(book.Interior)</td></tr>
+                            <tr><td>Interior</td><td><a target="_blank" href="Display?target=@Html.Raw(book.Interior)">@Html.Raw(book.Interior)</td></tr>
 
-                        <tr><td>Author Bio</td><td><a target="_blank" href="DisplayText?bookid=@Html.Raw(book.BookID.ToString())&field=authorbio">View Author Biography</a></td></tr>
+                            <tr><td>Author Bio</td><td><a target="_blank" href="DisplayText?bookid=@Html.Raw(book.BookID.ToString())&field=authorbio">View Author Biography</a></td></tr>
 
-                        <tr><td>Cover Idea</td><td><a target="_blank" href="DisplayText?bookid=@Html.Raw(book.BookID.ToString())&field=coveridea">View Cover Idea</a></td></tr>
-                    </table>
+                            <tr><td>Cover Idea</td><td><a target="_blank" href="DisplayText?bookid=@Html.Raw(book.BookID.ToString())&field=coveridea">View Cover Idea</a></td></tr>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
     }
 
 </div>
@@ -515,7 +519,7 @@
 <script type="text/javascript">
     debugger
 
-   
+
 
     function toggleColumn() {
         var col1 = document.getElementById('col1');
@@ -541,7 +545,7 @@
 
         event.preventDefault();
 
-        if(  document.getElementById("fieldset").disabled == true) {
+        if (document.getElementById("fieldset").disabled == true) {
             document.getElementById("fieldset").disabled = false;
             var elem = document.getElementById('UpdateButton');
             var txt = elem.textContent || elem.innerText;
@@ -562,11 +566,11 @@
         var result = UpdateAuthor(data);
         alert('Author has been updated');
 
-         document.getElementById("fieldset").disabled = true;
-            var elem = document.getElementById('UpdateButton');
-            var txt = elem.textContent || elem.innerText;
-            elem.innerText = 'Update';
-            return;
+        document.getElementById("fieldset").disabled = true;
+        var elem = document.getElementById('UpdateButton');
+        var txt = elem.textContent || elem.innerText;
+        elem.innerText = 'Update';
+        return;
 
         return false;
     }
@@ -581,7 +585,7 @@
         return true;
     }
 
-     function UpdateAuthor(data) {
+    function UpdateAuthor(data) {
 
         const author = JSON.parse(data);
 
@@ -601,6 +605,6 @@
                 html => console.log(html)
             );
     }
- 
+
 
 </script>

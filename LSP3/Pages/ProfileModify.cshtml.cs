@@ -1,19 +1,19 @@
 using LSP3.Model;
-
 using Microsoft.Extensions.Options;
 
 using Newtonsoft.Json;
 
 namespace LSP3.Pages;
 
-public class Profile : MasterModel
+
+public class ProfileModify : MasterModel
 {
     private readonly ILogger<Profile> _logger;
 
     HttpHelper helper = new HttpHelper();
     public AuthorDto Results { get; set; }
     private readonly AppSettings _appSettings;
-    public Profile(IOptions<AppSettings> appSettings, ILogger<Profile> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+    public ProfileModify(IOptions<AppSettings> appSettings, ILogger<Profile> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
         _appSettings = appSettings.Value;
         _logger = logger;

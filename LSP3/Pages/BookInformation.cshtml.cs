@@ -1,14 +1,19 @@
 using LSP3.Model;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace LSP3.Pages;
 
 public class BookInformationModel : MasterModel
 {
     private readonly ILogger<BookInformationModel> _logger;
-    public BookInformationModel(ILogger<BookInformationModel> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+    private readonly AppSettings _appSettings;
+
+
+    public BookInformationModel(IOptions<AppSettings> appSettings, ILogger<BookInformationModel> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
+        _appSettings = appSettings.Value;
         _logger = logger;
     }
 

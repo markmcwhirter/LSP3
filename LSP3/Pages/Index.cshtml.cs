@@ -1,5 +1,6 @@
 ﻿using LSP3.Model;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace LSP3.Pages;
 
@@ -12,8 +13,12 @@ public class IndexModel : MasterModel
     public List<BookDto> Books { get; set; }
 
     private readonly ILogger<IndexModel> _logger;
-    public IndexModel(ILogger<IndexModel> logger, IHttpContextAccessor httpContextAccessor) : base( httpContextAccessor)
+
+    private readonly AppSettings _appSettings;
+
+    public IndexModel(IOptions<AppSettings> appSettings, ILogger<IndexModel> logger, IHttpContextAccessor httpContextAccessor) : base( httpContextAccessor)
     {
+        _appSettings = appSettings.Value;
         _logger = logger;
     }
 
@@ -29,7 +34,7 @@ public class IndexModel : MasterModel
             if (!base.IsAuthenticated)
                 return Redirect("/Account/Login");
 
-            string apiResponse = await helper.Get($"http://localhost:5253/api/author/{base.Author.AuthorID}");
+            string apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{base.Author.AuthorID}");
 
             if (!string.IsNullOrEmpty(apiResponse))
             {
@@ -68,7 +73,7 @@ public class IndexModel : MasterModel
 
             }
 
-            apiResponse = await helper.Get($"http://localhost:5253/api/book/author/{base.Author.AuthorID}");
+            apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{base.Author.AuthorID}");
             if (!string.IsNullOrEmpty(apiResponse))
             {
 
@@ -105,7 +110,7 @@ public class IndexModel : MasterModel
                 #endregion
                 foreach (var b in Books)
                 {
-                    apiResponse = await helper.Get($"http://localhost:5253/api/sale/getsales/{b.BookID}");
+                    apiResponse = await helper.Get(_appSettings.HostUrl + $"sale/getsales/{b.BookID}");
                 }
             }
             

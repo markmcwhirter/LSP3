@@ -1,18 +1,21 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using LSP3.Model;
 
-namespace LSP3.Pages
+using Microsoft.Extensions.Options;
+
+namespace LSP3.Pages;
+
+public class DisplayTextModel : MasterModel
 {
-    public class DisplayTextModel : MasterModel
-    {
-        public DisplayTextModel(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
-        {
-        }
+    private readonly AppSettings _appSettings;
 
-        public void OnGet()
-        {
-            string imageName = System.Web.HttpUtility.HtmlDecode(Request.Query["target"].ToString());
-            var imageType = Path.GetExtension(imageName).ToLower();
-        }
+    public DisplayTextModel(IOptions<AppSettings> appSettings, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+    {
+        _appSettings = appSettings.Value;
+    }
+
+    public void OnGet()
+    {
+        string imageName = System.Web.HttpUtility.HtmlDecode(Request.Query["target"].ToString());
+        var imageType = Path.GetExtension(imageName).ToLower();
     }
 }

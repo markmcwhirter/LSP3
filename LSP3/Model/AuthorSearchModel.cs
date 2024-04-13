@@ -10,6 +10,7 @@ namespace LSP3.Model
 
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
-        // ... other Author properties
+        public string SortOrder { get; set; }
+
     }
 }

@@ -171,8 +171,8 @@ tbody tr td:nth-child(-n + 2) {
 #firstsearch {
     width: 50px;
 }
-#searchtable {
-    width: 500px; /* Adjust total table width as needed */
+.searchtable {
+    width: 700px; /* Adjust total table width as needed */
     border-collapse: collapse;
 }
 
@@ -181,4 +181,5 @@ tbody tr td:nth-child(-n + 2) {
     width: 100px; /* Width of each column */
     text-align: center;
 }
+
 

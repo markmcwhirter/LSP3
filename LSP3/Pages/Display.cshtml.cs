@@ -1,12 +1,7 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using LSP3.Model;
-using Microsoft.AspNetCore.Hosting.Server;
-using System.Drawing;
-using System.IO;
-using System.Drawing.Imaging;
-using System;
-using System.Net.Mime;
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace LSP3.Pages;
 
@@ -14,8 +9,11 @@ public class DisplayModel : MasterModel
 {
     public readonly IHttpContextAccessor _httpContextAccessor;
 
-    public DisplayModel(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+    private readonly AppSettings _appSettings;
+
+    public DisplayModel(IOptions<AppSettings> appSettings, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
+        _appSettings = appSettings.Value;
         _httpContextAccessor = httpContextAccessor;
     }
 
@@ -24,8 +22,8 @@ public class DisplayModel : MasterModel
         string imageName = HttpContext.Request.Query["target"].ToString();
         var fileExtension = Path.GetExtension(imageName).ToLower().Replace(".","");
 
-
-        var filePath = @"C:\\LSP\\LSP3\\LSP3\\Pages\\data\\" + imageName;
+        
+        var filePath = _appSettings.ImageData + imageName;
         if (!System.IO.File.Exists(filePath))
             return Page();
 

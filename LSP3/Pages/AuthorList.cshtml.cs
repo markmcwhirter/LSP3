@@ -1,6 +1,7 @@
 using LSP3.Model;
+
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
+using Microsoft.Extensions.Options;
 
 namespace LSP3.Pages;
 
@@ -14,8 +15,11 @@ public class AuthorListModel : MasterModel
 
     private readonly ILogger<AuthorListModel> _logger;
 
-    public AuthorListModel(ILogger<AuthorListModel> logger, IHttpContextAccessor httpContextAccessor) : base( httpContextAccessor)
+    private readonly AppSettings _appSettings;
+
+    public AuthorListModel(IOptions<AppSettings> appSettings, ILogger<AuthorListModel> logger, IHttpContextAccessor httpContextAccessor) : base( httpContextAccessor)
     {
+        _appSettings = appSettings.Value;
         _logger = logger;
     }
 
@@ -30,7 +34,7 @@ public class AuthorListModel : MasterModel
             if (!base.IsAuthenticated)
                 return Redirect("/Account/Login");
 
-            string apiResponse = await helper.Get($"http://localhost:5253/api/author");
+            string apiResponse = await helper.Get(_appSettings.HostUrl + $"author");
             AuthorList = extensions.Deserialize(apiResponse);
             foreach( var author in AuthorList )
             {
