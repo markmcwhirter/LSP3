@@ -34,4 +34,10 @@
       </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Update="wwwroot\css\optimized.css">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>

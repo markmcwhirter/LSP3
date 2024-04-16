@@ -29,18 +29,22 @@ public class AuthorSearch : MasterModel
         _logger = logger;
     }
 
-    
-    public async Task OnGetAsync(string LastName, string FirstName, string sortOrder, int? currentPage)
+    public async Task OnGetAsync(string lastName, string firstName, string sortOrder, int? currentPage)
     {
-        if (LastName == null && FirstName == null)
+        SortOrder = sortOrder;
+        CurrentPage = currentPage ?? 1;
+        LastName = lastName;
+        FirstName = firstName;
+
+        if (lastName == null && firstName == null)
         {
             Results = new List<AuthorListResultsModel>();
             return;
         }
 
         SearchTerm = new AuthorSearchModel();
-        SearchTerm.LastName = LastName == null ? " " : LastName; ;
-        SearchTerm.FirstName = FirstName == null ? " " : FirstName;
+        SearchTerm.LastName = lastName == null ? " " : lastName; ;
+        SearchTerm.FirstName = firstName == null ? " " : firstName;
 
 
 

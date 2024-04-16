@@ -4,7 +4,7 @@
 <form method="get">
     <p>
         Last: <input asp-for="LastName" />  First: <input asp-for="FirstName" />
-        <button type="submit" class="btn btn-primary">Search</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-primary">Search</button>
     </p>
 </form>
 <hr />
@@ -38,8 +38,9 @@
             {
                 <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
                     <a class="page-link" asp-page="./AuthorSearch"
+                       asp-route-lastName="@Model.LastName"
+                       asp-route-firstName="@Model.FirstName"
                        asp-route-sortOrder="@Model.SortOrder"
-                       asp-route-searchTerm="@Model.SearchTerm"
                        asp-route-currentPage="@i">@i</a>
                 </li>
             }

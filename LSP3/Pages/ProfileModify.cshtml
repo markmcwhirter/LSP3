@@ -10,6 +10,21 @@
      <table>
         <tr><td colspan="2"><label id="lblError" class="error"></label></td></tr>
         <tr>
+            <td><label id="AuthorID_Label" for="AuthorID">AuthorID</label></td>
+            <td><input type='text' name="AuthorId" id="AuthorId" class="textInput"  readonly MaxLength="50" value='@Model.Results.AuthorID' /></td>
+        </tr>
+        <tr>
+            <td><label id="Admin_Label" for="Admin">Admin</label></td>
+            <td width="300">
+                <select name="Admin" id="Admin" class="textInput">
+                    <option selected value='@Model.Results.Admin'></option>
+                    <option value="on">On</option>
+                    <option value="off">Off</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
             <td><label for="Prefix" class="textInput">Prefix</label></td>
             <td width="300">
                 <select name="Prefix" id="Prefix" class="textInput">
@@ -43,7 +58,7 @@
             <td><label name="Suffix_Label" id="Suffix_Label" for="Suffix" Suffix>Suffix</label></td>
             <td>
                 <select name="Suffix" id="Suffix" class="textInput">
-                    <option selected value=" value='@Model.Results.Suffix"></option>
+                    <option selected value="@Model.Results.Suffix"></option>
                     <option value="Jr">Jr</option>
                     <option value="Sr">Sr</option>
                     <option value="II">II</option>
@@ -61,12 +76,12 @@
 
         <tr>
             <td><label id="Password_Label" for="Password">Password</label></td>
-            <td><input type='password' name="Password" id="Password" class="textInput" MaxLength="50" value='@Model.Results.Password' /></td>
+            <td><input type='text' name="Password" id="Password" class="textInput" MaxLength="50" value='@Model.Results.Password' /></td>
         </tr>
-        <tr>
+@*         <tr>
             <td><label id="PasswordAgain_Label" for="Password">Reenter Password</label></td>
-            <td><input type='password' name="Password" id="AgainPassword" class="textInput" MaxLength="50" /></td>
-        </tr>
+            <td><input type='text' name="Password" id="AgainPassword" class="textInput" MaxLength="50" /></td>
+        </tr> *@
         <tr>
             <td><label id="Address1_Label" for="Address1">Address1</label></td>
             <td><input type='text' name="Address1" id="Address1" class="textInput" MaxLength="255" value='@Model.Results.Address1' /></td>
@@ -410,18 +425,19 @@
 
         <tr>
             <td><label id="Email_Label" for="Email">Email</label></td>
-            <td><input type='text' name="Email" id="Email" class="textInput" MaxLength="70" /></td>
+            <td><input type='text' name="Email" id="Email" class="textInput" MaxLength="70" value='@Model.Results.Email' /></td>
         </tr>
-        <tr><td colspan="2"><checkBox name="chkTandC" id="chkTandC" Text="I agree to the Terms and Conditions" /></td></tr>
 
-        
-         <tr><td colspan="2">&nbsp;</td></tr> 
+        <tr>
+            <td colspan="2">
+                <button type="button" id="UpdateButton" onclick="return UpdateAuthorEventHandler(event);" class="btn btn-primary">Update</button>
+                &nbsp;&nbsp;
+                <button type="button" id="CancelButton" onclick="return CancelEventHandler(event);" class="btn btn-secondary">Cancel</button>
+            </td>
+        </tr>
+  
+
     </table>
- 
-    <button type="button" id="UpdateButton" onclick="return UpdateAuthorEventHandler(event);" class="button blue">Update</button>&nbsp;&nbsp;
-    <button type="button" id="CancelButton" onclick="return CancelEventHandler(event);" class="button red">Cancel</button>
-
-
 
 </form>
 
@@ -430,7 +446,7 @@
     function CancelEventHandler(event) {
         event.preventDefault();
         alert('Update cancelled');
-        window.location.href = "Index";
+        window.location.href = "AuthorSearch";
         return false;
 
     }
@@ -441,25 +457,16 @@
         if (!Validate('FirstName', 'Please supply your first name')) return false;
         if (!Validate('LastName', 'Please supply your last name')) return false;
         if (!Validate('UserName', 'Please supply your username')) return false;
-        // if (!Validate('Password', 'Please supply a password')) return false;
-        // if (!Validate('AgainPassword', 'Please re-enter your password')) return false;
-
-        var password = document.getElementById('Password').value;
-        var againpassword = document.getElementById('AgainPassword').value;
-        if (password != againpassword) {
-            document.getElementById('lblError').innerHTML = 'Passwords must match';
-            return false;
-        }
-
+        if (!Validate('Password', 'Please supply a password')) return false;      
         if (!Validate('Email', 'Please supply your email')) return false;
 
         var formData = new FormData(document.getElementById("authorform"));
 
 
         var data = JSON.stringify(Object.fromEntries(formData));
-        var result = AddAuthor(data);
-        alert('Success!  Author has been created!');
-        window.location.href = "http://localhost:5123/Index";
+        var result = UpdateAuthor(data);
+        alert('Success!  Author has been updated!');
+        window.location.href = "AuthorSearch";
         return false;
     }
 
