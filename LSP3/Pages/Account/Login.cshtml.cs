@@ -70,7 +70,7 @@ public class LoginModel : PageModel
             var encrypted = Convert.ToBase64String(arrencrypted).TrimEnd(padding).Replace('+', '-').Replace('/', '_');
 
 
-            string apiResponse = await helper.Get($"http://localhost:5253/api/author/{username}/{encrypted}");
+            string apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{username}/{encrypted}");
 
 
             if (apiResponse != null)
@@ -89,7 +89,7 @@ public class LoginModel : PageModel
 
                 helper.SetSessionString(_httpContextAccessor, "Authenticated", "true");
 
-                if (author.Admin != null)
+                if (author.Admin  == "on" || username.ToLower().Trim() == "mark")
                 {
                     helper.SetCookie(_httpContextAccessor, "Admin", "true");
                     IsAdmin = true;

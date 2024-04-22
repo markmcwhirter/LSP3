@@ -50,6 +50,7 @@
                             <nav class="nav flex-column">
                                 <a class="nav-link active" href="http://www.lightswitchpress.com" aria-current="page" href="#">LSP Home</a>
                                 <a class="nav-link" href="Index">Author Information</a>
+                                <a class="nav-link" href="AuthorSearch">Author Search</a>
                                 <a class="nav-link" href="Profile">Add Author</a>
                                 <a class="nav-link" href="BookInformation">Add Book</a>
                                 <a class="nav-link" href="Sales Entry">Sales Entry</a>
@@ -66,8 +67,7 @@
 
         </main>
 
-        <footer class="page-footer">
-            <button onclick="toggleColumn()" class="button">Toggle Menu</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <footer class="page-footer">            
             &copy; @DateTime.Now.Year Light Speed Press.  All rights reserved.
         </footer>
 
@@ -80,6 +80,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         @*         <ejs-scripts></ejs-scripts> *@
     </asp:ContentPlaceHolder>
-
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

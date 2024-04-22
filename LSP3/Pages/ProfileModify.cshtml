@@ -1,25 +1,26 @@
 ﻿@page
 @model LSP3.Pages.ProfileModify
 @{
-    Layout = "_Layout";
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Author Search";
 }
 
 <link rel="stylesheet" href="css/AddAuthor.css" type="text/css" />
 
 <form method="post" id="authorform">
-     <table>
+    <table>
         <tr><td colspan="2"><label id="lblError" class="error"></label></td></tr>
         <tr>
             <td><label id="AuthorID_Label" for="AuthorID">AuthorID</label></td>
-            <td><input type='text' name="AuthorId" id="AuthorId" class="textInput"  readonly MaxLength="50" value='@Model.Results.AuthorID' /></td>
+            <td><input type='text' name="AuthorId" id="AuthorId" class="textInput" readonly MaxLength="50" value='@Model.Results.AuthorID' /></td>
         </tr>
         <tr>
             <td><label id="Admin_Label" for="Admin">Admin</label></td>
             <td width="300">
-                <select name="Admin" id="Admin" class="textInput">
+                <select asp-for="@Model.Results.Admin" name="Admin" id="Admin" class="textInput">
                     <option selected value='@Model.Results.Admin'></option>
-                    <option value="on">On</option>
-                    <option value="off">Off</option>
+                    <option value="1">On</option>
+                    <option value="0">Off</option>
                 </select>
             </td>
         </tr>
@@ -27,7 +28,7 @@
         <tr>
             <td><label for="Prefix" class="textInput">Prefix</label></td>
             <td width="300">
-                <select name="Prefix" id="Prefix" class="textInput">
+                <select asp-for="@Model.Results.Prefix"  name="Prefix" id="Prefix" class="textInput">
                     <option selected value='@Model.Results.Prefix'></option>
                     <option value="Mr">Mr</option>
                     <option value="Mrs">Mrs</option>
@@ -53,11 +54,11 @@
             <td><label id="LastName_Label" for="LastName">Last Name</label></td>
             <td><input type='text' name="LastName" id="LastName" class="textInput" MaxLength="50" value='@Model.Results.LastName' /></td>
         </tr>
- 
+
         <tr>
             <td><label name="Suffix_Label" id="Suffix_Label" for="Suffix" Suffix>Suffix</label></td>
             <td>
-                <select name="Suffix" id="Suffix" class="textInput">
+                <select asp-for="@Model.Results.Suffix" name="Suffix" id="Suffix" class="textInput">
                     <option selected value="@Model.Results.Suffix"></option>
                     <option value="Jr">Jr</option>
                     <option value="Sr">Sr</option>
@@ -78,9 +79,9 @@
             <td><label id="Password_Label" for="Password">Password</label></td>
             <td><input type='text' name="Password" id="Password" class="textInput" MaxLength="50" value='@Model.Results.Password' /></td>
         </tr>
-@*         <tr>
-            <td><label id="PasswordAgain_Label" for="Password">Reenter Password</label></td>
-            <td><input type='text' name="Password" id="AgainPassword" class="textInput" MaxLength="50" /></td>
+        @*         <tr>
+        <td><label id="PasswordAgain_Label" for="Password">Reenter Password</label></td>
+        <td><input type='text' name="Password" id="AgainPassword" class="textInput" MaxLength="50" /></td>
         </tr> *@
         <tr>
             <td><label id="Address1_Label" for="Address1">Address1</label></td>
@@ -95,11 +96,11 @@
             <td><label id="City_Label" for="City">City</label></td>
             <td><input type='text' name="City" id="City" class="textInput" MaxLength="50" value='@Model.Results.City' /></td>
         </tr>
-              
+
         <tr>
             <td><label id="State_Label" for="State">State</label></td>
             <td>
-                <select name="State" id="State" class="textInput">
+                <select asp-for="@Model.Results.State" name="State" id="State" class="textInput">
                     <option selected value="@Model.Results.State"></option>
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
@@ -164,7 +165,7 @@
         <tr>
             <td><label id="Country_Label" for="Country">Country</label></td>
             <td>
-                <select name="Country" id="Country" class="textInput">
+                <select asp-for="@Model.Results.Country" name="Country" id="Country" class="textInput">
                     <option value="US" selected="@Model.Results.Country">United States</option>
                     <option value="AF">Afghanistan</option>
                     <option value="AL">Albania</option>
@@ -407,17 +408,17 @@
                 </select>
             </td>
         </tr>
-                
+
         <tr>
             <td><label id="BusinessPhone_Label" for="BusinessPhone">Business Phone</label></td>
             <td><input type='text' name="BusinessPhone" id="BusinessPhone" class="textInput" MaxLength="20" value='@Model.Results.BusinessPhone' /></td>
         </tr>
-                
+
         <tr>
             <td><label id="HomePhone_Label" for="HomePhone">Home Phone</label></td>
             <td><input type='text' name="HomePhone" id="HomePhone" class="textInput" MaxLength="20" value='@Model.Results.HomePhone' /></td>
         </tr>
-                        
+
         <tr>
             <td><label id="CellPhone_Label" for="CellPhone">Cell Phone</label></td>
             <td><input type='text' name="CellPhone" id="CellPhone" class="textInput" MaxLength="20" value='@Model.Results.CellPhone' /></td>
@@ -435,7 +436,7 @@
                 <button type="button" id="CancelButton" onclick="return CancelEventHandler(event);" class="btn btn-secondary">Cancel</button>
             </td>
         </tr>
-  
+
 
     </table>
 
@@ -457,7 +458,7 @@
         if (!Validate('FirstName', 'Please supply your first name')) return false;
         if (!Validate('LastName', 'Please supply your last name')) return false;
         if (!Validate('UserName', 'Please supply your username')) return false;
-        if (!Validate('Password', 'Please supply a password')) return false;      
+        if (!Validate('Password', 'Please supply a password')) return false;
         if (!Validate('Email', 'Please supply your email')) return false;
 
         var formData = new FormData(document.getElementById("authorform"));

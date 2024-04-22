@@ -18,16 +18,15 @@ public class LogoutModel : PageModel
 
     public void OnGet() { }
 
-    public async Task<IActionResult> OnPost()
+    public IActionResult OnPost()
     {
-        AuthorDto author = new AuthorDto();
-
         HttpHelper helper = new HttpHelper();
 
 
         if (_httpContextAccessor.HttpContext != null)
         {
             helper.SetCookie(_httpContextAccessor, "userSession", "");
+            helper.SetCookie(_httpContextAccessor, "Authenticated", "");
         }
 
         return Redirect("/Account/Login");
