@@ -73,7 +73,7 @@ public class IndexModel : MasterModel
 
             }
 
-            apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{base.Author.AuthorID}");
+            apiResponse = await helper.Get(_appSettings.HostUrl + $"book/author/{base.Author.AuthorID}");
             if (!string.IsNullOrEmpty(apiResponse))
             {
 

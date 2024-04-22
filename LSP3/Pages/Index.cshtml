@@ -467,26 +467,106 @@
                 </h2>
                 <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                     <div class="accordion-body">
-                        <table cellspacing='0' style='border-collapse:collapse;'>
+                        <div class="row">
+                            <div class="col-sm-1">Title:</div>
+                            <div class="col-sm-5">@Html.Raw(book.Title)</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1">Subtitle:</div>
+                            <div class="col-sm-11">@Html.Raw(book.Subtitle)</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1">ISBN:</div>
+                            <div class="col-sm-11">@Html.Raw(book.ISBN)</div>
+                        </div>
 
-                            <tr><td>Title:</td><td>@Html.Raw(book.Title)</td></tr>
+                        <div class="row">
+                            <div class="col-sm-1">Cover:</div>
+                            <div class="col-sm-11">
+                                @if (book.Cover == null)
+                                {
+                                    <div>(No Cover image)</div>
+                                }
+                                else
+                                {
+                                    <a target="_blank" href="#" onClick="window.open('Display?target=@Html.Raw(book.Cover)&table=book','pagename','resizable,height=260,width=370'); return false;">@Html.Raw(book.Cover)</a>
+                                }
+                            </div>
+                        </div>
 
-                            <tr><td>Subtitle:</td><td>@Html.Raw(book.Subtitle)</td></tr>
+                        <div class="row">
+                            <div class="col-sm-1">Description:</div>
+                            <div class="col-sm-3">
+                                <a target="_blank" href="#" onClick="window.open('DisplayText?field=description&bookid=@Html.Raw(book.BookID.ToString())&table=book','pagename','resizable,height=260,width=370'); return false;">View Description</a>
+                            </div>
+                            <div class="col-sm-8">
+                                @(book.Description.Length > 10 ? "(" + book.Description.Substring(0, 10) + "...)" : "(" + book.Description + ")")
+                            </div>
+                        </div>
 
-                            <tr><td>ISBN:</td><td>@Html.Raw(book.ISBN)</td></tr>
+                        <div class="row">
+                            <div class="col-sm-1">Author Photo:</div>
+                            <div class="col-sm-11">
+                                @if (book.AuthorPhoto == null)
+                                {
+                                    <div>(No Author Photo image)</div>
+                                }
+                                else
+                                {
+                                    <a target="_blank" href="#" onClick="window.open('Display?table=book&target=@Html.Raw(book.AuthorPhoto)','pagename','resizable,height=260,width=370'); return false;">@Html.Raw(book.AuthorPhoto)</a>
+                                }
+                            </div>
+                        </div>
 
-                            <tr><td>Cover</td><td><a target="_blank" href="Display?target=@Html.Raw(book.Title)">@Html.Raw(book.Title)</td></tr>
+                        <div class="row">
+                            <div class="col-sm-1">Interior:</div>
+                            <div class="col-sm-11">
+                                @if (book.Interior == null)
+                                {
+                                    <div>(No Interior image)</div>
+                                }
+                                else
+                                {
+                                    <a target="_blank" href="#" onClick="window.open('Display?table=book&target=@Html.Raw(book.Interior)','pagename','resizable,height=260,width=370'); return false;">@Html.Raw(book.Interior)</a>
+                                }
+                            </div>
+                        </div>
 
-                            <tr><td>Description</td><td><a target="_blank" href="DisplayText?field=description&bookid=@Html.Raw(book.BookID.ToString())">View Description</a></td></tr>
+                        <div class="row">
+                            <div class="col-sm-1">Author Bio:</div>
+                            <div class="col-sm-3">
+                                <a target="_blank" href="#" onClick="window.open('DisplayText?field=authorbio&bookid=@Html.Raw(book.BookID.ToString())&table=book','pagename','resizable,height=260,width=370'); return false;">View Author Biography</a>
 
-                            <tr><td>Author Photo</td><td><a target="_blank" href="Display?target=@Html.Raw(book.AuthorPhoto)">@Html.Raw(book.AuthorPhoto)</td></tr>
+                            </div>
+                            <div class="col-sm-8">
+                                @if (book.AuthorBio == null)
+                                {
+                                    <div>(No Biography)</div>
+                                }
+                                else
+                                {
+                                    @(book.AuthorBio.Length > 10 ? "(" + book.AuthorBio.Substring(0, 10) + "...)" : "(" + book.AuthorBio + ")")
+                                }
+                            </div>
+                        </div>
 
-                            <tr><td>Interior</td><td><a target="_blank" href="Display?target=@Html.Raw(book.Interior)">@Html.Raw(book.Interior)</td></tr>
+                        <div class="row">
+                            <div class="col-sm-1">Cover Idea:</div>
+                            <div class="col-sm-3">
+                                <a target="_blank" href="#" onClick="window.open('DisplayText?field=coveridea&bookid=@Html.Raw(book.BookID.ToString())&table=book','pagename','resizable,height=260,width=370'); return false;">View Cover Idea</a>
+                            </div>
+                            <div class="col-sm-8">
+                                @if (book.CoverIdea == null)
+                                {
+                                    <div>(No Cover Idea)</div>
+                                }
+                                else
+                                {
+                                    @(book.CoverIdea.Length > 10 ? "(" + book.CoverIdea.Substring(0, 10) + "...)" : "(" + book.CoverIdea + ")")
+                                }
+                            </div>
+                        </div>
 
-                            <tr><td>Author Bio</td><td><a target="_blank" href="DisplayText?bookid=@Html.Raw(book.BookID.ToString())&field=authorbio">View Author Biography</a></td></tr>
-
-                            <tr><td>Cover Idea</td><td><a target="_blank" href="DisplayText?bookid=@Html.Raw(book.BookID.ToString())&field=coveridea">View Cover Idea</a></td></tr>
-                        </table>
                     </div>
                 </div>
             </div>
@@ -552,7 +632,7 @@
         var data = JSON.stringify(Object.fromEntries(formData));
 
         var result = UpdateAuthor(data);
-        
+
 
         document.getElementById("fieldset").disabled = true;
         var elem = document.getElementById('UpdateButton');
