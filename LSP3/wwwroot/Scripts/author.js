@@ -12,7 +12,7 @@ function UpdateAuthor(data) {
         body: JSON.stringify(author)
     };
 
-    fetch("http://localhost:5253/api/author/update", options)
+    fetch("http://164.92.99.186/api/author/update", options)
         .then(
             response => { return response.statusText() }
         ).then(
@@ -40,7 +40,7 @@ function AddAuthor(data) {
         body: JSON.stringify(author)
     };
 
-    fetch("http://localhost:5253/api/author", options)
+    fetch("http://164.92.99.186/api/author", options)
         .then(
             response => { return response.statusText() }
         ).then(
@@ -99,7 +99,7 @@ function UpdateAuthor(data) {
         body: JSON.stringify(author)
     };
 
-    fetch("http://localhost:5253/api/author/update", options)
+    fetch("http://164.92.99.186/api/author/update", options)
         .then(
             response => { return response.statusText() }
         ).then(
