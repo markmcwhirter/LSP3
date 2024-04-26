@@ -9,7 +9,7 @@ function Help(data) {
         body: data
     };
 
-    fetch("http://164.92.99.186/api/help", options)
+    fetch("http://164.92.99.186:8080/api/help", options)
         .then(
             response => { return response.statusText() }
         ).then(

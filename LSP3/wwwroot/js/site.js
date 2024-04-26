@@ -2,7 +2,7 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-const uri = 'http://164.92.99.186/api/author/1';
+const uri = 'http://164.92.99.186:8080/api/author/1';
 let todos = [];
 
 function getItems() {
