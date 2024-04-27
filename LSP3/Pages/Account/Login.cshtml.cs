@@ -85,7 +85,7 @@ public class LoginModel : PageModel
 
                 helper.SetSessionString(_httpContextAccessor, "Authenticated", "true");
 
-                if (author.Admin  == "on" || username.ToLower().Trim() == "mark")
+                if (author.Admin  == "on")
                 {
                     helper.SetCookie(_httpContextAccessor, "Admin", "true");
                     IsAdmin = true;
