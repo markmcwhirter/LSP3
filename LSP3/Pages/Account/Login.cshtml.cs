@@ -37,11 +37,7 @@ public class LoginModel : PageModel
 
         if (_httpContextAccessor.HttpContext != null)
         {
-            if( string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password) )
-            {
-                Username = "mark";
-                Password = "joellevivi1";
-            }
+
 
             var author = OnGetauthor(Username, Password);
 
