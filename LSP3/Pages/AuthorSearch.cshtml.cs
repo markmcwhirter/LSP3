@@ -9,18 +9,18 @@ namespace LSP3.Pages;
 public class AuthorSearch : MasterModel
 {
     private readonly ILogger<AuthorSearch> _logger;
-    public AuthorSearchModel SearchTerm { get; set; }
-    public string LastName { get; set; }
-    public string FirstName { get; set; }
+    public AuthorSearchModel? SearchTerm { get; set; }
+    public string? LastName { get; set; }
+    public string? FirstName { get; set; }
 
-    public string SortOrder { get; set; }
+    public string? SortOrder { get; set; }
     public int CurrentPage { get; set; } = 1;
     public int PageSize { get; set; } = 10;
     public int TotalPages { get; private set; }
 
-    public IList<AuthorListResultsModel> Results { get; set; }
-    HttpHelper helper = new HttpHelper();
-    Extensions<List<AuthorDto>> extensions = new Extensions<List<AuthorDto>>();
+    public IList<AuthorListResultsModel>? Results { get; set; }
+    readonly HttpHelper helper = new HttpHelper();
+    readonly Extensions<List<AuthorDto>> extensions = new();
     private readonly AppSettings _appSettings;
 
     public AuthorSearch(IOptions<AppSettings> appSettings,ILogger<AuthorSearch> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
@@ -43,8 +43,8 @@ public class AuthorSearch : MasterModel
         }
 
         SearchTerm = new AuthorSearchModel();
-        SearchTerm.LastName = lastName == null ? " " : lastName; ;
-        SearchTerm.FirstName = firstName == null ? " " : firstName;
+        SearchTerm.LastName = lastName ?? " "; ;
+        SearchTerm.FirstName = firstName ?? " ";
 
 
 
@@ -52,7 +52,7 @@ public class AuthorSearch : MasterModel
         SortOrder = sortOrder ?? "LastName"; // Default to sorting by last  name
 
 
-        Extensions<List<AuthorListResultsModel>> listextensions = new Extensions<List<AuthorListResultsModel>>();
+        Extensions<List<AuthorListResultsModel>> listextensions = new();
         try
         {
             SearchTerm.SortOrder = sortOrder ?? "LastName"; // Default to sorting by name
@@ -71,7 +71,9 @@ public class AuthorSearch : MasterModel
             {
                 CurrentPage = currentPage.Value;
             }
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
             TotalPages = (int)Math.Ceiling((decimal) Results.Count / PageSize);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
 
             Results = Results.Skip((CurrentPage - 1) * PageSize)
                              .Take(PageSize).ToList();

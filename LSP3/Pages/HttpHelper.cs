@@ -35,7 +35,9 @@ namespace LSP3.Pages
                 }
             }
         }
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
         public string GetSessionString(IHttpContextAccessor ctx, string variable) => ctx.HttpContext.Session.GetString(variable);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
         public void SetSessionString(IHttpContextAccessor ctx, string variable, string value)
         {
             if (ctx != null && ctx.HttpContext != null) ctx.HttpContext.Session.SetString(variable, value);
@@ -52,7 +54,9 @@ namespace LSP3.Pages
         public string GetCookie(IHttpContextAccessor ctx, string variable)
         {
             if (ctx != null && ctx.HttpContext != null && ctx.HttpContext.Request.Cookies[variable] != null)
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                 return ctx.HttpContext.Request.Cookies[variable].ToString();
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
             else
                 return "";
         }

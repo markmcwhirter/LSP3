@@ -11,7 +11,7 @@ public class Profile : MasterModel
     private readonly ILogger<Profile> _logger;
 
     HttpHelper helper = new HttpHelper();
-    public AuthorDto Results { get; set; }
+    public AuthorDto? Results { get; set; }
     private readonly AppSettings _appSettings;
     public Profile(IOptions<AppSettings> appSettings, ILogger<Profile> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
@@ -29,7 +29,9 @@ public class Profile : MasterModel
             var response = await helper.Get(_appSettings.HostUrl + $"author/{id}");
 
             if (response != null)
+#pragma warning disable CS8601 // Possible null reference assignment.
                 Results = JsonConvert.DeserializeObject<AuthorDto>(response);
+#pragma warning restore CS8601 // Possible null reference assignment.
         }
         catch (Exception ex)
         {

@@ -45,7 +45,7 @@ app.UseStaticFiles()
 .UseStaticFiles(new StaticFileOptions()
  {
      FileProvider = new PhysicalFileProvider(
-                System.IO.Path.GetFullPath(@"C:\\LSP\\LSP3\\LSP3\\Pages\\data\\")),
+                System.IO.Path.GetFullPath(@"data")),
      RequestPath = new PathString("/data"),
      DefaultContentType = "application/octet-stream"
  });

@@ -10,10 +10,12 @@ namespace LSP3
             {
                 return new T();
             }
+#pragma warning disable CS8603 // Possible null reference return.
             return JsonSerializer.Deserialize<T>(serializedString, new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
+#pragma warning restore CS8603 // Possible null reference return.
         }
     }
 

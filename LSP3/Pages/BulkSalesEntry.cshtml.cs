@@ -12,7 +12,7 @@ namespace LSP3.Pages;
 public class BulkSalesEntryModel : PageModel
 {
 
-    private IWebHostEnvironment _environment;
+    private readonly IWebHostEnvironment _environment;
 
     private readonly AppSettings _appSettings;
 
@@ -23,14 +23,11 @@ public class BulkSalesEntryModel : PageModel
     }
 
     [BindProperty]
-    public IFormFile Upload { get; set; }
+    public IFormFile? Upload { get; set; }
 
     [BindProperty]
-    public string Status { get; set; }
+    public string? Status { get; set; }
 
-    public void OnGet()
-    {
-    }
 
     public async Task OnPostAsync()
     {
@@ -41,12 +38,12 @@ public class BulkSalesEntryModel : PageModel
         {
             await Upload.CopyToAsync(fileStream);
         }
-        decimal royalties = 0.0M, comp = 0.0M, salestodate = 0.0M, salesthisperiod = 0.00M;
+        decimal royalties = 0.0M, salestodate = 0.0M, salesthisperiod = 0.00M;
         int booktype = 0, bookid = 0, units = 0, unitstodate = 0;
-        int authorid = 0;
+        //int authorid = 0;
 
         string strbooktype = "";
-        string input = "";
+        string? input = "";
         DateTime inputdate = DateTime.MinValue;
 
         StringBuilder sb = new StringBuilder();
@@ -105,7 +102,6 @@ public class BulkSalesEntryModel : PageModel
                     royalties = 0.0M;
                     booktype = 0;
                     bookid = 0;
-                    comp = 0.0M;
                     units = 0;
                     unitstodate = 0;
                     strbooktype = "";

@@ -11,7 +11,7 @@ public class ProfileModify : MasterModel
     private readonly ILogger<Profile> _logger;
 
     HttpHelper helper = new HttpHelper();
-    public AuthorDto Results { get; set; }
+    public AuthorDto? Results { get; set; }
     private readonly AppSettings _appSettings;
     public ProfileModify(IOptions<AppSettings> appSettings, ILogger<Profile> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {

@@ -8,18 +8,13 @@ namespace LSP3.Pages;
 public class BookReportModel : MasterModel
 {
     [BindProperty]
-    public List<BookSale> BookSaleData { get; set; }
+    public List<BookSale>? BookSaleData { get; set; }
 
 
-    private readonly ILogger<IndexModel> _logger;
 
-    private readonly AppSettings _appSettings;
-
-
-    public BookReportModel(IOptions<AppSettings> appSettings, ILogger<IndexModel> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+    public BookReportModel( IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
-        _appSettings = appSettings.Value;
-        _logger = logger;
+
     }
 
     //public async Task<IActionResult> OnGet()

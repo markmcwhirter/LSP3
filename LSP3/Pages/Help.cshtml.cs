@@ -9,24 +9,18 @@ namespace LSP3.Pages;
 public class HelpModel : MasterModel
 {
     [BindProperty]
-    public string From { get; set; }
+    public string? From { get; set; }
 
     [BindProperty]
-    public string FromEmail{ get; set; }
+    public string? FromEmail{ get; set; }
 
-    private IConfiguration Configuration;
-    
-    private readonly ILogger<IndexModel> _logger;
-    private readonly AppSettings _appSettings;
-
-    public HelpModel(IOptions<AppSettings> appSettings, ILogger<IndexModel> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+    public HelpModel(IOptions<AppSettings> appSettings, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
-        _appSettings = appSettings.Value;
-        _logger = logger;
+
     }
 
 
-    public async Task<IActionResult> OnGet()
+    public IActionResult OnGet()
     {
         HttpHelper helper = new HttpHelper();
 
@@ -42,8 +36,8 @@ public class HelpModel : MasterModel
 
 public class ContactFormModel
 {
-    public string Name { get; set; }
-    public string Subject { get; set; }
-    public string Email { get; set; }
-    public string Body { get; set; }
+    public string? Name { get; set; }
+    public string? Subject { get; set; }
+    public string? Email { get; set; }
+    public string? Body { get; set; }
 }

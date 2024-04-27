@@ -10,14 +10,14 @@ namespace LSP3.Pages;
 public class DisplayTextModel : MasterModel
 {
     [BindProperty]
-    public AuthorDto Author { get; set; }
+    public AuthorDto? Author { get; set; }
 
     [BindProperty]
-    public BookDto Book { get; set; }
+    public BookDto? Book { get; set; }
 
 
     [BindProperty]
-    public string Text { get; set; }
+    public string? Text { get; set; }
 
     private readonly ILogger<DisplayTextModel> _logger;
 

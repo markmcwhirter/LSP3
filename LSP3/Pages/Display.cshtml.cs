@@ -7,14 +7,14 @@ namespace LSP3.Pages;
 
 public class DisplayModel : MasterModel
 {
-    public readonly IHttpContextAccessor _httpContextAccessor;
+    //public readonly IHttpContextAccessor _httpContextAccessor;
 
     private readonly AppSettings _appSettings;
 
     public DisplayModel(IOptions<AppSettings> appSettings, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
         _appSettings = appSettings.Value;
-        _httpContextAccessor = httpContextAccessor;
+        //_httpContextAccessor = httpContextAccessor;
     }
 
     public IActionResult OnGet()

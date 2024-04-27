@@ -6,11 +6,11 @@ namespace LSP3.Model
     {
 
         [Display(Name = "First Name")] // Adjust display names as needed 
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         [Display(Name = "Last Name")]
-        public string LastName { get; set; }
-        public string SortOrder { get; set; }
+        public string? LastName { get; set; }
+        public string? SortOrder { get; set; }
 
     }
 }

@@ -23,15 +23,7 @@ public class MasterModel : PageModel
     {
         _httpContextAccessor = httpContextAccessor;
     }
-    public override void OnPageHandlerSelected(PageHandlerSelectedContext context)
-    {
-        //...
-    }
 
-    public override void OnPageHandlerExecuted(PageHandlerExecutedContext context)
-    {
-        base.OnPageHandlerExecuted(context);
-    }
 
 
     public override void OnPageHandlerExecuting(PageHandlerExecutingContext context)
@@ -46,10 +38,8 @@ public class MasterModel : PageModel
             if (!string.IsNullOrEmpty(tmpUserSession))
             {
                 Author = new Extensions<AuthorDto>().Deserialize(tmpUserSession);
-                CurrentUser = Author.Username;
+                CurrentUser = Author.Username ?? "";
                 IsAuthenticated = true;
-                if( Author.Admin != "")
-                    IsAdmin = true;
             }
         }
 

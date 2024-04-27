@@ -2,7 +2,7 @@
 {
     public class AppSettings
     {
-        public string HostUrl { get; set; }
-        public string ImageData { get; set; }
+        public string? HostUrl { get; set; }
+        public string? ImageData { get; set; }
     }
 }

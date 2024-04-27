@@ -8,7 +8,7 @@ namespace LSP3.Pages;
 public class BookListModel : MasterModel
 {
     [BindProperty]
-    public List<BookDto> Books { get; set; }
+    public List<BookDto>? Books { get; set; }
 
 
     private readonly ILogger<BookListModel> _logger;
@@ -24,8 +24,8 @@ public class BookListModel : MasterModel
 
     public async Task<IActionResult> OnGet()
     {
-        HttpHelper helper = new HttpHelper();
-        Extensions<List<BookDto>> extensions = new Extensions<List<BookDto>>();
+        HttpHelper helper = new();
+        Extensions<List<BookDto>> extensions = new();
 
         try
         {
