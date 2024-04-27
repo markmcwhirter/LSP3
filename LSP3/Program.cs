@@ -1,5 +1,6 @@
 using LSP3.Model;
 
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,6 +50,15 @@ app.UseStaticFiles()
      RequestPath = new PathString("/data"),
      DefaultContentType = "application/octet-stream"
  });
+
+// using Microsoft.AspNetCore.HttpOverrides;
+
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
+
+app.UseAuthentication();
 
 app.UseRouting();
 
