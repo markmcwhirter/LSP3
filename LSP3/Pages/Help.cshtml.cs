@@ -22,7 +22,7 @@ public class HelpModel : MasterModel
 
     public IActionResult OnGet()
     {
-        HttpHelper helper = new HttpHelper();
+        HttpHelper helper = new();
 
         if (!base.IsAuthenticated)
             return Redirect("/Account/Login");

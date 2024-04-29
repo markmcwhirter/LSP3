@@ -1,5 +1,30 @@
+async function CheckAuthor(username) {
+
+    var data;
+ 
+    try {
+        const response = await fetch('http://164.92.99.186:8080/api/user/' + username);
+        data = await response.json(); // Assuming the response is JSON
+        console.log(data);
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+
+    return data;
+}
+
+async function isUrlReachable(url) {
+    try {
+        const response = await fetch(url);
+        return response.ok; // Check if the HTTP status code is in the 2xx range
+    } catch (error) {
+        return false; // Any error during fetch indicates unreachable
+    }
+}
+
+
 function UpdateAuthor(data) {
-    debugger
+ 
     const author = JSON.parse(data);
     deleteFromObject('__RequestVerificationToken', author);
 

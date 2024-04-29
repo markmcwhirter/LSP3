@@ -31,7 +31,7 @@ public class BulkSalesEntryModel : PageModel
 
     public async Task OnPostAsync()
     {
-        HttpHelper helper = new HttpHelper();
+        HttpHelper helper = new();
 
         var file = Path.Combine(_environment.ContentRootPath, "SalesData", Upload.FileName);
         using (var fileStream = new FileStream(file, FileMode.Create))
@@ -46,11 +46,11 @@ public class BulkSalesEntryModel : PageModel
         string? input = "";
         DateTime inputdate = DateTime.MinValue;
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new();
 
         try
         {
-            using (StreamReader sr = new StreamReader(file))
+            using (StreamReader sr = new(file))
             {
                 input = sr.ReadLine();
                 sb.AppendLine(@"<table border='1'>");
@@ -126,19 +126,19 @@ public class BulkSalesEntryModel : PageModel
     }
 
 
-    private void MyParse(string p1, ref int qty, string p2)
+    private static void MyParse(string p1, ref int qty, string p2)
     {
         bool result = int.TryParse(p1, out qty);
         if (!result)
             throw new InvalidDataException("Error parsing " + p2);
     }
-    private void MyParse(string p1, ref decimal qty, string p2)
+    private static void MyParse(string p1, ref decimal qty, string p2)
     {
         bool result = decimal.TryParse(p1, out qty);
         if (!result)
             throw new InvalidDataException("Error parsing " + p2);
     }
-    private void MyParse(string p1, ref DateTime inputdate, string p2)
+    private static void MyParse(string p1, ref DateTime inputdate, string p2)
     {
         bool result = DateTime.TryParse(p1, CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out inputdate);
         if (!result)

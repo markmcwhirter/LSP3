@@ -16,17 +16,30 @@ public class LogoutModel : PageModel
         _httpContextAccessor = httpContextAccessor;
     }
 
-    public void OnGet() { }
-
-    public IActionResult OnPost()
-    {
-        HttpHelper helper = new HttpHelper();
+    public IActionResult OnGet() {
+        HttpHelper helper = new();
 
 
         if (_httpContextAccessor.HttpContext != null)
         {
             helper.SetCookie(_httpContextAccessor, "userSession", "");
             helper.SetCookie(_httpContextAccessor, "Authenticated", "");
+            helper.SetCookie(_httpContextAccessor, "Admin", "");
+        }
+
+        return Redirect("/Account/Login");
+    }
+
+    public IActionResult OnPost()
+    {
+        HttpHelper helper = new();
+
+
+        if (_httpContextAccessor.HttpContext != null)
+        {
+            helper.SetCookie(_httpContextAccessor, "userSession", "");
+            helper.SetCookie(_httpContextAccessor, "Authenticated", "");
+            helper.SetCookie(_httpContextAccessor, "Admin", "");
         }
 
         return Redirect("/Account/Login");

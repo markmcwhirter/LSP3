@@ -16,7 +16,7 @@ public class MasterModel : PageModel
     public bool IsAuthenticated = false;
     public bool IsAdmin = false;
 
-    public AuthorDto Author = new AuthorDto();
+    public AuthorDto Author = new();
     public string CurrentUser = "";
 
     public MasterModel(IHttpContextAccessor httpContextAccessor)
@@ -28,7 +28,7 @@ public class MasterModel : PageModel
 
     public override void OnPageHandlerExecuting(PageHandlerExecutingContext context)
     {
-        HttpHelper helper = new HttpHelper();
+        HttpHelper helper = new();
 
         if (_httpContextAccessor != null && _httpContextAccessor.HttpContext != null && _httpContextAccessor.HttpContext.Session != null)
         {

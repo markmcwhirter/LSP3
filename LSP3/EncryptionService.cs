@@ -5,15 +5,15 @@ namespace LSP3;
 
 public class EncryptionService
 {
-    private byte[] IV =
+    private readonly byte[] IV =
     {
         0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
         0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16
     };
 
-    string PASSPHRASE = "098asdf07s9d8f790a87sdf9a87sd98a7sdf987asdf987asd9f87as98g7a987sgd";
+    readonly string PASSPHRASE = "098asdf07s9d8f790a87sdf9a87sd98a7sdf987asdf987asd9f87as98g7a987sgd";
 
-    private byte[] DeriveKeyFromPassword(string password)
+    private static byte[] DeriveKeyFromPassword(string password)
     {
         var emptySalt = Array.Empty<byte>();
         var iterations = 1000;

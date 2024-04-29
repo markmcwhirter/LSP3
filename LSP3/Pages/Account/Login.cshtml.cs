@@ -33,15 +33,11 @@ public class LoginModel : PageModel
 
     public async Task<IActionResult> OnPost()
     {
-        HttpHelper helper = new HttpHelper();
+        HttpHelper helper = new();
 
         if (_httpContextAccessor.HttpContext != null)
         {
 
-
-            var author = OnGetauthor(Username, Password);
-
-            helper.SetSessionString(_httpContextAccessor, "Authenticated", "true");
             await OnGetauthor(Username, Password);
 
             if( IsAdmin )
@@ -54,9 +50,8 @@ public class LoginModel : PageModel
 
     public async Task OnGetauthor(string? username, string? password)
     {
-        AuthorDto author = new AuthorDto();
 
-        HttpHelper helper = new HttpHelper();
+        HttpHelper helper = new();
 
         if (username == null || password == null) return;
 
@@ -71,8 +66,8 @@ public class LoginModel : PageModel
 
             if (apiResponse != null)
             {
-                author = new Extensions<AuthorDto>().Deserialize(apiResponse);
-                await helper.Get(_appSettings.HostUrl + $"author/{username}/{encrypted}");
+                AuthorDto author = new Extensions<AuthorDto>().Deserialize(apiResponse);
+
                 helper.SetSessionString(_httpContextAccessor, "userSession", apiResponse);
 
                 HttpContext.Response.Cookies.Append("userSession", apiResponse, new CookieOptions
@@ -85,7 +80,7 @@ public class LoginModel : PageModel
 
                 helper.SetSessionString(_httpContextAccessor, "Authenticated", "true");
 
-                if (author.Admin  == "on")
+                if (author.Admin  == "1")
                 {
                     helper.SetCookie(_httpContextAccessor, "Admin", "true");
                     IsAdmin = true;
@@ -100,3 +95,5 @@ public class LoginModel : PageModel
 
     }
 }
+
+

@@ -19,7 +19,7 @@ public class AuthorSearch : MasterModel
     public int TotalPages { get; private set; }
 
     public IList<AuthorListResultsModel>? Results { get; set; }
-    readonly HttpHelper helper = new HttpHelper();
+    readonly HttpHelper helper = new();
     readonly Extensions<List<AuthorDto>> extensions = new();
     private readonly AppSettings _appSettings;
 
@@ -42,9 +42,11 @@ public class AuthorSearch : MasterModel
             return;
         }
 
-        SearchTerm = new AuthorSearchModel();
-        SearchTerm.LastName = lastName ?? " "; ;
-        SearchTerm.FirstName = firstName ?? " ";
+        SearchTerm = new AuthorSearchModel
+        {
+            LastName = lastName ?? " ",
+            FirstName = firstName ?? " "
+        };
 
 
 

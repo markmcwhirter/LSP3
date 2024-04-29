@@ -15,7 +15,7 @@ public class BookInformationModel : MasterModel
 
     //public async Task<IActionResult> OnGet()
     //{
-    //    HttpHelper helper = new HttpHelper();
+    //    HttpHelper helper = new();
     //    Extensions<AuthorDto> authorextensions = new Extensions<AuthorDto>();
     //    Extensions<List<BookDto>> bookextensions = new Extensions<List<BookDto>>();
 

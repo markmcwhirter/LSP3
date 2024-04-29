@@ -21,7 +21,7 @@ public class BookReportModel : MasterModel
     //{
     //    BookSaleData = new List<BookSale>();
 
-    //    HttpHelper helper = new HttpHelper();
+    //    HttpHelper helper = new();
     //    Extensions<List<BookSale>> bsExtention = new Extensions<List<BookSale>>();
 
     //    try

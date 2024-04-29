@@ -24,9 +24,9 @@ public class IndexModel : MasterModel
 
     public async Task<IActionResult> OnGet()
     {
-        HttpHelper helper = new HttpHelper();
-        Extensions<AuthorDto> authorextensions = new Extensions<AuthorDto>();
-        Extensions<List<BookDto>> bookextensions = new Extensions<List<BookDto>>();
+        HttpHelper helper = new();
+        Extensions<AuthorDto> authorextensions = new();
+        Extensions<List<BookDto>> bookextensions = new();
 
         try
         {

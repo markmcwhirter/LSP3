@@ -11,29 +11,23 @@ namespace LSP3.Pages
     {
         public async Task<HttpResponseMessage> PostAsync<T>(string url, T dto)
         {
-            using (var client = new HttpClient())
-            {
-                // Serialize the DTO object to JSON
-                var json = JsonConvert.SerializeObject(dto);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
+            using var client = new HttpClient();
+            // Serialize the DTO object to JSON
+            var json = JsonConvert.SerializeObject(dto);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                // Send the POST request
-                var response = await client.PostAsync(url, content);
+            // Send the POST request
+            var response = await client.PostAsync(url, content);
 
-                return response;
-            }
+            return response;
         }
 
 
         public async Task<string> Get(string url)
         {
-            using (var httpClient = new HttpClient())
-            {
-                using (HttpResponseMessage response = await httpClient.GetAsync(url))
-                {
-                    return await response.Content.ReadAsStringAsync();
-                }
-            }
+            using var httpClient = new HttpClient();
+            using HttpResponseMessage response = await httpClient.GetAsync(url);
+            return await response.Content.ReadAsStringAsync();
         }
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
         public string GetSessionString(IHttpContextAccessor ctx, string variable) => ctx.HttpContext.Session.GetString(variable);

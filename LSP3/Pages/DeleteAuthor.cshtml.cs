@@ -11,8 +11,8 @@ public class DeleteAuthor : MasterModel
 
     public IList<AuthorListResultsModel>? Results { get; set; }
 
-    HttpHelper helper = new HttpHelper();
-    Extensions<List<AuthorDto>> extensions = new Extensions<List<AuthorDto>>();
+    readonly HttpHelper helper = new();
+    readonly Extensions<List<AuthorDto>> extensions = new();
   
 
     public DeleteAuthor( IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)

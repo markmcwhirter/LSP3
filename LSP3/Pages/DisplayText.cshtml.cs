@@ -38,9 +38,9 @@ public class DisplayTextModel : MasterModel
 
         string apiResponse = "";
 
-        HttpHelper helper = new HttpHelper();
-        Extensions<AuthorDto> authorextensions = new Extensions<AuthorDto>();
-        Extensions<BookDto> bookextensions = new Extensions<BookDto>();
+        HttpHelper helper = new();
+        Extensions<AuthorDto> authorextensions = new();
+        Extensions<BookDto> bookextensions = new();
 
         try
         {
