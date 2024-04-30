@@ -105,7 +105,8 @@ function Validate(field, message) {
     var testvalue = document.getElementById(field).value;
 
     if (testvalue == null || testvalue == '') {
-        document.getElementById('lblError').innerHTML = message;
+        //document.getElementById('lblError').innerHTML = message;
+        document.getElementById('valerror').innerHTML = message;
         return false;
     }
     return true;
