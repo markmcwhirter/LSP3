@@ -1,5 +1,5 @@
 ﻿@page
-@model LSP3.Pages.Account.LoginModel
+@model LSP3.Pages.Account.ResetModel
 @{
     Layout = null; // Specify no layout
 }
@@ -9,7 +9,6 @@
 <head id="Head1" runat="server">
 		<title>LightSwitch</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta name="author" content="Mark McWhirter" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<meta name="robots" content="index, follow" /> 
 		
@@ -77,7 +76,7 @@
 
 			.loginbutton {
 				margin-top: 25px;
-				margin-right: 15px;
+				margin-left: 155px;
 				float: left;
 				padding: 6px 10px;
 				color: #fff;
@@ -160,46 +159,21 @@
 			
 			<div id="login-content">
 				    <p>
-                        <asp:Label ID="FailureText" runat="server" ></asp:Label>
+                        <asp:Label ID="FailureText" runat="server" >Enter your new password:</asp:Label>
 				    </p>
+					<p></p>
 					<p>
-						 <label for="UserName">Username</label>
-						<input type="text" id="UserName" name="UserName" class="text-input" autocomplete="on"/>
+						 <label for="password">Password:</label>
+						<input type="text" id="email" name="email" class="text-input" autocomplete="on"/>
 					</p>
-					<br style="clear: both;" />
-					<p>
-						 <label for="Password">Password</label>
-						<input type="password" id="Password" name="Password" class="text-input"  autocomplete="on" />
-					</p>
-
-
-					<button type="submit" class="button loginbutton"  >Log In</button>
-
-					<button type="button" class="button loginbutton"  onclick="return RegisterEventHandler(event);" >Register</button>
-					<button type="button" class="button loginbutton"  onclick="return ForgotLoginEventHandler(event);" >Forgot Password?</button>
+					<p><button type="submit" class="button loginbutton" >Submit</button></p>
 			
 			</div>
-					
-				
-
 		</div>
-
     </form>
 </body>
 </html>
-<script type="text/javascript">
-    function RegisterEventHandler(event) {
-        event.preventDefault();
-        window.location.href = "Register";
-        return false;
-    }
 
-	function ForgotLoginEventHandler(event) {
-        event.preventDefault();
-        window.location.href = "Forgotten";
-        return false;
-    }
-</script>
 
 
 

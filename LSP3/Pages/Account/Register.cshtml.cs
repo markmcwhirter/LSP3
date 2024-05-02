@@ -9,10 +9,10 @@ namespace LSP3.Pages.Account
         {
             _ = "test";
         }
-        public async Task<IActionResult> OnPost()
+        public IResult OnPost()
         {
             _ = "test";
-            return Page();
+            return (IResult)Page();
         }
     }
 }

@@ -182,4 +182,12 @@ tbody tr td:nth-child(-n + 2) {
     text-align: center;
 }
 
+.color-blue {
+    background-color: steelblue;
+}
+
+.color-lightblue {
+    background-color: lightsteelblue;
+}
+
 

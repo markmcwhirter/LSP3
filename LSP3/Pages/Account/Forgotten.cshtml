@@ -1,6 +1,180 @@
 ﻿@page
 @model LSP3.Pages.Account.ForgottenModel
 @{
-    Layout = "_LayoutNoMenu";
-    ViewData["Title"] = "Forgotten Password";
+    Layout = null; // Specify no layout
 }
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+		<title>LightSwitch</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="robots" content="index, follow" /> 
+		
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">		
+               
+
+
+		<style type="text/css">
+			* {
+				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			}
+			
+			body {
+				margin: 0;
+				padding: 0;
+				color: #fff;
+				background-color: black;
+				font-size: 14px;
+				text-shadow: #050505 0 -1px 0;
+				font-weight: bold;
+			}
+			
+			li {
+				list-style: none;
+			}
+			
+
+			
+			#login-wrapper {
+				margin: 0 0 0 -160px;
+				/* width: 320px; */
+				text-align: center;
+				z-index: 99;
+				position: absolute;
+				top: 0;
+				left: 50%;
+			}
+			
+			#login-top {
+				height: 120px;
+				padding-top: 140px;
+				text-align: center;
+			}
+			
+			label {
+				width: 70px;
+				float: left;
+				padding: 8px;
+				line-height: 14px;
+				margin-top: -4px;
+			}
+			
+			input.text-input {
+				width: 200px;
+				float: left;
+				-moz-border-radius: 4px;
+                -webkit-border-radius: 4px;
+				border-radius: 4px;
+				background: #fff;
+				border: solid 1px transparent;
+				color: #555;
+				padding: 8px;
+				font-size: 13px;
+			}
+
+			.loginbutton {
+				margin-top: 25px;
+				margin-left: 155px;
+				float: left;
+				padding: 6px 10px;
+				color: #fff;
+				font-size: 14px;
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#a4d04a), to(#459300));
+				text-shadow: #050505 0 -1px 0;
+				background-color: #459300;
+				-moz-border-radius: 4px;
+                -webkit-border-radius: 4px;
+				border-radius: 4px;
+				border: solid 1px transparent;
+				font-weight: bold;
+				cursor: pointer;
+				letter-spacing: 1px;
+			}
+
+			input.button {
+				float: left;
+				padding: 6px 10px;
+				color: #fff;
+				font-size: 14px;
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#a4d04a), to(#459300));
+				text-shadow: #050505 0 -1px 0;
+				background-color: #459300;
+				-moz-border-radius: 4px;
+                -webkit-border-radius: 4px;
+				border-radius: 4px;
+				border: solid 1px transparent;
+				font-weight: bold;
+				cursor: pointer;
+				letter-spacing: 1px;
+			}
+			
+			input.button:hover {
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#a4d04a), to(#a4d04a), color-stop(80%, #76b226));
+				text-shadow: #050505 0 -1px 2px;
+				background-color: #a4d04a;
+				color: #fff;
+			}
+			
+			div.error {
+				padding: 8px;
+				background: rgba(52, 4, 0, 0.4);
+				-moz-border-radius: 8px;
+                -webkit-border-radius: 8px;
+				border-radius: 8px;
+				border: solid 1px transparent;
+				margin: 6px 0;
+			}
+			.logo {
+				/* background-image: url(../images/logo.png); */
+				width: 300px;
+				height: 110px;
+				background-position: 0px 0px;
+				margin-left: 10px;
+			}
+			.signinbutton {
+				margin-left:  90px;
+			}
+			.registerbutton {
+				margin-left:  35px;
+			}
+			.forgotbutton {
+				margin-top: 25px;
+				margin-left:  110px;
+				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FF3FA5), to(#FF4530));
+			}
+			.buttonspacing {
+				 display: block;
+				margin-right: 10px;
+			}
+		</style>		
+    </head>
+    <body>
+    <form method="post">
+		<div id="login-wrapper" class="png_bg">
+			<div id="login-top">
+				<div class="logo"><img src="/images/logo.png" /></div>			
+			</div>
+			
+			<div id="login-content">
+				    <p>
+                        <asp:Label ID="FailureText" runat="server" >Enter your email address for recovery instructions:</asp:Label>
+				    </p>
+					<p></p>
+					<p>
+						 <label for="email">EMail:</label>
+						<input type="text" id="email" name="email" class="text-input" autocomplete="on"/>
+					</p>
+					<p><button type="submit" class="button loginbutton" >Submit</button></p>
+			
+			</div>
+		</div>
+    </form>
+</body>
+</html>
+
+
+
+
+

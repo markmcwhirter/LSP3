@@ -33,14 +33,14 @@ public class BulkSalesEntryModel : PageModel
     {
         HttpHelper helper = new();
 
-        var file = Path.Combine(_environment.ContentRootPath, "SalesData", Upload.FileName);
+        var file = Path.Combine(_environment.ContentRootPath, "data", Upload.FileName);
         using (var fileStream = new FileStream(file, FileMode.Create))
         {
             await Upload.CopyToAsync(fileStream);
         }
         decimal royalties = 0.0M, salestodate = 0.0M, salesthisperiod = 0.00M;
         int booktype = 0, bookid = 0, units = 0, unitstodate = 0;
-        //int authorid = 0;
+
 
         string strbooktype = "";
         string? input = "";
@@ -53,8 +53,25 @@ public class BulkSalesEntryModel : PageModel
             using (StreamReader sr = new(file))
             {
                 input = sr.ReadLine();
-                sb.AppendLine(@"<table border='1'>");
-                sb.AppendLine("<tr><td>Book ID</td><td>Sales<br/>Date</td><td>Book<br />Type</td><td>Units<br />Sold</td><td>Units<br />Sold<br /> To<br /> Date</td><td>Royalty</td><td>Sales<br /> This<br /> Period</td><td>Sales<br /> To<br /> Date</td></tr>");
+
+
+                sb.AppendLine(@"<div class='container-fluid'>");
+                sb.AppendLine(@"<div class='content'>");
+                sb.AppendLine(@"<div class='row'>");
+				sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Book ID</div>");
+				sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Sales Date</div>");
+				sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Book Type</div>");
+				sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Units Sold</div>");
+				sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Units To Date</div>");
+				sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Royalty</div>");
+				sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Sales This Period</div>");
+				sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Sales To Date</div>");
+                sb.AppendLine(@"<div class='col-sm-4'>&nbsp;</div>");
+                sb.AppendLine(@"</div>");
+
+
+
+                int count = 1;
 
                 while ((input = sr.ReadLine()) != null)
                 {
@@ -70,34 +87,28 @@ public class BulkSalesEntryModel : PageModel
                     MyParse(vals[7], ref salesthisperiod, "salesthisperiod");
 
 
-                    //clsSales i = new clsSales
-                    //{
-                    //    VendorID = booktype,
-                    //    SalesDate = inputdate,
-                    //    BookID = bookid,
-                    //    UnitsSold = units,
-                    //    UnitsToDate = unitstodate,
-                    //    Royalty = royalties,
-                    //    SalesToDate = salestodate,
-                    //    SalesThisPeriod = salesthisperiod,
-                    //    DateCreated = DateTime.Now.ToString()
-                    //};
-
-                    // check to see if entry already there
-                    //int unitscheck = sales.BooksSoldByDate(bookid, inputdate, booktype);
-
-                    //if (unitscheck > 0)
-                    //    sales.DeleteSalesRange(bookid, inputdate, booktype);
-
-                    //sales.InsertSale(i);
-
                     if (booktype == 5)
                         strbooktype = "EBook";
                     else
                         strbooktype = "Paperback";
 
-                    sb.AppendFormat("<tr><td>{0}</td><td>{1}<td>{2}</td><td>{3}</td><td>{4}</td><td>{5:C}</td><td>{6:C}</td><td>{7:C}</td></tr>",
-                        bookid, inputdate.ToShortDateString(), strbooktype, units, unitstodate, royalties, salesthisperiod, salestodate);
+                    string row = "";
+
+                    if (count % 2 == 0)
+                        row = "<div class='row color-blue'>";
+                    else
+                        row = "<div class='row color-lightblue'>";
+
+                    string strinputdate = inputdate.ToShortDateString();
+
+                    string strunit = units.ToString().PadLeft(10, ' '); 
+                    string strunitstodate = unitstodate.ToString().PadLeft(10, ' '); 
+
+                    string strroyalty = royalties.ToString("C2").PadLeft(10, ' '); 
+                    string strsalesthisperiod = salesthisperiod.ToString("C2").PadLeft(10, ' '); 
+                    string strsalestodate = salestodate.ToString("C2").PadLeft(10, ' '); 
+
+                    sb.AppendFormat($@"{row}<div class='col-sm-1 text-sm-end'>{bookid}</div><div class='col-sm-1 text-sm-end'>{strinputdate}</div><div class='col-sm-1 text-sm-end'>{strbooktype}</div><div class='col-sm-1 text-sm-end'>{strunit}</div><div class='col-sm-1  text-sm-end'>{strunitstodate}</div><div class='col-sm-1 text-sm-end'>{strroyalty}</div><div class='col-sm-1 text-sm-end'>{strsalesthisperiod}</div><div class='col-sm-1 text-sm-end'>{strsalestodate}</div><div class='col-sm-4'>&nbsp;</div></div>");
 
                     royalties = 0.0M;
                     booktype = 0;
@@ -107,15 +118,17 @@ public class BulkSalesEntryModel : PageModel
                     strbooktype = "";
                     input = "";
 
-                }
+                    // apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{authorid}");
+                    count++;
+				}
             }
-            sb.AppendLine("</table>");
+            sb.AppendLine("</div></div>");
             Status = sb.ToString();
         }
         catch (Exception ex)
         {
             sb.Clear();
-            sb.Append("<div>ERROR: ");
+            sb.Append("ERROR: ");
             sb.Append(ex.Message);
             sb.Append("<BR>");
             sb.Append(ex.InnerException);

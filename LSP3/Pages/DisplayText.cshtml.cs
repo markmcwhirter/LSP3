@@ -10,7 +10,7 @@ namespace LSP3.Pages;
 public class DisplayTextModel : MasterModel
 {
     [BindProperty]
-    public AuthorDto? Author { get; set; }
+    public new AuthorDto? Author { get; set; }
 
     [BindProperty]
     public BookDto? Book { get; set; }

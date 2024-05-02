@@ -7,7 +7,7 @@ namespace LSP3.Pages;
 public class IndexModel : MasterModel
 {
     [BindProperty]
-    public AuthorDto? Author { get; set; }
+    public new AuthorDto? Author { get; set; }
 
     [BindProperty]
     public List<BookDto>? Books { get; set; }
