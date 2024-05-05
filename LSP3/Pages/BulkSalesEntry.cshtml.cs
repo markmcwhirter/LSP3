@@ -1,5 +1,7 @@
 using LSP3.Model;
 
+using MailKit.Search;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
@@ -58,17 +60,16 @@ public class BulkSalesEntryModel : PageModel
                 sb.AppendLine(@"<div class='container-fluid'>");
                 sb.AppendLine(@"<div class='content'>");
                 sb.AppendLine(@"<div class='row'>");
-				sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Book ID</div>");
-				sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Sales Date</div>");
-				sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Book Type</div>");
-				sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Units Sold</div>");
-				sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Units To Date</div>");
-				sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Royalty</div>");
-				sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Sales This Period</div>");
-				sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Sales To Date</div>");
+                sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Book ID</div>");
+                sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Sales Date</div>");
+                sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Book Type</div>");
+                sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Units Sold</div>");
+                sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Units To Date</div>");
+                sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Royalty</div>");
+                sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Sales This Period</div>");
+                sb.AppendLine(@"<div class='col-sm-1 text-sm-end'>Sales To Date</div>");
                 sb.AppendLine(@"<div class='col-sm-4'>&nbsp;</div>");
                 sb.AppendLine(@"</div>");
-
 
 
                 int count = 1;
@@ -86,6 +87,17 @@ public class BulkSalesEntryModel : PageModel
                     MyParse(vals[6], ref salestodate, "salestodate");
                     MyParse(vals[7], ref salesthisperiod, "salesthisperiod");
 
+                    SalePostModel postdata = new SalePostModel
+                    {
+                        BookId = bookid,
+                        BookType = booktype,
+                        InputDate = inputdate.ToString("yyyy-MM-dd HH:mm:ss"),  // 2024-04-01 00:00:00
+                        Royalty = royalties,
+                        SalesThisPeriod = salesthisperiod,
+                        SalesToDate = salestodate,
+                        Units = units,
+                        UnitsToDate = unitstodate
+                    };
 
                     if (booktype == 5)
                         strbooktype = "EBook";
@@ -101,12 +113,12 @@ public class BulkSalesEntryModel : PageModel
 
                     string strinputdate = inputdate.ToShortDateString();
 
-                    string strunit = units.ToString().PadLeft(10, ' '); 
-                    string strunitstodate = unitstodate.ToString().PadLeft(10, ' '); 
+                    string strunit = units.ToString().PadLeft(10, ' ');
+                    string strunitstodate = unitstodate.ToString().PadLeft(10, ' ');
 
-                    string strroyalty = royalties.ToString("C2").PadLeft(10, ' '); 
-                    string strsalesthisperiod = salesthisperiod.ToString("C2").PadLeft(10, ' '); 
-                    string strsalestodate = salestodate.ToString("C2").PadLeft(10, ' '); 
+                    string strroyalty = royalties.ToString("C2").PadLeft(10, ' ');
+                    string strsalesthisperiod = salesthisperiod.ToString("C2").PadLeft(10, ' ');
+                    string strsalestodate = salestodate.ToString("C2").PadLeft(10, ' ');
 
                     sb.AppendFormat($@"{row}<div class='col-sm-1 text-sm-end'>{bookid}</div><div class='col-sm-1 text-sm-end'>{strinputdate}</div><div class='col-sm-1 text-sm-end'>{strbooktype}</div><div class='col-sm-1 text-sm-end'>{strunit}</div><div class='col-sm-1  text-sm-end'>{strunitstodate}</div><div class='col-sm-1 text-sm-end'>{strroyalty}</div><div class='col-sm-1 text-sm-end'>{strsalesthisperiod}</div><div class='col-sm-1 text-sm-end'>{strsalestodate}</div><div class='col-sm-4'>&nbsp;</div></div>");
 
@@ -118,9 +130,9 @@ public class BulkSalesEntryModel : PageModel
                     strbooktype = "";
                     input = "";
 
-                    // apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{authorid}");
+                    var response = await helper.PostAsync(_appSettings.HostUrl + $"sale", postdata);
                     count++;
-				}
+                }
             }
             sb.AppendLine("</div></div>");
             Status = sb.ToString();
