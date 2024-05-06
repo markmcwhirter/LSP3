@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 
 using System.Globalization;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace LSP3.Pages;
@@ -33,6 +34,8 @@ public class BulkSalesEntryModel : PageModel
 
     public async Task OnPostAsync()
     {
+        List<SalePostModel> salelist = new();
+
         HttpHelper helper = new();
 
         var file = Path.Combine(_environment.ContentRootPath, "data", Upload.FileName);
@@ -98,6 +101,7 @@ public class BulkSalesEntryModel : PageModel
                         Units = units,
                         UnitsToDate = unitstodate
                     };
+                    salelist.Add(postdata);
 
                     if (booktype == 5)
                         strbooktype = "EBook";
@@ -130,9 +134,12 @@ public class BulkSalesEntryModel : PageModel
                     strbooktype = "";
                     input = "";
 
-                    var response = await helper.PostAsync(_appSettings.HostUrl + $"sale", postdata);
+                    
                     count++;
                 }
+
+                var response = await helper.PostAsync(_appSettings.HostUrl + $"sale", salelist);
+
             }
             sb.AppendLine("</div></div>");
             Status = sb.ToString();
