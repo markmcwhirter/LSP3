@@ -34,12 +34,6 @@ public class AuthorSearch : MasterModel
     public async Task OnGetAsync(string lastName, string firstName, string sortOrder, string direction, int? currentPage)
     {
 
-        //if (lastName == null && firstName == null )
-        //{
-        //    Results = new List<AuthorListResultsModel>();
-        //    return;
-        //}
-
         SortOrder = sortOrder ?? "LastName";
         Direction = direction ?? "ASC";
         CurrentPage = currentPage ?? 1;
