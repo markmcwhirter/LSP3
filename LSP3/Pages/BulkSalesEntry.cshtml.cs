@@ -1,7 +1,5 @@
 using LSP3.Model;
 
-using MailKit.Search;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;

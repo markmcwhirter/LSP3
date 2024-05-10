@@ -44,6 +44,17 @@ function UpdateAuthor(data) {
             html => console.log(html)
         );
 }
+function DeleteAuthor(id) {
+
+   
+    // fetch("http://164.92.99.186:8080/api/author/delete/" + id)
+    fetch(" http://localhost:5253/api/author/delete/" + id)
+        .then(
+            response => { return response.statusText() }
+        ).then(
+            html => console.log(html)
+        );
+}
 
 function AddAuthor(data) {
 

@@ -26,5 +26,9 @@ namespace LSP3.Model
         [Display(Name = "Suffix")]
         [DataType(DataType.Text)]
         public string? Suffix { get; set; }
+
+        [Display(Name = "EMail")]
+        [DataType(DataType.Text)]
+        public string? EMail { get; set; }
     }
 }

@@ -1,4 +1,83 @@
 ﻿@page
 @model LSP3.Pages.DeleteAuthor
 @{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Delete Author";
 }
+
+<link rel="stylesheet" href="css/AddAuthor.css" type="text/css" />
+<style>
+    .labelback {
+        background-color: lightgray;
+    }
+    .formback {
+        background-color: gray;
+    }
+    .whiteback {
+        background-color: white;
+    }
+</style>
+
+<div class='container-fluid'>
+    <div class='content formback' >
+        <form method="post" id="authorform">
+            <div class='row'>
+                <div class='col-sm-12 labelback'>Author ID: @Model.Results.AuthorID</div>
+            </div>
+            <div class='row'>
+                <div class='col-sm-12 labelback'>Admin @Model.Results.Admin</div>
+            </div>
+            <div class='row'>
+                <div class='col-sm-12  labelback'>Name: @Model.Results.Prefix @Model.Results.FirstName @Model.Results.MiddleName @Model.Results.LastName @Model.Results.Suffix</div>
+            </div>
+            <div class='row'>
+                <div class='col-sm-12  labelback'>Username: @Model.Results.Username</div>
+            </div>
+            <div class='row'>
+                <div class='col-sm-12  labelback'>Address: @Model.AddressString</div>
+            </div>
+            <div class='row'>
+                <div class='col-sm-12 labelback'>EMail: @Model.Results.Email</div>
+            </div>
+            <div class='row whiteback'>
+                <div class='col-sm-12'>Book Count: @Model.BookCount</div>
+            </div>
+            <div class='row whiteback'>
+                <div class='col-sm-2 '><button type="button" id="UpdateButton" onclick="return UpdateAuthorEventHandler(@Model.Results.AuthorID);" class="btn btn-primary">Delete</button></div>
+                <div class='col-sm-2 '><button type="button" id="CancelButton" onclick="return CancelEventHandler(event);" class="btn btn-secondary">Cancel</button></div>
+            </div>
+        </form>
+        </<div>
+        </div>
+
+
+        <script type="text/javascript">
+            function CancelEventHandler(event) {
+                event.preventDefault();
+                window.location.href = "AuthorSearch";
+                return false;
+
+            }
+
+            function UpdateAuthorEventHandler(id) {
+                event.preventDefault();
+
+                debugger;
+                var result = DeleteAuthor(id);
+                alert('Author has been deleted');
+                window.location.href = "AuthorSearch";
+                return false;
+            }
+
+            function Validate(field, message) {
+                var testvalue = document.getElementById(field).value;
+
+                if (testvalue == null || testvalue == '') {
+                    // alert(message);
+                    document.getElementById('lblError').innerHTML = message;
+                    return false;
+                }
+                return true;
+            }
+        </script>
+

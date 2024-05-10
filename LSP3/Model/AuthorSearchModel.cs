@@ -11,6 +11,7 @@ namespace LSP3.Model
         [Display(Name = "Last Name")]
         public string? LastName { get; set; }
         public string? SortOrder { get; set; }
+        public string? Direction { get; set; }
 
     }
 }

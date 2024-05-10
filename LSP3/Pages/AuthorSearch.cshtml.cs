@@ -14,8 +14,10 @@ public class AuthorSearch : MasterModel
     public string? FirstName { get; set; }
 
     public string? SortOrder { get; set; }
+    public string? Direction { get; set; }
+
     public int CurrentPage { get; set; } = 1;
-    public int PageSize { get; set; } = 10;
+    public int PageSize { get; set; } = 15;
     public int TotalPages { get; private set; }
 
     public IList<AuthorListResultsModel>? Results { get; set; }
@@ -29,35 +31,34 @@ public class AuthorSearch : MasterModel
         _logger = logger;
     }
 
-    public async Task OnGetAsync(string lastName, string firstName, string sortOrder, int? currentPage)
+    public async Task OnGetAsync(string lastName, string firstName, string sortOrder, string direction, int? currentPage)
     {
-        SortOrder = sortOrder;
-        CurrentPage = currentPage ?? 1;
-        LastName = lastName;
-        FirstName = firstName;
 
-        if (lastName == null && firstName == null)
-        {
-            Results = new List<AuthorListResultsModel>();
-            return;
-        }
+        //if (lastName == null && firstName == null )
+        //{
+        //    Results = new List<AuthorListResultsModel>();
+        //    return;
+        //}
+
+        SortOrder = sortOrder ?? "LastName";
+        Direction = direction ?? "ASC";
+        CurrentPage = currentPage ?? 1;
+        LastName = lastName ?? " ";
+        FirstName = firstName ?? " ";
 
         SearchTerm = new AuthorSearchModel
         {
-            LastName = lastName ?? " ",
-            FirstName = firstName ?? " "
+            LastName = LastName,
+            FirstName = FirstName,
+            SortOrder = SortOrder,
+            Direction = Direction
         };
-
-
-
-        // Sorting
-        SortOrder = sortOrder ?? "LastName"; // Default to sorting by last  name
 
 
         Extensions<List<AuthorListResultsModel>> listextensions = new();
         try
         {
-            SearchTerm.SortOrder = sortOrder ?? "LastName"; // Default to sorting by name
+         
 
             var response = await helper.PostAsync(_appSettings.HostUrl + $"author/search", SearchTerm);
 

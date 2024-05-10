@@ -68,7 +68,8 @@ public class ForgottenModel : PageModel
 		sb.AppendLine("LightSwitchPress");
 		sb.AppendLine("Note: This message has been sent from an unattended email box.");
 
-		await _emailService.SendEmailAsync(Email,"Password reset instructions",sb.ToString());
+
+		await _emailService.SendEmailAsync(Email,"Password reset instructions",sb.ToString(),"");
 
 		return RedirectToPage("Login");
 

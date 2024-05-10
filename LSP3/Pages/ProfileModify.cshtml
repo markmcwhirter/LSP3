@@ -446,7 +446,6 @@
 <script type="text/javascript">
     function CancelEventHandler(event) {
         event.preventDefault();
-        alert('Update cancelled');
         window.location.href = "AuthorSearch";
         return false;
 
@@ -466,7 +465,7 @@
 
         var data = JSON.stringify(Object.fromEntries(formData));
         var result = UpdateAuthor(data);
-        alert('Success!  Author has been updated!');
+        alert('Author has been updated');
         window.location.href = "AuthorSearch";
         return false;
     }

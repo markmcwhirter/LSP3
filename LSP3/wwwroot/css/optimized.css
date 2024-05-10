@@ -427,6 +427,8 @@ a.footer_contact_flickr
 {
   background-image:url(../images/logo.png);
   background-position:0 0;
+  background-color: black;
+  background-repeat:no-repeat;
   height:110px;
   width:330px;
 }
