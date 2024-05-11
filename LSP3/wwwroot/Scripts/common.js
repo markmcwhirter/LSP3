@@ -4,25 +4,18 @@
 Functions:
 
     GetParameterByName - retrieves value of a querystring variable
-    GetUsername - retrieve username using activex windows script method
     toProperCase - input string, output proper cased string
     htmlEscape - html encode special characters
-    Display File - display file with supplied title in a kendow window
-    Call_Service - General ajax call
-    AutoComplete - General Kendo autocomplete feature
     getCurrentDate - return today's date in yyyy/mm/dd format
     isBlankOrNull - returns true if blank or null 
     checkBoolean - 1 if checkmark checked, 0 otherwise
     checkText - Return default value if blank or null
-    checkComboBox - if there is a current value from combobox return it, otherwise return default value
     getCurrentDate - return today's date in yyyy/mm/dd format   
 */
 
-
-/*     GetParameterByName - retrieves value of a querystring variable */
-
 var API_URL = 'http://164.92.99.186:8080/api';
 
+/*     GetParameterByName - retrieves value of a querystring variable */
 function GetParameterByName(name) {
     name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
 
@@ -32,20 +25,6 @@ function GetParameterByName(name) {
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-/* GetUsername - retrieve username using activex windows script method */
-function GetUsername() {
-    var userName = "";
-    var browser = navigator.userAgent.toLowerCase();
-
-    if (browser.indexOf("msie 9") !== -1) {
-        var wshshell = new ActiveXObject("wscript.shell");
-        var username = wshshell.ExpandEnvironmentStrings("%username%");
-
-        userName = username.replace(".", " ");
-    }
-
-    return userName;
-}
 
 /* toProperCase - input string, output proper cased string */
 function toProperCase(inString) {
@@ -88,189 +67,6 @@ function htmlEscape(str) {
         .replace(/>/g, '&gt;');
 }
 
-/* Display File - display file with supplied title in a kendow window */
-function DisplayFile(dispfile, title) {
-
-    var window = $("#docviewwindow");
-
-    if (window.length === 0) {
-        $("body").append('<div id="docviewwindow"/>');
-
-        window = $("#docviewwindow");
-    }
-
-    var filename = dispfile.replace(/\\/g, "&#92;");
-
-    window.kendoWindow({
-        modal: true,
-        pinned: true,
-        resizable: true,
-        title: title,
-        visible: false,
-        width: 1720,
-        height: 900,
-        iframe: true,
-        content: filename
-    });
-
-    window.data("kendoWindow").open().center();
-}
-
-
-/* kendo grid */
-/*
-function KendoGrid(id,serviceURL,service,type,parameterfunction,totalfunction,Model,height,pagesize,changefunction,databoundfunction,Columns,rowtemplate) {
-
-    parameterfunction = parameterfunction ?  this[parameterfunction] : null;
-
-    var dataSource = new kendo.data.DataSource({
-            transport: {
-                read: {
-                    url: "http://" + serviceURL + "/ServiceBus.svc/" + service,
-                    dataType: "json",
-                    type: type,
-                    contentType: "application/json;charset=utf-8"
-                },
-                parameterMap: parameterfunction
-            },
-            schema: {
-                data: service + 'Result',
-                total: function (data) {
-                    var count = 0;
-
-                    if (data.GetPartListResult.length > 0) {
-                        count = data.GetPartListResult[0]["TotalCount"];
-                    }
-
-                    return count;
-                },
-                type: "json",
-                id: "ID",
-                cache: false,
-                model: Model
-            },
-            pageSize: 17,
-            serverPaging: true,
-            serverFiltering: true,
-            serverSorting: true
-        });
-
-    dataSource = data ? data : dataSource;
-
-
-    $('#' + id).kendoGrid({
-        dataSource: ,
-        height: 660,
-        selectable: "row",
-        scrollable: true,
-        sortable: true,
-        filterable: false,
-        pageable: true,
-        change: function (arg) {
-            window.location = 'partsconfigedit.html?ID=' + this.dataItem(this.select())["ID"] + '&Kit_Id=' + this.dataItem(this.select())["Kit_Id"];
-        },
-        dataBound: function () {
-            var grid = $("#partList");
-            var colCount = grid.find('.k-grid-header colgroup > col').length;
-
-            if (grid.data("kendoGrid").dataSource._view.length === 0) {
-                grid.find('.k-grid-content tbody').append('<tr class="kendo-data-row"><td colspan="' + colCount + '" style="text-align: center; color: maroon">Your search criteria returned no results</td></tr>');
-            }
-        },
-        columns: Columns,
-        rowTemplate:rowtemplate
-    });
-
-}
-
-*/
-/* Combobox */
-function ComboBox(id, service, label, data, cascadefrom, cascadefromfield, parameterfunction) {
-
-
-    cascadefrom = cascadefrom ? cascadefrom : null;
-    cascadefromfield = cascadefromfield ? cascadefromfield : null;
-    parameterfunction = parameterfunction ? this[parameterfunction] : null;
-
-    var dataSource = new kendo.data.DataSource({
-        transport: {
-            read: {
-                dataType: "json",
-                url: "http://" + serviceURL + "/ServiceBus.svc/" + service
-            },
-            parameterMap: parameterfunction
-        }
-    });
-
-    dataSource = data ? data : dataSource;
-
-
-    $('#' + id).kendoComboBox({
-        dataBound: function (e) {
-            if (this.value() && this.selectedIndex === -1) {
-                this._filterSource({
-                    value: this.value(),
-                    field: this.options.dataTextField,
-                    operator: "contains"
-                });
-                this.select(0);
-                if (this.selectedIndex === -1) {
-
-                    this.text("");
-                }
-            }
-        },
-        filter: "startswith",
-        delay: 1,
-        placeholder: label,
-        cascadeFrom: cascadefrom,
-        cascadeFromField: cascadefromfield,
-        dataTextField: "Name",
-        dataValueField: "ID",
-        autoBind: false,
-        dataSource: dataSource,
-        template: '<span style="font-size: 10pt">#: Name #</span>'
-    });
-}
-
-
-/* Call_Service - General ajax call  */
-function Call_Service(inType, inUrl, inData, inContentType, inDataType, inProcessData, inLoader, inSuccess, inFailure) {
-    $.ajax({
-        context: this,
-        type: inType,
-        url: inUrl,
-        data: inData,
-        contentType: inContentType,
-        dataType: inDataType,
-        processdata: inProcessData,
-        success: this[inSuccess],
-        error: this[inFailure]
-    });
-}
-
-/* AutoComplete - General Kendo autocomplete feature */
-function AutoComplete(id, service, label) {
-    $('#' + id).kendoAutoComplete({
-        dataTextField: "Name",
-        dataValueField: "ID",
-        placeholder: label,
-        dataSource: {
-            transport: {
-                read: {
-                    dataType: "json",
-                    url: "http://" + serviceURL + "/ServiceBus.svc/" + service,
-                }
-            }
-        },
-        suggest: true,
-        template: '<span style="font-size: 10pt">#: Name #</span>'
-    }).bind("focus", function () {
-        var field = $('#' + id).data("kendoAutoComplete");
-        field.list.width(400);
-    });
-}
-
 /* isBlankOrNull - returns true if blank or null */
 function isBlankOrNull(tag) {
     if ($.trim($(tag).val()) === '') {
@@ -290,10 +86,6 @@ function checkText(tag, defvalue) {
     return isBlankOrNull(tag) ? defvalue : $(tag).val();
 }
 
-/* checkComboBox - if there is a current value from combobox return it, otherwise return default value */
-function checkComboBox(tag, defvalue) {
-    return $.trim($(tag).data("kendoComboBox").value()) === '' ? defvalue : $(tag).data("kendoComboBox").value();
-}
 
 /* getCurrentDate - return today's date in yyyy/mm/dd format */
 function getCurrentDate() {
@@ -312,13 +104,3 @@ function getCurrentDate() {
     return today1;
 }
 
-
-function GetDocumentsBySopNumber(sopNumber) {
-    Call_Service("POST", "http://" + serviceURL + "/ServiceBus.svc/GetDocumentsBySopNumber", "{\"sopNumber\": \"" + sopNumber + "\"}", "application/json; charset=utf-8", "json", true, "#loader", "GetDocumentsBySopNumberSuccess", "displayError");
-}
-
-function GetDocumentsBySopNumberSuccess(result) {
-    var docresult = result.GetDocumentsBySopNumberResult;
-    $('#linkPageCell').html("<table width='100%' border='0'><tr><td colspan='2' width='100%' style='text-align:center;'>Reference Materials</td></tr>" + docresult + "</table>");
-    return;
-}

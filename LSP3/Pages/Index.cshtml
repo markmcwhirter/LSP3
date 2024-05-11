@@ -566,35 +566,154 @@
                                 }
                             </div>
                         </div>
-
+                        <div class="row">
+                            <div class="col-sm-1">_</div>
+                        </div>
                         <div class="row">
                             <div class="col-sm-1">Book Sales:</div>
                         </div>
                         <div class="row">
                             <div class="col-sm-1"></div>
-                            <div class="col-sm-1">Sold To Date:</div>
-                            <div class="col-sm-1">@book.BooksSoldToDate</div>
+                            <div class="col-sm-2">Sold To Date:</div>
+                            <div class="col-sm-1">
+                                @if (book.BooksSoldToDate != null) { @(book.BooksSoldToDate > 0 ? book.BooksSoldToDate : 0) } else { @("0") }
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-1"></div>
-                            <div class="col-sm-1">Sold This Period:</div>
-                            <div class="col-sm-1">@book.BooksSoldThisPeriod</div>
+                            <div class="col-sm-2">Sold This Period:</div>
+                            <div class="col-sm-1">
+                                @if (book.BooksSoldThisPeriod != null)
+                                {
+                                    @(book.BooksSoldThisPeriod > 0 ? book.BooksSoldThisPeriod : 0)
+                                }
+                                else
+                                {
+                                    @("0")
+                                }
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-1"></div>
-                            <div class="col-sm-1">Sales This Period:</div>
-                            <div class="col-sm-1">$@book.BooksSalesThisPeriod</div>
+                            <div class="col-sm-2">Sales This Period:</div>
+                            <div class="col-sm-1">
+                                @if (book.BooksSalesThisPeriod != null)
+                                {
+                                    @(book.BooksSalesThisPeriod > 0 ? book.BooksSalesThisPeriod : "$ 0.00" )
+                                }
+                                else
+                                {
+                                    @("$ 0.00")
+                                }
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-1"></div>
-                            <div class="col-sm-1">Sales To Date:</div>
-                            <div class="col-sm-1">$@book.BooksSalesToDate</div>
+                            <div class="col-sm-2">Sales To Date:</div>
+                            <div class="col-sm-1">
+                                @if (book.BooksSalesToDate != null)
+                                {
+                                    @(book.BooksSalesToDate > 0 ? book.BooksSalesToDate : "$ 0.00")
+                                }
+                                else
+                                {
+                                    @("$ 0.00")
+                                }
+                                </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-1"></div>
-                            <div class="col-sm-1">Royalties:</div>
-                            <div class="col-sm-1">$@book.BookRoyalties</div>
+                            <div class="col-sm-2">Royalties:</div>
+                            <div class="col-sm-1">
+                                @if (book.BookRoyalties != null)
+                                {
+                                    @(book.BookRoyalties > 0 ? book.BookRoyalties : "$ 0.00")
+                                }
+                                else
+                                {
+                                    @("$ 0.00")
+                                }
+                                </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-sm-1">_</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1">EBook Sales:</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-2">Sold To Date:</div>
+                            <div class="col-sm-1">
+                                @if (book.EBooksSoldToDate != null)
+                                {
+                                    @(book.EBooksSoldToDate > 0 ? book.EBooksSoldToDate : 0)
+                                }
+                                else
+                                {
+                                    @("0")
+                                }
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-2">Sold This Period:</div>
+                            <div class="col-sm-1">
+                                @if (book.EBooksSoldThisPeriod != null)
+                                {
+                                    @(book.EBooksSoldThisPeriod > 0 ? book.EBooksSoldThisPeriod : 0)
+                                }
+                                else
+                                {
+                                    @("0")
+                                }
+                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-2">Sales This Period:</div>
+                            <div class="col-sm-1">
+                                @if (book.EBooksSalesThisPeriod != null)
+                                {
+                                    @(book.EBooksSalesThisPeriod > 0 ? book.EBooksSalesThisPeriod : "$ 0.00")
+                                }
+                                else
+                                {
+                                    @("$ 0.00")
+                                }
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-2">Sales To Date:</div>
+                            <div class="col-sm-1">
+                                @if (book.EBooksSalesToDate != null)
+                                {
+                                    @(book.EBooksSalesToDate > 0 ? book.EBooksSalesToDate : "$ 0.00")
+                                }
+                                else
+                                {
+                                    @("$ 0.00")
+                                }
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-2">Royalties:</div>
+                            <div class="col-sm-1">
+                                @if (book.EBookRoyalties != null)
+                                {
+                                    @(book.EBookRoyalties > 0 ? book.EBookRoyalties : "$ 0.00")
+                                }
+                                else
+                                {
+                                    @("$ 0.00")
+                                }
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
