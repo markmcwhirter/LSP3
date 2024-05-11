@@ -461,28 +461,31 @@
         {
             <div class="accordion-item">
                 <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                        Book:  @Html.Raw(book.Title)
+                    <button style="font-weight: bold;" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                        Title:  @Html.Raw(book.Title)
                     </button>
                 </h2>
                 <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                     <div class="accordion-body">
-                        <div class="row">
-                            <div class="col-sm-1">Title:</div>
+@*                         <div class="row">
+                            <div class="col-sm-1" style="font-weight: bold;">Title</div>
                             <div class="col-sm-5">@Html.Raw(book.Title)</div>
-                        </div>
+                        </div> *@
                         <div class="row">
+                            <div class="col-sm-1"></div>
                             <div class="col-sm-1">Subtitle:</div>
-                            <div class="col-sm-11">@Html.Raw(book.Subtitle)</div>
+                            <div class="col-sm-10">@Html.Raw(book.Subtitle)</div>
                         </div>
                         <div class="row">
+                            <div class="col-sm-1"></div>
                             <div class="col-sm-1">ISBN:</div>
-                            <div class="col-sm-11">@Html.Raw(book.ISBN)</div>
+                            <div class="col-sm-10">@Html.Raw(book.ISBN)</div>
                         </div>
 
                         <div class="row">
+                            <div class="col-sm-1"></div>
                             <div class="col-sm-1">Cover:</div>
-                            <div class="col-sm-11">
+                            <div class="col-sm-10">
                                 @if (book.Cover == null)
                                 {
                                     <div>(No Cover image)</div>
@@ -495,18 +498,20 @@
                         </div>
 
                         <div class="row">
+                            <div class="col-sm-1"></div>
                             <div class="col-sm-1">Description:</div>
                             <div class="col-sm-3">
                                 <a target="_blank" href="#" onClick="window.open('DisplayText?field=description&bookid=@Html.Raw(book.BookID.ToString())&table=book','pagename','resizable,height=260,width=370'); return false;">View Description</a>
                             </div>
-                            <div class="col-sm-8">
+                            <div class="col-sm-7">
                                 @(book.Description.Length > 10 ? "(" + book.Description.Substring(0, 10) + "...)" : "(" + book.Description + ")")
                             </div>
                         </div>
 
                         <div class="row">
+                            <div class="col-sm-1"></div>
                             <div class="col-sm-1">Author Photo:</div>
-                            <div class="col-sm-11">
+                            <div class="col-sm-10">
                                 @if (book.AuthorPhoto == null)
                                 {
                                     <div>(No Author Photo image)</div>
@@ -519,8 +524,9 @@
                         </div>
 
                         <div class="row">
+                            <div class="col-sm-1"></div>
                             <div class="col-sm-1">Interior:</div>
-                            <div class="col-sm-11">
+                            <div class="col-sm-10">
                                 @if (book.Interior == null)
                                 {
                                     <div>(No Interior image)</div>
@@ -533,12 +539,13 @@
                         </div>
 
                         <div class="row">
+                            <div class="col-sm-1"></div>
                             <div class="col-sm-1">Author Bio:</div>
                             <div class="col-sm-3">
                                 <a target="_blank" href="#" onClick="window.open('DisplayText?field=authorbio&bookid=@Html.Raw(book.BookID.ToString())&table=book','pagename','resizable,height=260,width=370'); return false;">View Author Biography</a>
 
                             </div>
-                            <div class="col-sm-8">
+                            <div class="col-sm-7">
                                 @if (book.AuthorBio == null)
                                 {
                                     <div>(No Biography)</div>
@@ -551,11 +558,12 @@
                         </div>
 
                         <div class="row">
+                            <div class="col-sm-1"></div>
                             <div class="col-sm-1">Cover Idea:</div>
                             <div class="col-sm-3">
                                 <a target="_blank" href="#" onClick="window.open('DisplayText?field=coveridea&bookid=@Html.Raw(book.BookID.ToString())&table=book','pagename','resizable,height=260,width=370'); return false;">View Cover Idea</a>
                             </div>
-                            <div class="col-sm-8">
+                            <div class="col-sm-7">
                                 @if (book.CoverIdea == null)
                                 {
                                     <div>(No Cover Idea)</div>
@@ -566,17 +574,22 @@
                                 }
                             </div>
                         </div>
+                        <div style="height: 15px;"></div>
                         <div class="row">
-                            <div class="col-sm-1">_</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-1">Book Sales:</div>
+                            <div class="col-sm-1" style="font-weight: bold;">Book Sales:</div>
                         </div>
                         <div class="row">
                             <div class="col-sm-1"></div>
                             <div class="col-sm-2">Sold To Date:</div>
                             <div class="col-sm-1">
-                                @if (book.BooksSoldToDate != null) { @(book.BooksSoldToDate > 0 ? book.BooksSoldToDate : 0) } else { @("0") }
+                                @if (book.BooksSoldToDate != null)
+                                {
+                                    @(book.BooksSoldToDate > 0 ? book.BooksSoldToDate : 0)
+                                }
+                                else
+                                {
+                                    @("0")
+                                }
                             </div>
                         </div>
                         <div class="row">
@@ -599,7 +612,7 @@
                             <div class="col-sm-1">
                                 @if (book.BooksSalesThisPeriod != null)
                                 {
-                                    @(book.BooksSalesThisPeriod > 0 ? book.BooksSalesThisPeriod : "$ 0.00" )
+                                    @(book.BooksSalesThisPeriod > 0 ? book.BooksSalesThisPeriod : "$ 0.00")
                                 }
                                 else
                                 {
@@ -619,7 +632,7 @@
                                 {
                                     @("$ 0.00")
                                 }
-                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-1"></div>
@@ -633,14 +646,12 @@
                                 {
                                     @("$ 0.00")
                                 }
-                                </div>
+                            </div>
                         </div>
 
+                        <div style="height: 15px;"></div>
                         <div class="row">
-                            <div class="col-sm-1">_</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-1">EBook Sales:</div>
+                            <div class="col-sm-1" style="font-weight: bold;">EBook Sales:</div>
                         </div>
                         <div class="row">
                             <div class="col-sm-1"></div>
@@ -668,7 +679,7 @@
                                 {
                                     @("0")
                                 }
-                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-1"></div>
