@@ -10,7 +10,11 @@ public class IndexModel : MasterModel
     public new AuthorDto? Author { get; set; }
 
     [BindProperty]
-    public List<BookDto>? Books { get; set; }
+    public List<BookSummaryModel>? Books { get; set; }
+
+    [BindProperty]
+    public SalesSummaryModel Sales { get; set; }
+
 
     private readonly ILogger<IndexModel> _logger;
 
@@ -26,7 +30,7 @@ public class IndexModel : MasterModel
     {
         HttpHelper helper = new();
         Extensions<AuthorDto> authorextensions = new();
-        Extensions<List<BookDto>> bookextensions = new();
+        Extensions<List<BookSummaryModel>> bookextensions = new();
 
         try
         {
@@ -37,82 +41,12 @@ public class IndexModel : MasterModel
             string apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{base.Author.AuthorID}");
 
             if (!string.IsNullOrEmpty(apiResponse))
-            {
-
                 Author = authorextensions.Deserialize(apiResponse);
-                #region Repeater
-                //bookRepeater.DataSource = Books;
-                //bookRepeater.DataBind();
-                // try
-                //{
-                //    // Create a new instance of the Repeater control
-                //    Repeater repeater = new Repeater();
-
-                //    // Set the data source for the repeater control
-                //    repeater.DataSource = Books;
-
-                //    // Set the event handler for the ItemDataBound event
-                //    repeater.ItemDataBound += Repeater_ItemDataBound;
-
-                //    // Set the template for the repeater control
-                //    repeater.ItemTemplate = new CustomRepeaterTemplate();
-
-                //    // Bind the data to the repeater control
-                //    repeater.DataBind();
-
-                //    // Add the repeater control to the page
-                //    // Replace "page" with the actual page object
-                //    page.Controls.Add(repeater);
-                //}
-                //catch (Exception ex)
-                //{
-                //    // Log the error
-                //    Console.WriteLine("An error occurred: " + ex.Message);
-                //}
-                #endregion
-
-            }
 
             apiResponse = await helper.Get(_appSettings.HostUrl + $"book/author/{base.Author.AuthorID}");
+
             if (!string.IsNullOrEmpty(apiResponse))
-            {
-
                 Books = bookextensions.Deserialize(apiResponse);
-                #region Repeater
-                //bookRepeater.DataSource = Books;
-                //bookRepeater.DataBind();
-                // try
-                //{
-                //    // Create a new instance of the Repeater control
-                //    Repeater repeater = new Repeater();
-
-                //    // Set the data source for the repeater control
-                //    repeater.DataSource = Books;
-
-                //    // Set the event handler for the ItemDataBound event
-                //    repeater.ItemDataBound += Repeater_ItemDataBound;
-
-                //    // Set the template for the repeater control
-                //    repeater.ItemTemplate = new CustomRepeaterTemplate();
-
-                //    // Bind the data to the repeater control
-                //    repeater.DataBind();
-
-                //    // Add the repeater control to the page
-                //    // Replace "page" with the actual page object
-                //    page.Controls.Add(repeater);
-                //}
-                //catch (Exception ex)
-                //{
-                //    // Log the error
-                //    Console.WriteLine("An error occurred: " + ex.Message);
-                //}
-                #endregion
-                foreach (var b in Books)
-                {
-                    apiResponse = await helper.Get(_appSettings.HostUrl + $"sale/getsales/{b.BookID}");
-                }
-            }
             
         }
         catch (Exception ex)

@@ -3,7 +3,7 @@ async function CheckAuthor(username) {
     var data;
  
     try {
-        const response = await fetch('http://164.92.99.186:8080/api/user/' + username);
+        const response = await fetch(API_URL + '/api/user/' + username);
         data = await response.json(); // Assuming the response is JSON
         console.log(data);
     } catch (error) {
@@ -37,7 +37,7 @@ function UpdateAuthor(data) {
         body: JSON.stringify(author)
     };
 
-    fetch("http://164.92.99.186:8080/api/author/update", options)
+    fetch(API_URL + "/api/author/update", options)
         .then(
             response => { return response.statusText() }
         ).then(
@@ -46,9 +46,7 @@ function UpdateAuthor(data) {
 }
 function DeleteAuthor(id) {
 
-   
-    // fetch("http://164.92.99.186:8080/api/author/delete/" + id)
-    fetch(" http://localhost:5253/api/author/delete/" + id)
+    fetch(API_URL + "/api/author/delete/" + id)
         .then(
             response => { return response.statusText() }
         ).then(
@@ -76,7 +74,7 @@ function AddAuthor(data) {
         body: JSON.stringify(author)
     };
 
-    fetch("http://164.92.99.186:8080/api/author", options)
+    fetch(API_URL + "/api/author", options)
         .then(
             response => { return response.statusText() }
         ).then(
@@ -88,7 +86,7 @@ function UpdateAuthorEventHandler(event) {
 
     event.preventDefault();
 
-    debugger
+
     if (document.getElementById("fieldset").disabled == true) {
         document.getElementById("fieldset").disabled = false;
         var elem = document.getElementById('UpdateButton');
@@ -124,7 +122,7 @@ function Validate(field, message) {
 }
 
 function UpdateAuthor(data) {
-    debugger
+
     const author = JSON.parse(data);
 
     let options = {
@@ -136,7 +134,7 @@ function UpdateAuthor(data) {
         body: JSON.stringify(author)
     };
 
-    fetch("http://164.92.99.186:8080/api/author/update", options)
+    fetch(API_URL + "/api/author/update", options)
         .then(
             response => { return response.statusText() }
         ).then(

@@ -567,6 +567,34 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-sm-1">Book Sales:</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-1">Sold To Date:</div>
+                            <div class="col-sm-1">@book.BooksSoldToDate</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-1">Sold This Period:</div>
+                            <div class="col-sm-1">@book.BooksSoldThisPeriod</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-1">Sales This Period:</div>
+                            <div class="col-sm-1">$@book.BooksSalesThisPeriod</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-1">Sales To Date:</div>
+                            <div class="col-sm-1">$@book.BooksSalesToDate</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-1">Royalties:</div>
+                            <div class="col-sm-1">$@book.BookRoyalties</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -612,7 +640,7 @@
     function UpdateAuthorEventHandler(event) {
 
         event.preventDefault();
-        debugger
+
         if (document.getElementById("fieldset").disabled == true) {
             document.getElementById("fieldset").disabled = false;
             var elem = document.getElementById('UpdateButton');
@@ -654,7 +682,6 @@
     }
 
     function UpdateAuthor(data) {
-        debugger
         const author = JSON.parse(data);
 
         let options = {
@@ -666,7 +693,7 @@
             body: JSON.stringify(author)
         };
 
-        fetch("http://164.92.99.186:8080/api/author/update", options)
+        fetch(API_URL + "/api/author/update", options)
             .then(
                 response => { return 'Success'; }
             ).then(

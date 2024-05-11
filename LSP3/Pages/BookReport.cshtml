@@ -44,9 +44,8 @@
     new agGrid.Grid(eGridDiv, gridOptions);
 
     // Fetch data from server
-    debugger
     
-    fetch("http://164.92.99.186:8080/api/sale/getsales")
+    fetch(HOST_URL + "/sale/getsales")
         .then(response => response.json())
         .then(data => {
             data.forEach(function (i) {

@@ -56,8 +56,7 @@
                     }
 
                     // Build your API request URL
-                    const urlold = `/api/products?startRow=${startRow}&endRow=${endRow}&sortColumn=${sortColumn}&sortDirection=${sortDirection}`;
-                    const url = `http://localhost:5253/api/author/gridsearch?startRow=${startRow}&endRow=${endRow}&sortColumn=${sortColumn}&sortDirection=${sortDirection}`;
+                    const url = API_URL + `/api/author/gridsearch?startRow=${startRow}&endRow=${endRow}&sortColumn=${sortColumn}&sortDirection=${sortDirection}`;
                     fetch(url)
                         .then(response =>  response.json())
                         .then(data => {

@@ -20,6 +20,9 @@ Functions:
 
 
 /*     GetParameterByName - retrieves value of a querystring variable */
+
+var API_URL = 'http://164.92.99.186:8080/api';
+
 function GetParameterByName(name) {
     name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
 

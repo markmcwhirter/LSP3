@@ -37,7 +37,6 @@
 
 
             $("#authorform").submit(function (e) {
-                debugger;
                 var submitted =
                     e.originalEvent.explicitOriginalTarget ||
                     e.originalEvent.relatedTarget ||
@@ -253,23 +252,10 @@
 
             e.preventDefault();
 
-            debugger;
-
             var checkfields = ["username", "email", "password", "firstname", "lastname",
                 "address1", "city", "state", "zip", "toc"];
 
 
-            //
-            // var submitted =
-            //     e.originalEvent.explicitOriginalTarget ||
-            //     e.originalEvent.relatedTarget ||
-            //     document.activeElement;
-            // // Look if it was a text node (IE bug)
-            // submitted = submitted.nodeType == 1 ?
-            //     submitted :
-            //     submitted.parentNode;
-
-            // if (submitted.id == "registerButton") {
             var errfields = "";
 
             for (var i = 0; i < checkfields.length; i++) {

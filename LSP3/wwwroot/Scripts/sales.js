@@ -17,7 +17,7 @@ function AddSale(data) {
         body: JSON.stringify(author)
     };
 
-    fetch("http://164.92.99.186:8080/api/author", options)
+    fetch(API_URL + "/api/author", options)
         .then(
             response => { return response.statusText() }
         ).then(
