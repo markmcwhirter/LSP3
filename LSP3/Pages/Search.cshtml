@@ -45,7 +45,7 @@
                 }
 
                 // Build your API request URL
-                const url = API_URL + `/api/author/gridsearch?startRow=${startRow}&endRow=${endRow}&sortColumn=${sortColumn}&sortDirection=${sortDirection}`;
+                const url = API_URL + `/author/gridsearch?startRow=${startRow}&endRow=${endRow}&sortColumn=${sortColumn}&sortDirection=${sortDirection}`;
                 fetch(url)
                     .then(response => response.json())
                     .then(data => {
