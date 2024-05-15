@@ -1,0 +1,161 @@
+﻿@page
+@model BookModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Book";
+}
+
+<div class="container-fluid">
+    <div class="content" style="width:60%;">
+        <div style="height:20px;"></div>
+        <form method="post" id="bookform">
+            <input type="hidden" id="bookid" name="bookid" value="@Model.Book.BookID">
+            <input type="hidden" id="authorid" name="authorid" value="@Model.Book.AuthorID">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>Stop!  Don't incur extra fees!</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-12">
+                    Is your manuscript 100% complete? After you submit your manuscript and select your publishing service, your book goes into production the next business day.
+                    Any changes or edits requested by the author once a book goes into production result in editorial fees of $60/hour.
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" name="title" id="title" aria-describedby="titleHelp" value="@Model.Book.Title" >
+            </div>
+
+            <div class="mb-3">
+                <label for="subtitle" class="form-label">Sub Title</label>
+                <input type="text" class="form-control" name="subtitle" id="subtitle" aria-describedby="subtitleHelp" value="@Model.Book.Subtitle" >
+            </div>
+
+            <div class="mb-3">
+                <label for="isbn" class="form-label">ISBN</label>
+                <input type="text" class="form-control" name="isbn" id="isbn" aria-describedby="isbnHelp" value="@Model.Book.ISBN" readonly="@Model.IsReadOnly">
+                <div id="isbnHelp" class="form-text">This the ISBN number for your book. LSP use only.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="isbn" class="form-label">Description</label>
+                <textarea class="form-control" name="description" id="description" rows="2" cols="20" MaxLength="6000" style="resize:vertical;width:100%;" TextMode="MultiLine" aria-describedby="descriptionHelp" value="@Model.Book.Description"></textarea>
+                <div id="descriptionHelp" class="form-text">This is the description of your book. What customers will see online and what appears on the back of your book. Description should be two to three paragraphs.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="isbn" class="form-label">Author Biography</label>
+                <textarea  class="form-control" name="authorbio" id="authorbio" rows="2" cols="20" MaxLength="6000" TextMode="MultiLine" style="resize:vertical;width:100%;" aria-describedby="bioHelp" value="@Model.Book.AuthorBio" ></textarea>
+                <div id="bioHelp" class="form-text">If you would like to include an author biography, please write up to one paragraph otherwise leave blank.</div>
+            </div>
+
+
+            <div class="mb-3">
+                <label for="isbn" class="form-label">Cover Idea</label>
+                <textarea  class="form-control" id="coveridea" name="coveridea" rows="2" cols="20" MaxLength="6000" style="resize:vertical;width:100%;" TextMode="MultiLine" aria-describedby="coverHelp" value="@Model.Book.CoverIdea"></textarea>
+                <div id="coverHelp" class="form-text">If you have an idea for your cover please describe it in the space below, otherwise leave blank. LSP designers will do their best to duplicate your idea when possible.</div>
+            </div>
+
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="tandc" name="tandc">
+                <label class="form-check-label" for="exampleCheck1">I understand the <a href="http://www.lightswitchpress.com/terms.php" target="_blank">Terms and Conditions</a></label>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                </div>
+                <div class="col-sm-1">
+                    <button type="button" id="UpdateButton" onclick="return UpdateBookEventHandler(event);" class="btn btn-primary" style="color: white">Update</button>
+                </div>
+                <div class="col-sm-1">
+                    <button type="button" id="CancelButton" onclick="return CancelBookEventHandler(event);" class="btn btn-secondary" style="color: white">Cancel</button>
+                </div>
+
+            </div>
+            <div style="height:20px;"></div>
+        </form>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    window.addEventListener("load", evaluateInputAndUpdateButton);
+
+    function UpdateButton() {
+
+    }
+    function evaluateInputAndUpdateButton() {
+
+
+        const inputElement = document.getElementById("bookid");
+        const buttonElement = document.getElementById("UpdateButton");
+
+        const inputValue = inputElement.value;
+
+        if (inputValue === null || inputValue.trim() === "" || inputValue.trim() === "0") {
+            buttonElement.innerHTML = "Add";
+        } else {
+            buttonElement.innerHTML = "Update";
+        }
+
+    }
+
+
+    function CancelBookEventHandler() {
+
+        event.preventDefault();
+
+        return false;
+
+    }
+
+    function UpdateBookEventHandler(event) {
+        debugger;
+        event.preventDefault();
+
+        const myCheckbox = document.getElementById("tandc");
+
+        if (!myCheckbox.checked) {
+            alert('Please check Terms and Conditions Checkbox to continue');
+            return false;
+        }
+
+
+
+        var formData = new FormData(document.getElementById("bookform"));
+
+
+        var data = JSON.stringify(Object.fromEntries(formData));
+
+        const book = JSON.parse(data);
+        deleteFromObject('__RequestVerificationToken', book);
+
+        let options = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(book)
+        };
+
+        fetch(API_URL + "/api/book/update", options)
+            .then(
+                response => { return 'Success'; }
+            ).then(
+                html => console.log(html)
+            );
+
+        return false;
+    }
+
+</script>
+
+
+
+
+
+

@@ -34,6 +34,9 @@ public class IndexModel : MasterModel
 
         try
         {
+            Author = new AuthorDto();
+            Books = new List<BookSummaryModel>();
+            Sales = new SalesSummaryModel();
 
             if (!base.IsAuthenticated)
                 return Redirect("/Account/Login");

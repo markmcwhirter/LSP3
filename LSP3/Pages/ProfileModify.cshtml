@@ -446,7 +446,7 @@
 <script type="text/javascript">
     function CancelEventHandler(event) {
         event.preventDefault();
-        window.location.href = "AuthorSearch";
+        window.location.href = "Search";
         return false;
 
     }
@@ -466,7 +466,7 @@
         var data = JSON.stringify(Object.fromEntries(formData));
         var result = UpdateAuthor(data);
         alert('Author has been updated');
-        window.location.href = "AuthorSearch";
+        window.location.href = "Search";
         return false;
     }
 
