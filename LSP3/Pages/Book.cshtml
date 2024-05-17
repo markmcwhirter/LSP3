@@ -142,14 +142,14 @@
             body: JSON.stringify(book)
         };
 
-        fetch(API_URL + "/api/book/update", options)
+        fetch(API_URL + "book/update", options)
             .then(
                 response => { return 'Success'; }
             ).then(
                 html => console.log(html)
             );
 
-        return false;
+        return true;
     }
 
 </script>

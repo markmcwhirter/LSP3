@@ -4,19 +4,20 @@
     Layout = "_LayoutAdmin";
 }
 
-<div id="myGrid" class="ag-theme-material" style="height: 800px; width: 1200px"></div>
+<div id="myGrid" class="ag-theme-alpine" style="height: 800px; width: 1200px"></div>
 
 
 <script>
 
     // Column definitions
     const columnDefs = [
-        { field: 'authorID', sortable: true, filter: true, editable: false },
-        { field: 'lastName', sortable: true, filter: true, editable: true },
-        { field: 'firstName', sortable: true, filter: true, editable: true },
-        { field: 'eMail', sortable: true, filter: true, editable: true },
-        { field: 'editLink', innerWidth:100, outerWidth:100, filter: false, editable: false, cellRenderer: params => { return "<a href='ProfileModify?id=" + params.value + "'>Edit</a>"; } },
-        { field: 'deleteLink', innerWidth: 100, outerWidth: 100, sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='DeleteAuthor?id=" + params.value + "'>Delete</a>"; } }
+        { field: 'authorID', headerName: 'Author ID', cellDataType: 'number', sortable: true, filter: true, editable: false },
+        { field: 'lastName', headerName: 'Last Name', sortable: true, filter: true, editable: true },
+        { field: 'firstName', headerName: 'First Name', sortable: true, filter: true, editable: true },
+        { field: 'eMail', headerName: 'EMail', sortable: true, filter: true, editable: true },
+        { field: 'infoLink', headerName: 'Edit', innerWidth: 100, outerWidth: 100, filter: false, editable: false, cellRenderer: params => { return "<a href='Admin?authorid=" + params.value + "'>Information</a>"; } },
+        { field: 'editLink', headerName: 'Edit', innerWidth: 100, outerWidth: 100, filter: false, editable: false, cellRenderer: params => { return "<a href='ProfileModify?id=" + params.value + "'>Edit</a>"; } },
+        { field: 'deleteLink', headerName: 'Delete', innerWidth: 100, outerWidth: 100, sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='DeleteAuthor?id=" + params.value + "'>Delete</a>"; } }
     ];
 
     // Grid options
@@ -45,7 +46,7 @@
                 }
 
                 // Build your API request URL
-                const url = API_URL + `/author/gridsearch?startRow=${startRow}&endRow=${endRow}&sortColumn=${sortColumn}&sortDirection=${sortDirection}`;
+                const url = API_URL + `author/gridsearch?startRow=${startRow}&endRow=${endRow}&sortColumn=${sortColumn}&sortDirection=${sortDirection}`;
                 fetch(url)
                     .then(response => response.json())
                     .then(data => {

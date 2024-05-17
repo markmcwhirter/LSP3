@@ -29,13 +29,15 @@ public class AdminModel : MasterModel
 
     public async Task<IActionResult> OnGet()
     {
-        HttpHelper helper = new();
-        Extensions<AuthorDto> authorextensions = new();
-        Extensions<List<BookSummaryModel>> bookextensions = new();
-
 
         try
         {
+            HttpHelper helper = new();
+            Extensions<AuthorDto> authorextensions = new();
+            Extensions<List<BookSummaryModel>> bookextensions = new();
+
+            string authorid = "";
+
             Author = new AuthorDto();
             Books = new List<BookSummaryModel>();
             Sales = new SalesSummaryModel();
@@ -43,12 +45,17 @@ public class AdminModel : MasterModel
             if (!base.IsAuthenticated)
                 return Redirect("/Account/Login");
 
-            string apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{base.Author.AuthorID}");
+            if (Request.Query.ContainsKey("authorid"))
+                authorid = Request.Query["authorid"].ToString();
+            else
+                authorid = base.Author.AuthorID.ToString();
+
+            string apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{authorid}");
 
             if (!string.IsNullOrEmpty(apiResponse))
                 Author = authorextensions.Deserialize(apiResponse);
 
-            apiResponse = await helper.Get(_appSettings.HostUrl + $"book/author/{base.Author.AuthorID}");
+            apiResponse = await helper.Get(_appSettings.HostUrl + $"book/author/{authorid}");
 
             if (!string.IsNullOrEmpty(apiResponse))
                 Books = bookextensions.Deserialize(apiResponse);

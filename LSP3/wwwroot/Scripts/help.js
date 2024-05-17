@@ -9,7 +9,7 @@ function Help(data) {
         body: data
     };
 
-    fetch(API_URL + "/api/help", options)
+    fetch(API_URL + "help", options)
         .then(
             response => { return response.statusText() }
         ).then(

@@ -13,7 +13,28 @@ Functions:
     getCurrentDate - return today's date in yyyy/mm/dd format   
 */
 
-var API_URL = 'http://164.92.99.186:8080/api';
+var API_URL = 'http://localhost:5253/api/';
+
+
+function Validate(field, message) {
+    var testvalue = document.getElementById(field).value;
+
+    if (testvalue == null || testvalue == '') {
+        //document.getElementById('lblError').innerHTML = message;
+        document.getElementById('valerror').innerHTML = message;
+        return false;
+    }
+    return true;
+}
+
+function deleteFromObject(keyPart, obj) {
+    for (var k in obj) {          // Loop through the object
+        if (~k.indexOf(keyPart)) { // If the current key contains the string we're looking for
+            delete obj[k];       // Delete obj[key];
+        }
+    }
+}
+
 
 /*     GetParameterByName - retrieves value of a querystring variable */
 function GetParameterByName(name) {

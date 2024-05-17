@@ -34,25 +34,25 @@ public class AuthorSearch : MasterModel
     public async Task OnGetAsync(string lastName, string firstName, string sortOrder, string direction, int? currentPage)
     {
 
-        SortOrder = sortOrder ?? "LastName";
-        Direction = direction ?? "ASC";
-        CurrentPage = currentPage ?? 1;
-        LastName = lastName ?? " ";
-        FirstName = firstName ?? " ";
 
-        SearchTerm = new AuthorSearchModel
-        {
-            LastName = LastName,
-            FirstName = FirstName,
-            SortOrder = SortOrder,
-            Direction = Direction
-        };
 
 
         Extensions<List<AuthorListResultsModel>> listextensions = new();
         try
         {
-         
+            SortOrder = sortOrder ?? "LastName";
+            Direction = direction ?? "ASC";
+            CurrentPage = currentPage ?? 1;
+            LastName = lastName ?? " ";
+            FirstName = firstName ?? " ";
+
+            SearchTerm = new AuthorSearchModel
+            {
+                LastName = LastName,
+                FirstName = FirstName,
+                SortOrder = SortOrder,
+                Direction = Direction
+            };
 
             var response = await helper.PostAsync(_appSettings.HostUrl + $"author/search", SearchTerm);
 

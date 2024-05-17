@@ -17,7 +17,7 @@ function AddSale(data) {
         body: JSON.stringify(author)
     };
 
-    fetch(API_URL + "/api/author", options)
+    fetch(API_URL + "author", options)
         .then(
             response => { return response.statusText() }
         ).then(
@@ -25,20 +25,3 @@ function AddSale(data) {
         );
 }
 
-
-function deleteFromObject(keyPart, obj) {
-    for (var k in obj) {          // Loop through the object
-        if (~k.indexOf(keyPart)) { // If the current key contains the string we're looking for
-            delete obj[k];       // Delete obj[key];
-        }
-    }
-}
-
-async function isUrlReachable(url) {
-    try {
-        const response = await fetch(url);
-        return response.ok; // Check if the HTTP status code is in the 2xx range
-    } catch (error) {
-        return false; // Any error during fetch indicates unreachable
-    }
-}

@@ -7,6 +7,9 @@ namespace LSP3.Pages;
 public class IndexModel : MasterModel
 {
     [BindProperty]
+    public bool IsAdmin { get; set; }
+
+    [BindProperty]
     public new AuthorDto? Author { get; set; }
 
     [BindProperty]
@@ -28,18 +31,23 @@ public class IndexModel : MasterModel
 
     public async Task<IActionResult> OnGet()
     {
-        HttpHelper helper = new();
-        Extensions<AuthorDto> authorextensions = new();
-        Extensions<List<BookSummaryModel>> bookextensions = new();
+
 
         try
         {
+            HttpHelper helper = new();
+            Extensions<AuthorDto> authorextensions = new();
+            Extensions<List<BookSummaryModel>> bookextensions = new();
+
             Author = new AuthorDto();
             Books = new List<BookSummaryModel>();
             Sales = new SalesSummaryModel();
 
             if (!base.IsAuthenticated)
                 return Redirect("/Account/Login");
+
+            if (base.IsAdmin)
+                return RedirectToPage("/Admin");
 
             string apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{base.Author.AuthorID}");
 

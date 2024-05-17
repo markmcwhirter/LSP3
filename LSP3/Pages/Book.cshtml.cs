@@ -30,11 +30,13 @@ public class BookModel : MasterModel
 
     public async Task<IActionResult> OnGet(int? bookid, int? authorid)
     {
-        HttpHelper helper = new();
-        Extensions<BookDto> bookextensions = new Extensions<BookDto>();
+
 
         try
         {
+            HttpHelper helper = new();
+            Extensions<BookDto> bookextensions = new Extensions<BookDto>();
+
 
             if (!base.IsAuthenticated)
                 return Redirect("/Account/Login");

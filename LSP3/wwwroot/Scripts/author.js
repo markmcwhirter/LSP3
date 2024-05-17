@@ -3,7 +3,7 @@ async function CheckAuthor(username) {
     var data;
  
     try {
-        const response = await fetch(API_URL + '/api/user/' + username);
+        const response = await fetch(API_URL + 'user/' + username);
         data = await response.json(); // Assuming the response is JSON
         console.log(data);
     } catch (error) {
@@ -12,16 +12,6 @@ async function CheckAuthor(username) {
 
     return data;
 }
-
-async function isUrlReachable(url) {
-    try {
-        const response = await fetch(url);
-        return response.ok; // Check if the HTTP status code is in the 2xx range
-    } catch (error) {
-        return false; // Any error during fetch indicates unreachable
-    }
-}
-
 
 function UpdateAuthor(data) {
  
@@ -37,7 +27,7 @@ function UpdateAuthor(data) {
         body: JSON.stringify(author)
     };
 
-    fetch(API_URL + "/api/author/update", options)
+    fetch(API_URL + "author/update", options)
         .then(
             response => { return response.statusText() }
         ).then(
@@ -46,7 +36,7 @@ function UpdateAuthor(data) {
 }
 function DeleteAuthor(id) {
 
-    fetch(API_URL + "/api/author/delete/" + id)
+    fetch(API_URL + "author/delete/" + id)
         .then(
             response => { return response.statusText() }
         ).then(
@@ -74,7 +64,7 @@ function AddAuthor(data) {
         body: JSON.stringify(author)
     };
 
-    fetch(API_URL + "/api/author", options)
+    fetch(API_URL + "author", options)
         .then(
             response => { return response.statusText() }
         ).then(
@@ -108,44 +98,4 @@ function UpdateAuthorEventHandler(event) {
     alert('Author has been updated');
 
     return false;
-}
-
-function Validate(field, message) {
-    var testvalue = document.getElementById(field).value;
-
-    if (testvalue == null || testvalue == '') {
-        //document.getElementById('lblError').innerHTML = message;
-        document.getElementById('valerror').innerHTML = message;
-        return false;
-    }
-    return true;
-}
-
-function UpdateAuthor(data) {
-
-    const author = JSON.parse(data);
-
-    let options = {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(author)
-    };
-
-    fetch(API_URL + "/api/author/update", options)
-        .then(
-            response => { return response.statusText() }
-        ).then(
-            html => console.log(html)
-        );
-}
-
-function deleteFromObject(keyPart, obj) {
-    for (var k in obj) {          // Loop through the object
-        if (~k.indexOf(keyPart)) { // If the current key contains the string we're looking for
-            delete obj[k];       // Delete obj[key];
-        }
-    }
 }

@@ -30,16 +30,17 @@ public class BookDeleteModel : MasterModel
     }
     public async Task OnGetAsync()
     {
-        HttpHelper helper = new();
-        Extensions<AuthorDto> authorextensions = new();
-        Extensions<List<BookDto>> bookextensions = new();
 
-
-
-        string id = Request.Query["bookid"].ToString();
 
         try
         {
+            HttpHelper helper = new();
+            Extensions<AuthorDto> authorextensions = new();
+            Extensions<List<BookDto>> bookextensions = new();
+
+
+
+            string id = Request.Query["bookid"].ToString();
 
             var response = await helper.Get(_appSettings.HostUrl + $"book/{id}");
 

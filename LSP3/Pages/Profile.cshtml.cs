@@ -21,11 +21,10 @@ public class Profile : MasterModel
 
     public async Task OnGetAsync()
     {
-        string id = Request.Query["id"].ToString();
 
         try
         {
-
+            string id = Request.Query["id"].ToString();
             var response = await helper.Get(_appSettings.HostUrl + $"author/{id}");
 
             if (response != null)

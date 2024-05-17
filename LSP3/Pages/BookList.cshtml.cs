@@ -15,6 +15,7 @@ public class BookListModel : MasterModel
 
     private readonly AppSettings _appSettings;
 
+
     public BookListModel(IOptions<AppSettings> appSettings, ILogger<BookListModel> logger, IHttpContextAccessor httpContextAccessor) : base( httpContextAccessor)
     {
         _appSettings = appSettings.Value;
@@ -24,11 +25,13 @@ public class BookListModel : MasterModel
 
     public async Task<IActionResult> OnGet()
     {
-        HttpHelper helper = new();
-        Extensions<List<BookDto>> extensions = new();
+
 
         try
         {
+            HttpHelper helper = new();
+            Extensions<List<BookDto>> extensions = new();
+
 
             if (!base.IsAuthenticated)
                 return Redirect("/Account/Login");

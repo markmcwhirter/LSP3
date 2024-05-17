@@ -63,9 +63,7 @@
     function DeleteBookEventHandler(event, id) {
         event.preventDefault();
 
-        debugger;
-
-        fetch(API_URL + "/api/book/delete/" + id)
+        fetch(API_URL + "book/delete/" + id)
             .then(
                 response => { return response.statusText() }
             ).then(
