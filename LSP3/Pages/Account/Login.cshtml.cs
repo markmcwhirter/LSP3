@@ -8,90 +8,95 @@ namespace LSP3.Pages.Account;
 
 public class LoginModel : PageModel
 {
-    [BindProperty]
-    public string? Username { get; set; }
+	[BindProperty]
+	public string? Username { get; set; }
 
-    [BindProperty]
-    public string? Password { get; set; }
+	[BindProperty]
+	public string? Password { get; set; }
 
-    private readonly ILogger<IndexModel> _logger;
-    private readonly IHttpContextAccessor _httpContextAccessor;
-    private readonly AppSettings _appSettings;
+	private readonly ILogger<IndexModel> _logger;
+	private readonly IHttpContextAccessor _httpContextAccessor;
+	private readonly AppSettings _appSettings;
 
-    static readonly char[] padding = { '=' };
+	static readonly char[] padding = { '=' };
 
-    private bool IsAdmin = false;
+	private bool IsAdmin = false;
 
-    public LoginModel(IOptions<AppSettings> appSettings, ILogger<IndexModel> logger, IHttpContextAccessor httpContextAccessor)
-    {
-        _appSettings = appSettings.Value;
-        _logger = logger;
-        _httpContextAccessor = httpContextAccessor;
-    }
+	public LoginModel(IOptions<AppSettings> appSettings, ILogger<IndexModel> logger, IHttpContextAccessor httpContextAccessor)
+	{
+		_appSettings = appSettings.Value;
+		_logger = logger;
+		_httpContextAccessor = httpContextAccessor;
+	}
 
-    public void OnGet() { }
+	public void OnGet() { }
 
-    public async Task<IActionResult> OnPost()
-    {
-        HttpHelper helper = new();
+	public async Task<IActionResult> OnPost()
+	{
+		HttpHelper helper = new();
 
-        if (_httpContextAccessor.HttpContext != null)
-        {
+		if (_httpContextAccessor.HttpContext != null)
+		{
 
-            await OnGetauthor(Username, Password);
-
-            return IsAdmin ? RedirectToPage("/Admin") : RedirectToPage("/Index");
-
-        }
-        return Page();
-    }
-
-    public async Task OnGetauthor(string? username, string? password)
-    {
-
-        HttpHelper helper = new();
-
-        if (username == null || password == null) return;
-
-        try
-        {
-            byte[]? arrencrypted = await new EncryptionService().EncryptAsync(password);
-            var encrypted = Convert.ToBase64String(arrencrypted).TrimEnd(padding).Replace('+', '-').Replace('/', '_');
+			await OnGetauthor(Username, Password);
 
 
-            string apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{username}/{encrypted}");
+
+		}
+		return IsAdmin ? RedirectToPage("/Admin") : RedirectToPage("/Index");
+	}
+
+	public async Task OnGetauthor(string? username, string? password)
+	{
+
+		HttpHelper helper = new();
+
+		if (username == null || password == null) return;
+
+		try
+		{
+			byte[]? arrencrypted = await new EncryptionService().EncryptAsync(password);
+			var encrypted = Convert.ToBase64String(arrencrypted).TrimEnd(padding).Replace('+', '-').Replace('/', '_');
 
 
-            if (apiResponse != null)
-            {
-                AuthorDto author = new Extensions<AuthorDto>().Deserialize(apiResponse);
+			string apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{username}/{encrypted}");
 
-                helper.SetSessionString(_httpContextAccessor, "userSession", apiResponse);
 
-                HttpContext.Response.Cookies.Append("userSession", apiResponse, new CookieOptions
-                {
-                    Expires = DateTime.Now.AddHours(1)
-                });
+			if (apiResponse != null)
+			{
+				AuthorDto author = new Extensions<AuthorDto>().Deserialize(apiResponse);
+				if (author.AuthorID == 0)
+				{
+					Username = "";
+					return;
+				}
 
-                helper.SetCookie(_httpContextAccessor, "userSession", apiResponse);
-               
+				helper.SetSessionString(_httpContextAccessor, "userSession", apiResponse);
 
-                helper.SetSessionString(_httpContextAccessor, "Authenticated", "true");
+				HttpContext.Response.Cookies.Append("userSession", apiResponse, new CookieOptions
+				{
+					Expires = DateTime.Now.AddHours(1)
+				});
 
-                if (author.Admin  == "1")
-                {
-                    helper.SetCookie(_httpContextAccessor, "Admin", "true");
-                    IsAdmin = true;
-                }
-            }
+				helper.SetCookie(_httpContextAccessor, "userSession", apiResponse);
 
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Error: {ex.Message} {ex.InnerException} {ex.StackTrace}");
-        }
 
-    }
+				helper.SetSessionString(_httpContextAccessor, "Authenticated", "true");
+
+				if (author.Admin == "1")
+				{
+					helper.SetCookie(_httpContextAccessor, "Admin", "true");
+					IsAdmin = true;
+				}
+			}
+
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError($"Error: {ex.Message} {ex.InnerException} {ex.StackTrace}");
+		}
+
+	}
 }
 
 
