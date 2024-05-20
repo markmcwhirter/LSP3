@@ -40,10 +40,8 @@ public class LoginModel : PageModel
 
             await OnGetauthor(Username, Password);
 
-            if( IsAdmin )
-                return RedirectToPage("/Admin");
-            else
-                return RedirectToPage("/Index");
+            return IsAdmin ? RedirectToPage("/Admin") : RedirectToPage("/Index");
+
         }
         return Page();
     }
