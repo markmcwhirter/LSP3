@@ -27,8 +27,13 @@ namespace LSP3.Pages
         {
             using var httpClient = new HttpClient();
             using HttpResponseMessage response = await httpClient.GetAsync(url);
-            return await response.Content.ReadAsStringAsync();
+
+			response.EnsureSuccessStatusCode(); // Check for errors
+
+			string content = await response.Content.ReadAsStringAsync(); // Await again
+			return content;
         }
+
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
         public string GetSessionString(IHttpContextAccessor ctx, string variable) => ctx.HttpContext.Session.GetString(variable);
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
