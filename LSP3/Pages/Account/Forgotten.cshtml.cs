@@ -32,29 +32,33 @@ public class ForgottenModel : PageModel
 		_emailService = emailservice;
 	}
 
-	public void OnGet() { }
+	//public void OnGet() { }
 
-	public async Task<IActionResult> OnPost()
+	//public async Task<IActionResult> OnPost()
+	public async Task<IActionResult> OnGet() 
 	{
+		string username = "";
+
 		StringBuilder sb = new();
 
 		HttpHelper helper = new();
 
-		if ( string.IsNullOrEmpty(Email))
-			return Page();
 
+        if (Request.Query.ContainsKey("username"))
+            username = Request.Query["username"].ToString();
+		else
+			RedirectToPage("Login");
 
-		string username = await helper.Get(_appSettings.HostUrl + $"User/email/{Email}");
+		string email = await helper.Get(_appSettings.HostUrl + $"User/username/{username}");
 
 		sb.AppendLine("Thank you for joining LightSwitchPress's automated author system.");
 		sb.AppendLine();
 		sb.AppendLine("A request was made to send reset your password for LightSwitchPress. Please click on the following link to reset your password:");
 		sb.AppendLine();
-		string encrypted = EncryptionHelper.EncryptString(Email, EncryptionHelper.DefaultPassword);
-		byte[] data = System.Text.Encoding.UTF8.GetBytes(encrypted);
-		string base64String = Convert.ToBase64String(data);
+		//string encrypted = EncryptionHelper.Encrypt(username);
+		string encrypted = Convert.ToBase64String(Encoding.UTF8.GetBytes(username));
 
-		sb.AppendLine("http://143.110.232.75/Account/Reset/" + base64String);
+		sb.AppendLine("http://143.110.232.75/Account/Reset?username=" + encrypted);
 
 		sb.AppendLine();
 
@@ -65,11 +69,10 @@ public class ForgottenModel : PageModel
 		sb.AppendLine("Regards,");
 		sb.AppendLine("LightSwitchPress Team");
 		sb.AppendLine();
-		sb.AppendLine("LightSwitchPress");
 		sb.AppendLine("Note: This message has been sent from an unattended email box.");
 
 
-		await _emailService.SendEmailAsync(Email,"Password reset instructions",sb.ToString(),"");
+		await _emailService.SendEmailAsync(email, "Password reset instructions",sb.ToString(),"");
 
 		return RedirectToPage("Login");
 

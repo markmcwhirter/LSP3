@@ -196,7 +196,9 @@
 
 	function ForgotLoginEventHandler(event) {
         event.preventDefault();
-        window.location.href = "Forgotten";
+		var username = document.getElementById('UserName').value;
+
+        window.location.href = "Forgotten?username=" + username;
         return false;
     }
 </script>

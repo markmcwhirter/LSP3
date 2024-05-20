@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 
+using System.Text;
+using System.Text.Encodings;
+using System.Text.Unicode;
+
 namespace LSP3.Pages.Account;
 
 public class ResetModel : PageModel
@@ -29,7 +33,19 @@ public class ResetModel : PageModel
         _httpContextAccessor = httpContextAccessor;
     }
 
-    public void OnGet() { }
+    public void OnGet() 
+    {
+		if (Request.Query.ContainsKey("username"))
+			Username = Request.Query["username"].ToString();
+
+		// string decrypted = EncryptionHelper.Decrypt(Username);
+		//string encrypted = Convert.ToBase64String(Encoding.UTF8.GetBytes(username));
+
+		string decrypted = Encoding.UTF8.GetString(Convert.FromBase64String(Username));
+
+
+
+	}
 
     public async Task<IActionResult> OnPost()
     {
