@@ -15,9 +15,9 @@
         { field: 'lastName', headerName: 'Last Name', sortable: true, filter: true, editable: true },
         { field: 'firstName', headerName: 'First Name', sortable: true, filter: true, editable: true },
         { field: 'eMail', headerName: 'EMail', sortable: true, filter: true, editable: true },
-        { field: 'infoLink', headerName: 'Edit', innerWidth: 100, outerWidth: 100, filter: false, editable: false, cellRenderer: params => { return "<a href='Admin?authorid=" + params.value + "'>Information</a>"; } },
-        { field: 'editLink', headerName: 'Edit', innerWidth: 100, outerWidth: 100, filter: false, editable: false, cellRenderer: params => { return "<a href='ProfileModify?id=" + params.value + "'>Edit</a>"; } },
-        { field: 'deleteLink', headerName: 'Delete', innerWidth: 100, outerWidth: 100, sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='DeleteAuthor?id=" + params.value + "'>Delete</a>"; } }
+        { field: 'infoLink', headerName: 'Info', sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='Admin?authorid=" + params.value + "'>Info</a>"; } },
+        { field: 'editLink', headerName: 'Edit', sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='ProfileModify?id=" + params.value + "'>Edit</a>"; } },
+        { field: 'deleteLink', headerName: 'Delete', sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='DeleteAuthor?id=" + params.value + "'>Delete</a>"; } }
     ];
 
     // Grid options
@@ -45,7 +45,7 @@
                     sortDirection = sortModel[0].sort;
                 }
 
-                // Build your API request URL
+                // Build your API request URL              
                 const url = API_URL + `author/gridsearch?startRow=${startRow}&endRow=${endRow}&sortColumn=${sortColumn}&sortDirection=${sortDirection}`;
                 fetch(url)
                     .then(response => response.json())
