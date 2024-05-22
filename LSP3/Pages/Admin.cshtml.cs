@@ -50,6 +50,8 @@ public class AdminModel : MasterModel
             else
                 authorid = base.Author.AuthorID.ToString();
 
+            _logger.LogInformation($"Admin:  Get authorid: {authorid}");
+
             string apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{authorid}");
 
             if (!string.IsNullOrEmpty(apiResponse))
