@@ -21,12 +21,13 @@ public class BookDeleteModel : MasterModel
     [BindProperty]
     public int? BookCount { get; set; }
 
-
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
     public BookDeleteModel(IOptions<AppSettings> appSettings, ILogger<BookDeleteModel> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
         _appSettings = appSettings.Value;
         _logger = logger;
+        _httpContextAccessor = httpContextAccessor;
     }
     public async Task OnGetAsync()
     {
@@ -35,10 +36,12 @@ public class BookDeleteModel : MasterModel
         try
         {
             HttpHelper helper = new();
+            SessionHelper sessionHelper = new();
             Extensions<AuthorDto> authorextensions = new();
             Extensions<List<BookDto>> bookextensions = new();
 
-
+            if (!base.IsAuthenticated) return;
+            if (!base.IsAdmin) return;
 
             string id = Request.Query["bookid"].ToString();
 

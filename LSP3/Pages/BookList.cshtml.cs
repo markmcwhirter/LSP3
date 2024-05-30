@@ -14,12 +14,14 @@ public class BookListModel : MasterModel
     private readonly ILogger<BookListModel> _logger;
 
     private readonly AppSettings _appSettings;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
 
     public BookListModel(IOptions<AppSettings> appSettings, ILogger<BookListModel> logger, IHttpContextAccessor httpContextAccessor) : base( httpContextAccessor)
     {
         _appSettings = appSettings.Value;
         _logger = logger;
+        _httpContextAccessor = httpContextAccessor;
     }
 
 
@@ -30,11 +32,16 @@ public class BookListModel : MasterModel
         try
         {
             HttpHelper helper = new();
+            SessionHelper sessionHelper = new();
             Extensions<List<BookDto>> extensions = new();
 
 
             if (!base.IsAuthenticated)
                 return Redirect("/Account/Login");
+
+            if (!base.IsAdmin)
+                return Redirect("/Index");
+
 
             string apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{Author.AuthorID}");
             Books = extensions.Deserialize(apiResponse);

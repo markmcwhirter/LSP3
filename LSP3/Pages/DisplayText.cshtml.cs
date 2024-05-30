@@ -22,11 +22,13 @@ public class DisplayTextModel : MasterModel
     private readonly ILogger<DisplayTextModel> _logger;
 
     private readonly AppSettings _appSettings;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
     public DisplayTextModel(IOptions<AppSettings> appSettings, ILogger<DisplayTextModel> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
         _appSettings = appSettings.Value;
         _logger = logger;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     public async Task<IActionResult> OnGet()
@@ -39,13 +41,14 @@ public class DisplayTextModel : MasterModel
         string apiResponse = "";
 
         HttpHelper helper = new();
+        SessionHelper   sessionHelper = new();
         Extensions<AuthorDto> authorextensions = new();
         Extensions<BookDto> bookextensions = new();
 
         try
         {
 
-            if (!base.IsAuthenticated)
+            if (!sessionHelper.IsAuthenticated(_httpContextAccessor))
                 return Redirect("/Account/Login");
 
             if (table.ToLower() == "author")

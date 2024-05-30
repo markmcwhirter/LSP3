@@ -24,7 +24,7 @@
     const gridOptions = {
         columnDefs: columnDefs,
         pagination: true,
-        paginationPageSize: 20, 
+        paginationPageSize: 20,
         rowGroupPanelShow: "always",
         pivotPanelShow: "always",
 
@@ -45,7 +45,7 @@
                     sortDirection = sortModel[0].sort;
                 }
 
-                // Build your API request URL              
+                // Build your API request URL
                 const url = API_URL + `author/gridsearch?startRow=${startRow}&endRow=${endRow}&sortColumn=${sortColumn}&sortDirection=${sortDirection}`;
                 fetch(url)
                     .then(response => response.json())
@@ -64,4 +64,3 @@
     // Create the grid instance
     new agGrid.createGrid(document.getElementById('myGrid'), gridOptions);
 </script>
-

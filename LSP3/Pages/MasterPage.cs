@@ -11,10 +11,9 @@ public class MasterModel : PageModel
 
     public readonly IHttpContextAccessor _httpContextAccessor;
 
-    public string authenticated = "";
-    public string currentUser = "";
     public bool IsAuthenticated = false;
     public bool IsAdmin = false;
+    public int AuthorId = 0;
 
     public AuthorDto Author = new();
     public string CurrentUser = "";
@@ -28,19 +27,15 @@ public class MasterModel : PageModel
 
     public override void OnPageHandlerExecuting(PageHandlerExecutingContext context)
     {
-        HttpHelper helper = new();
+
+        SessionHelper sessionHelper = new();
 
         if (_httpContextAccessor != null && _httpContextAccessor.HttpContext != null && _httpContextAccessor.HttpContext.Session != null)
         {
-           
-            string tmpUserSession = helper.GetCookie(_httpContextAccessor, "userSession");
 
-            if (!string.IsNullOrEmpty(tmpUserSession))
-            {
-                Author = new Extensions<AuthorDto>().Deserialize(tmpUserSession);
-                CurrentUser = Author.Username ?? "";
-                IsAuthenticated = true;
-            }
+            IsAuthenticated = sessionHelper.IsAuthenticated(_httpContextAccessor);
+            IsAdmin = sessionHelper.IsAdmin(_httpContextAccessor);
+            AuthorId = sessionHelper.GetAuthorId(_httpContextAccessor);
         }
 
     }

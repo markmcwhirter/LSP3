@@ -89,7 +89,7 @@
     }
     function evaluateInputAndUpdateButton() {
 
-
+        debugger;
         const inputElement = document.getElementById("bookid");
         const buttonElement = document.getElementById("UpdateButton");
 
@@ -113,9 +113,10 @@
     }
 
     function UpdateBookEventHandler(event) {
-        debugger;
+
         event.preventDefault();
 
+        debugger;
         const myCheckbox = document.getElementById("tandc");
 
         if (!myCheckbox.checked) {
@@ -148,6 +149,9 @@
             ).then(
                 html => console.log(html)
             );
+
+        alert('Add or Update sucessful');
+        window.location.href = "Admin";
 
         return true;
     }

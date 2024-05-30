@@ -10,17 +10,19 @@ using System.Text;
 
 namespace LSP3.Pages;
 
-public class BulkSalesEntryModel : PageModel
+public class BulkSalesEntryModel : MasterModel
 {
 
     private readonly IWebHostEnvironment _environment;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
     private readonly AppSettings _appSettings;
 
-    public BulkSalesEntryModel(IOptions<AppSettings> appSettings, IWebHostEnvironment environment)
+    public BulkSalesEntryModel(IOptions<AppSettings> appSettings, IWebHostEnvironment environment, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
         _appSettings = appSettings.Value;
         _environment = environment;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     [BindProperty]
@@ -35,6 +37,14 @@ public class BulkSalesEntryModel : PageModel
         List<SalePostModel> salelist = new();
 
         HttpHelper helper = new();
+        SessionHelper sessionHelper = new();
+
+        if (!base.IsAuthenticated)
+            return;
+
+        if (!base.IsAdmin)
+            return;
+
 
         var file = Path.Combine(_environment.ContentRootPath, "data", Upload.FileName);
         using (var fileStream = new FileStream(file, FileMode.Create))

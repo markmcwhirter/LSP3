@@ -68,6 +68,7 @@ public class ResetModel : PageModel
     {
 
         HttpHelper helper = new();
+        SessionHelper sessionHelper = new SessionHelper();
 
         if (username == null || password == null) return;
 
@@ -84,23 +85,12 @@ public class ResetModel : PageModel
             {
                 AuthorDto author = new Extensions<AuthorDto>().Deserialize(apiResponse);
 
-                helper.SetSessionString(_httpContextAccessor, "userSession", apiResponse);
 
-                HttpContext.Response.Cookies.Append("userSession", apiResponse, new CookieOptions
-                {
-                    Expires = DateTime.Now.AddHours(1)
-                });
+                sessionHelper.SetSessionString(_httpContextAccessor, "Authenticated", "true");
 
-                helper.SetCookie(_httpContextAccessor, "userSession", apiResponse);
-               
+                var isAdmin = author.Admin == "1" ? "true" : "false";
+                sessionHelper.SetSessionString(_httpContextAccessor, "Admin", isAdmin);
 
-                helper.SetSessionString(_httpContextAccessor, "Authenticated", "true");
-
-                if (author.Admin  == "1")
-                {
-                    helper.SetCookie(_httpContextAccessor, "Admin", "true");
-                    IsAdmin = true;
-                }
             }
 
         }

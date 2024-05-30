@@ -24,18 +24,25 @@ public class AuthorSearch : MasterModel
     readonly HttpHelper helper = new();
     readonly Extensions<List<AuthorDto>> extensions = new();
     private readonly AppSettings _appSettings;
+    private SessionHelper sessionHelper = new();
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
     public AuthorSearch(IOptions<AppSettings> appSettings,ILogger<AuthorSearch> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
         _appSettings = appSettings.Value;
         _logger = logger;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     public async Task OnGetAsync(string lastName, string firstName, string sortOrder, string direction, int? currentPage)
     {
 
 
+        if (!base.IsAuthenticated)
+            return;
 
+        if (!base.IsAdmin)
+            return;
 
         Extensions<List<AuthorListResultsModel>> listextensions = new();
         try

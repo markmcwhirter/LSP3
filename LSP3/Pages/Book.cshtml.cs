@@ -21,11 +21,13 @@ public class BookModel : MasterModel
     private readonly ILogger<BookModel> _logger;
 
     private readonly AppSettings _appSettings;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
     public BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
         _appSettings = appSettings.Value;
         _logger = logger;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     public async Task<IActionResult> OnGet(int? bookid, int? authorid)
@@ -35,6 +37,7 @@ public class BookModel : MasterModel
         try
         {
             HttpHelper helper = new();
+            SessionHelper sessionHelper = new();
             Extensions<BookDto> bookextensions = new Extensions<BookDto>();
 
 

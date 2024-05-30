@@ -7,12 +7,7 @@ namespace LSP3.Pages.Account
     {
         public void OnGet()
         {
-            _ = "test";
-        }
-        public IResult OnPost()
-        {
-            _ = "test";
-            return (IResult)Page();
+
         }
     }
 }

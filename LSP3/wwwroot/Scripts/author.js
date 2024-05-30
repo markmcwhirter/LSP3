@@ -64,9 +64,12 @@ function AddAuthor(data) {
         body: JSON.stringify(author)
     };
 
-    fetch(API_URL + "author", options)
+    fetch(API_URL + "author/add", options)
         .then(
-            response => { return response.statusText() }
+            response => {
+                debugger;
+                return console.log(response)
+            }
         ).then(
             html => console.log(html)
         );

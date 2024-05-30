@@ -421,14 +421,23 @@
                     <tr><td colspan="2">&nbsp;</td></tr>
         </table>
 
-        <button type="button" id="AddButton" onclick="return AddAuthorEventHandler(event);" class="button blue">Add</button>&nbsp;&nbsp;
-        <button type="button" id="UpdateButton" onclick="UpdateButton_Click" class="button blue">Update</button>&nbsp;&nbsp;
-        <button type="button" id="DeleteButton" onclick="DeleteButton_Click" class="button blue">Delete</button>&nbsp;&nbsp;
+        <button type="button" id="AddButton" onclick="return AddAuthorEventHandler(event);" class="btn btn-primary">Add</button>&nbsp;&nbsp;
+        <button type="button" id="CancelButton" onclick="return CancelEventHandler(event);" class="btn btn-secondary">Cancel</button>
+@*         <button type="button" id="UpdateButton" onclick="UpdateButton_Click" class="button blue">Update</button>&nbsp;&nbsp;
+        <button type="button" id="DeleteButton" onclick="DeleteButton_Click" class="button blue">Delete</button>&nbsp;&nbsp; *@
 
     </form>
 }
 
 <script type="text/javascript">
+
+    function CancelEventHandler(event) {
+        event.preventDefault();
+        window.location.href = "Index";
+        return false;
+
+    }
+
     function AddAuthorEventHandler(event) {
         event.preventDefault();
 
@@ -451,10 +460,12 @@
 
 
         var data = JSON.stringify(Object.fromEntries(formData));
+
         var result = AddAuthor(data);
-        alert('Success!  Author has been created!');
+        document.getElementById('lblError').innerHTML = "";
+        // alert('Success!  Author has been created!');
         window.location.href = "Index";
-        return false;
+        return true;
     }
 
     function Validate(field, message) {

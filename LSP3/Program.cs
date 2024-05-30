@@ -30,12 +30,15 @@ builder.Services.AddTransient<EmailService>();
 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.IdleTimeout = TimeSpan.FromHours(10);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
 
+
 var app = builder.Build();
+
+app.UseCookiePolicy();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -45,7 +48,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-// app.UseHttpsRedirection();
+
 app.UseStaticFiles()
 .UseStaticFiles(new StaticFileOptions()
  {
@@ -55,7 +58,6 @@ app.UseStaticFiles()
      DefaultContentType = "application/octet-stream"
  });
 
-// using Microsoft.AspNetCore.HttpOverrides;
 
 app.UseForwardedHeaders(new ForwardedHeadersOptions
 {

@@ -21,13 +21,15 @@ public class BookSalesModel : MasterModel
     private readonly ILogger<BookSalesModel> _logger;
 
     private readonly AppSettings _appSettings;
-
+    private SessionHelper sessionHelper = new();
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
 
     public BookSalesModel(IOptions<AppSettings> appSettings, ILogger<BookSalesModel> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
         _appSettings = appSettings.Value;
         _logger = logger;
+        _httpContextAccessor = httpContextAccessor;
 
     }
 
@@ -43,6 +45,11 @@ public class BookSalesModel : MasterModel
 
             if (!base.IsAuthenticated)
                 return Redirect("/Account/Login");
+
+            if (!base.IsAdmin)
+                return Redirect("/Index");
+
+
 
             string apiResponse = await helper.Get(_appSettings.HostUrl + $"sale/getsales");
 

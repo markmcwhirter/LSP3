@@ -33,16 +33,16 @@ public class LoginModel : PageModel
 
 	public async Task<IActionResult> OnPost()
 	{
-		HttpHelper helper = new();
+		SessionHelper helper = new();
 
 		if (_httpContextAccessor.HttpContext != null)
-		{
-
 			await OnGetauthor(Username, Password);
 
+		if( helper.IsAuthenticated(_httpContextAccessor))
+        {
+            IsAdmin = helper.IsAdmin(_httpContextAccessor);
+        }
 
-
-		}
 		return IsAdmin ? RedirectToPage("/Admin") : RedirectToPage("/Index");
 	}
 
@@ -50,6 +50,7 @@ public class LoginModel : PageModel
 	{
 
 		HttpHelper helper = new();
+		SessionHelper sessionHelper = new SessionHelper();
 
 		if (username == null || password == null) return;
 
@@ -71,24 +72,14 @@ public class LoginModel : PageModel
 					return;
 				}
 
-				helper.SetSessionString(_httpContextAccessor, "userSession", apiResponse);
+				sessionHelper.SetSessionString(_httpContextAccessor, "AuthorId", author.AuthorID.ToString());
+                sessionHelper.SetSessionString(_httpContextAccessor, "Authenticated", "true");
 
-				HttpContext.Response.Cookies.Append("userSession", apiResponse, new CookieOptions
-				{
-					Expires = DateTime.Now.AddHours(1)
-				});
-
-				helper.SetCookie(_httpContextAccessor, "userSession", apiResponse);
+				var isAdmin = author.Admin == "1" ? "true" : "false";
+                sessionHelper.SetSessionString(_httpContextAccessor, "Admin", isAdmin);
 
 
-				helper.SetSessionString(_httpContextAccessor, "Authenticated", "true");
-
-				if (author.Admin == "1")
-				{
-					helper.SetCookie(_httpContextAccessor, "Admin", "true");
-					IsAdmin = true;
-				}
-			}
+            }
 
 		}
 		catch (Exception ex)

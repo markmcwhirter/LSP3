@@ -13,18 +13,26 @@ public class ProfileModify : MasterModel
     readonly HttpHelper helper = new();
     public AuthorDto? Results { get; set; }
     private readonly AppSettings _appSettings;
+    private readonly IHttpContextAccessor _httpContextAccessor;
+
     public ProfileModify(IOptions<AppSettings> appSettings, ILogger<Profile> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
         _appSettings = appSettings.Value;
         _logger = logger;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     public async Task OnGetAsync()
     {
+        SessionHelper sessionHelper = new();
+
         string id = Request.Query["id"].ToString();
 
         try
         {
+
+            if (!base.IsAuthenticated)
+                return;
 
             var response = await helper.Get(_appSettings.HostUrl + $"author/{id}");
 

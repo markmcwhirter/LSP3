@@ -20,11 +20,13 @@ public class AdminModel : MasterModel
     private readonly ILogger<AdminModel> _logger;
 
     private readonly AppSettings _appSettings;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
     public AdminModel(IOptions<AppSettings> appSettings, ILogger<AdminModel> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
         _appSettings = appSettings.Value;
         _logger = logger;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     public async Task<IActionResult> OnGet()
@@ -33,24 +35,28 @@ public class AdminModel : MasterModel
         try
         {
             HttpHelper helper = new();
+            SessionHelper sessionHelper = new();
             Extensions<AuthorDto> authorextensions = new();
             Extensions<List<BookSummaryModel>> bookextensions = new();
 
-            string authorid = "";
+            string? authorid = "";
 
             Author = new AuthorDto();
             Books = new List<BookSummaryModel>();
             Sales = new SalesSummaryModel();
 
-            if (!base.IsAuthenticated)
+
+            if( !base.IsAuthenticated)
                 return Redirect("/Account/Login");
+
+            if (!base.IsAdmin)
+                return Redirect("/Index");
+
 
             if (Request.Query.ContainsKey("authorid"))
                 authorid = Request.Query["authorid"].ToString();
             else
-                authorid = base.Author.AuthorID.ToString();
-
-            _logger.LogInformation($"Admin:  Get authorid: {authorid}");
+                authorid = base.AuthorId.ToString();
 
             string apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{authorid}");
 

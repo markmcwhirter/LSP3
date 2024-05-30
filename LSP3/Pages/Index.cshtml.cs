@@ -22,20 +22,21 @@ public class IndexModel : MasterModel
     private readonly ILogger<IndexModel> _logger;
 
     private readonly AppSettings _appSettings;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
     public IndexModel(IOptions<AppSettings> appSettings, ILogger<IndexModel> logger, IHttpContextAccessor httpContextAccessor) : base( httpContextAccessor)
     {
         _appSettings = appSettings.Value;
         _logger = logger;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     public async Task<IActionResult> OnGet()
     {
-
-
         try
         {
             HttpHelper helper = new();
+            SessionHelper sessionHelper = new();
             Extensions<AuthorDto> authorextensions = new();
             Extensions<List<BookSummaryModel>> bookextensions = new();
 
@@ -43,11 +44,13 @@ public class IndexModel : MasterModel
             Books = new List<BookSummaryModel>();
             Sales = new SalesSummaryModel();
 
+
             if (!base.IsAuthenticated)
                 return Redirect("/Account/Login");
 
             if (base.IsAdmin)
-                return RedirectToPage("/Admin");
+                return Redirect("/Admin");
+
 
             string apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{base.Author.AuthorID}");
 

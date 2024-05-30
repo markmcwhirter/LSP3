@@ -9,6 +9,7 @@ public class LogoutModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
     private readonly IHttpContextAccessor _httpContextAccessor;
+    SessionHelper sessionHelper = new SessionHelper();
 
     public LogoutModel(ILogger<IndexModel> logger, IHttpContextAccessor httpContextAccessor)
     {
@@ -17,31 +18,14 @@ public class LogoutModel : PageModel
     }
 
     public IActionResult OnGet() {
-        HttpHelper helper = new();
-
 
         if (_httpContextAccessor.HttpContext != null)
         {
-            helper.SetCookie(_httpContextAccessor, "userSession", "");
-            helper.SetCookie(_httpContextAccessor, "Authenticated", "");
-            helper.SetCookie(_httpContextAccessor, "Admin", "");
+            sessionHelper.SetSessionString(_httpContextAccessor, "Authenticated", "false");
+            sessionHelper.SetSessionString(_httpContextAccessor, "Admin", "false");
+            sessionHelper.SetSessionString(_httpContextAccessor, "AuthorId", "0");
         }
-
         return Redirect("/Account/Login");
     }
 
-    public IActionResult OnPost()
-    {
-        HttpHelper helper = new();
-
-
-        if (_httpContextAccessor.HttpContext != null)
-        {
-            helper.SetCookie(_httpContextAccessor, "userSession", "");
-            helper.SetCookie(_httpContextAccessor, "Authenticated", "");
-            helper.SetCookie(_httpContextAccessor, "Admin", "");
-        }
-
-        return Redirect("/Account/Login");
-    }
 }

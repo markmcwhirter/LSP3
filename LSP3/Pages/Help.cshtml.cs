@@ -13,18 +13,20 @@ public class HelpModel : MasterModel
 
     [BindProperty]
     public string? FromEmail{ get; set; }
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
     public HelpModel(IOptions<AppSettings> appSettings, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
-
+        _httpContextAccessor = httpContextAccessor;
     }
 
 
     public IActionResult OnGet()
     {
         HttpHelper helper = new();
+        SessionHelper   sessionHelper = new();
 
-        if (!base.IsAuthenticated)
+        if (!sessionHelper.IsAuthenticated(_httpContextAccessor))
             return Redirect("/Account/Login");
 
         From = base.CurrentUser;

@@ -18,5 +18,11 @@ public class SearchModel : MasterModel
     }
     public void OnGet()
     {
+
+        if (!base.IsAuthenticated)
+            return;
+
+        if (!base.IsAdmin)
+            return;
     }
 }
