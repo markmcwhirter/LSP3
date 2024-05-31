@@ -67,7 +67,6 @@ function AddAuthor(data) {
     fetch(API_URL + "author/add", options)
         .then(
             response => {
-                debugger;
                 return console.log(response)
             }
         ).then(

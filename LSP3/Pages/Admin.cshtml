@@ -630,20 +630,6 @@
                                 }
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-1"></div>
-                            <div class="col-sm-2">Royalties:</div>
-                            <div class="col-sm-1">
-                                @if (book.BookRoyalties != null)
-                                {
-                                    @(book.BookRoyalties > 0 ? book.BookRoyalties : "$ 0.00")
-                                }
-                                else
-                                {
-                                    @("$ 0.00")
-                                }
-                            </div>
-                        </div>
 
                         <div style="height: 15px;"></div>
                         <div class="row">
@@ -706,13 +692,46 @@
 
                             </div>
                         </div>
+
+                        <div style="height: 15px;"></div>
+                        <div class="row">
+                            <div class="col-sm-1" style="font-weight: bold;">Audio Book Sales:</div>
+                        </div>
                         <div class="row">
                             <div class="col-sm-1"></div>
-                            <div class="col-sm-2">Royalties:</div>
+                            <div class="col-sm-2">Sold To Date:</div>
                             <div class="col-sm-1">
-                                @if (book.EBookRoyalties != null)
+                                @if (book.AudioBooksSoldToDate != null)
                                 {
-                                    @(book.EBookRoyalties > 0 ? book.EBookRoyalties : "$ 0.00")
+                                    @(book.AudioBooksSoldToDate > 0 ? book.AudioBooksSoldToDate : 0)
+                                }
+                                else
+                                {
+                                    @("0")
+                                }
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-2">Sold This Period:</div>
+                            <div class="col-sm-1">
+                                @if (book.AudioBooksSoldThisPeriod != null)
+                                {
+                                    @(book.AudioBooksSoldThisPeriod > 0 ? book.AudioBooksSoldThisPeriod : 0)
+                                }
+                                else
+                                {
+                                    @("0")
+                                }
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-2">Sales This Period:</div>
+                            <div class="col-sm-1">
+                                @if (book.AudioBooksSalesThisPeriod != null)
+                                {
+                                    @(book.AudioBooksSalesThisPeriod > 0 ? book.AudioBooksSalesThisPeriod : "$ 0.00")
                                 }
                                 else
                                 {
@@ -720,10 +739,43 @@
                                 }
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-2">Sales To Date:</div>
+                            <div class="col-sm-1">
+                                @if (book.AudioBooksSalesToDate != null)
+                                {
+                                    @(book.AudioBooksSalesToDate > 0 ? book.AudioBooksSalesToDate : "$ 0.00")
+                                }
+                                else
+                                {
+                                    @("$ 0.00")
+                                }
+
+                            </div>
+                        </div>
+
                         <div style="height: 15px;"></div>
                         <div class="row">
-                            <div class="col-sm-2"><a class="nav-link" href="Book?bookid=@book.BookID">Update Book</a></div>
-                            <div class="col-sm-2"><a class="nav-link" href="BookDelete?bookid=@book.BookID">Delete Book</a></div>
+                            <div class="col-sm-1" style="font-weight: bold;">Royalties:</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-1">
+                                @if (book.BookRoyalties != null && book.EBookRoyalties != null && book.AudioBookRoyalties != null)
+                                {
+                                    var royalties = book.BookRoyalties + book.EBookRoyalties + book.AudioBookRoyalties;
+                                    @(royalties > 0 ? royalties : "$ 0.00")
+                                }
+                                else
+                                {
+                                    @("$ 0.00")
+                                }
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2"><a class="nav-link" href="Book?bookid=@book.BookID&authorid=@book.AuthorID">Update</a></div>
                         </div>
 
                     </div>
