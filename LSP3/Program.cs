@@ -1,5 +1,10 @@
 using LSP3;
 using LSP3.Model;
+using Serilog;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
 
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +21,21 @@ builder.Host.ConfigureAppConfiguration((builder, config) =>
      .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
      .AddEnvironmentVariables();
  });
+
+builder.Logging.ClearProviders(); // Remove default providers if desired
+builder.Logging.AddConsole();     // Log to console (development)
+builder.Logging.AddDebug();       // Log to debug output (VS)
+builder.Logging.AddSerilog();
+
+// Serilog Configuration (For File Logging)
+builder.Host.UseSerilog((ctx, lc) => lc
+    .WriteTo.File("logs/log-.txt",
+        rollingInterval: RollingInterval.Day,
+        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
+);
+
+// Add any other desired log sinks (e.g., Console for development)
+builder.Logging.AddSerilog();
 
 builder.Services.AddRazorPages();
 
@@ -51,12 +71,12 @@ if (!app.Environment.IsDevelopment())
 
 app.UseStaticFiles()
 .UseStaticFiles(new StaticFileOptions()
- {
-     FileProvider = new PhysicalFileProvider(
+{
+    FileProvider = new PhysicalFileProvider(
                 System.IO.Path.GetFullPath(@"data")),
-     RequestPath = new PathString("/data"),
-     DefaultContentType = "application/octet-stream"
- });
+    RequestPath = new PathString("/data"),
+    DefaultContentType = "application/octet-stream"
+});
 
 
 app.UseForwardedHeaders(new ForwardedHeadersOptions
