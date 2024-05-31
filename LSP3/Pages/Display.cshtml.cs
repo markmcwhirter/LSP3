@@ -1,17 +1,18 @@
 using LSP3.Model;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 
 namespace LSP3.Pages;
 
-public class DisplayModel : MasterModel
+public class DisplayModel : PageModel
 {
     public readonly IHttpContextAccessor _httpContextAccessor;
 
     private readonly AppSettings _appSettings;
 
-    public DisplayModel(IOptions<AppSettings> appSettings, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+    public DisplayModel(IOptions<AppSettings> appSettings, IHttpContextAccessor httpContextAccessor)
     {
         _appSettings = appSettings.Value;
         _httpContextAccessor = httpContextAccessor;

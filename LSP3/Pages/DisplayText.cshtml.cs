@@ -1,13 +1,12 @@
 using LSP3.Model;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
-
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace LSP3.Pages;
 
-public class DisplayTextModel : MasterModel
+public class DisplayTextModel : PageModel
 {
     [BindProperty]
     public new AuthorDto? Author { get; set; }
@@ -24,7 +23,7 @@ public class DisplayTextModel : MasterModel
     private readonly AppSettings _appSettings;
     private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public DisplayTextModel(IOptions<AppSettings> appSettings, ILogger<DisplayTextModel> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+    public DisplayTextModel(IOptions<AppSettings> appSettings, ILogger<DisplayTextModel> logger, IHttpContextAccessor httpContextAccessor) 
     {
         _appSettings = appSettings.Value;
         _logger = logger;
