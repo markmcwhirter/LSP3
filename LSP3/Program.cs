@@ -35,7 +35,6 @@ builder.Host.UseSerilog((ctx, lc) => lc
 );
 
 // Add any other desired log sinks (e.g., Console for development)
-builder.Logging.AddSerilog();
 
 builder.Services.AddRazorPages();
 
@@ -51,8 +50,8 @@ builder.Services.AddTransient<EmailService>();
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromHours(10);
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
+    //options.Cookie.HttpOnly = true;
+    //options.Cookie.IsEssential = true;
 });
 
 
@@ -64,7 +63,6 @@ app.UseCookiePolicy();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-
     app.UseHsts();
 }
 
