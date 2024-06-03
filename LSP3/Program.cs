@@ -34,7 +34,6 @@ builder.Host.UseSerilog((ctx, lc) => lc
         outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
 );
 
-// Add any other desired log sinks (e.g., Console for development)
 
 builder.Services.AddRazorPages();
 
