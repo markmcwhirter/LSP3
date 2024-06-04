@@ -81,6 +81,7 @@ public class DisplayTextModel : PageModel
                 case "notes":
                     Text = Book.Notes ?? "No Notes available";
                     break;
+
             }
 
         }
