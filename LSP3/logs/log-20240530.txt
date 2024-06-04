@@ -1,0 +1,59 @@
+2024-05-30 19:59:20 [INF] User profile is available. Using 'C:\Users\Mark_\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-05-30 19:59:20 [INF] Now listening on: http://localhost:5001
+2024-05-30 19:59:20 [INF] Application started. Press Ctrl+C to shut down.
+2024-05-30 19:59:20 [INF] Hosting environment: Development
+2024-05-30 19:59:20 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-05-30 19:59:21 [INF] Request starting HTTP/1.1 GET http://localhost:5001/ - null null
+2024-05-30 19:59:21 [INF] Executing endpoint '/Index'
+2024-05-30 19:59:21 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2024-05-30 19:59:21 [INF] Executing handler method LSP3.Pages.IndexModel.OnGet - ModelState is "Valid"
+2024-05-30 19:59:21 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RedirectResult.
+2024-05-30 19:59:21 [INF] Executing RedirectResult, redirecting to /Account/Login.
+2024-05-30 19:59:21 [INF] Executed page /Index in 17.2661ms
+2024-05-30 19:59:21 [INF] Executed endpoint '/Index'
+2024-05-30 19:59:21 [INF] Request finished HTTP/1.1 GET http://localhost:5001/ - 302 0 null 238.8971ms
+2024-05-30 19:59:21 [INF] Request starting HTTP/1.1 GET http://localhost:5001/Account/Login - null null
+2024-05-30 19:59:21 [INF] Executing endpoint '/Account/Login'
+2024-05-30 19:59:21 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-05-30 19:59:21 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnGet - ModelState is "Valid"
+2024-05-30 19:59:21 [INF] Executed handler method OnGet, returned result .
+2024-05-30 19:59:21 [INF] Executing an implicit handler method - ModelState is "Valid"
+2024-05-30 19:59:21 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-05-30 19:59:21 [INF] Executed page /Account/Login in 28.6562ms
+2024-05-30 19:59:21 [INF] Executed endpoint '/Account/Login'
+2024-05-30 19:59:21 [INF] Request finished HTTP/1.1 GET http://localhost:5001/Account/Login - 200 null text/html; charset=utf-8 40.5412ms
+2024-05-30 19:59:21 [INF] Request starting HTTP/1.1 GET http://localhost:5001/images/logo.png - null null
+2024-05-30 19:59:21 [INF] Request starting HTTP/1.1 GET http://localhost:5001/_framework/aspnetcore-browser-refresh.js - null null
+2024-05-30 19:59:21 [INF] Request starting HTTP/1.1 GET http://localhost:5001/_vs/browserLink - null null
+2024-05-30 19:59:21 [INF] Request finished HTTP/1.1 GET http://localhost:5001/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 1.5439ms
+2024-05-30 19:59:21 [INF] Sending file. Request path: '/images/logo.png'. Physical path: 'C:\LSP\LSP3\LSP3\wwwroot\images\logo.png'
+2024-05-30 19:59:21 [INF] Request finished HTTP/1.1 GET http://localhost:5001/images/logo.png - 200 19476 image/png 9.2275ms
+2024-05-30 19:59:21 [INF] Request finished HTTP/1.1 GET http://localhost:5001/_vs/browserLink - 200 null text/javascript; charset=UTF-8 22.8452ms
+2024-05-30 19:59:21 [INF] Request starting HTTP/1.1 GET http://localhost:5001/Account/favicon.ico - null null
+2024-05-30 19:59:21 [INF] Request finished HTTP/1.1 GET http://localhost:5001/Account/favicon.ico - 404 0 null 4.1887ms
+2024-05-30 19:59:21 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5001/Account/favicon.ico, Response status code: 404
+2024-05-30 19:59:43 [INF] Request starting HTTP/1.1 POST http://localhost:5001/Account/Login - application/x-www-form-urlencoded 222
+2024-05-30 19:59:43 [INF] Executing endpoint '/Account/Login'
+2024-05-30 19:59:43 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-05-30 19:59:43 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnPost - ModelState is "Valid"
+2024-05-30 19:59:44 [INF] Executed handler method OnPost, returned result Microsoft.AspNetCore.Mvc.RedirectToPageResult.
+2024-05-30 19:59:44 [INF] Executing RedirectToPageResult, redirecting to /Admin.
+2024-05-30 19:59:44 [INF] Executed page /Account/Login in 1622.8053ms
+2024-05-30 19:59:44 [INF] Executed endpoint '/Account/Login'
+2024-05-30 19:59:44 [INF] Session started; Key:872341d9-38f3-5f0f-3232-9123ef754a53, Id:3372904a-022d-e1fd-3af9-e8f8d44f0ea0
+2024-05-30 19:59:44 [INF] Request finished HTTP/1.1 POST http://localhost:5001/Account/Login - 302 0 null 1628.9882ms
+2024-05-30 19:59:44 [INF] Request starting HTTP/1.1 GET http://localhost:5001/Admin - null null
+2024-05-30 19:59:44 [INF] Executing endpoint '/Admin'
+2024-05-30 19:59:44 [INF] Route matched with {page = "/Admin"}. Executing page /Admin
+2024-05-30 19:59:44 [INF] Executing handler method LSP3.Pages.AdminModel.OnGet - ModelState is "Valid"
+2024-05-30 19:59:46 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-05-30 19:59:46 [INF] Executed page /Admin in 1319.3432ms
+2024-05-30 19:59:46 [INF] Executed endpoint '/Admin'
+2024-05-30 19:59:46 [INF] Request finished HTTP/1.1 GET http://localhost:5001/Admin - 200 null text/html; charset=utf-8 1324.5321ms
+2024-05-30 19:59:46 [INF] Request starting HTTP/1.1 GET http://localhost:5001/_framework/aspnetcore-browser-refresh.js - null null
+2024-05-30 19:59:46 [INF] Request finished HTTP/1.1 GET http://localhost:5001/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 0.2577ms
+2024-05-30 19:59:46 [INF] Request starting HTTP/1.1 GET http://localhost:5001/Scripts/author.js - null null
+2024-05-30 19:59:46 [INF] Sending file. Request path: '/Scripts/author.js'. Physical path: 'C:\LSP\LSP3\LSP3\wwwroot\Scripts\author.js'
+2024-05-30 19:59:46 [INF] Request finished HTTP/1.1 GET http://localhost:5001/Scripts/author.js - 200 2735 text/javascript 1.3893ms
+2024-05-30 19:59:46 [INF] Request starting HTTP/1.1 GET http://localhost:5001/_vs/browserLink - null null
+2024-05-30 19:59:46 [INF] Request finished HTTP/1.1 GET http://localhost:5001/_vs/browserLink - 200 null text/javascript; charset=UTF-8 10.0317ms
