@@ -4,6 +4,31 @@
     Layout = "_LayoutAdmin";
 }
 
+<div class="container-fluid">
+    <div class="content" style="width:60%;">
+        <div style="height:20px;"></div>
+        <div class="row">
+            <div class="col-sm-2">
+                <button type="button" id="savefiltermodel" onclick="saveFilterModel();" class="btn btn-primary" style="color: white">Save Filter</button>
+            </div>
+            <div class="col-sm-2">
+                <button type="button" id="savefiltermodel" onclick="restoreFilterModel();" class="btn btn-primary" style="color: white">Restore Filter</button>
+            </div>
+            <div class="col-sm-2">
+                <button type="button" id="savefiltermodel" onclick="clearFilters();" class="btn btn-primary" style="color: white">Reset Filters</button>
+            </div>
+            <div class="col-sm-2">
+                <button type="button" id="savefiltermodel" onclick="destroyFilter();" class="btn btn-primary" style="color: white">Destroy Filter</button>
+            </div>
+            <div class="col-sm-2">
+                Saved Filters: <span id="savedFilters">(none)</span>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div style="height:20px;"></div>
 <div id="myGrid" class="ag-theme-alpine" style="height: 800px; width: 1200px"></div>
 
 
@@ -11,33 +36,38 @@
 
     // Column definitions
     const columnDefs = [
-        { field: 'authorID', headerName: 'Author ID', cellDataType: 'number', sortable: true, filter: true, editable: false },
-        { field: 'lastName', headerName: 'Last Name', sortable: true, filter: true, editable: true },
-        { field: 'firstName', headerName: 'First Name', sortable: true, filter: true, editable: true },
-        { field: 'eMail', headerName: 'EMail', sortable: true, filter: true, editable: true },
-        { field: 'infoLink', headerName: 'Info', sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='Admin?authorid=" + params.value + "'>Info</a>"; } },
-        { field: 'editLink', headerName: 'Edit', sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='ProfileModify?id=" + params.value + "'>Edit</a>"; } },
-        { field: 'deleteLink', headerName: 'Delete', sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='DeleteAuthor?id=" + params.value + "'>Delete</a>"; } }
+        { field: 'authorID', flex: 1, headerName: 'Author ID', cellDataType: 'number', sortable: true, filter: 'agNumberColumnFilter', editable: false },
+        { field: 'lastName', flex: 1, headerName: 'Last Name', sortable: true, filter: 'agTextColumnFilter', editable: true },
+        { field: 'firstName', flex: 1, headerName: 'First Name', sortable: true, filter: 'agTextColumnFilter', editable: true },
+        { field: 'eMail', flex: 1, headerName: 'EMail', sortable: true, filter: 'agTextColumnFilter', editable: true },
+        { field: 'infoLink', flex: 1, headerName: 'Info', sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='Admin?authorid=" + params.value + "'>Info</a>"; } },
+        { field: 'editLink', flex: 1, headerName: 'Edit', sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='ProfileModify?id=" + params.value + "'>Edit</a>"; } },
+        { field: 'deleteLink', flex: 1, headerName: 'Delete', sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='DeleteAuthor?id=" + params.value + "'>Delete</a>"; } }
     ];
+
+    let gridApi;
 
     // Grid options
     const gridOptions = {
         columnDefs: columnDefs,
         pagination: true,
         paginationPageSize: 20,
-        rowGroupPanelShow: "always",
-        pivotPanelShow: "always",
+        //: true,
+        // rowGroupPanelShow: "always",
+        // pivotPanelShow: "always",
 
         // Enable server-side sorting and filtering
         rowModelType: 'serverSide',
+        //serverSideStoreType: 'partial',
 
         // Datasource definition
         serverSideDatasource: {
             getRows: (params) => { // This function is called by ag-Grid
                 const { startRow, endRow, sortModel } = params.request;
-
+                //debugger;
                 let sortColumn = null;
                 let sortDirection = null;
+                let filter = JSON.stringify(params.request.filterModel);
 
                 // Extract sorting information
                 if (sortModel.length > 0) {
@@ -46,7 +76,7 @@
                 }
 
                 // Build your API request URL
-                const url = API_URL + `author/gridsearch?startRow=${startRow}&endRow=${endRow}&sortColumn=${sortColumn}&sortDirection=${sortDirection}`;
+                const url = API_URL + `author/gridsearch?startRow=${startRow}&endRow=${endRow}&sortColumn=${sortColumn}&sortDirection=${sortDirection}&filter=${filter}`;
                 fetch(url)
                     .then(response => response.json())
                     .then(data => {
@@ -62,5 +92,48 @@
     };
 
     // Create the grid instance
-    new agGrid.createGrid(document.getElementById('myGrid'), gridOptions);
+    gridApi = new agGrid.createGrid(document.getElementById('myGrid'), gridOptions);
+
+
+    var savedFilterModel = null;
+
+    function clearFilters() {
+        gridApi.setFilterModel(null);
+    }
+
+    function saveFilterModel() {
+
+        savedFilterModel = gridApi.getFilterModel();
+
+        var keys = Object.keys(savedFilterModel);
+        var savedFilters = keys.length > 0 ? keys.join(", ") : "(none)";
+
+        document.querySelector("#savedFilters").textContent = savedFilters;
+    }
+
+    function restoreFilterModel() {
+        gridApi.setFilterModel(savedFilterModel);
+    }
+
+    function restoreFromHardCoded() {
+        var hardcodedFilter = {
+            country: {
+                type: "set",
+                values: ["Ireland", "United States"],
+            },
+            age: { type: "lessThan", filter: "30" },
+            athlete: { type: "startsWith", filter: "Mich" },
+            date: { type: "lessThan", dateFrom: "2010-01-01" },
+        };
+
+        gridApi.setFilterModel(hardcodedFilter);
+    }
+
+    function destroyFilter() {
+        gridApi.destroyFilter("athlete");
+        gridApi.setFilterModel(null);
+
+        document.querySelector("#savedFilters").textContent = '';
+    }
+
 </script>

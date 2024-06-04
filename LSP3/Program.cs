@@ -1,14 +1,10 @@
 using LSP3;
 using LSP3.Model;
-using Serilog;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-
 
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
+
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
