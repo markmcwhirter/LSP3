@@ -78,6 +78,9 @@ public class DisplayTextModel : PageModel
                 case "description":
                     Text = Book.Description ?? "No Description available";
                     break;
+                case "notes":
+                    Text = Book.Notes ?? "No Notes available";
+                    break;
             }
 
         }

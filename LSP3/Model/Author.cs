@@ -41,4 +41,5 @@ public partial class AuthorDto
 	public string? Username { get; set; }
 	public string? Admin { get; set; }
 	public string? Bio { get; set; }
+    public string? Notes { get; set; }
 }

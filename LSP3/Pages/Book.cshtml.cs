@@ -3,7 +3,7 @@ using LSP3.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
-using static System.Reflection.Metadata.BlobBuilder;
+using System.Web;
 
 namespace LSP3.Pages;
 
@@ -16,6 +16,9 @@ public class BookModel : MasterModel
 
     [BindProperty]
     public int? AuthorId { get; set; }
+
+    [BindProperty]
+    public string? Referrer { get; set; }
 
 
     private readonly ILogger<BookModel> _logger;
@@ -47,6 +50,9 @@ public class BookModel : MasterModel
             IsReadOnly = false;
             Book = new BookDto();
 
+
+            Referrer = GetReferrer().AbsoluteUri;
+
             if (Request.Query.ContainsKey("authorid"))
             {
                 AuthorId = authorid;
@@ -71,5 +77,10 @@ public class BookModel : MasterModel
         }
 
         return Page();
+    }
+    private Uri GetReferrer()
+    {
+        var header = _httpContextAccessor.HttpContext.Request.GetTypedHeaders();
+        return header.Referer;
     }
 }

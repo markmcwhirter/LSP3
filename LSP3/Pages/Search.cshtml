@@ -42,7 +42,7 @@
         { field: 'lastName', flex: 1, headerName: 'Last Name', sortable: true, filter: 'agTextColumnFilter', editable: true },
         { field: 'firstName', flex: 1, headerName: 'First Name', sortable: true, filter: 'agTextColumnFilter', editable: true },
         { field: 'eMail', flex: 2, headerName: 'EMail', sortable: true, filter: 'agTextColumnFilter', editable: true },
-        { field: 'infoLink', flex: 1, headerName: 'Info', sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='Admin?authorid=" + params.value + "'>Info</a>"; } },
+        { field: 'notes', flex: 1, headerName: 'Notes', sortable: true, filter: 'agTextColumnFilter', editable: true },
         { field: 'editLink', flex: 1, headerName: 'Edit', sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='ProfileModify?id=" + params.value + "'>Edit</a>"; } },
         { field: 'deleteLink', flex: 1, headerName: 'Delete', sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='DeleteAuthor?id=" + params.value + "'>Delete</a>"; } }
     ];
@@ -117,25 +117,37 @@
         gridApi.setFilterModel(savedFilterModel);
     }
 
-    function restoreFromHardCoded() {
-        var hardcodedFilter = {
-            country: {
-                type: "set",
-                values: ["Ireland", "United States"],
-            },
-            age: { type: "lessThan", filter: "30" },
-            athlete: { type: "startsWith", filter: "Mich" },
-            date: { type: "lessThan", dateFrom: "2010-01-01" },
-        };
-
-        gridApi.setFilterModel(hardcodedFilter);
-    }
-
     function destroyFilter() {
         gridApi.destroyFilter("athlete");
         gridApi.setFilterModel(null);
 
         document.querySelector("#savedFilters").textContent = '';
     }
+
+    gridApi.addEventListener('cellValueChanged', function (event) {
+        debugger;
+        // get the updated row data
+        var updatedRowData = event.data;
+        delete updatedRowData.editLink;
+        delete updatedRowData.deleteLink;
+
+        let options = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedRowData)
+        };
+
+        fetch(API_URL + "author/update", options)
+            .then(
+                response => { return 'Success'; }
+            ).then(
+                html => console.log(html)
+            );
+
+        alert('Update sucessful');
+    });
 
 </script>
