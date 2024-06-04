@@ -1,24 +1,26 @@
 ﻿@page
 @model LSP3.Pages.SearchModel
 @{
-    Layout = "_LayoutAdmin";
+    Layout = "_LayoutAdmin2";
 }
+
+
 
 <div class="container-fluid">
     <div class="content" style="width:60%;">
-        <div style="height:20px;"></div>
+        <div style="height:10px;"></div>
         <div class="row">
             <div class="col-sm-2">
-                <button type="button" id="savefiltermodel" onclick="saveFilterModel();" class="btn btn-primary" style="color: white">Save Filter</button>
+                <button type="button" id="savefiltermodel" onclick="saveFilterModel();" class="btn btn-outline-success btn-sm" style="color: black">Save Filter</button>
             </div>
             <div class="col-sm-2">
-                <button type="button" id="savefiltermodel" onclick="restoreFilterModel();" class="btn btn-primary" style="color: white">Restore Filter</button>
+                <button type="button" id="savefiltermodel" onclick="restoreFilterModel();" class="btn btn-outline-success btn-sm" style="color: black">Restore Filter</button>
             </div>
             <div class="col-sm-2">
-                <button type="button" id="savefiltermodel" onclick="clearFilters();" class="btn btn-primary" style="color: white">Reset Filters</button>
+                <button type="button" id="savefiltermodel" onclick="clearFilters();" class="btn btn-outline-danger btn-sm" style="color: black">Reset Filters</button>
             </div>
             <div class="col-sm-2">
-                <button type="button" id="savefiltermodel" onclick="destroyFilter();" class="btn btn-primary" style="color: white">Destroy Filter</button>
+                <button type="button" id="savefiltermodel" onclick="destroyFilter();" class="btn btn-outline-danger btn-sm" style="color: black">Destroy Filter</button>
             </div>
             <div class="col-sm-2">
                 Saved Filters: <span id="savedFilters">(none)</span>
@@ -28,7 +30,7 @@
         </div>
     </div>
 </div>
-<div style="height:20px;"></div>
+<div style="height:10px;"></div>
 <div id="myGrid" class="ag-theme-alpine" style="height: 800px; width: 1200px"></div>
 
 
@@ -39,7 +41,7 @@
         { field: 'authorID', flex: 1, headerName: 'Author ID', cellDataType: 'number', sortable: true, filter: 'agNumberColumnFilter', editable: false },
         { field: 'lastName', flex: 1, headerName: 'Last Name', sortable: true, filter: 'agTextColumnFilter', editable: true },
         { field: 'firstName', flex: 1, headerName: 'First Name', sortable: true, filter: 'agTextColumnFilter', editable: true },
-        { field: 'eMail', flex: 1, headerName: 'EMail', sortable: true, filter: 'agTextColumnFilter', editable: true },
+        { field: 'eMail', flex: 2, headerName: 'EMail', sortable: true, filter: 'agTextColumnFilter', editable: true },
         { field: 'infoLink', flex: 1, headerName: 'Info', sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='Admin?authorid=" + params.value + "'>Info</a>"; } },
         { field: 'editLink', flex: 1, headerName: 'Edit', sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='ProfileModify?id=" + params.value + "'>Edit</a>"; } },
         { field: 'deleteLink', flex: 1, headerName: 'Delete', sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='DeleteAuthor?id=" + params.value + "'>Delete</a>"; } }
