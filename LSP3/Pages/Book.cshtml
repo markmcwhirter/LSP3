@@ -58,6 +58,12 @@
                 <div id="coverHelp" class="form-text">If you have an idea for your cover please describe it in the space below, otherwise leave blank. LSP designers will do their best to duplicate your idea when possible.</div>
             </div>
 
+            <div class="mb-3">
+                <label for="notes" class="form-label">Notes</label>
+                <textarea class="form-control" id="notes" name="notes" rows="2" cols="20" MaxLength="6000" style="resize:vertical;width:100%;" TextMode="MultiLine" aria-describedby="notesHelp" value="@Model.Book.Notes"></textarea>
+                <div id="notesHelp" class="form-text">Place to provide notes</div>
+            </div>
+
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="tandc" name="tandc">
                 <label class="form-check-label" for="exampleCheck1">I understand the <a href="http://www.lightswitchpress.com/terms.php" target="_blank">Terms and Conditions</a></label>
@@ -149,7 +155,7 @@
             );
 
         alert('Add or Update sucessful');
-        window.location.href = "Admin";
+        window.location.href = "@Model.Referrer";
 
         return true;
     }

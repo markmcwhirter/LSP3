@@ -429,6 +429,10 @@
                                             <option value="ZW">Zimbabwe</option>
                                         </select>
                                     </div>
+                                    <div class="col-sm-12">
+                                        <label for="notes" class="form-label align-middle">Notes:</label>
+                                        <input type="text" asp-for="@Model.Author.Notes" class="form-control" name="notes" id="notes">
+                                    </div>
                                 </div>
                             </fieldset>
                             <div class="row">
@@ -567,6 +571,23 @@
                                 else
                                 {
                                     @(book.CoverIdea.Length > 10 ? "(" + book.CoverIdea.Substring(0, 10) + "...)" : "(" + book.CoverIdea + ")")
+                                }
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-1">Notes:</div>
+                            <div class="col-sm-3">
+                                <a target="_blank" href="#" onClick="window.open('DisplayText?field=notes&bookid=@Html.Raw(book.BookID.ToString())&table=book','pagename','resizable,height=260,width=370'); return false;">Notes</a>
+                            </div>
+                            <div class="col-sm-7">
+                                @if (book.Notes == null)
+                                {
+                                    <div>(No Notes)</div>
+                                }
+                                else
+                                {
+                                    @(book.Notes.Length > 10 ? "(" + book.Notes.Substring(0, 10) + "...)" : "(" + book.Notes + ")")
                                 }
                             </div>
                         </div>
