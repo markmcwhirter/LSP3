@@ -33,19 +33,43 @@
 <div style="height:10px;"></div>
 <div id="myGrid" class="ag-theme-alpine" style="height: 800px; width: 1200px"></div>
 
+<!-- Modal Structure -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Save Changes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+               Changes have been saved.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 
 <script>
 
     // Column definitions
     const columnDefs = [
         { field: 'authorID', flex: 1, headerName: 'Author ID', cellDataType: 'number', sortable: true, filter: 'agNumberColumnFilter', editable: false },
-        { field: 'lastName', flex: 1, headerName: 'Last Name', sortable: true, filter: 'agTextColumnFilter', editable: true },
+        { field: 'lastName', flex: 1, headerName: 'Last Name', sortable: true, filter: 'agTextColumnFilter', editable: true},
         { field: 'firstName', flex: 1, headerName: 'First Name', sortable: true, filter: 'agTextColumnFilter', editable: true },
         { field: 'eMail', flex: 2, headerName: 'EMail', sortable: true, filter: 'agTextColumnFilter', editable: true },
         { field: 'notes', flex: 1, headerName: 'Notes', sortable: true, filter: 'agTextColumnFilter', editable: true },
         { field: 'editLink', flex: 1, headerName: 'Edit', sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='ProfileModify?id=" + params.value + "'>Edit</a>"; } },
         { field: 'deleteLink', flex: 1, headerName: 'Delete', sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='DeleteAuthor?id=" + params.value + "'>Delete</a>"; } }
     ];
+
 
     let gridApi;
 
@@ -54,15 +78,27 @@
         columnDefs: columnDefs,
         pagination: true,
         paginationPageSize: 20,
-        rowGroupPanelShow: "always",
+        rowHeight: 32.5,
+        //rowGroupPanelShow: "always",
+        //groupDisplayType: 'groupRows',
         // pivotPanelShow: "always",
+        defaultColDef: {
+            filter: "agTextColumnFilter",
+            floatingFilter: true,
+        },
+        // autoGroupColumnDef: {
+        //     flex: 1,
+        //     minWidth: 280,
+        //     field: "lastName",
+        // },
 
         rowModelType: 'serverSide',
         //serverSideStoreType: 'partial',
 
         // Datasource definition
         serverSideDatasource: {
-            getRows: (params) => { // This function is called by ag-Grid
+            getRows: (params) => {
+                console.log("[Datasource] - rows requested by grid: ", params.request);
                 const { startRow, endRow, sortModel } = params.request;
                 //debugger;
                 let sortColumn = null;
@@ -116,7 +152,7 @@
     }
 
     function destroyFilter() {
-        gridApi.destroyFilter("athlete");
+       // gridApi.destroyFilter("athlete");
         gridApi.setFilterModel(null);
 
         document.querySelector("#savedFilters").textContent = '';
@@ -140,12 +176,14 @@
 
         fetch(API_URL + "author/update", options)
             .then(
-                response => { return 'Success'; }
+                response => {
+                    $('#exampleModal').modal('show');
+                }
             ).then(
                 html => console.log(html)
             );
 
-        alert('Update sucessful');
+        //alert('Update sucessful');
     });
 
 </script>

@@ -32,9 +32,7 @@ public class ForgottenModel : PageModel
 		_emailService = emailservice;
 	}
 
-	//public void OnGet() { }
 
-	//public async Task<IActionResult> OnPost()
 	public async Task<IActionResult> OnGet() 
 	{
 		string username = "";
@@ -50,6 +48,9 @@ public class ForgottenModel : PageModel
 			RedirectToPage("Login");
 
 		string email = await helper.Get(_appSettings.HostUrl + $"User/username/{username}");
+
+		if( string.IsNullOrEmpty(email))
+			return RedirectToPage("Login");
 
 		sb.AppendLine("Thank you for joining LightSwitchPress's automated author system.");
 		sb.AppendLine();
