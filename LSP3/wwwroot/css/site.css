@@ -190,4 +190,8 @@ tbody tr td:nth-child(-n + 2) {
     background-color: lightsteelblue;
 }
 
+.sitelink {
+    color: black;
+}
+
 
