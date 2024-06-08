@@ -122,15 +122,14 @@
         document.querySelector("#savedFilters").textContent = '';
     }
     function currencyFormatter(currency) {
-        debugger;
         if (currency === undefined ) {
             return "$0";
         }
         else {
 
             var sansDec = currency.toFixed(0);
-            var formatted = sansDec.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-            return "$" + `${formatted}`;
+            //var formatted = sansDec.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            return "$" + `${sansDec}`;
         }
     }
 </script>

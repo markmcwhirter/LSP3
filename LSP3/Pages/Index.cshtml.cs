@@ -51,13 +51,14 @@ public class IndexModel : MasterModel
             if (base.IsAdmin)
                 return Redirect("/Admin");
 
+            int authorId = int.Parse(sessionHelper.GetSessionString(_httpContextAccessor, "AuthorId"));
 
-            string apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{base.Author.AuthorID}");
+            string apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{authorId}");
 
             if (!string.IsNullOrEmpty(apiResponse))
                 Author = authorextensions.Deserialize(apiResponse);
 
-            apiResponse = await helper.Get(_appSettings.HostUrl + $"book/author/{base.Author.AuthorID}");
+            apiResponse = await helper.Get(_appSettings.HostUrl + $"book/author/{authorId}");
 
             if (!string.IsNullOrEmpty(apiResponse))
                 Books = bookextensions.Deserialize(apiResponse);

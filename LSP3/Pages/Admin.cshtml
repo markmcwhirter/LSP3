@@ -2,7 +2,6 @@
 @model LSP3.Pages.AdminModel
 @{
     Layout = "_LayoutAdmin";
-    ViewData["Title"] = "Admin Page";
     var books = Model.Books;
 }
 <style>
@@ -16,7 +15,7 @@
         <div class="accordion" id="accordionPanels">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                    <button style="font-weight: bold;" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
                         Author Information
                     </button>
                 </h2>
@@ -26,7 +25,7 @@
                             <fieldset id="fieldset" name="fieldset" disabled>
 
                                 <input type="hidden" id="authorid" name="authorid" value="@Model.Author.AuthorID">
-
+                                <a class="addbook" href="Book?authorid=@Model.Author.AuthorID">Add Book</a>
                                 <div class="row">
                                     <div class="col-sm-1">
                                         <label for="prefix" class="form-label align-middle align-middle">Prefix:</label>
@@ -429,10 +428,6 @@
                                             <option value="ZW">Zimbabwe</option>
                                         </select>
                                     </div>
-                                    <div class="col-sm-12">
-                                        <label for="notes" class="form-label align-middle">Notes:</label>
-                                        <input type="text" asp-for="@Model.Author.Notes" class="form-control" name="notes" id="notes">
-                                    </div>
                                 </div>
                             </fieldset>
                             <div class="row">
@@ -465,7 +460,7 @@
         {
             <div class="accordion-item">
                 <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                    <button style="font-weight: bold;" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                    <button style="font-weight: bold;" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
                         Title:  @Html.Raw(book.Title)
                     </button>
                 </h2>
@@ -571,23 +566,6 @@
                                 else
                                 {
                                     @(book.CoverIdea.Length > 10 ? "(" + book.CoverIdea.Substring(0, 10) + "...)" : "(" + book.CoverIdea + ")")
-                                }
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-1"></div>
-                            <div class="col-sm-1">Notes:</div>
-                            <div class="col-sm-3">
-                                <a target="_blank" href="#" onClick="window.open('DisplayText?field=notes&bookid=@Html.Raw(book.BookID.ToString())&table=book','pagename','resizable,height=260,width=370'); return false;">Notes</a>
-                            </div>
-                            <div class="col-sm-7">
-                                @if (book.Notes == null)
-                                {
-                                    <div>(No Notes)</div>
-                                }
-                                else
-                                {
-                                    @(book.Notes.Length > 10 ? "(" + book.Notes.Substring(0, 10) + "...)" : "(" + book.Notes + ")")
                                 }
                             </div>
                         </div>
@@ -795,6 +773,7 @@
                             </div>
 
                         </div>
+
                         <div class="row">
                             <div class="col-sm-2"><a class="nav-link" href="Book?bookid=@book.BookID&authorid=@book.AuthorID">Update</a></div>
                         </div>
@@ -808,6 +787,23 @@
 </div>
 
 <script type="text/javascript">
+
+    $('.expand').click(function () {
+        target_num = $(this).attr('id').split('-')[1];
+        content_id = '#expandable-'.concat(target_num);
+        $(content_id).slideToggle('fast');
+    });
+
+    function toggleColumn() {
+        var col1 = document.getElementById('col1');
+        if (col1.classList.contains('collapsed')) {
+            col1.classList.remove('collapsed');
+        } else {
+            col1.classList.add('collapsed');
+        }
+    }
+
+
 
     function CancelAuthorEventHandler(event) {
 
