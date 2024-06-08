@@ -13,7 +13,7 @@ Functions:
     getCurrentDate - return today's date in yyyy/mm/dd format   
 */
 
-var API_URL = 'http://localhost:5253/api/';
+var API_URL = 'http://164.92.99.186:8080/api';
 
 
 function Validate(field, message) {
