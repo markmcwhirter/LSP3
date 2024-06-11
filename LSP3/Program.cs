@@ -10,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.ConfigureAppConfiguration((builder, config) =>
  {
+
+
      var env = builder.HostingEnvironment;
 
      config.SetBasePath(env.ContentRootPath)
@@ -18,18 +20,21 @@ builder.Host.ConfigureAppConfiguration((builder, config) =>
      .AddEnvironmentVariables();
  });
 
-builder.Logging.ClearProviders(); // Remove default providers if desired
-builder.Logging.AddConsole();     // Log to console (development)
-builder.Logging.AddDebug();       // Log to debug output (VS)
-builder.Logging.AddSerilog();
 
 // Serilog Configuration (For File Logging)
 builder.Host.UseSerilog((ctx, lc) => lc
     .WriteTo.File("logs/log-.txt",
         rollingInterval: RollingInterval.Day,
         outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
+    .WriteTo.Seq("http://209.38.64.145:5341")
+    .Enrich.WithProperty("Application", "LSP3")
+    .Enrich.WithProperty("Environment", ctx.HostingEnvironment.EnvironmentName)
 );
 
+builder.Services.AddLogging(loggingBuilder =>
+{
+    loggingBuilder.AddSeq();
+});
 
 builder.Services.AddRazorPages();
 
@@ -44,9 +49,7 @@ builder.Services.AddTransient<EmailService>();
 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromHours(10);
-    //options.Cookie.HttpOnly = true;
-    //options.Cookie.IsEssential = true;
+    options.IdleTimeout = TimeSpan.FromHours(1);
 });
 
 

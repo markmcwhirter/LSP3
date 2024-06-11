@@ -14,7 +14,7 @@ public class LoginModel : PageModel
 	[BindProperty]
 	public string? Password { get; set; }
 
-	private readonly ILogger<IndexModel> _logger;
+	private readonly ILogger<LoginModel> _logger;
 	private readonly IHttpContextAccessor _httpContextAccessor;
 	private readonly AppSettings _appSettings;
 
@@ -22,7 +22,7 @@ public class LoginModel : PageModel
 
 	private bool IsAdmin = false;
 
-	public LoginModel(IOptions<AppSettings> appSettings, ILogger<IndexModel> logger, IHttpContextAccessor httpContextAccessor)
+	public LoginModel(IOptions<AppSettings> appSettings, ILogger<LoginModel> logger, IHttpContextAccessor httpContextAccessor)
 	{
 		_appSettings = appSettings.Value;
 		_logger = logger;
@@ -34,6 +34,7 @@ public class LoginModel : PageModel
 	public async Task<IActionResult> OnPost()
 	{
 		SessionHelper helper = new();
+		_logger.LogInformation($"Logging in: Username: {Username}");
 
 		if (_httpContextAccessor.HttpContext != null)
 			await OnGetauthor(Username, Password);
@@ -68,6 +69,7 @@ public class LoginModel : PageModel
 				AuthorDto author = new Extensions<AuthorDto>().Deserialize(apiResponse);
 				if (author.AuthorID == 0)
 				{
+					_logger.LogInformation($"User {username} not found");
 					Username = "";
 					return;
 				}
