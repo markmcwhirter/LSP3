@@ -34,7 +34,7 @@ public class LoginModel : PageModel
 	public async Task<IActionResult> OnPost()
 	{
 		SessionHelper helper = new();
-		_logger.LogInformation($"Logging in: Username: {Username}");
+		_logger.LogInformation($"*** Logging in: Username: {Username}");
 
 		if (_httpContextAccessor.HttpContext != null)
 			await OnGetauthor(Username, Password);

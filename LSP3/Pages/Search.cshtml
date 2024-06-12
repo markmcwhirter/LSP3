@@ -87,21 +87,14 @@
             sortable: true,
             flex: 1
         },
-        // autoGroupColumnDef: {
-        //     flex: 1,
-        //     minWidth: 280,
-        //     field: "lastName",
-        // },
-
+ 
         rowModelType: 'serverSide',
-        //serverSideStoreType: 'partial',
-
+        /
         // Datasource definition
         serverSideDatasource: {
             getRows: (params) => {
                 console.log("[Datasource] - rows requested by grid: ", params.request);
                 const { startRow, endRow, sortModel } = params.request;
-                //debugger;
                 let sortColumn = null;
                 let sortDirection = null;
                 let filter = JSON.stringify(params.request.filterModel);
@@ -153,14 +146,12 @@
     }
 
     function destroyFilter() {
-       // gridApi.destroyFilter("athlete");
         gridApi.setFilterModel(null);
 
         document.querySelector("#savedFilters").textContent = '';
     }
 
     gridApi.addEventListener('cellValueChanged', function (event) {
-        debugger;
         // get the updated row data
         var updatedRowData = event.data;
         delete updatedRowData.editLink;
@@ -184,7 +175,6 @@
                 html => console.log(html)
             );
 
-        //alert('Update sucessful');
     });
 
 </script>

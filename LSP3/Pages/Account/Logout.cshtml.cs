@@ -21,7 +21,7 @@ public class LogoutModel : PageModel
     {
         SessionHelper helper = new();
         var username = helper.GetSessionString(_httpContextAccessor, "Username");
-        _logger.LogInformation($"Logging out: Username: {username}");
+        _logger.LogInformation($"*** Logging out: Username: {username}");
 
         if (_httpContextAccessor.HttpContext != null)
         {

@@ -61,9 +61,8 @@
         // Datasource definition
         serverSideDatasource: {
             getRows: (params) => { 
-                console.log("[Datasource] - rows requested by grid: ", params.request);
+                // console.log("[Datasource] - rows requested by grid: ", params.request);
                 const { startRow, endRow, sortModel } = params.request;
-                //debugger;
                 let sortColumn = null;
                 let sortDirection = null;
                 let filter = JSON.stringify(params.request.filterModel);
@@ -79,7 +78,6 @@
                 fetch(url)
                     .then(response => response.json())
                     .then(data => {
-                        debugger;
                         params.success({ rowData: data, rowCount: data.length });  // Adjust 'totalRecords' if your API provides it
                     })
                     .catch(error => {

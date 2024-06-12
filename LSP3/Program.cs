@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.FileProviders;
 
 using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,14 +21,18 @@ builder.Host.ConfigureAppConfiguration((builder, config) =>
      .AddEnvironmentVariables();
  });
 
-
 // Serilog Configuration (For File Logging)
 builder.Host.UseSerilog((ctx, lc) => lc
     .WriteTo.File("logs/log-.txt",
         rollingInterval: RollingInterval.Day,
         outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
+    .MinimumLevel.Debug()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+    // Filter out ASP.NET Core infrastructre logs that are Information and below
+    .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+    .Enrich.FromLogContext()
     .WriteTo.Seq("http://209.38.64.145:5341")
-    .Enrich.WithProperty("Application", "LSP3")
+    .Enrich.WithProperty("Application", "LSP")
     .Enrich.WithProperty("Environment", ctx.HostingEnvironment.EnvironmentName)
 );
 
@@ -74,6 +79,7 @@ app.UseStaticFiles()
     DefaultContentType = "application/octet-stream"
 });
 
+app.UseSerilogRequestLogging();
 
 app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
