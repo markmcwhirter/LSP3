@@ -195,3 +195,27 @@ tbody tr td:nth-child(-n + 2) {
 }
 
 
+.uploadBorder {
+    /* border-2 border-dashed border-blue-500 p-40 mx-auto max-w-4xl cursor-pointer relative */
+    border-style: dashed;
+    border-width: 2px;
+    border-color: blue;
+    cursor: pointer;
+}
+.uploadBorderFile {
+    /* hidden absolute inset-0 w-full h-full opacity-0 cursor-pointer */
+    cursor: pointer;
+    opacity: 0;
+    display: none;
+
+}
+.dropAreaText {
+    color: gray;
+    vertical-align: middle;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.dotBorder {
+    border-style: double;
+}

@@ -1,0 +1,44 @@
+﻿@page
+@model LSP3.Pages.UploadContentModel
+@{
+    Layout = "_Layout";
+}
+
+<div class="container-fluid">
+    <div class="content" style="width:60%;">
+        <form method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-sm-12">
+                    Book Image and Document Uploads
+                </div>
+            </div>
+            <div class="row" ></div>
+            <div class="row"><div class="col-sm-12" style="font-color: red;">@Model.Status</div></div>
+            <div class="row">
+                <div class="col-sm-2" class="form-label">Select Book:</div>
+
+                <div class="col-sm-2" class="form-control"><select asp-for="SelectedBookId" asp-items="@Model.BookOptions"></select></div>
+            </div>
+            <div class="row" style="height: 25px"></div>
+            <div class="row">
+                <div class="col-sm-2" class="form-label">Select Image Type:</div>
+                <div class="col-sm-2" class="form-control"><select asp-for="SelectedContentType" asp-items="@Model.ContentTypes"></select></div>
+            </div>
+            <div class="row" style="height: 25px"></div>
+            <div class="row">
+                <div class="col-sm-3" class="form-control">
+                    <label asp-for="File" class="form-label" style="background-color: lightgray; padding: 25px;">Click here to select file</label>
+                    <input type="file" asp-for="File" class="uploadBorderFile" />
+                    <span asp-validation-for="File" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row" style="height: 25px"></div>
+            <div class="row">
+                <div class="col-sm-3" class="form-control">
+                    <button type="submit" class="btn btn-primary" style="color: white">Upload File</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

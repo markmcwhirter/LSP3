@@ -11,6 +11,13 @@
         <form method="post" id="bookform">
             <input type="hidden" id="bookid" name="bookid" value="@Model.Book.BookID">
             <input type="hidden" id="authorid" name="authorid" value="@Model.Book.AuthorID">
+            <input type="hidden" id="cover" name="cover" value="@Model.Book.Cover">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="uploadMessage"></div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-sm-12">
                     <h2>Stop!  Don't incur extra fees!</h2>
@@ -25,12 +32,12 @@
 
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" name="title" id="title" aria-describedby="titleHelp" value="@Model.Book.Title" >
+                <input type="text" class="form-control" name="title" id="title" aria-describedby="titleHelp" value="@Model.Book.Title">
             </div>
 
             <div class="mb-3">
                 <label for="subtitle" class="form-label">Sub Title</label>
-                <input type="text" class="form-control" name="subtitle" id="subtitle" aria-describedby="subtitleHelp" value="@Model.Book.Subtitle" >
+                <input type="text" class="form-control" name="subtitle" id="subtitle" aria-describedby="subtitleHelp" value="@Model.Book.Subtitle">
             </div>
 
             <div class="mb-3">
@@ -47,14 +54,14 @@
 
             <div class="mb-3">
                 <label for="isbn" class="form-label">Author Biography</label>
-                <textarea  class="form-control" name="authorbio" id="authorbio" rows="2" cols="20" MaxLength="6000" TextMode="MultiLine" style="resize:vertical;width:100%;" aria-describedby="bioHelp" value="@Model.Book.AuthorBio" ></textarea>
+                <textarea class="form-control" name="authorbio" id="authorbio" rows="2" cols="20" MaxLength="6000" TextMode="MultiLine" style="resize:vertical;width:100%;" aria-describedby="bioHelp" value="@Model.Book.AuthorBio"></textarea>
                 <div id="bioHelp" class="form-text">If you would like to include an author biography, please write up to one paragraph otherwise leave blank.</div>
             </div>
 
 
             <div class="mb-3">
                 <label for="isbn" class="form-label">Cover Idea</label>
-                <textarea  class="form-control" id="coveridea" name="coveridea" rows="2" cols="20" MaxLength="6000" style="resize:vertical;width:100%;" TextMode="MultiLine" aria-describedby="coverHelp" value="@Model.Book.CoverIdea"></textarea>
+                <textarea class="form-control" id="coveridea" name="coveridea" rows="2" cols="20" MaxLength="6000" style="resize:vertical;width:100%;" TextMode="MultiLine" aria-describedby="coverHelp" value="@Model.Book.CoverIdea"></textarea>
                 <div id="coverHelp" class="form-text">If you have an idea for your cover please describe it in the space below, otherwise leave blank. LSP designers will do their best to duplicate your idea when possible.</div>
             </div>
 
@@ -63,6 +70,9 @@
                 <textarea class="form-control" id="notes" name="notes" rows="2" cols="20" MaxLength="6000" style="resize:vertical;width:100%;" TextMode="MultiLine" aria-describedby="notesHelp" value="@Model.Book.Notes"></textarea>
                 <div id="notesHelp" class="form-text">Place to provide notes</div>
             </div>
+
+
+
 
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="tandc" name="tandc">
@@ -73,7 +83,7 @@
                 <div class="col-sm-4">
                 </div>
                 <div class="col-sm-1">
-                    <button type="button" id="UpdateButton" onclick="return UpdateBookEventHandler(event);" class="btn btn-primary" style="color: white">Update</button>
+                    <button type="button" id="UpdateButton" onclick="return UpdateBookEventHandler(event);" class="btn btn-primary" style="color: white">Add</button>
                 </div>
                 <div class="col-sm-1">
                     <button type="button" id="CancelButton" onclick="return CancelBookEventHandler(event);" class="btn btn-secondary" style="color: white">Cancel</button>
@@ -118,7 +128,7 @@
     }
 
     function UpdateBookEventHandler(event) {
-
+        debugger;
         event.preventDefault();
 
         const myCheckbox = document.getElementById("tandc");
@@ -128,31 +138,56 @@
             return false;
         }
 
+        /* Upload cover image */
+        const fileCoverData = fileInputCover.files[0];
+
+
+        // File Upload using Fetch API
+        const formCover = new FormData();
+        formCover.append('file', fileCoverData); // Append the file to the FormData object
+
+
+        fetch('/your-upload-endpoint', {
+            method: 'POST',
+            body: formCover
+        })
+            .then(response => {
+                if (response.ok) {
+                    uploadStatus.textContent = "File uploaded successfully!";
+                } else {
+                    uploadStatus.textContent = "Upload failed.";
+                }
+            })
+            .catch(error => {
+                console.error('Error uploading file:', error);
+                uploadStatus.textContent = "An error occurred during upload.";
+            });
+
 
 
         var formData = new FormData(document.getElementById("bookform"));
+        AddBook(formData);
 
+        // var data = JSON.stringify(Object.fromEntries(formData));
 
-        var data = JSON.stringify(Object.fromEntries(formData));
+        // const book = JSON.parse(data);
+        // deleteFromObject('__RequestVerificationToken', book);
 
-        const book = JSON.parse(data);
-        deleteFromObject('__RequestVerificationToken', book);
+        // let options = {
+        //     method: 'POST',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(book)
+        // };
 
-        let options = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(book)
-        };
-
-        fetch(API_URL + "book/update", options)
-            .then(
-                response => { return 'Success'; }
-            ).then(
-                html => console.log(html)
-            );
+        // fetch(API_URL + "book/update", options)
+        //     .then(
+        //         response => { return 'Success'; }
+        //     ).then(
+        //         html => console.log(html)
+        //     );
 
         alert('Add or Update sucessful');
         window.location.href = "@Model.Referrer";
@@ -160,6 +195,140 @@
         return true;
     }
 
+
+    /* Upload File methods */
+    const dropAreaCover = document.getElementById('dropAreaCover');
+    const fileInputCover = document.getElementById('fileInputCover');
+    const coverFileName = document.getElementById('coverFileName');
+
+
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropAreaCover.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults() {
+        e.preventDefault();
+        dropAreaCover.classList.add('dotBorder');
+    }
+
+    dropAreaCover.addEventListener('click', () => {
+        fileInputCover.click();
+    });
+
+
+    dropAreaCover.addEventListener('drop', UpdateCoverFile);
+
+    fileInputCover.addEventListener('change', UpdateCoverFile);
+
+    function UpdateCoverFile() {
+        const file = fileInputCover.files[0];
+
+        coverFileName.textContent = file.name;
+        const hiddeninput = document.getElementById('cover');
+        hiddeninput.value = file.name;
+    }
+
+    async function uploadFile(content) {
+        debugger;
+        const fileInput = document.getElementById(content);
+
+        // modify later to handle other file inputs
+        const file = fileInputCover.files[0];
+
+        if (file) {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const response = fetch("/Book", {
+                method: "POST",
+                body: fileInputCover.files[0] 
+             })                    
+            .then(function(serverPromise){ 
+              serverPromise.json()
+                .then(function(j) { 
+                  console.log(j); 
+                })
+                .catch(function(e){
+                  console.log(e);
+                });
+            })
+            .catch(function(e){
+                console.log(e);
+              });
+
+            // try {
+            //     const response = fetch("/Book", {
+            //         method: "POST",
+            //         //headers: { "Content-Type": "application/json" },
+            //         body: file // JSON.stringify(Object.fromEntries(formData))
+            //     });
+            //     if (response.ok) {
+            //         const message = await response.text();
+            //         document.getElementById('uploadMessage').textContent = message;
+            //     } else {
+            //         document.getElementById('uploadMessage').textContent = 'Upload failed.';
+            //     }
+            // }
+            // catch (error) {
+            //     console.error('Error:', error);
+            //     document.getElementById('uploadMessage').textContent = 'An error occurred.';
+            // }
+
+            // try {
+            //     const response = await fetch('', {
+            //         method: 'POST',
+            //         body: formData
+            //     });
+
+            //     if (response.ok) {
+            //         const message = await response.text();
+            //         document.getElementById('uploadMessage').textContent = message;
+            //     } else {
+            //         document.getElementById('uploadMessage').textContent = 'Upload failed.';
+            //     }
+            // } catch (error) {
+            //     console.error('Error:', error);
+            //     document.getElementById('uploadMessage').textContent = 'An error occurred.';
+            // }
+        } else {
+            document.getElementById('uploadMessage').textContent = 'Please select a file.';
+        }
+    }
+
+    function post_to_url(path, params, method) {
+        method = method || "post"; // Set method to post by default, if not specified.
+
+        // The rest of this code assumes you are not using a library.
+        // It can be made less wordy if you use one.
+        var form = document.createElement("form");
+        form.setAttribute("method", method);
+        form.setAttribute("action", path);
+
+        var addField = function (key, value) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", value);
+
+            form.appendChild(hiddenField);
+        };
+
+        for (var key in params) {
+            if (params.hasOwnProperty(key)) {
+                if (params[key] instanceof Array) {
+                    for (var i = 0; i < params[key].length; i++) {
+                        addField(key, params[key][i])
+                    }
+                }
+                else {
+                    addField(key, params[key]);
+                }
+            }
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+    }
 </script>
 
 
