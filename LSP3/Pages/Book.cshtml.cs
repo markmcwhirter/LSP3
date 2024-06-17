@@ -7,7 +7,8 @@ using System.Web;
 
 namespace LSP3.Pages;
 
-public class BookModel : MasterModel
+public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> logger, IHttpContextAccessor httpContextAccessor,
+    IWebHostEnvironment environment) : MasterModel(httpContextAccessor)
 {
     public bool IsReadOnly { get; set; }
 
@@ -21,23 +22,13 @@ public class BookModel : MasterModel
     public string? Referrer { get; set; }
 
 
-    private readonly ILogger<BookModel> _logger;
+    private readonly ILogger<BookModel> _logger = logger;
 
-    private readonly AppSettings _appSettings;
-    private readonly IHttpContextAccessor _httpContextAccessor;
-    private IWebHostEnvironment _environment;
+    private readonly AppSettings _appSettings = appSettings.Value;
+    private readonly IWebHostEnvironment _environment = environment;
     [BindProperty]
     public IFormFile File { get; set; }
     public string UploadMessage { get; set; }
-
-    public BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> logger, IHttpContextAccessor httpContextAccessor, 
-        IWebHostEnvironment environment) : base(httpContextAccessor)
-    {
-        _appSettings = appSettings.Value;
-        _logger = logger;
-        _httpContextAccessor = httpContextAccessor;
-        _environment = environment;
-    }
 
     public async Task<IActionResult> OnPostHandlePostRequest(IFormFile file)
     {
@@ -91,9 +82,8 @@ public class BookModel : MasterModel
 
         try
         {
-            HttpHelper helper = new();
-            SessionHelper sessionHelper = new();
-            Extensions<BookDto> bookextensions = new Extensions<BookDto>();
+            HttpHelper helper = new();           
+            Extensions<BookDto> bookextensions = new();
 
 
             if (!base.IsAuthenticated)
@@ -102,8 +92,6 @@ public class BookModel : MasterModel
             IsReadOnly = false;
             Book = new BookDto();
 
-
-            Referrer = GetReferrer().AbsoluteUri;
 
             if (Request.Query.ContainsKey("authorid"))
             {
@@ -125,14 +113,9 @@ public class BookModel : MasterModel
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Error: {ex.Message}: {ex.InnerException}: {ex.StackTrace}");
+            _logger.LogError(ex.Message);
         }
 
         return Page();
-    }
-    private Uri GetReferrer()
-    {
-        var header = _httpContextAccessor.HttpContext.Request.GetTypedHeaders();
-        return header.Referer;
     }
 }

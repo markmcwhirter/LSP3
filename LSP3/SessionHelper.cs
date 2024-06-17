@@ -36,7 +36,7 @@ public class SessionHelper
         var isAuthenticated = GetSessionString(ctx, "Authenticated");
         
 
-        return (!string.IsNullOrEmpty(isAuthenticated) &&  isAuthenticated == "true") ? true : false;
+        return (!string.IsNullOrEmpty(isAuthenticated) &&  isAuthenticated == "true");
     }
 
     public bool IsAdmin(IHttpContextAccessor ctx)

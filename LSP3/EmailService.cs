@@ -10,26 +10,25 @@ namespace LSP3;
 
 
 
-public class EmailService
+public class EmailService(IOptions<AppSettings> appSettings, ILogger<EmailService> logger)
 {
-    private readonly ILogger<EmailService> _logger;
-    private readonly IOptions<AppSettings> _appSettings;
+    private readonly ILogger<EmailService> _logger = logger;
+    private readonly IOptions<AppSettings> _appSettings = appSettings;
 
-    public EmailService(IOptions<AppSettings> appSettings, ILogger<EmailService> logger)
-    {
-        _appSettings = appSettings;
-        _logger = logger;
-
-    }
-
-
-
-    public async Task SendEmailAsync( string toEmail, string subject, string plainTextContent, string htmlContent)
+    public void  SendEmailAsync( string toEmail, string subject, string plainTextContent, string htmlContent)
     {
 
         try
         {
+            if (_appSettings == null || _appSettings.Value == null)
+                throw new InvalidOperationException("AppSettings is null");
 
+            if ( string.IsNullOrEmpty(_appSettings.Value.SmtpServer) ||
+                 string.IsNullOrEmpty(_appSettings.Value.SmtpPort) ||
+                 string.IsNullOrEmpty(_appSettings.Value.SmtpUser) ||
+                 string.IsNullOrEmpty(_appSettings.Value.SmtpPassword) ||
+                 string.IsNullOrEmpty(_appSettings.Value.SmtpFromAddress))
+                throw new InvalidOperationException("AppSettings is null or has a null Smtp value");
 
             var smtpClient = new SmtpClient(_appSettings.Value.SmtpServer)
             {
@@ -42,7 +41,7 @@ public class EmailService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Error sending email - {ex.Message}{ex.StackTrace}");
+            _logger.LogError(ex.Message);
         }
 
 

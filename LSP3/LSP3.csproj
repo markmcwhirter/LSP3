@@ -7,6 +7,14 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;8602;8618;0108;S6667</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;8602;8618;0108;S6667</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="LinqKit" Version="1.2.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />

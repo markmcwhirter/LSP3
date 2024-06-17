@@ -14,18 +14,15 @@ public class Profile : MasterModel
     readonly HttpHelper helper = new();
     public AuthorDto? Results { get; set; }
     private readonly AppSettings _appSettings;
-    private readonly IHttpContextAccessor _httpContextAccessor;
 
     public Profile(IOptions<AppSettings> appSettings, ILogger<Profile> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
         _appSettings = appSettings.Value;
-        _logger = logger;
-        _httpContextAccessor = httpContextAccessor;
+        _logger = logger;       
     }
 
     public async Task OnGetAsync()
     {
-        SessionHelper sessionHelper = new();
 
         try
         {
@@ -50,14 +47,14 @@ public class Profile : MasterModel
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Error: {ex.Message}: {ex.InnerException}: {ex.StackTrace}");
+            _logger.LogError(ex.Message);
         }
 
 
     }
 
 
-    public async Task<IActionResult> OnPost()
+    public IActionResult OnPost()
     {
         return Redirect("/Index");
 

@@ -9,7 +9,7 @@ namespace LSP3.Pages;
 public class DisplayTextModel : PageModel
 {
     [BindProperty]
-    public new AuthorDto? Author { get; set; }
+    public AuthorDto? Author { get; set; }
 
     [BindProperty]
     public BookDto? Book { get; set; }
@@ -37,7 +37,7 @@ public class DisplayTextModel : PageModel
         string authorid = System.Web.HttpUtility.HtmlDecode(Request.Query["authorid"].ToString());
         string table = System.Web.HttpUtility.HtmlDecode(Request.Query["table"].ToString());
 
-        string apiResponse = "";
+        string apiResponse;
 
         HttpHelper helper = new();
         SessionHelper   sessionHelper = new();
@@ -50,7 +50,7 @@ public class DisplayTextModel : PageModel
             if (!sessionHelper.IsAuthenticated(_httpContextAccessor))
                 return Redirect("/Account/Login");
 
-            if (table.ToLower() == "author")
+            if (table.Equals("author", StringComparison.CurrentCultureIgnoreCase))
             {
                 apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{authorid}");
 
@@ -87,7 +87,7 @@ public class DisplayTextModel : PageModel
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Error: {ex.Message}: {ex.InnerException}: {ex.StackTrace}");
+            _logger.LogError(ex.Message);
         }
 
         return Page();

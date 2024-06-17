@@ -10,7 +10,7 @@ using System.Text.Unicode;
 
 namespace LSP3.Pages.Account;
 
-public class ResetModel : PageModel
+public class ResetModel(IOptions<AppSettings> appSettings, ILogger<ResetModel> logger, IHttpContextAccessor httpContextAccessor) : PageModel
 {
     [BindProperty]
     public string? Username { get; set; }
@@ -18,39 +18,16 @@ public class ResetModel : PageModel
     [BindProperty]
     public string? Password { get; set; }
 
-    private readonly ILogger<ResetModel> _logger;
-    private readonly IHttpContextAccessor _httpContextAccessor;
-    private readonly AppSettings _appSettings;
+    private readonly ILogger<ResetModel> _logger = logger;
+    private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
+    private readonly AppSettings _appSettings = appSettings.Value;
 
-    static readonly char[] padding = { '=' };
+    static readonly char[] padding = ['='];
 
-    private bool IsAdmin = false;
-
-    public ResetModel(IOptions<AppSettings> appSettings, ILogger<ResetModel> logger, IHttpContextAccessor httpContextAccessor)
-    {
-        _appSettings = appSettings.Value;
-        _logger = logger;
-        _httpContextAccessor = httpContextAccessor;
-    }
-
-    public void OnGet() 
-    {
-		if (Request.Query.ContainsKey("username"))
-			Username = Request.Query["username"].ToString();
-
-		// string decrypted = EncryptionHelper.Decrypt(Username);
-		//string encrypted = Convert.ToBase64String(Encoding.UTF8.GetBytes(username));
-
-		string decrypted = Encoding.UTF8.GetString(Convert.FromBase64String(Username));
-
-
-
-	}
+    private readonly bool IsAdmin = false;
 
     public async Task<IActionResult> OnPost()
     {
-        HttpHelper helper = new();
-
         if (_httpContextAccessor.HttpContext != null)
         {
 
@@ -68,7 +45,7 @@ public class ResetModel : PageModel
     {
 
         HttpHelper helper = new();
-        SessionHelper sessionHelper = new SessionHelper();
+        SessionHelper sessionHelper = new();
 
         if (username == null || password == null) return;
 
@@ -96,7 +73,7 @@ public class ResetModel : PageModel
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Error: {ex.Message} {ex.InnerException} {ex.StackTrace}");
+            _logger.LogError(ex.Message);
         }
 
     }

@@ -42,13 +42,11 @@ public class UploadContentModel : MasterModel
     private readonly ILogger<UploadContentModel> _logger;
 
     private readonly AppSettings _appSettings;
-    private readonly IHttpContextAccessor _httpContextAccessor;
 
     public UploadContentModel(IOptions<AppSettings> appSettings, ILogger<UploadContentModel> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
         _appSettings = appSettings.Value;
         _logger = logger;
-        _httpContextAccessor = httpContextAccessor;
     }
 
     public async Task<IActionResult> OnGet(int? bookid, int? authorid)
@@ -59,24 +57,22 @@ public class UploadContentModel : MasterModel
         try
         {
             HttpHelper helper = new();
-            SessionHelper sessionHelper = new();
-            Extensions<BookDto> bookextensions = new Extensions<BookDto>();
 
-            BookOptions = new List<SelectListItem>();
-            ContentTypes = new List<SelectListItem>
-            {
-                new SelectListItem { Value = "cover", Text = "Cover Image" },
-                new SelectListItem { Value = "interior", Text = "Interior Image" },
-                new SelectListItem { Value = "author", Text = "Author Photo" },
-                new SelectListItem { Value = "doc", Text = "Book Document" }
-            };
+            BookOptions = [];
+            ContentTypes =
+            [
+                new() { Value = "cover", Text = "Cover Image" },
+                new() { Value = "interior", Text = "Interior Image" },
+                new() { Value = "author", Text = "Author Photo" },
+                new() { Value = "doc", Text = "Book Document" }
+            ];
             Status = "";
 
 
             if (!base.IsAuthenticated)
                 return Redirect("/Account/Login");
 
-            Books = new List<BookListSummaryModel>();
+            Books = [];
 
             var apiResponse = await helper.Get(_appSettings.HostUrl + $"book/getidbyauthor/{id}");
 
@@ -85,7 +81,7 @@ public class UploadContentModel : MasterModel
 
             foreach (var b in Books)
             {
-                b.bookTitle = $"{b.bookID.ToString().PadLeft(6, ' ')} - {b.bookTitle.PadRight(25, ' ')}";
+                b.bookTitle = $"{b.bookID,6} - {b.bookTitle,-25}";
             }
 
             BookOptions = Books.Select(b => new SelectListItem { Value = b.bookID.ToString(), Text = b.bookTitle });
@@ -95,7 +91,7 @@ public class UploadContentModel : MasterModel
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Error: {ex.Message}: {ex.InnerException}: {ex.StackTrace}");
+            _logger.LogError(ex.Message);
         }
 
         return Page();
@@ -106,10 +102,6 @@ public class UploadContentModel : MasterModel
     public async Task<IActionResult> OnPostAsync()
     {
         HttpHelper helper = new();
-        SessionHelper sessionHelper = new();
-        Extensions<AuthorDto> authorextensions = new();
-        Extensions<List<BookDto>> bookextensions = new();
-
 
         if (!ModelState.IsValid)
         {
@@ -144,7 +136,7 @@ public class UploadContentModel : MasterModel
 
         var response = await helper.Get(_appSettings.HostUrl + $"book/{SelectedBookId}");
 
-        BookDto tmpbook = new BookDto();
+        BookDto tmpbook = new();
 
         if (!string.IsNullOrEmpty(response))
             tmpbook = new Extensions<BookDto>().Deserialize(response);
@@ -166,7 +158,7 @@ public class UploadContentModel : MasterModel
                 break;
         }
 
-        var postresponse = await helper.PostAsync(_appSettings.HostUrl + $"book/update", tmpbook);
+        _ = await helper.PostAsync(_appSettings.HostUrl + $"book/update", tmpbook);
 
         Status = "File Uploaded";
 

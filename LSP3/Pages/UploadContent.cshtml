@@ -14,20 +14,20 @@
                 </div>
             </div>
             <div class="row" ></div>
-            <div class="row"><div class="col-sm-12" style="font-color: red;">@Model.Status</div></div>
+            <div class="row"><div class="col-sm-12" style="color: red;">@Model.Status</div></div>
             <div class="row">
-                <div class="col-sm-2" class="form-label">Select Book:</div>
+                <div class="col-sm-2 form-label">Select Book:</div>
 
-                <div class="col-sm-2" class="form-control"><select asp-for="SelectedBookId" asp-items="@Model.BookOptions"></select></div>
+                <div class="col-sm-2 form-control"><select asp-for="SelectedBookId" asp-items="@Model.BookOptions"></select></div>
             </div>
             <div class="row" style="height: 25px"></div>
             <div class="row">
-                <div class="col-sm-2" class="form-label">Select Image Type:</div>
-                <div class="col-sm-2" class="form-control"><select asp-for="SelectedContentType" asp-items="@Model.ContentTypes"></select></div>
+                <div class="col-sm-2 form-label">Select Image Type:</div>
+                <div class="col-sm-2 form-control"><select asp-for="SelectedContentType" asp-items="@Model.ContentTypes"></select></div>
             </div>
             <div class="row" style="height: 25px"></div>
             <div class="row">
-                <div class="col-sm-3" class="form-control">
+                <div class="col-sm-3 form-control">
                     <label asp-for="File" class="form-label" style="background-color: lightgray; padding: 25px;">Click here to select file</label>
                     <input type="file" asp-for="File" class="uploadBorderFile" />
                     <span asp-validation-for="File" class="text-danger"></span>
@@ -35,7 +35,7 @@
             </div>
             <div class="row" style="height: 25px"></div>
             <div class="row">
-                <div class="col-sm-3" class="form-control">
+                <div class="col-sm-3 form-control">
                     <button type="submit" class="btn btn-primary" style="color: white">Upload File</button>
                 </div>
             </div>
