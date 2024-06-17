@@ -1,0 +1,296 @@
+2024-06-14 07:53:24 [INF] Now listening on: http://localhost:5000
+2024-06-14 07:53:24 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 07:53:24 [INF] Hosting environment: Development
+2024-06-14 07:53:24 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 07:53:25 [INF] HTTP GET / responded 302 in 149.8633 ms
+2024-06-14 07:53:25 [INF] HTTP GET /Account/Login responded 200 in 22.0567 ms
+2024-06-14 07:53:26 [INF] *** Logging in: Username: mark
+2024-06-14 07:53:27 [INF] HTTP POST /Account/Login responded 302 in 921.1986 ms
+2024-06-14 07:53:30 [INF] HTTP GET /Admin responded 200 in 2591.8514 ms
+2024-06-14 07:53:35 [INF] HTTP GET /Book responded 200 in 13.3684 ms
+2024-06-14 07:58:09 [INF] Now listening on: http://localhost:5000
+2024-06-14 07:58:09 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 07:58:09 [INF] Hosting environment: Development
+2024-06-14 07:58:09 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 07:58:10 [INF] HTTP GET / responded 302 in 111.8913 ms
+2024-06-14 07:58:10 [INF] HTTP GET /Account/Login responded 200 in 26.2477 ms
+2024-06-14 07:58:12 [INF] *** Logging in: Username: mark
+2024-06-14 07:58:12 [INF] HTTP POST /Account/Login responded 302 in 897.7057 ms
+2024-06-14 07:58:15 [INF] HTTP GET /Admin responded 200 in 2545.6796 ms
+2024-06-14 07:58:19 [INF] HTTP GET /Book responded 200 in 13.9098 ms
+2024-06-14 08:05:01 [INF] Now listening on: http://localhost:5000
+2024-06-14 08:05:01 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 08:05:01 [INF] Hosting environment: Development
+2024-06-14 08:05:01 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 08:05:02 [INF] HTTP GET / responded 302 in 116.3630 ms
+2024-06-14 08:05:02 [INF] HTTP GET /Account/Login responded 200 in 23.9117 ms
+2024-06-14 08:05:03 [INF] *** Logging in: Username: mark
+2024-06-14 08:05:04 [INF] HTTP POST /Account/Login responded 302 in 818.0708 ms
+2024-06-14 08:05:07 [INF] HTTP GET /Admin responded 200 in 2500.3167 ms
+2024-06-14 08:05:11 [INF] HTTP GET /Book responded 200 in 12.0142 ms
+2024-06-14 08:12:30 [INF] Now listening on: http://localhost:5000
+2024-06-14 08:12:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 08:12:30 [INF] Hosting environment: Development
+2024-06-14 08:12:30 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 08:12:30 [INF] HTTP GET / responded 302 in 112.0753 ms
+2024-06-14 08:12:30 [INF] HTTP GET /Account/Login responded 200 in 23.1745 ms
+2024-06-14 08:12:32 [INF] *** Logging in: Username: mark
+2024-06-14 08:12:33 [INF] HTTP POST /Account/Login responded 302 in 728.2587 ms
+2024-06-14 08:12:35 [INF] HTTP GET /Admin responded 200 in 2350.1627 ms
+2024-06-14 08:12:39 [INF] HTTP GET /Book responded 200 in 11.3890 ms
+2024-06-14 08:15:39 [INF] Now listening on: http://localhost:5000
+2024-06-14 08:15:39 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 08:15:39 [INF] Hosting environment: Development
+2024-06-14 08:15:39 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 08:15:39 [INF] HTTP GET / responded 302 in 101.8773 ms
+2024-06-14 08:15:39 [INF] HTTP GET /Account/Login responded 200 in 26.7099 ms
+2024-06-14 08:15:40 [INF] *** Logging in: Username: mark
+2024-06-14 08:15:41 [INF] HTTP POST /Account/Login responded 302 in 225.5400 ms
+2024-06-14 08:15:43 [INF] HTTP GET /Admin responded 200 in 2453.5279 ms
+2024-06-14 08:15:47 [INF] HTTP GET /Book responded 200 in 14.5844 ms
+2024-06-14 08:19:35 [INF] Now listening on: http://localhost:5000
+2024-06-14 08:19:35 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 08:19:35 [INF] Hosting environment: Development
+2024-06-14 08:19:35 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 08:19:36 [INF] HTTP GET / responded 302 in 109.0147 ms
+2024-06-14 08:19:36 [INF] HTTP GET /Account/Login responded 200 in 27.8905 ms
+2024-06-14 08:19:37 [INF] *** Logging in: Username: mark
+2024-06-14 08:19:38 [INF] HTTP POST /Account/Login responded 302 in 666.2263 ms
+2024-06-14 08:19:40 [INF] HTTP GET /Admin responded 200 in 2392.3684 ms
+2024-06-14 08:19:43 [INF] HTTP GET /Book responded 200 in 11.0325 ms
+2024-06-14 08:22:15 [INF] Now listening on: http://localhost:5000
+2024-06-14 08:22:15 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 08:22:15 [INF] Hosting environment: Development
+2024-06-14 08:22:15 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 08:22:16 [INF] HTTP GET / responded 302 in 119.9320 ms
+2024-06-14 08:22:16 [INF] HTTP GET /Account/Login responded 200 in 27.7196 ms
+2024-06-14 08:22:17 [INF] *** Logging in: Username: mark
+2024-06-14 08:22:17 [INF] HTTP POST /Account/Login responded 302 in 223.9833 ms
+2024-06-14 08:22:19 [INF] HTTP GET /Admin responded 200 in 2403.1457 ms
+2024-06-14 08:22:22 [INF] HTTP GET /Book responded 200 in 11.0382 ms
+2024-06-14 08:26:31 [INF] Now listening on: http://localhost:5000
+2024-06-14 08:26:32 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 08:26:32 [INF] Hosting environment: Development
+2024-06-14 08:26:32 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 08:26:32 [INF] HTTP GET / responded 302 in 112.1999 ms
+2024-06-14 08:26:32 [INF] HTTP GET /Account/Login responded 200 in 25.7201 ms
+2024-06-14 08:26:34 [INF] *** Logging in: Username: mark
+2024-06-14 08:26:34 [INF] HTTP POST /Account/Login responded 302 in 781.1433 ms
+2024-06-14 08:26:37 [INF] HTTP GET /Admin responded 200 in 2385.4055 ms
+2024-06-14 08:26:40 [INF] HTTP GET /Book responded 200 in 11.2769 ms
+2024-06-14 08:28:13 [INF] Now listening on: http://localhost:5000
+2024-06-14 08:28:13 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 08:28:13 [INF] Hosting environment: Development
+2024-06-14 08:28:13 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 08:28:14 [INF] HTTP GET / responded 302 in 109.7146 ms
+2024-06-14 08:28:14 [INF] HTTP GET /Account/Login responded 200 in 24.5953 ms
+2024-06-14 08:28:15 [INF] *** Logging in: Username: mark
+2024-06-14 08:28:16 [INF] HTTP POST /Account/Login responded 302 in 249.1631 ms
+2024-06-14 08:28:18 [INF] HTTP GET /Admin responded 200 in 2579.7263 ms
+2024-06-14 08:28:21 [INF] HTTP GET /Book responded 200 in 15.8153 ms
+2024-06-14 08:30:30 [INF] Now listening on: http://localhost:5000
+2024-06-14 08:30:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 08:30:30 [INF] Hosting environment: Development
+2024-06-14 08:30:30 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 08:30:31 [INF] HTTP GET / responded 302 in 115.7709 ms
+2024-06-14 08:30:31 [INF] HTTP GET /Account/Login responded 200 in 26.8134 ms
+2024-06-14 08:30:39 [INF] *** Logging in: Username: mark
+2024-06-14 08:30:39 [INF] HTTP POST /Account/Login responded 302 in 230.7890 ms
+2024-06-14 08:30:42 [INF] HTTP GET /Admin responded 200 in 2411.8189 ms
+2024-06-14 08:30:46 [INF] HTTP GET /Book responded 200 in 11.4559 ms
+2024-06-14 08:33:17 [INF] Now listening on: http://localhost:5000
+2024-06-14 08:33:17 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 08:33:17 [INF] Hosting environment: Development
+2024-06-14 08:33:17 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 08:33:18 [INF] HTTP GET / responded 302 in 112.5946 ms
+2024-06-14 08:33:18 [INF] HTTP GET /Account/Login responded 200 in 28.0187 ms
+2024-06-14 08:33:19 [INF] *** Logging in: Username: mark
+2024-06-14 08:33:20 [INF] HTTP POST /Account/Login responded 302 in 224.7696 ms
+2024-06-14 08:33:22 [INF] HTTP GET /Admin responded 200 in 2527.8050 ms
+2024-06-14 08:33:24 [INF] HTTP GET /Book responded 200 in 11.8613 ms
+2024-06-14 08:34:24 [INF] Now listening on: http://localhost:5000
+2024-06-14 08:34:24 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 08:34:24 [INF] Hosting environment: Development
+2024-06-14 08:34:24 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 08:34:26 [INF] HTTP GET / responded 302 in 111.1232 ms
+2024-06-14 08:34:26 [INF] HTTP GET /Account/Login responded 200 in 24.8941 ms
+2024-06-14 08:34:27 [INF] *** Logging in: Username: mark
+2024-06-14 08:34:27 [INF] HTTP POST /Account/Login responded 302 in 192.9528 ms
+2024-06-14 08:34:30 [INF] HTTP GET /Admin responded 200 in 2484.0681 ms
+2024-06-14 08:34:31 [INF] HTTP GET /Book responded 200 in 11.2664 ms
+2024-06-14 08:36:52 [INF] Now listening on: http://localhost:5000
+2024-06-14 08:36:52 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 08:36:52 [INF] Hosting environment: Development
+2024-06-14 08:36:52 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 08:36:53 [INF] HTTP GET / responded 302 in 113.8083 ms
+2024-06-14 08:36:53 [INF] HTTP GET /Account/Login responded 200 in 23.7150 ms
+2024-06-14 08:36:53 [INF] HTTP GET /Account/favicon.ico responded 404 in 3.2229 ms
+2024-06-14 08:37:07 [INF] *** Logging in: Username: mark
+2024-06-14 08:37:08 [INF] HTTP POST /Account/Login responded 302 in 229.5377 ms
+2024-06-14 08:37:10 [INF] HTTP GET /Admin responded 200 in 2752.7850 ms
+2024-06-14 08:37:16 [INF] HTTP GET /Book responded 200 in 12.9509 ms
+2024-06-14 08:42:42 [INF] Now listening on: http://localhost:5000
+2024-06-14 08:42:42 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 08:42:42 [INF] Hosting environment: Development
+2024-06-14 08:42:42 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 08:42:42 [INF] HTTP GET / responded 302 in 127.8426 ms
+2024-06-14 08:42:42 [INF] HTTP GET /Account/Login responded 200 in 24.5828 ms
+2024-06-14 08:42:44 [INF] *** Logging in: Username: mark
+2024-06-14 08:42:44 [INF] HTTP POST /Account/Login responded 302 in 745.9423 ms
+2024-06-14 08:42:48 [INF] HTTP GET /Admin responded 200 in 3085.5199 ms
+2024-06-14 08:45:28 [INF] Now listening on: http://localhost:5000
+2024-06-14 08:45:28 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 08:45:28 [INF] Hosting environment: Development
+2024-06-14 08:45:28 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 08:45:30 [INF] HTTP GET / responded 302 in 110.0449 ms
+2024-06-14 08:45:30 [INF] HTTP GET /Account/Login responded 200 in 25.3424 ms
+2024-06-14 08:45:31 [INF] *** Logging in: Username: mark
+2024-06-14 08:45:31 [INF] HTTP POST /Account/Login responded 302 in 216.8720 ms
+2024-06-14 08:45:34 [INF] HTTP GET /Admin responded 200 in 3388.1193 ms
+2024-06-14 08:45:40 [INF] HTTP GET /Book responded 200 in 4151.7356 ms
+2024-06-14 08:47:56 [INF] Now listening on: http://localhost:5000
+2024-06-14 08:47:56 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 08:47:56 [INF] Hosting environment: Development
+2024-06-14 08:47:56 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 08:47:57 [INF] HTTP GET / responded 302 in 112.2983 ms
+2024-06-14 08:47:57 [INF] HTTP GET /Account/Login responded 200 in 23.9463 ms
+2024-06-14 08:48:47 [INF] *** Logging in: Username: mark
+2024-06-14 08:48:47 [INF] HTTP POST /Account/Login responded 302 in 247.2037 ms
+2024-06-14 08:48:50 [INF] HTTP GET /Admin responded 200 in 3297.6675 ms
+2024-06-14 08:48:58 [INF] HTTP GET /Book responded 200 in 5626.7771 ms
+2024-06-14 08:49:16 [INF] HTTP GET /Admin responded 200 in 3511.5705 ms
+2024-06-14 08:49:56 [INF] HTTP GET /Book responded 200 in 4.0102 ms
+2024-06-14 08:50:31 [ERR] Error: An error occurred while sending the request.: System.IO.IOException: Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host..
+ ---> System.Net.Sockets.SocketException (10054): An existing connection was forcibly closed by the remote host.
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Int32>.GetResult(Int16 token)
+   at System.Net.Http.HttpConnection.InitialFillAsync(Boolean async)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken):    at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at LSP3.Pages.HttpHelper.Get(String url) in C:\LSP\LSP3\LSP3\Pages\HttpHelper.cs:line 26
+   at LSP3.Pages.AdminModel.OnGet() in C:\LSP\LSP3\LSP3\Pages\Admin.cshtml.cs:line 61
+2024-06-14 08:50:31 [INF] HTTP GET /Admin responded 200 in 26018.1413 ms
+2024-06-14 09:00:07 [INF] Now listening on: http://localhost:5000
+2024-06-14 09:00:07 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 09:00:07 [INF] Hosting environment: Development
+2024-06-14 09:00:07 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 09:00:08 [INF] HTTP GET / responded 302 in 114.1841 ms
+2024-06-14 09:00:08 [INF] HTTP GET /Account/Login responded 200 in 22.6562 ms
+2024-06-14 09:00:14 [INF] HTTP GET /Account/Login responded 200 in 4.8133 ms
+2024-06-14 09:00:14 [INF] HTTP GET /Account/favicon.ico responded 404 in 0.7147 ms
+2024-06-14 09:00:15 [INF] *** Logging in: Username: mark
+2024-06-14 09:00:17 [INF] HTTP POST /Account/Login responded 302 in 1712.6707 ms
+2024-06-14 09:00:21 [INF] HTTP GET /Admin responded 200 in 4365.3486 ms
+2024-06-14 09:00:27 [INF] HTTP GET /Book responded 200 in 13.8236 ms
+2024-06-14 09:02:26 [ERR] Error: An error occurred while sending the request.: System.IO.IOException: Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host..
+ ---> System.Net.Sockets.SocketException (10054): An existing connection was forcibly closed by the remote host.
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Int32>.GetResult(Int16 token)
+   at System.Net.Http.HttpConnection.InitialFillAsync(Boolean async)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken):    at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at LSP3.Pages.HttpHelper.Get(String url) in C:\LSP\LSP3\LSP3\Pages\HttpHelper.cs:line 26
+   at LSP3.Pages.AdminModel.OnGet() in C:\LSP\LSP3\LSP3\Pages\Admin.cshtml.cs:line 61
+2024-06-14 09:02:26 [INF] HTTP GET /Admin responded 200 in 32282.2098 ms
+2024-06-14 09:04:03 [INF] Now listening on: http://localhost:5000
+2024-06-14 09:04:03 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 09:04:03 [INF] Hosting environment: Development
+2024-06-14 09:04:03 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 09:04:04 [INF] HTTP GET / responded 302 in 105.9807 ms
+2024-06-14 09:04:04 [INF] HTTP GET /Account/Login responded 200 in 23.0079 ms
+2024-06-14 09:04:06 [INF] *** Logging in: Username: mark
+2024-06-14 09:04:07 [INF] HTTP POST /Account/Login responded 302 in 1395.2738 ms
+2024-06-14 09:04:11 [INF] HTTP GET /Admin responded 200 in 4266.1968 ms
+2024-06-14 09:04:13 [INF] HTTP GET /Book responded 200 in 10.7035 ms
+2024-06-14 09:05:18 [ERR] Error: An error occurred while sending the request.: System.IO.IOException: Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host..
+ ---> System.Net.Sockets.SocketException (10054): An existing connection was forcibly closed by the remote host.
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Int32>.GetResult(Int16 token)
+   at System.Net.Http.HttpConnection.InitialFillAsync(Boolean async)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken):    at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at LSP3.Pages.HttpHelper.Get(String url) in C:\LSP\LSP3\LSP3\Pages\HttpHelper.cs:line 26
+   at LSP3.Pages.AdminModel.OnGet() in C:\LSP\LSP3\LSP3\Pages\Admin.cshtml.cs:line 61
+2024-06-14 09:05:18 [INF] HTTP GET /Admin responded 200 in 23108.3291 ms
+2024-06-14 09:19:57 [INF] Now listening on: http://localhost:5000
+2024-06-14 09:19:57 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 09:19:57 [INF] Hosting environment: Development
+2024-06-14 09:19:57 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 09:19:57 [INF] HTTP GET / responded 302 in 102.7424 ms
+2024-06-14 09:19:58 [INF] HTTP GET /Account/Login responded 200 in 22.5323 ms
+2024-06-14 09:19:59 [INF] *** Logging in: Username: mark
+2024-06-14 09:20:01 [INF] HTTP POST /Account/Login responded 302 in 1651.4903 ms
+2024-06-14 09:20:05 [INF] HTTP GET /Admin responded 200 in 4240.1563 ms
+2024-06-14 09:20:06 [INF] HTTP GET /Book responded 200 in 12.4243 ms
+2024-06-14 09:21:17 [INF] Now listening on: http://localhost:5000
+2024-06-14 09:21:17 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 09:21:17 [INF] Hosting environment: Development
+2024-06-14 09:21:17 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 09:21:18 [INF] HTTP GET / responded 302 in 113.7942 ms
+2024-06-14 09:21:18 [INF] HTTP GET /Account/Login responded 200 in 23.8220 ms
+2024-06-14 09:21:19 [INF] *** Logging in: Username: mark
+2024-06-14 09:21:19 [INF] HTTP POST /Account/Login responded 302 in 207.5441 ms
+2024-06-14 09:21:23 [INF] HTTP GET /Admin responded 200 in 3542.8316 ms
+2024-06-14 09:21:24 [INF] HTTP GET /Book responded 200 in 12.3781 ms
+2024-06-14 09:24:35 [INF] Now listening on: http://localhost:5000
+2024-06-14 09:24:35 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 09:24:35 [INF] Hosting environment: Development
+2024-06-14 09:24:35 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 09:24:35 [INF] HTTP GET / responded 302 in 100.4595 ms
+2024-06-14 09:24:36 [INF] HTTP GET /Account/Login responded 200 in 22.9761 ms
+2024-06-14 09:24:37 [INF] *** Logging in: Username: mark
+2024-06-14 09:24:37 [INF] HTTP POST /Account/Login responded 302 in 236.3807 ms
+2024-06-14 09:24:41 [INF] HTTP GET /Admin responded 200 in 3718.5248 ms
+2024-06-14 09:24:44 [INF] HTTP GET /Book responded 200 in 12.4843 ms
+2024-06-14 09:27:14 [INF] Now listening on: http://localhost:5000
+2024-06-14 09:27:14 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 09:27:14 [INF] Hosting environment: Development
+2024-06-14 09:27:14 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 09:27:15 [INF] HTTP GET / responded 302 in 102.5222 ms
+2024-06-14 09:27:15 [INF] HTTP GET /Account/Login responded 200 in 23.1492 ms
+2024-06-14 09:27:16 [INF] *** Logging in: Username: mark
+2024-06-14 09:27:21 [ERR] Error: No connection could be made because the target machine actively refused it. (localhost:5253) System.Net.Sockets.SocketException (10061): No connection could be made because the target machine actively refused it.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|285_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)    at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.HttpConnectionWaiter`1.WaitForConnectionWithTelemetryAsync(HttpRequestMessage request, HttpConnectionPool pool, Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at LSP3.Pages.HttpHelper.Get(String url) in C:\LSP\LSP3\LSP3\Pages\HttpHelper.cs:line 26
+   at LSP3.Pages.Account.LoginModel.OnGetauthor(String username, String password) in C:\LSP\LSP3\LSP3\Pages\Account\Login.cshtml.cs:line 64
+2024-06-14 09:27:21 [INF] HTTP POST /Account/Login responded 302 in 4268.5684 ms
+2024-06-14 09:27:21 [INF] HTTP GET / responded 302 in 0.3943 ms
+2024-06-14 09:27:21 [INF] HTTP GET /Account/Login responded 200 in 2.5467 ms
+2024-06-14 09:27:44 [INF] *** Logging in: Username: mark
+2024-06-14 09:27:45 [INF] HTTP POST /Account/Login responded 302 in 1306.7170 ms
+2024-06-14 09:27:49 [INF] HTTP GET /Admin responded 200 in 3461.0304 ms
+2024-06-14 09:27:50 [INF] HTTP GET /Book responded 200 in 13.4823 ms
+2024-06-14 10:16:29 [INF] Now listening on: http://localhost:5000
+2024-06-14 10:16:29 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-14 10:16:29 [INF] Hosting environment: Development
+2024-06-14 10:16:29 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-14 10:16:30 [INF] HTTP GET / responded 302 in 106.6598 ms
+2024-06-14 10:16:30 [INF] HTTP GET /Account/Login responded 200 in 22.4671 ms
+2024-06-14 10:16:32 [INF] *** Logging in: Username: mark
+2024-06-14 10:16:33 [INF] HTTP POST /Account/Login responded 302 in 712.3994 ms
+2024-06-14 10:16:36 [INF] HTTP GET /Admin responded 200 in 3547.8616 ms
+2024-06-14 10:16:38 [INF] HTTP GET /Book responded 200 in 13.3747 ms

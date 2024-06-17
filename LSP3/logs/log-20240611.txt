@@ -1,0 +1,583 @@
+2024-06-11 00:30:50 [INF] User profile is available. Using 'C:\Users\Mark_\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-11 00:30:51 [INF] Now listening on: http://localhost:5000
+2024-06-11 00:30:51 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-11 00:30:51 [INF] Hosting environment: Development
+2024-06-11 00:30:51 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-11 00:30:51 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - null null
+2024-06-11 00:30:51 [INF] Executing endpoint '/Index'
+2024-06-11 00:30:52 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2024-06-11 00:30:52 [INF] Accessing expired session, Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a
+2024-06-11 00:30:52 [INF] Executing handler method LSP3.Pages.IndexModel.OnGet - ModelState is "Valid"
+2024-06-11 00:30:52 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RedirectResult.
+2024-06-11 00:30:52 [INF] Executing RedirectResult, redirecting to /Account/Login.
+2024-06-11 00:30:52 [INF] Executed page /Index in 17.6323ms
+2024-06-11 00:30:52 [INF] Executed endpoint '/Index'
+2024-06-11 00:30:52 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - 302 0 null 282.0971ms
+2024-06-11 00:30:52 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Account/Login - null null
+2024-06-11 00:30:52 [INF] Executing endpoint '/Account/Login'
+2024-06-11 00:30:52 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-06-11 00:30:52 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnGet - ModelState is "Valid"
+2024-06-11 00:30:52 [INF] Executed handler method OnGet, returned result .
+2024-06-11 00:30:52 [INF] Executing an implicit handler method - ModelState is "Valid"
+2024-06-11 00:30:52 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 00:30:52 [INF] Executed page /Account/Login in 30.9261ms
+2024-06-11 00:30:52 [INF] Executed endpoint '/Account/Login'
+2024-06-11 00:30:52 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Account/Login - 200 null text/html; charset=utf-8 39.1249ms
+2024-06-11 00:30:52 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 00:30:52 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 00:30:52 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 1.4378ms
+2024-06-11 00:30:52 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 129.8293ms
+2024-06-11 00:30:53 [INF] Request starting HTTP/1.1 POST http://localhost:5000/Account/Login - application/x-www-form-urlencoded 222
+2024-06-11 00:30:53 [INF] Executing endpoint '/Account/Login'
+2024-06-11 00:30:53 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-06-11 00:30:53 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnPost - ModelState is "Valid"
+2024-06-11 00:30:53 [INF] Logging in: Username: mark
+2024-06-11 00:30:56 [INF] Accessing expired session, Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a
+2024-06-11 00:30:56 [INF] Executed handler method OnPost, returned result Microsoft.AspNetCore.Mvc.RedirectToPageResult.
+2024-06-11 00:30:56 [INF] Executing RedirectToPageResult, redirecting to /Admin.
+2024-06-11 00:30:56 [INF] Executed page /Account/Login in 2581.6579ms
+2024-06-11 00:30:56 [INF] Executed endpoint '/Account/Login'
+2024-06-11 00:30:56 [INF] Session started; Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a, Id:55eef4dd-37de-9153-ff79-2a0f94ea18c7
+2024-06-11 00:30:56 [INF] Request finished HTTP/1.1 POST http://localhost:5000/Account/Login - 302 0 null 2588.3758ms
+2024-06-11 00:30:56 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Admin - null null
+2024-06-11 00:30:56 [INF] Executing endpoint '/Admin'
+2024-06-11 00:30:56 [INF] Route matched with {page = "/Admin"}. Executing page /Admin
+2024-06-11 00:30:56 [INF] Executing handler method LSP3.Pages.AdminModel.OnGet - ModelState is "Valid"
+2024-06-11 00:30:59 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 00:30:59 [INF] Executed page /Admin in 3226.5736ms
+2024-06-11 00:30:59 [INF] Executed endpoint '/Admin'
+2024-06-11 00:30:59 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Admin - 200 null text/html; charset=utf-8 3230.3364ms
+2024-06-11 00:30:59 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 00:30:59 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 0.2676ms
+2024-06-11 00:30:59 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Scripts/common.js - null null
+2024-06-11 00:30:59 [INF] The file /Scripts/common.js was not modified
+2024-06-11 00:30:59 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Scripts/common.js - 304 null text/javascript 4.3967ms
+2024-06-11 00:30:59 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 00:30:59 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 7.1041ms
+2024-06-11 00:32:45 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Account/Logout - null null
+2024-06-11 00:32:45 [INF] Executing endpoint '/Account/Logout'
+2024-06-11 00:32:45 [INF] Route matched with {page = "/Account/Logout"}. Executing page /Account/Logout
+2024-06-11 00:32:45 [INF] Executing handler method LSP3.Pages.Account.LogoutModel.OnGet - ModelState is "Valid"
+2024-06-11 00:32:45 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RedirectResult.
+2024-06-11 00:32:45 [INF] Executing RedirectResult, redirecting to /Account/Login.
+2024-06-11 00:32:45 [INF] Executed page /Account/Logout in 0.6071ms
+2024-06-11 00:32:45 [INF] Executed endpoint '/Account/Logout'
+2024-06-11 00:32:45 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Account/Logout - 302 0 null 8.7772ms
+2024-06-11 00:32:45 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Account/Login - null null
+2024-06-11 00:32:45 [INF] Executing endpoint '/Account/Login'
+2024-06-11 00:32:45 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-06-11 00:32:45 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnGet - ModelState is "Valid"
+2024-06-11 00:32:45 [INF] Executed handler method OnGet, returned result .
+2024-06-11 00:32:45 [INF] Executing an implicit handler method - ModelState is "Valid"
+2024-06-11 00:32:45 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 00:32:45 [INF] Executed page /Account/Login in 1.0018ms
+2024-06-11 00:32:45 [INF] Executed endpoint '/Account/Login'
+2024-06-11 00:32:45 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Account/Login - 200 null text/html; charset=utf-8 2.5443ms
+2024-06-11 00:32:45 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 00:32:45 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 00:32:45 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 0.2038ms
+2024-06-11 00:32:45 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 4.0755ms
+2024-06-11 00:32:46 [INF] Request starting HTTP/1.1 POST http://localhost:5000/Account/Login - application/x-www-form-urlencoded 222
+2024-06-11 00:32:46 [INF] Executing endpoint '/Account/Login'
+2024-06-11 00:32:46 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-06-11 00:32:46 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnPost - ModelState is "Valid"
+2024-06-11 00:32:46 [INF] Logging in: Username: mark
+2024-06-11 00:32:48 [INF] Executed handler method OnPost, returned result Microsoft.AspNetCore.Mvc.RedirectToPageResult.
+2024-06-11 00:32:48 [INF] Executing RedirectToPageResult, redirecting to /Admin.
+2024-06-11 00:32:48 [INF] Executed page /Account/Login in 1489.5231ms
+2024-06-11 00:32:48 [INF] Executed endpoint '/Account/Login'
+2024-06-11 00:32:48 [INF] Request finished HTTP/1.1 POST http://localhost:5000/Account/Login - 302 0 null 1492.1113ms
+2024-06-11 00:32:48 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Admin - null null
+2024-06-11 00:32:48 [INF] Executing endpoint '/Admin'
+2024-06-11 00:32:48 [INF] Route matched with {page = "/Admin"}. Executing page /Admin
+2024-06-11 00:32:48 [INF] Executing handler method LSP3.Pages.AdminModel.OnGet - ModelState is "Valid"
+2024-06-11 00:32:50 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 00:32:50 [INF] Executed page /Admin in 2380.4427ms
+2024-06-11 00:32:50 [INF] Executed endpoint '/Admin'
+2024-06-11 00:32:50 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Admin - 200 null text/html; charset=utf-8 2382.9007ms
+2024-06-11 00:32:50 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 00:32:50 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 0.1634ms
+2024-06-11 00:32:50 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 00:32:50 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 2.6612ms
+2024-06-11 10:57:05 [INF] User profile is available. Using 'C:\Users\Mark_\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-11 10:57:05 [INF] Now listening on: http://localhost:5000
+2024-06-11 10:57:05 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-11 10:57:05 [INF] Hosting environment: Development
+2024-06-11 10:57:05 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-11 10:57:05 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - null null
+2024-06-11 10:57:05 [INF] Executing endpoint '/Index'
+2024-06-11 10:57:05 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2024-06-11 10:57:05 [INF] Accessing expired session, Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a
+2024-06-11 10:57:05 [INF] Executing handler method LSP3.Pages.IndexModel.OnGet - ModelState is "Valid"
+2024-06-11 10:57:05 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RedirectResult.
+2024-06-11 10:57:05 [INF] Executing RedirectResult, redirecting to /Account/Login.
+2024-06-11 10:57:05 [INF] Executed page /Index in 12.6393ms
+2024-06-11 10:57:05 [INF] Executed endpoint '/Index'
+2024-06-11 10:57:05 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - 302 0 null 165.3179ms
+2024-06-11 10:57:05 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Account/Login - null null
+2024-06-11 10:57:05 [INF] Executing endpoint '/Account/Login'
+2024-06-11 10:57:05 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-06-11 10:57:05 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnGet - ModelState is "Valid"
+2024-06-11 10:57:05 [INF] Executed handler method OnGet, returned result .
+2024-06-11 10:57:05 [INF] Executing an implicit handler method - ModelState is "Valid"
+2024-06-11 10:57:05 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 10:57:06 [INF] Executed page /Account/Login in 24.0274ms
+2024-06-11 10:57:06 [INF] Executed endpoint '/Account/Login'
+2024-06-11 10:57:06 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Account/Login - 200 null text/html; charset=utf-8 33.5607ms
+2024-06-11 10:57:06 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 10:57:06 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 10:57:06 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 1.5161ms
+2024-06-11 10:57:06 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 20.8841ms
+2024-06-11 10:57:07 [INF] Request starting HTTP/1.1 POST http://localhost:5000/Account/Login - application/x-www-form-urlencoded 222
+2024-06-11 10:57:07 [INF] Executing endpoint '/Account/Login'
+2024-06-11 10:57:07 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-06-11 10:57:07 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnPost - ModelState is "Valid"
+2024-06-11 10:57:09 [WRN] Logging in: Username: mark
+2024-06-11 10:57:13 [ERR] Error: No connection could be made because the target machine actively refused it. (localhost:5253) System.Net.Sockets.SocketException (10061): No connection could be made because the target machine actively refused it.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|285_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)    at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.HttpConnectionWaiter`1.WaitForConnectionWithTelemetryAsync(HttpRequestMessage request, HttpConnectionPool pool, Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at LSP3.Pages.HttpHelper.Get(String url) in C:\LSP\LSP3\LSP3\Pages\HttpHelper.cs:line 26
+   at LSP3.Pages.Account.LoginModel.OnGetauthor(String username, String password) in C:\LSP\LSP3\LSP3\Pages\Account\Login.cshtml.cs:line 64
+2024-06-11 10:57:13 [INF] Accessing expired session, Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a
+2024-06-11 10:57:13 [INF] Executed handler method OnPost, returned result Microsoft.AspNetCore.Mvc.RedirectToPageResult.
+2024-06-11 10:57:13 [INF] Executing RedirectToPageResult, redirecting to /Index.
+2024-06-11 10:57:13 [INF] Executed page /Account/Login in 6176.4887ms
+2024-06-11 10:57:13 [INF] Executed endpoint '/Account/Login'
+2024-06-11 10:57:13 [INF] Request finished HTTP/1.1 POST http://localhost:5000/Account/Login - 302 0 null 6182.3535ms
+2024-06-11 10:57:13 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - null null
+2024-06-11 10:57:13 [INF] Executing endpoint '/Index'
+2024-06-11 10:57:13 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2024-06-11 10:57:13 [INF] Accessing expired session, Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a
+2024-06-11 10:57:13 [INF] Executing handler method LSP3.Pages.IndexModel.OnGet - ModelState is "Valid"
+2024-06-11 10:57:13 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RedirectResult.
+2024-06-11 10:57:13 [INF] Executing RedirectResult, redirecting to /Account/Login.
+2024-06-11 10:57:13 [INF] Executed page /Index in 0.63ms
+2024-06-11 10:57:13 [INF] Executed endpoint '/Index'
+2024-06-11 10:57:13 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - 302 0 null 2.9025ms
+2024-06-11 10:57:13 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Account/Login - null null
+2024-06-11 10:57:13 [INF] Executing endpoint '/Account/Login'
+2024-06-11 10:57:13 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-06-11 10:57:13 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnGet - ModelState is "Valid"
+2024-06-11 10:57:13 [INF] Executed handler method OnGet, returned result .
+2024-06-11 10:57:13 [INF] Executing an implicit handler method - ModelState is "Valid"
+2024-06-11 10:57:13 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 10:57:13 [INF] Executed page /Account/Login in 2.8328ms
+2024-06-11 10:57:13 [INF] Executed endpoint '/Account/Login'
+2024-06-11 10:57:13 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Account/Login - 200 null text/html; charset=utf-8 4.6351ms
+2024-06-11 10:57:13 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 10:57:13 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 10:57:13 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 0.3694ms
+2024-06-11 10:57:13 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 11.2061ms
+2024-06-11 11:14:53 [INF] User profile is available. Using 'C:\Users\Mark_\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-11 11:14:54 [INF] Now listening on: http://localhost:5000
+2024-06-11 11:14:54 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-11 11:14:54 [INF] Hosting environment: Development
+2024-06-11 11:14:54 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-11 11:14:54 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - null null
+2024-06-11 11:14:54 [INF] Executing endpoint '/Index'
+2024-06-11 11:14:54 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2024-06-11 11:14:54 [INF] Accessing expired session, Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a
+2024-06-11 11:14:54 [INF] Executing handler method LSP3.Pages.IndexModel.OnGet - ModelState is "Valid"
+2024-06-11 11:14:54 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RedirectResult.
+2024-06-11 11:14:54 [INF] Executing RedirectResult, redirecting to /Account/Login.
+2024-06-11 11:14:54 [INF] Executed page /Index in 13.9106ms
+2024-06-11 11:14:54 [INF] Executed endpoint '/Index'
+2024-06-11 11:14:54 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - 302 0 null 173.8904ms
+2024-06-11 11:14:54 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Account/Login - null null
+2024-06-11 11:14:54 [INF] Executing endpoint '/Account/Login'
+2024-06-11 11:14:54 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-06-11 11:14:54 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnGet - ModelState is "Valid"
+2024-06-11 11:14:54 [INF] Executed handler method OnGet, returned result .
+2024-06-11 11:14:54 [INF] Executing an implicit handler method - ModelState is "Valid"
+2024-06-11 11:14:54 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 11:14:55 [INF] Executed page /Account/Login in 27.4008ms
+2024-06-11 11:14:55 [INF] Executed endpoint '/Account/Login'
+2024-06-11 11:14:55 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Account/Login - 200 null text/html; charset=utf-8 35.3789ms
+2024-06-11 11:14:55 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 11:14:55 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 11:14:55 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 1.7924ms
+2024-06-11 11:14:55 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 23.4874ms
+2024-06-11 11:14:56 [INF] Request starting HTTP/1.1 POST http://localhost:5000/Account/Login - application/x-www-form-urlencoded 222
+2024-06-11 11:14:56 [INF] Executing endpoint '/Account/Login'
+2024-06-11 11:14:56 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-06-11 11:14:56 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnPost - ModelState is "Valid"
+2024-06-11 11:14:58 [INF] Logging in: Username: mark
+2024-06-11 11:15:00 [INF] Accessing expired session, Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a
+2024-06-11 11:15:00 [INF] Executed handler method OnPost, returned result Microsoft.AspNetCore.Mvc.RedirectToPageResult.
+2024-06-11 11:15:00 [INF] Executing RedirectToPageResult, redirecting to /Admin.
+2024-06-11 11:15:00 [INF] Executed page /Account/Login in 4267.8095ms
+2024-06-11 11:15:00 [INF] Executed endpoint '/Account/Login'
+2024-06-11 11:15:00 [INF] Session started; Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a, Id:154a7b46-8f5d-76e3-6667-b7eeeffb237d
+2024-06-11 11:15:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/Account/Login - 302 0 null 4274.8481ms
+2024-06-11 11:15:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Admin - null null
+2024-06-11 11:15:00 [INF] Executing endpoint '/Admin'
+2024-06-11 11:15:00 [INF] Route matched with {page = "/Admin"}. Executing page /Admin
+2024-06-11 11:15:00 [INF] Executing handler method LSP3.Pages.AdminModel.OnGet - ModelState is "Valid"
+2024-06-11 11:15:03 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 11:15:03 [INF] Executed page /Admin in 2892.6285ms
+2024-06-11 11:15:03 [INF] Executed endpoint '/Admin'
+2024-06-11 11:15:03 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Admin - 200 null text/html; charset=utf-8 2897.4327ms
+2024-06-11 11:15:03 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 11:15:03 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 0.4176ms
+2024-06-11 11:15:03 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 11:15:03 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 8.9944ms
+2024-06-11 11:21:26 [INF] User profile is available. Using 'C:\Users\Mark_\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-11 11:21:26 [INF] Now listening on: http://localhost:5000
+2024-06-11 11:21:26 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-11 11:21:26 [INF] Hosting environment: Development
+2024-06-11 11:21:26 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-11 11:21:26 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - null null
+2024-06-11 11:21:26 [INF] Executing endpoint '/Index'
+2024-06-11 11:21:27 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2024-06-11 11:21:27 [INF] Accessing expired session, Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a
+2024-06-11 11:21:27 [INF] Executing handler method LSP3.Pages.IndexModel.OnGet - ModelState is "Valid"
+2024-06-11 11:21:27 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RedirectResult.
+2024-06-11 11:21:27 [INF] Executing RedirectResult, redirecting to /Account/Login.
+2024-06-11 11:21:27 [INF] Executed page /Index in 13.2959ms
+2024-06-11 11:21:27 [INF] Executed endpoint '/Index'
+2024-06-11 11:21:27 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - 302 0 null 164.6428ms
+2024-06-11 11:21:27 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Account/Login - null null
+2024-06-11 11:21:27 [INF] Executing endpoint '/Account/Login'
+2024-06-11 11:21:27 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-06-11 11:21:27 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnGet - ModelState is "Valid"
+2024-06-11 11:21:27 [INF] Executed handler method OnGet, returned result .
+2024-06-11 11:21:27 [INF] Executing an implicit handler method - ModelState is "Valid"
+2024-06-11 11:21:27 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 11:21:27 [INF] Executed page /Account/Login in 27.5278ms
+2024-06-11 11:21:27 [INF] Executed endpoint '/Account/Login'
+2024-06-11 11:21:27 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Account/Login - 200 null text/html; charset=utf-8 35.8236ms
+2024-06-11 11:21:27 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 11:21:27 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 11:21:27 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 1.6572ms
+2024-06-11 11:21:27 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 21.4225ms
+2024-06-11 11:21:29 [INF] Request starting HTTP/1.1 POST http://localhost:5000/Account/Login - application/x-www-form-urlencoded 222
+2024-06-11 11:21:29 [INF] Executing endpoint '/Account/Login'
+2024-06-11 11:21:29 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-06-11 11:21:29 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnPost - ModelState is "Valid"
+2024-06-11 11:21:33 [INF] Logging in: Username: mark
+2024-06-11 11:21:34 [INF] Accessing expired session, Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a
+2024-06-11 11:21:34 [INF] Executed handler method OnPost, returned result Microsoft.AspNetCore.Mvc.RedirectToPageResult.
+2024-06-11 11:21:34 [INF] Executing RedirectToPageResult, redirecting to /Admin.
+2024-06-11 11:21:34 [INF] Executed page /Account/Login in 5491.8015ms
+2024-06-11 11:21:34 [INF] Executed endpoint '/Account/Login'
+2024-06-11 11:21:34 [INF] Session started; Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a, Id:d044f4d4-65c7-997b-6f0b-130cf5122041
+2024-06-11 11:21:34 [INF] Request finished HTTP/1.1 POST http://localhost:5000/Account/Login - 302 0 null 5498.9993ms
+2024-06-11 11:21:34 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Admin - null null
+2024-06-11 11:21:34 [INF] Executing endpoint '/Admin'
+2024-06-11 11:21:34 [INF] Route matched with {page = "/Admin"}. Executing page /Admin
+2024-06-11 11:21:34 [INF] Executing handler method LSP3.Pages.AdminModel.OnGet - ModelState is "Valid"
+2024-06-11 11:21:37 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 11:21:37 [INF] Executed page /Admin in 2694.253ms
+2024-06-11 11:21:37 [INF] Executed endpoint '/Admin'
+2024-06-11 11:21:37 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Admin - 200 null text/html; charset=utf-8 2698.6005ms
+2024-06-11 11:21:37 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 11:21:37 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 0.3791ms
+2024-06-11 11:21:37 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 11:21:37 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 7.275ms
+2024-06-11 11:24:14 [INF] User profile is available. Using 'C:\Users\Mark_\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-11 11:24:14 [INF] Now listening on: http://localhost:5000
+2024-06-11 11:24:14 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-11 11:24:14 [INF] Hosting environment: Development
+2024-06-11 11:24:14 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-11 11:24:14 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - null null
+2024-06-11 11:24:14 [INF] Executing endpoint '/Index'
+2024-06-11 11:24:14 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2024-06-11 11:24:14 [INF] Accessing expired session, Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a
+2024-06-11 11:24:14 [INF] Executing handler method LSP3.Pages.IndexModel.OnGet - ModelState is "Valid"
+2024-06-11 11:24:14 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RedirectResult.
+2024-06-11 11:24:14 [INF] Executing RedirectResult, redirecting to /Account/Login.
+2024-06-11 11:24:14 [INF] Executed page /Index in 14.2382ms
+2024-06-11 11:24:14 [INF] Executed endpoint '/Index'
+2024-06-11 11:24:14 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - 302 0 null 150.5538ms
+2024-06-11 11:24:14 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Account/Login - null null
+2024-06-11 11:24:14 [INF] Executing endpoint '/Account/Login'
+2024-06-11 11:24:14 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-06-11 11:24:14 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnGet - ModelState is "Valid"
+2024-06-11 11:24:14 [INF] Executed handler method OnGet, returned result .
+2024-06-11 11:24:14 [INF] Executing an implicit handler method - ModelState is "Valid"
+2024-06-11 11:24:14 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 11:24:14 [INF] Executed page /Account/Login in 24.729ms
+2024-06-11 11:24:14 [INF] Executed endpoint '/Account/Login'
+2024-06-11 11:24:14 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Account/Login - 200 null text/html; charset=utf-8 34.2738ms
+2024-06-11 11:24:14 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 11:24:14 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 11:24:14 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 1.5805ms
+2024-06-11 11:24:14 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 20.6159ms
+2024-06-11 11:24:16 [INF] Request starting HTTP/1.1 POST http://localhost:5000/Account/Login - application/x-www-form-urlencoded 222
+2024-06-11 11:24:16 [INF] Executing endpoint '/Account/Login'
+2024-06-11 11:24:16 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-06-11 11:24:16 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnPost - ModelState is "Valid"
+2024-06-11 11:24:16 [INF] Logging in: Username: mark
+2024-06-11 11:24:16 [INF] Accessing expired session, Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a
+2024-06-11 11:24:16 [INF] Executed handler method OnPost, returned result Microsoft.AspNetCore.Mvc.RedirectToPageResult.
+2024-06-11 11:24:16 [INF] Executing RedirectToPageResult, redirecting to /Admin.
+2024-06-11 11:24:16 [INF] Executed page /Account/Login in 296.0727ms
+2024-06-11 11:24:16 [INF] Executed endpoint '/Account/Login'
+2024-06-11 11:24:16 [INF] Session started; Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a, Id:8b7c90a1-cd6e-c9c5-5b7c-c95df1c41c13
+2024-06-11 11:24:16 [INF] Request finished HTTP/1.1 POST http://localhost:5000/Account/Login - 302 0 null 302.8218ms
+2024-06-11 11:24:16 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Admin - null null
+2024-06-11 11:24:16 [INF] Executing endpoint '/Admin'
+2024-06-11 11:24:16 [INF] Route matched with {page = "/Admin"}. Executing page /Admin
+2024-06-11 11:24:16 [INF] Executing handler method LSP3.Pages.AdminModel.OnGet - ModelState is "Valid"
+2024-06-11 11:24:19 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 11:24:19 [INF] Executed page /Admin in 2611.7794ms
+2024-06-11 11:24:19 [INF] Executed endpoint '/Admin'
+2024-06-11 11:24:19 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Admin - 200 null text/html; charset=utf-8 2616.1362ms
+2024-06-11 11:24:19 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 11:24:19 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 0.4067ms
+2024-06-11 11:24:19 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 11:24:19 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 8.9412ms
+2024-06-11 11:41:08 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Account/Logout - null null
+2024-06-11 11:41:08 [INF] Executing endpoint '/Account/Logout'
+2024-06-11 11:41:08 [INF] Route matched with {page = "/Account/Logout"}. Executing page /Account/Logout
+2024-06-11 11:41:08 [INF] Executing handler method LSP3.Pages.Account.LogoutModel.OnGet - ModelState is "Valid"
+2024-06-11 11:41:08 [INF] Logging out: Username: 
+2024-06-11 11:41:08 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RedirectResult.
+2024-06-11 11:41:08 [INF] Executing RedirectResult, redirecting to /Account/Login.
+2024-06-11 11:41:08 [INF] Executed page /Account/Logout in 1.6781ms
+2024-06-11 11:41:08 [INF] Executed endpoint '/Account/Logout'
+2024-06-11 11:41:08 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Account/Logout - 302 0 null 11.8179ms
+2024-06-11 11:41:08 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Account/Login - null null
+2024-06-11 11:41:08 [INF] Executing endpoint '/Account/Login'
+2024-06-11 11:41:08 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-06-11 11:41:08 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnGet - ModelState is "Valid"
+2024-06-11 11:41:08 [INF] Executed handler method OnGet, returned result .
+2024-06-11 11:41:08 [INF] Executing an implicit handler method - ModelState is "Valid"
+2024-06-11 11:41:08 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 11:41:08 [INF] Executed page /Account/Login in 1.2383ms
+2024-06-11 11:41:08 [INF] Executed endpoint '/Account/Login'
+2024-06-11 11:41:08 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Account/Login - 200 null text/html; charset=utf-8 3.0388ms
+2024-06-11 11:41:08 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 11:41:08 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 11:41:08 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 0.5208ms
+2024-06-11 11:41:08 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 5.0529ms
+2024-06-11 11:47:59 [INF] User profile is available. Using 'C:\Users\Mark_\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-11 11:47:59 [INF] Now listening on: http://localhost:5000
+2024-06-11 11:47:59 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-11 11:47:59 [INF] Hosting environment: Development
+2024-06-11 11:47:59 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-11 11:47:59 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - null null
+2024-06-11 11:47:59 [INF] Executing endpoint '/Index'
+2024-06-11 11:48:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2024-06-11 11:48:00 [INF] Accessing expired session, Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a
+2024-06-11 11:48:00 [INF] Executing handler method LSP3.Pages.IndexModel.OnGet - ModelState is "Valid"
+2024-06-11 11:48:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RedirectResult.
+2024-06-11 11:48:00 [INF] Executing RedirectResult, redirecting to /Account/Login.
+2024-06-11 11:48:00 [INF] Executed page /Index in 13.0648ms
+2024-06-11 11:48:00 [INF] Executed endpoint '/Index'
+2024-06-11 11:48:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - 302 0 null 184.2072ms
+2024-06-11 11:48:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Account/Login - null null
+2024-06-11 11:48:00 [INF] Executing endpoint '/Account/Login'
+2024-06-11 11:48:00 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-06-11 11:48:00 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnGet - ModelState is "Valid"
+2024-06-11 11:48:00 [INF] Executed handler method OnGet, returned result .
+2024-06-11 11:48:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2024-06-11 11:48:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 11:48:00 [INF] Executed page /Account/Login in 28.4891ms
+2024-06-11 11:48:00 [INF] Executed endpoint '/Account/Login'
+2024-06-11 11:48:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Account/Login - 200 null text/html; charset=utf-8 37.2536ms
+2024-06-11 11:48:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 11:48:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 11:48:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 1.4673ms
+2024-06-11 11:48:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 20.9534ms
+2024-06-11 11:48:01 [INF] Request starting HTTP/1.1 POST http://localhost:5000/Account/Login - application/x-www-form-urlencoded 222
+2024-06-11 11:48:01 [INF] Executing endpoint '/Account/Login'
+2024-06-11 11:48:01 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-06-11 11:48:01 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnPost - ModelState is "Valid"
+2024-06-11 11:48:01 [INF] Logging in: Username: mark
+2024-06-11 11:48:03 [INF] Accessing expired session, Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a
+2024-06-11 11:48:03 [INF] Executed handler method OnPost, returned result Microsoft.AspNetCore.Mvc.RedirectToPageResult.
+2024-06-11 11:48:03 [INF] Executing RedirectToPageResult, redirecting to /Admin.
+2024-06-11 11:48:03 [INF] Executed page /Account/Login in 1884.5171ms
+2024-06-11 11:48:03 [INF] Executed endpoint '/Account/Login'
+2024-06-11 11:48:03 [INF] Session started; Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a, Id:19aa4ae8-8ec1-0e03-f9a9-d148206ab5dd
+2024-06-11 11:48:03 [INF] Request finished HTTP/1.1 POST http://localhost:5000/Account/Login - 302 0 null 1891.0436ms
+2024-06-11 11:48:03 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Admin - null null
+2024-06-11 11:48:03 [INF] Executing endpoint '/Admin'
+2024-06-11 11:48:03 [INF] Route matched with {page = "/Admin"}. Executing page /Admin
+2024-06-11 11:48:03 [INF] Executing handler method LSP3.Pages.AdminModel.OnGet - ModelState is "Valid"
+2024-06-11 11:48:06 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 11:48:06 [INF] Executed page /Admin in 3055.7584ms
+2024-06-11 11:48:06 [INF] Executed endpoint '/Admin'
+2024-06-11 11:48:06 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Admin - 200 null text/html; charset=utf-8 3062.01ms
+2024-06-11 11:48:06 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 11:48:06 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 0.4872ms
+2024-06-11 11:48:06 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 11:48:06 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 8.5341ms
+2024-06-11 11:49:50 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Account/Logout - null null
+2024-06-11 11:49:50 [INF] Executing endpoint '/Account/Logout'
+2024-06-11 11:49:50 [INF] Route matched with {page = "/Account/Logout"}. Executing page /Account/Logout
+2024-06-11 11:49:50 [INF] Executing handler method LSP3.Pages.Account.LogoutModel.OnGet - ModelState is "Valid"
+2024-06-11 11:49:50 [INF] Logging out: Username: 
+2024-06-11 11:49:50 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RedirectResult.
+2024-06-11 11:49:50 [INF] Executing RedirectResult, redirecting to /Account/Login.
+2024-06-11 11:49:50 [INF] Executed page /Account/Logout in 1.1725ms
+2024-06-11 11:49:50 [INF] Executed endpoint '/Account/Logout'
+2024-06-11 11:49:50 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Account/Logout - 302 0 null 9.3191ms
+2024-06-11 11:49:50 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Account/Login - null null
+2024-06-11 11:49:50 [INF] Executing endpoint '/Account/Login'
+2024-06-11 11:49:50 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-06-11 11:49:50 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnGet - ModelState is "Valid"
+2024-06-11 11:49:50 [INF] Executed handler method OnGet, returned result .
+2024-06-11 11:49:50 [INF] Executing an implicit handler method - ModelState is "Valid"
+2024-06-11 11:49:50 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 11:49:50 [INF] Executed page /Account/Login in 1.1269ms
+2024-06-11 11:49:50 [INF] Executed endpoint '/Account/Login'
+2024-06-11 11:49:50 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Account/Login - 200 null text/html; charset=utf-8 2.6919ms
+2024-06-11 11:49:50 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 11:49:50 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 11:49:50 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 0.2978ms
+2024-06-11 11:49:50 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 3.3656ms
+2024-06-11 21:11:43 [INF] User profile is available. Using 'C:\Users\Mark_\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-11 21:11:44 [INF] Now listening on: http://localhost:5000
+2024-06-11 21:11:44 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-11 21:11:44 [INF] Hosting environment: Development
+2024-06-11 21:11:44 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-11 21:11:44 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - null null
+2024-06-11 21:11:44 [INF] Executing endpoint '/Index'
+2024-06-11 21:11:45 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2024-06-11 21:11:45 [INF] Accessing expired session, Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a
+2024-06-11 21:11:45 [INF] Executing handler method LSP3.Pages.IndexModel.OnGet - ModelState is "Valid"
+2024-06-11 21:11:45 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RedirectResult.
+2024-06-11 21:11:45 [INF] Executing RedirectResult, redirecting to /Account/Login.
+2024-06-11 21:11:45 [INF] Executed page /Index in 15.5914ms
+2024-06-11 21:11:45 [INF] Executed endpoint '/Index'
+2024-06-11 21:11:45 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - 302 0 null 269.1945ms
+2024-06-11 21:11:45 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Account/Login - null null
+2024-06-11 21:11:45 [INF] Executing endpoint '/Account/Login'
+2024-06-11 21:11:45 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-06-11 21:11:45 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnGet - ModelState is "Valid"
+2024-06-11 21:11:45 [INF] Executed handler method OnGet, returned result .
+2024-06-11 21:11:45 [INF] Executing an implicit handler method - ModelState is "Valid"
+2024-06-11 21:11:45 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 21:11:45 [INF] Executed page /Account/Login in 38.7082ms
+2024-06-11 21:11:45 [INF] Executed endpoint '/Account/Login'
+2024-06-11 21:11:45 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Account/Login - 200 null text/html; charset=utf-8 48.6269ms
+2024-06-11 21:11:45 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 21:11:45 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 21:11:45 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 2.0693ms
+2024-06-11 21:11:45 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 62.9101ms
+2024-06-11 21:11:51 [INF] Request starting HTTP/1.1 POST http://localhost:5000/Account/Login - application/x-www-form-urlencoded 222
+2024-06-11 21:11:51 [INF] Executing endpoint '/Account/Login'
+2024-06-11 21:11:51 [INF] Route matched with {page = "/Account/Login"}. Executing page /Account/Login
+2024-06-11 21:11:51 [INF] Executing handler method LSP3.Pages.Account.LoginModel.OnPost - ModelState is "Valid"
+2024-06-11 21:11:51 [INF] *** Logging in: Username: mark
+2024-06-11 21:11:53 [INF] Accessing expired session, Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a
+2024-06-11 21:11:53 [INF] Executed handler method OnPost, returned result Microsoft.AspNetCore.Mvc.RedirectToPageResult.
+2024-06-11 21:11:53 [INF] Executing RedirectToPageResult, redirecting to /Admin.
+2024-06-11 21:11:53 [INF] Executed page /Account/Login in 2124.1234ms
+2024-06-11 21:11:53 [INF] Executed endpoint '/Account/Login'
+2024-06-11 21:11:53 [INF] Session started; Key:0314e18a-f5f6-c594-abda-4d51e1ccc35a, Id:2d8c946b-7d30-e0c0-9057-1aa7635fe44d
+2024-06-11 21:11:53 [INF] Request finished HTTP/1.1 POST http://localhost:5000/Account/Login - 302 0 null 2132.1757ms
+2024-06-11 21:11:53 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Admin - null null
+2024-06-11 21:11:53 [INF] Executing endpoint '/Admin'
+2024-06-11 21:11:53 [INF] Route matched with {page = "/Admin"}. Executing page /Admin
+2024-06-11 21:11:53 [INF] Executing handler method LSP3.Pages.AdminModel.OnGet - ModelState is "Valid"
+2024-06-11 21:11:57 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 21:11:57 [INF] Executed page /Admin in 3601.8203ms
+2024-06-11 21:11:57 [INF] Executed endpoint '/Admin'
+2024-06-11 21:11:57 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Admin - 200 null text/html; charset=utf-8 3606.606ms
+2024-06-11 21:11:57 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Scripts/author.js - null null
+2024-06-11 21:11:57 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Scripts/common.js - null null
+2024-06-11 21:11:57 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 21:11:57 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 0.3185ms
+2024-06-11 21:11:57 [INF] The file /Scripts/author.js was not modified
+2024-06-11 21:11:57 [INF] The file /Scripts/common.js was not modified
+2024-06-11 21:11:57 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Scripts/common.js - 304 null text/javascript 4.6654ms
+2024-06-11 21:11:57 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Scripts/author.js - 304 null text/javascript 4.6669ms
+2024-06-11 21:11:57 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 21:11:57 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 7.6272ms
+2024-06-11 21:15:34 [INF] Request starting HTTP/1.1 GET http://localhost:5000/BookSearch - null null
+2024-06-11 21:15:34 [INF] Executing endpoint '/BookSearch'
+2024-06-11 21:15:34 [INF] Route matched with {page = "/BookSearch"}. Executing page /BookSearch
+2024-06-11 21:15:34 [INF] Executing handler method LSP3.Pages.BookSearchModel.OnGet - ModelState is "Valid"
+2024-06-11 21:15:34 [INF] Executed handler method OnGet, returned result .
+2024-06-11 21:15:34 [INF] Executing an implicit handler method - ModelState is "Valid"
+2024-06-11 21:15:34 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 21:15:34 [INF] Executed page /BookSearch in 36.3375ms
+2024-06-11 21:15:34 [INF] Executed endpoint '/BookSearch'
+2024-06-11 21:15:34 [INF] Request finished HTTP/1.1 GET http://localhost:5000/BookSearch - 200 null text/html; charset=utf-8 44.9858ms
+2024-06-11 21:15:34 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 21:15:34 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 0.3367ms
+2024-06-11 21:15:34 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 21:15:34 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 2.808ms
+2024-06-11 21:20:27 [INF] Request starting HTTP/1.1 GET http://localhost:5000/BookSearch - null null
+2024-06-11 21:20:27 [INF] Executing endpoint '/BookSearch'
+2024-06-11 21:20:27 [INF] Route matched with {page = "/BookSearch"}. Executing page /BookSearch
+2024-06-11 21:20:27 [INF] Executing handler method LSP3.Pages.BookSearchModel.OnGet - ModelState is "Valid"
+2024-06-11 21:20:27 [INF] Executed handler method OnGet, returned result .
+2024-06-11 21:20:27 [INF] Executing an implicit handler method - ModelState is "Valid"
+2024-06-11 21:20:27 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 21:20:27 [INF] Executed page /BookSearch in 1.3139ms
+2024-06-11 21:20:27 [INF] Executed endpoint '/BookSearch'
+2024-06-11 21:20:27 [INF] Request finished HTTP/1.1 GET http://localhost:5000/BookSearch - 200 null text/html; charset=utf-8 11.3485ms
+2024-06-11 21:20:27 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 21:20:27 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 0.3848ms
+2024-06-11 21:20:27 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 21:20:27 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 2.6524ms
+2024-06-11 21:20:27 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico - null null
+2024-06-11 21:20:27 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'C:\LSP\LSP3\LSP3\wwwroot\favicon.ico'
+2024-06-11 21:20:27 [INF] Request finished HTTP/1.1 GET http://localhost:5000/favicon.ico - 200 5430 image/x-icon 12.5833ms
+2024-06-11 21:21:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/BookSearch - null null
+2024-06-11 21:21:30 [INF] Executing endpoint '/BookSearch'
+2024-06-11 21:21:30 [INF] Route matched with {page = "/BookSearch"}. Executing page /BookSearch
+2024-06-11 21:21:30 [INF] Executing handler method LSP3.Pages.BookSearchModel.OnGet - ModelState is "Valid"
+2024-06-11 21:21:30 [INF] Executed handler method OnGet, returned result .
+2024-06-11 21:21:30 [INF] Executing an implicit handler method - ModelState is "Valid"
+2024-06-11 21:21:30 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-06-11 21:21:30 [INF] Executed page /BookSearch in 1.2475ms
+2024-06-11 21:21:30 [INF] Executed endpoint '/BookSearch'
+2024-06-11 21:21:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/BookSearch - 200 null text/html; charset=utf-8 7.5691ms
+2024-06-11 21:21:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-11 21:21:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 13744 application/javascript; charset=utf-8 0.3897ms
+2024-06-11 21:21:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2024-06-11 21:21:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 2.7052ms
+2024-06-11 21:29:23 [INF] Now listening on: http://localhost:5000
+2024-06-11 21:29:23 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-11 21:29:23 [INF] Hosting environment: Development
+2024-06-11 21:29:23 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-11 21:29:23 [INF] HTTP GET / responded 302 in 143.6987 ms
+2024-06-11 21:29:23 [INF] HTTP GET /Account/Login responded 200 in 38.4332 ms
+2024-06-11 21:29:25 [INF] *** Logging in: Username: mark
+2024-06-11 21:29:27 [INF] HTTP POST /Account/Login responded 302 in 1695.1220 ms
+2024-06-11 21:29:29 [INF] HTTP GET /Admin responded 200 in 2699.1069 ms
+2024-06-11 21:44:57 [INF] Now listening on: http://localhost:5000
+2024-06-11 21:44:57 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-11 21:44:57 [INF] Hosting environment: Development
+2024-06-11 21:44:57 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-11 21:44:58 [INF] HTTP GET / responded 302 in 126.4682 ms
+2024-06-11 21:44:58 [INF] HTTP GET /Account/Login responded 200 in 30.7118 ms
+2024-06-11 21:45:00 [INF] *** Logging in: Username: mark
+2024-06-11 21:45:02 [INF] HTTP POST /Account/Login responded 302 in 2137.2475 ms
+2024-06-11 21:45:05 [INF] HTTP GET /Admin responded 200 in 2880.3074 ms
+2024-06-11 21:45:28 [INF] HTTP GET /BookSearch responded 200 in 49.0387 ms
+2024-06-11 21:46:37 [INF] HTTP GET /BookSearch responded 200 in 1.4101 ms
+2024-06-11 21:46:44 [INF] HTTP GET /Index responded 302 in 2.1242 ms
+2024-06-11 21:46:47 [INF] HTTP GET /Admin responded 200 in 2992.2107 ms
+2024-06-11 21:46:48 [INF] HTTP GET /Search responded 200 in 4.5343 ms
+2024-06-11 21:46:54 [INF] HTTP GET /BookSales responded 200 in 4.1230 ms
+2024-06-11 21:46:57 [INF] HTTP GET /Search responded 200 in 0.7854 ms
+2024-06-11 22:13:17 [INF] Now listening on: http://localhost:5000
+2024-06-11 22:13:17 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-11 22:13:17 [INF] Hosting environment: Development
+2024-06-11 22:13:17 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-11 22:13:18 [INF] HTTP GET / responded 302 in 121.5591 ms
+2024-06-11 22:13:18 [INF] HTTP GET /Account/Login responded 200 in 28.9540 ms
+2024-06-11 22:13:19 [INF] *** Logging in: Username: mark
+2024-06-11 22:13:21 [INF] HTTP POST /Account/Login responded 302 in 1777.0039 ms
+2024-06-11 22:13:24 [INF] HTTP GET /Admin responded 200 in 2759.7070 ms
+2024-06-11 22:13:35 [INF] HTTP GET /Search responded 200 in 11.1608 ms
+2024-06-11 22:13:38 [INF] HTTP GET /Search responded 200 in 1.0924 ms
+2024-06-11 22:13:40 [INF] HTTP GET /BookSearch responded 200 in 4.8691 ms
+2024-06-11 22:13:42 [INF] HTTP GET /BookSales responded 200 in 5.6967 ms

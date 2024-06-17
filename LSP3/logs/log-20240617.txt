@@ -1,0 +1,16 @@
+2024-06-17 00:08:56 [INF] Now listening on: http://localhost:5000
+2024-06-17 00:08:56 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-17 00:08:56 [INF] Hosting environment: Development
+2024-06-17 00:08:56 [INF] Content root path: C:\LSP\LSP3\LSP3
+2024-06-17 00:08:58 [INF] HTTP GET / responded 302 in 143.0422 ms
+2024-06-17 00:08:58 [INF] HTTP GET /Account/Login responded 200 in 23.0505 ms
+2024-06-17 00:08:58 [INF] HTTP GET /Account/favicon.ico responded 404 in 2.7334 ms
+2024-06-17 00:09:08 [INF] HTTP GET /Account/Login responded 200 in 2.9442 ms
+2024-06-17 00:09:08 [INF] HTTP GET /Account/favicon.ico responded 404 in 0.2187 ms
+2024-06-17 00:09:15 [INF] *** Logging in: Username: mark
+2024-06-17 00:09:17 [INF] HTTP POST /Account/Login responded 302 in 1848.7057 ms
+2024-06-17 00:09:21 [INF] HTTP GET /Admin responded 200 in 4144.4571 ms
+2024-06-17 00:09:52 [INF] HTTP GET /Book responded 200 in 8.9075 ms
+2024-06-17 00:09:53 [INF] HTTP GET /Admin responded 200 in 4356.5453 ms
+2024-06-17 00:10:02 [INF] HTTP GET /Admin responded 200 in 4451.7808 ms
+2024-06-17 00:10:09 [INF] HTTP GET /UploadContent responded 200 in 3256.4341 ms
