@@ -74,8 +74,8 @@
             getRows: (params) => { 
                 console.log("[Datasource] - rows requested by grid: ", params.request);
                 const { startRow, endRow, sortModel } = params.request;
-                let sortColumn = null;
-                let sortDirection = null;
+                let sortColumn = "bookID";
+                let sortDirection = "ASC";
                 let filter = JSON.stringify(params.request.filterModel);
 
                 // Extract sorting information

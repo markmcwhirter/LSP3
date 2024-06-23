@@ -90,11 +90,7 @@ function htmlEscape(str) {
 
 /* isBlankOrNull - returns true if blank or null */
 function isBlankOrNull(tag) {
-    if ($.trim($(tag).val()) === '') {
-        return true;
-    } else {
-        return false;
-    }
+    return $.trim($(tag).val()) === '';
 }
 
 /* checkBoolean - 1 if checkmark checked, 0 otherwise */

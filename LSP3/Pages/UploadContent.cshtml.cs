@@ -10,7 +10,7 @@ using System.Text.Json;
 namespace LSP3.Pages;
 
 
-public class UploadContentModel : MasterModel
+public class UploadContentModel(IOptions<AppSettings> appSettings, ILogger<UploadContentModel> logger, IHttpContextAccessor httpContextAccessor) : MasterModel(httpContextAccessor)
 {
     [BindProperty]
     public string Status { get; set; }
@@ -39,15 +39,9 @@ public class UploadContentModel : MasterModel
     public IFormFile File { get; set; }
 
 
-    private readonly ILogger<UploadContentModel> _logger;
+    private readonly ILogger<UploadContentModel> _logger = logger;
 
-    private readonly AppSettings _appSettings;
-
-    public UploadContentModel(IOptions<AppSettings> appSettings, ILogger<UploadContentModel> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
-    {
-        _appSettings = appSettings.Value;
-        _logger = logger;
-    }
+    private readonly AppSettings _appSettings = appSettings.Value;
 
     public async Task<IActionResult> OnGet(int? bookid, int? authorid)
     {

@@ -8,21 +8,14 @@ using System.Linq;
 
 namespace LSP3.Pages;
 
-public class FilesModel : MasterModel
+public class FilesModel(IOptions<AppSettings> appSettings, ILogger<FilesModel> logger, IHttpContextAccessor httpContextAccessor) : MasterModel(httpContextAccessor)
 {
     [BindProperty]
-    public List<FileDisplayModel> Files { get; set; }
+    public List<FileDisplayModel> Files { get; set; } = [];
 
-    private readonly ILogger<FilesModel> _logger;
+    private readonly ILogger<FilesModel> _logger = logger;
 
-    private readonly AppSettings _appSettings;
-
-    public FilesModel(IOptions<AppSettings> appSettings, ILogger<FilesModel> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
-    {
-        _appSettings = appSettings.Value;
-        _logger = logger;
-        Files = [];
-    }
+    private readonly AppSettings _appSettings = appSettings.Value;
 
     public IActionResult OnGet()
     {
