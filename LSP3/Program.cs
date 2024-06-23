@@ -5,41 +5,34 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.FileProviders;
 
 using Serilog;
-using Serilog.Events;
+
+
+var configuration = new ConfigurationBuilder()
+     .SetBasePath(Directory.GetCurrentDirectory())
+     .AddJsonFile("appsettings.json")
+     .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", true)
+     .Build();
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .Enrich.WithThreadId()
+    .Enrich.WithProperty("Application", "LSPApi")
+    .Enrich.WithProperty("Environment", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production")
+    .Enrich.WithProperty("ThreadName", Thread.CurrentThread.Name ?? "Unnamed Thread")
+    .Enrich.WithProcessId()
+    .Enrich.FromLogContext()
+    .Enrich.WithMachineName()
+    .Enrich.WithEnvironmentUserName()
+    .Enrich.WithClientIp()
+    .Enrich.WithRequestHeader("User-Agent")
+    .WriteTo.File("log.txt",
+        rollingInterval: RollingInterval.Day,
+        rollOnFileSizeLimit: true)
+    .WriteTo.Seq("http://209.38.64.145:5341")
+    .ReadFrom.Configuration(configuration)
+    .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Host.ConfigureAppConfiguration((builder, config) =>
- {
-
-
-     var env = builder.HostingEnvironment;
-
-     config.SetBasePath(env.ContentRootPath)
-     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-     .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-     .AddEnvironmentVariables();
- });
-
-// Serilog Configuration (For File Logging)
-builder.Host.UseSerilog((ctx, lc) => lc
-    .WriteTo.File("logs/log-.txt",
-        rollingInterval: RollingInterval.Day,
-        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
-    .MinimumLevel.Debug()
-    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-    // Filter out ASP.NET Core infrastructre logs that are Information and below
-    .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
-    .Enrich.FromLogContext()
-    .WriteTo.Seq("http://209.38.64.145:5341")
-    .Enrich.WithProperty("Application", "LSP")
-    .Enrich.WithProperty("Environment", ctx.HostingEnvironment.EnvironmentName)
-);
-
-builder.Services.AddLogging(loggingBuilder =>
-{
-    loggingBuilder.AddSeq();
-});
 
 builder.Services.AddRazorPages();
 
@@ -57,8 +50,23 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromHours(1);
 });
 
+builder.Services.AddSingleton<HttpRequestAndCorrelationContextEnricher>();
+builder.Host.UseSerilog(Log.Logger);
+
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("corspolicy", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+//});
+
+
 
 var app = builder.Build();
+
+app.UseCors(x => x
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .SetIsOriginAllowed(origin => true) // allow any origin
+    .AllowCredentials()); // allow credentials
 
 app.UseCookiePolicy();
 

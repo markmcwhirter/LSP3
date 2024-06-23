@@ -93,7 +93,7 @@
 
         serverSideDatasource: {
             getRows: (params) => {
-                debugger;
+
                 console.log("[Datasource] - rows requested by grid: ", params.request);
                 const { startRow, endRow, sortModel } = params.request;
                 let sortColumn = "lastName";
@@ -105,6 +105,9 @@
                     sortColumn = sortModel[0].colId;
                     sortDirection = sortModel[0].sort;
                 }
+
+                sortColumn = sortColumn === "null" ? "AuthorId" : sortColumn;
+                sortDirection = sortDirection === "asc" ? "ASC" : "DESC";
 
                 // Build your API request URL
                 const url = API_URL + `author/gridsearch?startRow=${startRow}&endRow=${endRow}&sortColumn=${sortColumn}&sortDirection=${sortDirection}&filter=${filter}`;
