@@ -16,7 +16,7 @@ var configuration = new ConfigurationBuilder()
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .Enrich.WithThreadId()
-    .Enrich.WithProperty("Application", "LSPApi")
+    .Enrich.WithProperty("Application", "LSP")
     .Enrich.WithProperty("Environment", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production")
     .Enrich.WithProperty("ThreadName", Thread.CurrentThread.Name ?? "Unnamed Thread")
     .Enrich.WithProcessId()
@@ -25,7 +25,7 @@ Log.Logger = new LoggerConfiguration()
     .Enrich.WithEnvironmentUserName()
     .Enrich.WithClientIp()
     .Enrich.WithRequestHeader("User-Agent")
-    .WriteTo.File("log.txt",
+    .WriteTo.File("logs/log-.txt",
         rollingInterval: RollingInterval.Day,
         rollOnFileSizeLimit: true)
     .WriteTo.Seq("http://209.38.64.145:5341")
