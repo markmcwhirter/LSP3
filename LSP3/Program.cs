@@ -13,6 +13,8 @@ var configuration = new ConfigurationBuilder()
      .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", true)
      .Build();
 
+var sequrl = configuration.GetValue<string>("Seq");
+
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .Enrich.WithThreadId()
@@ -28,7 +30,7 @@ Log.Logger = new LoggerConfiguration()
     .WriteTo.File("logs/log-.txt",
         rollingInterval: RollingInterval.Day,
         rollOnFileSizeLimit: true)
-    .WriteTo.Seq("http://209.38.64.145:5341")
+    .WriteTo.Seq(sequrl)
     .ReadFrom.Configuration(configuration)
     .CreateLogger();
 
@@ -53,10 +55,10 @@ builder.Services.AddSession(options =>
 builder.Services.AddSingleton<HttpRequestAndCorrelationContextEnricher>();
 builder.Host.UseSerilog(Log.Logger);
 
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("corspolicy", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-//});
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("corspolicy", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+});
 
 
 

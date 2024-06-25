@@ -61,9 +61,9 @@
         // Datasource definition
         serverSideDatasource: {
             getRows: (params) => { 
-                // console.log("[Datasource] - rows requested by grid: ", params.request);
+                console.log("[Datasource] - rows requested by grid: ", params.request);
                 const { startRow, endRow, sortModel } = params.request;
-                let sortColumn = "BookId";
+                let sortColumn = "Author";
                 let sortDirection = "ASC";
                 let filter = JSON.stringify(params.request.filterModel);
 
@@ -72,6 +72,8 @@
                     sortColumn = sortModel[0].colId;
                     sortDirection = sortModel[0].sort;
                 }
+                sortColumn = sortColumn === "null" ? "Author" : sortColumn;
+                sortDirection = sortDirection === "asc" ? "ASC" : "DESC";
 
                 // Build your API request URL
                 const url = API_URL + `book/gridsearch?startRow=${startRow}&endRow=${endRow}&sortColumn=${sortColumn}&sortDirection=${sortDirection}&filter=${filter}`;
