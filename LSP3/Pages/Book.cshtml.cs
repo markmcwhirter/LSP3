@@ -3,7 +3,8 @@ using LSP3.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
-using System.Web;
+using System.Text.Json;
+
 
 namespace LSP3.Pages;
 
@@ -45,35 +46,14 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
             }
 
             UploadMessage = $"File '{fileName}' uploaded successfully.";
+            Response.Redirect($"Book2?BookID={Book.BookID}");
         }
         else
         {
             UploadMessage = "Please select a file.";
         }
         return new JsonResult(new { message = "" });
-    }
 
-    public async Task<IActionResult> OnPostAsync(IFormFile file)
-    {
-        if (file != null && file.Length > 0)
-        {
-            var uploadsFolder = Path.Combine(_environment.WebRootPath, "data"); // "uploads" folder within wwwroot
-            var fileName = Path.GetFileName(file.FileName);
-            var filePath = Path.Combine(uploadsFolder, fileName);
-
-            Directory.CreateDirectory(uploadsFolder); // Ensure folder exists
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                await File.CopyToAsync(fileStream);
-            }
-
-            UploadMessage = $"File '{fileName}' uploaded successfully.";
-        }
-        else
-        {
-            UploadMessage = "Please select a file.";
-        }
-        return Page();
     }
 
     public async Task<IActionResult> OnGet(int? bookid, int? authorid)
@@ -82,7 +62,7 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
 
         try
         {
-            HttpHelper helper = new();           
+            HttpHelper helper = new();
             Extensions<BookDto> bookextensions = new();
 
 
@@ -109,6 +89,36 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
                     Book = bookextensions.Deserialize(apiResponse);
             }
 
+
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message);
+        }
+
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        try
+        {
+            HttpHelper helper = new();
+            Extensions<BookDto> bookextensions = new();
+
+            if (!base.IsAuthenticated)
+                return Redirect("/Account/Login");
+
+            Book.DateCreated = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
+
+            string jsonString = JsonSerializer.Serialize(Book);
+
+            var apiResponse = await helper.PostAsync(_appSettings.HostUrl + "book/update", jsonString);
+
+            if (Book.BookID > 0)
+                UploadMessage = "Book saved successfully!";
+            else
+                UploadMessage = "Book could not be saved.";
 
         }
         catch (Exception ex)

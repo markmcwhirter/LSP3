@@ -483,7 +483,7 @@
                             <div class="col-sm-10">
                                 @if (book.Cover == null)
                                 {
-                                    <div>(No Cover image)</div>
+                                    <a target="_blank" href="#" style="color: red" onClick="window.open('AddBookImage?bookid=@book.BookID&type=cover','pagename','menubar=yes,location=yes,status=yes,channelmode=yes,toolbar=yes,resizable=yes'); return false;">Click to add cover image</a>
                                 }
                                 else
                                 {
@@ -496,7 +496,7 @@
                             <div class="col-sm-1"></div>
                             <div class="col-sm-1">Description:</div>
                             <div class="col-sm-3">
-                                <a target="_blank" href="#" onClick="window.open('DisplayText?field=description&bookid=@Html.Raw(book.BookID.ToString())&table=book','pagename','resizable,height=260,width=370'); return false;">View Description</a>
+                                <a target="_blank" href="#" onClick="window.open('DisplayText?field=description&bookid=@Html.Raw(book.BookID.ToString())&table=book','pagename','menubar=yes,location=yes,status=yes,channelmode=yes,toolbar=yes,resizable=yes'); return false;">View Description</a>
                             </div>
                             <div class="col-sm-7">
                                 @(book.Description.Length > 10 ? "(" + book.Description.Substring(0, 10) + "...)" : "(" + book.Description + ")")
@@ -509,7 +509,7 @@
                             <div class="col-sm-10">
                                 @if (book.AuthorPhoto == null)
                                 {
-                                    <div>(No Author Photo image)</div>
+                                    <a target="_blank" href="#" style="color: red" onClick="window.open('AddBookImage?bookid=@book.BookID&type=author','pagename','menubar=yes,location=yes,status=yes,channelmode=yes,toolbar=yes,resizable=yes'); return false;">Click to add author photo image</a>
                                 }
                                 else
                                 {
@@ -524,7 +524,7 @@
                             <div class="col-sm-10">
                                 @if (book.Interior == null)
                                 {
-                                    <div>(No Interior image)</div>
+                                    <a target="_blank" href="#" style="color: red" onClick="window.open('AddBookImage?bookid=@book.BookID&type=interior','pagename','resizable'); return false;">Click to add interior image</a>
                                 }
                                 else
                                 {

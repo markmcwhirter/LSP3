@@ -72,7 +72,7 @@
             getRows: (params) => { 
                 console.log("[Datasource] - rows requested by grid: ", params.request);
                 const { startRow, endRow, sortModel } = params.request;
-                let sortColumn = "Author";
+                let sortColumn = "Title";
                 let sortDirection = "ASC";
                 let filter = JSON.stringify(params.request.filterModel);
 
@@ -81,7 +81,7 @@
                     sortColumn = sortModel[0].colId;
                     sortDirection = sortModel[0].sort;
                 }
-                sortColumn = sortColumn === "null" ? "Author" : sortColumn;
+                sortColumn = sortColumn === "null" ? "Title" : sortColumn;
                 sortDirection = sortDirection === "asc" ? "ASC" : "DESC";
 
                 // Build your API request URL

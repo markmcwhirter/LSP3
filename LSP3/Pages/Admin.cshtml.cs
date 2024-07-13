@@ -68,6 +68,11 @@ public class AdminModel : MasterModel
             if (!string.IsNullOrEmpty(apiResponse))
                 Books = bookextensions.Deserialize(apiResponse);
 
+            foreach( var b in Books)
+            {
+                var cover = b.Cover;
+            }
+
         }
         catch (Exception ex)
         {

@@ -83,7 +83,7 @@
                 <div class="col-sm-4">
                 </div>
                 <div class="col-sm-1">
-                    <button type="button" id="UpdateButton" onclick="return UpdateBookEventHandler(event);" class="btn btn-primary" style="color: white">Add</button>
+                    <button type="submit" id="UpdateButton" class="btn btn-primary" style="color: white">Add</button>
                 </div>
                 <div class="col-sm-1">
                     <button type="button" id="CancelButton" onclick="return CancelBookEventHandler(event);" class="btn btn-secondary" style="color: white">Cancel</button>
@@ -100,11 +100,8 @@
 
     window.addEventListener("load", evaluateInputAndUpdateButton);
 
-    function UpdateButton() {
-
-    }
     function evaluateInputAndUpdateButton() {
-
+       
         const inputElement = document.getElementById("bookid");
         const buttonElement = document.getElementById("UpdateButton");
 
@@ -127,208 +124,6 @@
 
     }
 
-    function UpdateBookEventHandler(event) {
-        debugger;
-        event.preventDefault();
-
-        const myCheckbox = document.getElementById("tandc");
-
-        if (!myCheckbox.checked) {
-            alert('Please check Terms and Conditions Checkbox to continue');
-            return false;
-        }
-
-        /* Upload cover image */
-        const fileCoverData = fileInputCover.files[0];
-
-
-        // File Upload using Fetch API
-        const formCover = new FormData();
-        formCover.append('file', fileCoverData); // Append the file to the FormData object
-
-
-        fetch('/your-upload-endpoint', {
-            method: 'POST',
-            body: formCover
-        })
-            .then(response => {
-                if (response.ok) {
-                    uploadStatus.textContent = "File uploaded successfully!";
-                } else {
-                    uploadStatus.textContent = "Upload failed.";
-                }
-            })
-            .catch(error => {
-                console.error('Error uploading file:', error);
-                uploadStatus.textContent = "An error occurred during upload.";
-            });
-
-
-
-        var formData = new FormData(document.getElementById("bookform"));
-        AddBook(formData);
-
-        // var data = JSON.stringify(Object.fromEntries(formData));
-
-        // const book = JSON.parse(data);
-        // deleteFromObject('__RequestVerificationToken', book);
-
-        // let options = {
-        //     method: 'POST',
-        //     headers: {
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(book)
-        // };
-
-        // fetch(API_URL + "book/update", options)
-        //     .then(
-        //         response => { return 'Success'; }
-        //     ).then(
-        //         html => console.log(html)
-        //     );
-
-        alert('Add or Update sucessful');
-        window.location.href = "@Model.Referrer";
-
-        return true;
-    }
-
-
-    /* Upload File methods */
-    const dropAreaCover = document.getElementById('dropAreaCover');
-    const fileInputCover = document.getElementById('fileInputCover');
-    const coverFileName = document.getElementById('coverFileName');
-
-
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-        dropAreaCover.addEventListener(eventName, preventDefaults, false);
-    });
-
-    function preventDefaults() {
-        e.preventDefault();
-        dropAreaCover.classList.add('dotBorder');
-    }
-
-    dropAreaCover.addEventListener('click', () => {
-        fileInputCover.click();
-    });
-
-
-    dropAreaCover.addEventListener('drop', UpdateCoverFile);
-
-    fileInputCover.addEventListener('change', UpdateCoverFile);
-
-    function UpdateCoverFile() {
-        const file = fileInputCover.files[0];
-
-        coverFileName.textContent = file.name;
-        const hiddeninput = document.getElementById('cover');
-        hiddeninput.value = file.name;
-    }
-
-    async function uploadFile(content) {
-        debugger;
-        const fileInput = document.getElementById(content);
-
-        // modify later to handle other file inputs
-        const file = fileInputCover.files[0];
-
-        if (file) {
-            const formData = new FormData();
-            formData.append('file', file);
-
-            const response = fetch("/Book", {
-                method: "POST",
-                body: fileInputCover.files[0] 
-             })                    
-            .then(function(serverPromise){ 
-              serverPromise.json()
-                .then(function(j) { 
-                  console.log(j); 
-                })
-                .catch(function(e){
-                  console.log(e);
-                });
-            })
-            .catch(function(e){
-                console.log(e);
-              });
-
-            // try {
-            //     const response = fetch("/Book", {
-            //         method: "POST",
-            //         //headers: { "Content-Type": "application/json" },
-            //         body: file // JSON.stringify(Object.fromEntries(formData))
-            //     });
-            //     if (response.ok) {
-            //         const message = await response.text();
-            //         document.getElementById('uploadMessage').textContent = message;
-            //     } else {
-            //         document.getElementById('uploadMessage').textContent = 'Upload failed.';
-            //     }
-            // }
-            // catch (error) {
-            //     console.error('Error:', error);
-            //     document.getElementById('uploadMessage').textContent = 'An error occurred.';
-            // }
-
-            // try {
-            //     const response = await fetch('', {
-            //         method: 'POST',
-            //         body: formData
-            //     });
-
-            //     if (response.ok) {
-            //         const message = await response.text();
-            //         document.getElementById('uploadMessage').textContent = message;
-            //     } else {
-            //         document.getElementById('uploadMessage').textContent = 'Upload failed.';
-            //     }
-            // } catch (error) {
-            //     console.error('Error:', error);
-            //     document.getElementById('uploadMessage').textContent = 'An error occurred.';
-            // }
-        } else {
-            document.getElementById('uploadMessage').textContent = 'Please select a file.';
-        }
-    }
-
-    function post_to_url(path, params, method) {
-        method = method || "post"; // Set method to post by default, if not specified.
-
-        // The rest of this code assumes you are not using a library.
-        // It can be made less wordy if you use one.
-        var form = document.createElement("form");
-        form.setAttribute("method", method);
-        form.setAttribute("action", path);
-
-        var addField = function (key, value) {
-            var hiddenField = document.createElement("input");
-            hiddenField.setAttribute("type", "hidden");
-            hiddenField.setAttribute("name", key);
-            hiddenField.setAttribute("value", value);
-
-            form.appendChild(hiddenField);
-        };
-
-        for (var key in params) {
-            if (params.hasOwnProperty(key)) {
-                if (params[key] instanceof Array) {
-                    for (var i = 0; i < params[key].length; i++) {
-                        addField(key, params[key][i])
-                    }
-                }
-                else {
-                    addField(key, params[key]);
-                }
-            }
-        }
-
-        document.body.appendChild(form);
-        form.submit();
-    }
 </script>
 
 

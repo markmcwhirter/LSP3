@@ -1,0 +1,38 @@
+﻿@page
+@model LSP3.Pages.AddBookImage
+@{
+    Layout = "_LayoutNoMenu";
+}
+
+<div class="container-fluid">
+    <div class="content" style="width:60%;">
+        <form method="post" enctype="multipart/form-data" >
+            <div class="row"></div>
+            <div class="row">
+                <div class="col-sm-12">
+                    Book Image and Document Uploads
+                </div>
+            </div>
+            <div class="row"></div>
+            <div class="row">
+                <div class="col-sm-12" style="color: red;">@Model.Status</div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3 form-control">
+                    <label asp-for="File" class="form-label">Click here to select file</label>
+                    @* <input type="file" asp-for="File" name="fileInput1" id="fileInput1" class="uploadBorderFile" /> *@
+                    <input type="file" asp-for="File" />
+                    <span asp-validation-for="File" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row" style="height: 25px"></div>
+            <div class="row">
+                <div class="col-sm-3 form-control">
+                    <button type="submit" class="btn btn-primary" style="color: white">Upload File</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
