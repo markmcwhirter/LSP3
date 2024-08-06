@@ -82,6 +82,12 @@ public class LoginModel : PageModel
 
 
             }
+			else
+			{
+                _logger.LogInformation($"ApiResponse is null");
+                Username = "";
+                return;
+            }
 
 		}
 		catch (Exception ex)
