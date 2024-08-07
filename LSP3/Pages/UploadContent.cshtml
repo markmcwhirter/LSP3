@@ -3,43 +3,120 @@
 @{
     Layout = "_Layout";
 }
+<style>
+    input[type="file"]::file-selector-button {
+        border-radius: 4px;
+        padding: 0 16px;
+        height: 40px;
+        cursor: pointer;
+        background-color: white;
+        border: 1px solid rgba(0, 0, 0, 0.16);
+        box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+        margin-right: 16px;
+        transition: background-color 200ms;
+    }
 
+        /* file upload button hover state */
+        input[type="file"]::file-selector-button:hover {
+            background-color: #f3f4f6;
+        }
+
+        /* file upload button active state */
+        input[type="file"]::file-selector-button:active {
+            background-color: #e5e7eb;
+        }
+
+</style>
 
 <div class="container-fluid">
     <div class="content" style="width:60%;">
         <form method="post" enctype="multipart/form-data">
             <div class="row">
+                <div class="col-sm-12"></div>
+            </div>
+            <div class="row">
                 <div class="col-sm-12">
-                    Book Image and Document Uploads
+                    <h3>Book Image and Document Uploads</h3>
                 </div>
             </div>
-            <div class="row" ></div>
-            <div class="row"><div class="col-sm-12" style="color: red;">@Model.Status</div></div>
-            <div class="row">
-                <div class="col-sm-2 form-label">Select Book:</div>
+ 
+            <div class="row" style="padding:10px;">
+                <div class="col-sm-3 form-control uploadBorder">
+                    <label for="fileInput1" class="form-label" >Select Manuscript    </label>
+                    <input type="file" id="fileInput1" name="fileInput1"  />
+                </div>
+            </div>
 
-                <div class="col-sm-2 form-control"><select asp-for="SelectedBookId" asp-items="@Model.BookOptions"></select></div>
-            </div>
-            <div class="row" style="height: 25px"></div>
-            <div class="row">
-                <div class="col-sm-2 form-label">Select Image Type:</div>
-                <div class="col-sm-2 form-control"><select asp-for="SelectedContentType" asp-items="@Model.ContentTypes"></select></div>
-            </div>
-            <div class="row" style="height: 25px"></div>
-            <div class="row">
-                <div class="col-sm-3 form-control">
-                    <label asp-for="File" class="form-label" style="background-color: lightgray; padding: 25px;">Click here to select file</label>
-                    <input type="file" asp-for="File" class="uploadBorderFile" />
-                    <span asp-validation-for="File" class="text-danger"></span>
+            <div class="row" style="padding:10px;">
+                <div class="col-sm-3 form-control uploadBorder">
+                    <label class="form-label" >Select Cover     </label>
+                    <input type="file" id="fileInput2" name="fileInput2" />
                 </div>
             </div>
+
+            <div class="row" style="padding:10px;">
+                <div class="col-sm-3 form-control uploadBorder">
+                    <label class="form-label" >Select Interior    </label>
+                    <input type="file" id="fileInput3" name="fileInput3" />
+                </div>
+            </div>
+
+            <div class="row" style="padding:10px;">
+                <div class="col-sm-3 form-control uploadBorder">
+                    <label class="form-label" >Select Author   </label>
+                    <input type="file" id="fileInput4" name="fileInput4"  />
+                </div>
+            </div>
+
             <div class="row" style="height: 25px"></div>
             <div class="row">
                 <div class="col-sm-3 form-control">
-                    <button type="submit" class="btn btn-primary" style="color: white">Upload File</button>
+                    <button id="uploadButton" name="uploadButton" type="submit" class="btn btn-primary" style="color: white">Upload File</button>
                 </div>
             </div>
         </form>
     </div>
 
 </div>
+@* <script type="text/javascript">
+
+    const uploadButton = document.getElementById("uploadButton");
+
+    uploadButton.addEventListener("click", () => {
+
+        debugger;
+        const fileInputs = [
+            document.getElementById("fileInput0"),
+            document.getElementById("fileInput1"),
+            document.getElementById("fileInput2"),
+            document.getElementById("fileInput3")
+        ];
+
+        fileInputs.forEach(input => {
+            const files = input.files;
+
+            if (files.length > 0) {
+                const formData = new FormData();
+                for (let i = 0; i < files.length; i++) {
+                    formData.append("files[]", files[i]);
+                }
+
+                // Replace with your actual server-side upload endpoint
+                const uploadUrl = "/your-upload-endpoint";
+
+                fetch(uploadUrl, {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(response => {
+                        // Handle the server response (e.g., show success/error messages)
+                    })
+                    .catch(error => {
+                        console.error("Upload error:", error);
+                    });
+            }
+        });
+    });
+
+
+</script> *@

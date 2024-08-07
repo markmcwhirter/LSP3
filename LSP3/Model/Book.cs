@@ -43,6 +43,9 @@ public partial class BookDto
     [JsonProperty("coverIdea")]
     public string? CoverIdea { get; set; }
 
+    [JsonProperty("document")]
+    public string? Document { get; set; }
+
     [JsonProperty("notes")]
     public string? Notes { get; set; }
 }

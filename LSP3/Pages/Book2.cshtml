@@ -20,8 +20,16 @@
 
             <div class="row">
                 <div class="col-sm-3 form-control">
+                    <label asp-for="File" class="form-label" style="background-color: lightgray; padding: 25px;">Click here to select Manuscript</label>
+                    <input type="file" id="fileInput0" class="uploadBorderFile" />
+                    <span asp-validation-for="File" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3 form-control">
                     <label asp-for="File" class="form-label" style="background-color: lightgray; padding: 25px;">Click here to select Cover file</label>
-                    <input type="file"  id="fileInput1" class="uploadBorderFile" />
+                    <input type="file" id="fileInput1" class="uploadBorderFile" />
                     <span asp-validation-for="File" class="text-danger"></span>
                 </div>
             </div>
@@ -45,7 +53,7 @@
             <div class="row" style="height: 25px"></div>
             <div class="row">
                 <div class="col-sm-3 form-control">
-                    <button type="submit" class="btn btn-primary" style="color: white">Upload File</button>
+                    <button id="uploadButton" name="uploadButton" type="button" class="btn btn-primary" style="color: white">Upload File</button>
                 </div>
             </div>
         </form>
@@ -60,6 +68,7 @@
 
         debugger;
         const fileInputs = [
+            document.getElementById("fileInput0"),
             document.getElementById("fileInput1"),
             document.getElementById("fileInput2"),
             document.getElementById("fileInput3")
