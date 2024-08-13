@@ -163,7 +163,7 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
             _logger.LogError(ex.Message);
         }
 
-        return RedirectToPage("/Index"); //return Page();
+        return RedirectToPage("/Index"); 
     }
 }
 

@@ -33,10 +33,7 @@ public class ResetModel(IOptions<AppSettings> appSettings, ILogger<ResetModel> l
 
             await OnGetauthor(Username, Password);
 
-            if( IsAdmin )
-                return RedirectToPage("/Admin");
-            else
-                return RedirectToPage("/Index");
+            return RedirectToPage("/Index");
         }
         return Page();
     }

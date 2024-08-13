@@ -51,14 +51,7 @@ public class UploadContentModel(IOptions<AppSettings> appSettings, IHttpContextA
         await UploadFile(fileInput2, "cover");
         await UploadFile(fileInput4, "author");
 
-        if (helper.IsAuthenticated(_httpContextAccessor))
-        {
-            IsAdmin = helper.IsAdmin(_httpContextAccessor);
-        }
-
-        return IsAdmin ? RedirectToPage("/Admin") : RedirectToPage("/Index");
-
-        return Page();
+        return RedirectToPage("/Index");
     }
 
     private async Task UploadFile(IFormFile inputFile, string filetype)

@@ -138,13 +138,7 @@ public class AddBookImage : PageModel
 
             SessionHelper helper = new();
 
-            bool IsAdmin = false;
-
-            if (helper.IsAuthenticated(_httpContextAccessor))
-            {
-                IsAdmin = helper.IsAdmin(_httpContextAccessor);
-            }
-            return IsAdmin ? RedirectToPage("/Admin") : RedirectToPage("/Index");
+            return  RedirectToPage("/Index");
         }
         catch (Exception ex)
         {
