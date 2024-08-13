@@ -493,16 +493,7 @@
                         <div class="row">
                             <div class="col-sm-1"></div>
                             <div class="col-sm-1">Cover:</div>
-                            <div class="col-sm-10">
-                                @if (book.Cover == null)
-                                {
-                                    <a target="_blank" href="#" style="color: red" onClick="window.open('AddBookImage?bookid=@book.BookID&type=cover','pagename','resizable'); return false;">Click to add cover image</a>
-                                }
-                                else
-                                {
-                                    <a target="_blank" href="#" onClick="window.open('Display?target=@Html.Raw(book.Cover)&table=book','pagename','resizable,height=260,width=370'); return false;">@Html.Raw(book.Cover)</a>
-                                }
-                            </div>
+                            <div class="col-sm-10">@book.Cover</div>
                         </div>
 
                         <div class="row">
@@ -519,32 +510,9 @@
                         <div class="row">
                             <div class="col-sm-1"></div>
                             <div class="col-sm-1">Author Photo:</div>
-                            <div class="col-sm-10">
-                                @if (book.AuthorPhoto == null)
-                                {
-                                    <a target="_blank" href="#" style="color: red" onClick="window.open('AddBookImage?bookid=@book.BookID&type=author','pagename','resizable'); return false;">Click to add cover image</a>
-                                }
-                                else
-                                {
-                                    <a target="_blank" href="#" onClick="window.open('Display?table=book&target=@Html.Raw(book.AuthorPhoto)','pagename','resizable,height=260,width=370'); return false;">@Html.Raw(book.AuthorPhoto)</a>
-                                }
-                            </div>
+                            <div class="col-sm-10">@book.AuthorPhoto</div>
                         </div>
 
-                        @*                         <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-1">Interior:</div>
-                <div class="col-sm-10">
-                @if (book.Interior == null)
-                {
-                <a target="_blank" href="#" style="color: red" onClick="window.open('AddBookImage?bookid=@book.BookID&type=interior','pagename','resizable'); return false;">Click to add cover image</a>
-                }
-                else
-                {
-                <a target="_blank" href="#" onClick="window.open('Display?table=book&target=@Html.Raw(book.Interior)','pagename','resizable,height=260,width=370'); return false;">@Html.Raw(book.Interior)</a>
-                }
-                </div>
-                </div> *@
 
                         <div class="row">
                             <div class="col-sm-1"></div>

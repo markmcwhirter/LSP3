@@ -10,7 +10,10 @@
         <div style="height:20px;"></div>
         <form method="post" id="bookform"  onsubmit="return validateForm();">
             <input type="hidden" id="bookid" name="bookid" value="@Model.Book.BookID">
-            <input type="hidden" id="authorid" name="authorid" value="@Model.Book.AuthorID">
+            @if (!Model.IsAdmin)
+            {
+                <input type="hidden" id="authorid" name="authorid" value="@Model.Book.AuthorID">
+            }
             <input type="hidden" id="cover" name="cover" value="@Model.Book.Cover">
             <div class="row">
                 <div class="col-sm-12">
@@ -20,28 +23,20 @@
 
             @if (Model.IsAdmin)
             {
-                <div class="row">
-                    <div class="col-sm-12">
-                    </div>
-                </div>
-                <div class="mb-6">
+                <div style="height:20px;"></div>
+                <div class="mb-12">
                     <label for="title" class="form-label">Select the Author</label>
-                    <select name="AuthorDropdown" id="AuthorDropdown">
+                    <select name="AuthorID" id="AuthorID"  class="select">
                         @{
                             foreach (var a in Model.ListItems)
                             {
                                 <option value="@a.AuthorID">@a.Name</option>
                             }
                         }
+                        <span class="focus"></span>
                     </select>
                 </div>
-            }
-            @if (Model.IsAdmin)
-            {
-                <div class="row">
-                    <div class="col-sm-12">
-                    </div>
-                </div>
+                <div style="height:20px;"></div>
             }
             else
             {

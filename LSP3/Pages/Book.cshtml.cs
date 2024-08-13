@@ -19,8 +19,11 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
     [BindProperty]
     public BookDto? Book { get; set; }
 
+    //[BindProperty]
+    //public int? AuthorId { get; set; }
+
     [BindProperty]
-    public int? AuthorId { get; set; }
+    public int? SelectedValue { get; set; }
 
     [BindProperty]
     public string? Referrer { get; set; }
@@ -68,7 +71,7 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
 
     }
 
-    public async Task<IActionResult> OnGet(int? bookid, int? authorid)
+    public async Task<IActionResult> OnGet(int? bookid, int authorid=0)
     {
 
 
@@ -114,10 +117,10 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
 
             }
 
-            if (Request.Query.ContainsKey("authorid"))
+            if (!IsAdmin && Request.Query.ContainsKey("authorid"))
             {
                 AuthorId = authorid;
-                Book.AuthorID = authorid ?? 0;
+                Book.AuthorID = authorid;
             }
 
             if (Request.Query.ContainsKey("bookid"))
@@ -148,10 +151,7 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
             Extensions<BookDto> bookextensions = new();
 
             if (!base.IsAuthenticated)
-                return Redirect("/Account/Login");
-
-            
-            Book.DateCreated = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
+                return Redirect("/Account/Login");          
 
             var apiResponse = await helper.PostAsync(_appSettings.HostUrl + "book/update", Book);
 
