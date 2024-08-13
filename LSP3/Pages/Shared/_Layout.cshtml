@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -11,9 +14,9 @@
     <meta name="robots" content="noindex, nofollow" />
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" type="text/css" />      
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" type="text/css" />
-    <link rel="stylesheet" href="~/css/optimized.css"  asp-append-version="true"  type="text/css" />
+    <link rel="stylesheet" href="~/css/optimized.css" asp-append-version="true" type="text/css" />
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -23,6 +26,11 @@
     <script src="Scripts/author.js" type="text/javascript"></script>
     <script src="Scripts/book.js" type="text/javascript"></script>
     <script src="Scripts/help.js" type="text/javascript"></script>
+
+    <script src="https://unpkg.com/ag-grid-enterprise/dist/ag-grid-enterprise.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ag-charts-enterprise@9.0.0/dist/umd/ag-charts-enterprise.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-enterprise/styles/ag-grid.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-enterprise/styles/ag-theme-alpine.css" />
 
 </head>
 <body>
@@ -42,11 +50,11 @@
                         <div id="contentInner">
 
                             <nav class="nav flex-column">
-                                <a class="nav-link active" href="http://www.lightswitchpress.com" aria-current="page" >LSP Home</a>
-                                <a class="nav-link" href="Index">Author Information</a>
-                                <a class="nav-link" href="Book"></a>
-                                <a class="nav-link" href="UploadContent">Upload Book Images</a>
-                                <a class="nav-link" href="Account/Logout">Logout</a>
+                                @foreach (var link in GetLinks())
+                                {
+                                    @Html.Raw(link);
+                                }
+
                             </nav>
                         </div>
                     </div>
@@ -70,3 +78,56 @@
 
 </body>
 </html>
+
+
+@{
+
+    List<string> GetLinks()
+    {
+        var menulist = new List<String>();
+        int authorid = 0;
+        int bookid = 0;
+        bool admin = false;
+
+        @if (Context.Session.GetString("AuthorId") != null)
+        {
+            authorid = int.Parse(Context.Session.GetString("AuthorId"));
+        }
+        @if (Context.Session.GetString("Admin") != null)
+        {
+            admin = bool.Parse(Context.Session.GetString("Admin"));
+        }
+
+        var links = new List<MenuItem>
+        {
+            new MenuItem { DisplayName = "LSP Home", LinkUrl = "http://www.lightswitchpress.com", Admin = false },
+            new MenuItem { DisplayName = "Author Information", LinkUrl = "Index", Admin = false },
+           // new MenuItem { DisplayName = "Upload Book Images", LinkUrl = "UploadContent", Admin = false },
+            new MenuItem { DisplayName = "Author Search", LinkUrl = "Search", Admin = true },
+            new MenuItem { DisplayName = "New Author", LinkUrl = "Account/Register", Admin = true },
+            new MenuItem { DisplayName = "Book Search", LinkUrl = "BookSearch", Admin = true },
+            new MenuItem { DisplayName = "New Book", LinkUrl = "Book", Admin = false },
+            new MenuItem { DisplayName = "Bulk Sales Entry", LinkUrl = "BulkSalesEntry", Admin = true },
+            new MenuItem { DisplayName = "Book Sales Browse", LinkUrl = "BookSales", Admin = true },
+            new MenuItem { DisplayName = "Logout", LinkUrl = "Account/Logout", Admin = false },
+        };
+
+        foreach (var l in links)
+        {
+            if( admin == false && l.DisplayName.ToLower().Equals("new book"))
+            {
+                menulist.Add($"<a class=\"nav-link sitelink\" href=\"{l.LinkUrl}?authorid={authorid}\">{l.DisplayName}</a>");
+            }
+            else if (admin == true)
+            {
+                menulist.Add($"<a class=\"nav-link sitelink\" href=\"{l.LinkUrl}\">{l.DisplayName}</a>");
+            }
+            else if (admin == false && l.Admin == false)
+            {
+                menulist.Add($"<a class=\"nav-link sitelink\" href=\"{l.LinkUrl}\">{l.DisplayName}</a>");
+            }
+        }
+        return menulist;
+    }
+}
+

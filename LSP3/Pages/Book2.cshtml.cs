@@ -44,20 +44,18 @@ public class Book2Model(IOptions<AppSettings> appSettings, ILogger<Book2Model> l
 
         try
         {
-            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "data");
-            Directory.CreateDirectory(uploadsFolder); // Create if not exists
+            if (!Directory.Exists(_appSettings.ImageData))
+            {
+                Directory.CreateDirectory(_appSettings.ImageData);
+            }
 
             var ext = Path.GetExtension(File.FileName);
 
             string randomfile = UidGenerator.GenerateHtmlFriendlyUid(24);
 
             // Construct the full path for saving
-            var filePath = Path.Combine(uploadsFolder, $"{bookId}_{randomfile}{ext}");
+            var filePath = Path.Combine(_appSettings.ImageData, $"{bookId}_{randomfile}{ext}");
 
-            if (!Directory.Exists(uploadsFolder))
-            {
-                Directory.CreateDirectory(uploadsFolder);
-            }
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {

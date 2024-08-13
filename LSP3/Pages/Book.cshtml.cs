@@ -3,6 +3,9 @@ using LSP3.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+
 using System.Text.Json;
 
 
@@ -22,13 +25,22 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
     [BindProperty]
     public string? Referrer { get; set; }
 
+    [BindProperty]
+    public bool IsAdmin { get; set; }
+
+    [BindProperty]
+    public List<AuthorListItem> ListItems { get; set; }
+
+    [BindProperty]
+    public IFormFile File { get; set; }
+
 
     private readonly ILogger<BookModel> _logger = logger;
 
     private readonly AppSettings _appSettings = appSettings.Value;
     private readonly IWebHostEnvironment _environment = environment;
-    [BindProperty]
-    public IFormFile File { get; set; }
+
+
     public string UploadMessage { get; set; }
 
     public async Task<IActionResult> OnPostHandlePostRequest(IFormFile file)
@@ -63,8 +75,12 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
         try
         {
             HttpHelper helper = new();
-            Extensions<BookDto> bookextensions = new();
+            SessionHelper sessionhelper = new();
 
+            Extensions<BookDto> bookextensions = new();
+            Extensions<AuthorListResultsModel> authorextensions = new();
+
+            List<AuthorListResults> authorlist = new();
 
             if (!base.IsAuthenticated)
                 return Redirect("/Account/Login");
@@ -72,6 +88,31 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
             IsReadOnly = false;
             Book = new BookDto();
 
+            // see if this is an admin 
+            IsAdmin = sessionhelper.IsAdmin(_httpContextAccessor);
+
+            if (IsAdmin)
+            { 
+            
+                ListItems = new List<AuthorListItem>();
+
+                // retrieve author list
+                var apiResponse = await helper.Get(_appSettings.HostUrl + $"author/getall");
+
+                if (!string.IsNullOrEmpty(apiResponse))
+                { 
+                    
+                    authorlist = System.Text.Json.JsonSerializer.Deserialize<List<AuthorListResults>>(apiResponse, new JsonSerializerOptions
+                        {
+                            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                        });
+                }
+                foreach( var a in authorlist)
+                {
+                    ListItems.Add(new AuthorListItem { AuthorID = a.AuthorID, Name = $" Id - {a.AuthorID} Name: {a.LastName},{a.FirstName} Email: {a.EMail}" });
+                }
+
+            }
 
             if (Request.Query.ContainsKey("authorid"))
             {
@@ -109,16 +150,12 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
             if (!base.IsAuthenticated)
                 return Redirect("/Account/Login");
 
+            
             Book.DateCreated = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
 
-            string jsonString = JsonSerializer.Serialize(Book);
+            var apiResponse = await helper.PostAsync(_appSettings.HostUrl + "book/update", Book);
 
-            var apiResponse = await helper.PostAsync(_appSettings.HostUrl + "book/update", jsonString);
-
-            if (Book.BookID > 0)
-                UploadMessage = "Book saved successfully!";
-            else
-                UploadMessage = "Book could not be saved.";
+            UploadMessage = apiResponse.IsSuccessStatusCode ? "Book saved successfully!" : "Book could not be saved.";
 
         }
         catch (Exception ex)
@@ -126,6 +163,12 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
             _logger.LogError(ex.Message);
         }
 
-        return Page();
+        return RedirectToPage("/Index"); //return Page();
     }
+}
+
+public class AuthorListItem
+{
+    public int AuthorID { get; set; }
+    public string Name { get; set; }
 }

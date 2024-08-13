@@ -49,7 +49,6 @@ public class UploadContentModel(IOptions<AppSettings> appSettings, IHttpContextA
 
         await UploadFile(fileInput1, "manuscript");
         await UploadFile(fileInput2, "cover");
-        await UploadFile(fileInput3, "interior");
         await UploadFile(fileInput4, "author");
 
         if (helper.IsAuthenticated(_httpContextAccessor))
@@ -75,16 +74,16 @@ public class UploadContentModel(IOptions<AppSettings> appSettings, IHttpContextA
             int bookId = TempData["BookId"] != null ? Convert.ToInt32(TempData["BookId"]) : 0;
             int authorId = TempData["AuthorId"] != null ? Convert.ToInt32(TempData["AuthorId"]) : 0;
 
-
-            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "data");
-            Directory.CreateDirectory(uploadsFolder); // Create if not exists
-
+            if (!Directory.Exists(_appSettings.ImageData))
+            {
+                Directory.CreateDirectory(_appSettings.ImageData);
+            }
 
 
             string randomfile = UidGenerator.GenerateHtmlFriendlyUid(24);
             var ext = Path.GetExtension(inputFile.FileName);
             var filename = $"{bookId}_{randomfile}{ext}";
-            var filePath = Path.Combine(uploadsFolder, filename);
+            var filePath = Path.Combine(_appSettings.ImageData, filename);
 
             // Save the file to the server
             using (var fileStream = new FileStream(filePath, FileMode.Create))
@@ -99,11 +98,9 @@ public class UploadContentModel(IOptions<AppSettings> appSettings, IHttpContextA
                 Book = bookextensions.Deserialize(apiResponse);
 
             if (filetype == "manuscript")
-                Book.Document = filename;
+                Book.Interior = filename;
             else if (filetype == "cover")
                 Book.Cover = filename;
-            else if (filetype == "interior")
-                Book.Interior = filename;
             else if (filetype == "author")
                 Book.AuthorPhoto = filename;
 

@@ -48,10 +48,7 @@ public class IndexModel : MasterModel
             if (!base.IsAuthenticated)
                 return Redirect("/Account/Login");
 
-            if (base.IsAdmin)
-                return Redirect("/Admin");
-
-            int authorId = int.Parse(sessionHelper.GetSessionString(_httpContextAccessor, "AuthorId"));
+             int authorId = int.Parse(sessionHelper.GetSessionString(_httpContextAccessor, "AuthorId"));
 
             string apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{authorId}");
 
@@ -62,6 +59,7 @@ public class IndexModel : MasterModel
 
             if (!string.IsNullOrEmpty(apiResponse))
                 Books = bookextensions.Deserialize(apiResponse);
+
             
         }
         catch (Exception ex)

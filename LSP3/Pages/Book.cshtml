@@ -8,7 +8,7 @@
 <div class="container-fluid">
     <div class="content" style="width:60%;">
         <div style="height:20px;"></div>
-        <form method="post" id="bookform">
+        <form method="post" id="bookform"  onsubmit="return validateForm();">
             <input type="hidden" id="bookid" name="bookid" value="@Model.Book.BookID">
             <input type="hidden" id="authorid" name="authorid" value="@Model.Book.AuthorID">
             <input type="hidden" id="cover" name="cover" value="@Model.Book.Cover">
@@ -18,17 +18,45 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <h2>Stop!  Don't incur extra fees!</h2>
+            @if (Model.IsAdmin)
+            {
+                <div class="row">
+                    <div class="col-sm-12">
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="mb-12">
-                    Is your manuscript 100% complete? After you submit your manuscript and select your publishing service, your book goes into production the next business day.
-                    Any changes or edits requested by the author once a book goes into production result in editorial fees of $60/hour.
+                <div class="mb-6">
+                    <label for="title" class="form-label">Select the Author</label>
+                    <select name="AuthorDropdown" id="AuthorDropdown">
+                        @{
+                            foreach (var a in Model.ListItems)
+                            {
+                                <option value="@a.AuthorID">@a.Name</option>
+                            }
+                        }
+                    </select>
                 </div>
-            </div>
+            }
+            @if (Model.IsAdmin)
+            {
+                <div class="row">
+                    <div class="col-sm-12">
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2>Stop!  Don't incur extra fees!</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-12">
+                        Is your manuscript 100% complete? After you submit your manuscript and select your publishing service, your book goes into production the next business day.
+                        Any changes or edits requested by the author once a book goes into production result in editorial fees of $60/hour.
+                    </div>
+                </div>
+            }
 
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
@@ -72,12 +100,11 @@
             </div>
 
 
-
-
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="tandc" name="tandc">
-                <label class="form-check-label" for="exampleCheck1">I understand the <a href="http://www.lightswitchpress.com/terms.php" target="_blank">Terms and Conditions</a></label>
+                <label class="form-check-label" for="TOCCheck">I understand the <a href="http://www.lightswitchpress.com/terms.php" target="_blank">Terms and Conditions</a></label>
             </div>
+
 
             <div class="row">
                 <div class="col-sm-4">
@@ -91,6 +118,9 @@
 
             </div>
             <div style="height:20px;"></div>
+            <script>
+
+            </script>
         </form>
     </div>
 
@@ -100,8 +130,18 @@
 
     window.addEventListener("load", evaluateInputAndUpdateButton);
 
+    function validateForm() {
+
+        var checkbox = document.getElementById("tandc");
+        if (checkbox == null || !checkbox.checked) {
+            alert("Please check the checkbox before submitting.");
+            return false; // Prevent form submission
+        }
+        return true; // Allow form submission
+    }
+
     function evaluateInputAndUpdateButton() {
-       
+
         const inputElement = document.getElementById("bookid");
         const buttonElement = document.getElementById("UpdateButton");
 

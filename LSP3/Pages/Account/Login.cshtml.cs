@@ -44,7 +44,7 @@ public class LoginModel : PageModel
             IsAdmin = helper.IsAdmin(_httpContextAccessor);
         }
 
-		return IsAdmin ? RedirectToPage("/Admin") : RedirectToPage("/Index");
+		return RedirectToPage("/Index");
 	}
 
 	public async Task OnGetauthor(string? username, string? password)

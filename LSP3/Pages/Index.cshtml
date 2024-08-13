@@ -1,20 +1,14 @@
 ﻿@page
 @model IndexModel
+@using LSP3.Pages.Shared;
+
 @{
     Layout = "_Layout";
-    ViewData["Title"] = "Author Information";
     var books = Model.Books;
 }
 <style>
     .form-control {
         margin: 5px 0 5px 0 !important;
-    }
-
-    .addbook {
-        position: relative;
-        left: -215px;
-        top: 5px;
-        color: #0d6efd !important;
     }
 </style>
 
@@ -33,7 +27,6 @@
                             <fieldset id="fieldset" name="fieldset" disabled>
 
                                 <input type="hidden" id="authorid" name="authorid" value="@Model.Author.AuthorID">
-                                <a class="addbook" href="Book?authorid=@Model.Author.AuthorID">Add Book</a>
                                 <div class="row">
                                     <div class="col-sm-1">
                                         <label for="prefix" class="form-label align-middle align-middle">Prefix:</label>
@@ -494,7 +487,7 @@
                         <div class="row">
                             <div class="col-sm-1"></div>
                             <div class="col-sm-1">Manuscript:</div>
-                            <div class="col-sm-10">@Html.Raw(book.Document)</div>
+                            <div class="col-sm-10">@Html.Raw(book.Interior)</div>
                         </div>
 
                         <div class="row">
@@ -538,20 +531,20 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-sm-1"></div>
-                            <div class="col-sm-1">Interior:</div>
-                            <div class="col-sm-10">
-                                @if (book.Interior == null)
-                                {
-                                    <a target="_blank" href="#" style="color: red" onClick="window.open('AddBookImage?bookid=@book.BookID&type=interior','pagename','resizable'); return false;">Click to add cover image</a>
-                                }
-                                else
-                                {
-                                    <a target="_blank" href="#" onClick="window.open('Display?table=book&target=@Html.Raw(book.Interior)','pagename','resizable,height=260,width=370'); return false;">@Html.Raw(book.Interior)</a>
-                                }
-                            </div>
-                        </div>
+                        @*                         <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-1">Interior:</div>
+                <div class="col-sm-10">
+                @if (book.Interior == null)
+                {
+                <a target="_blank" href="#" style="color: red" onClick="window.open('AddBookImage?bookid=@book.BookID&type=interior','pagename','resizable'); return false;">Click to add cover image</a>
+                }
+                else
+                {
+                <a target="_blank" href="#" onClick="window.open('Display?table=book&target=@Html.Raw(book.Interior)','pagename','resizable,height=260,width=370'); return false;">@Html.Raw(book.Interior)</a>
+                }
+                </div>
+                </div> *@
 
                         <div class="row">
                             <div class="col-sm-1"></div>
@@ -585,21 +578,42 @@
                                 }
                                 else
                                 {
-                                    @(book.CoverIdea.Length > 10 ? "(" + book.CoverIdea.Substring(0, 10) + "...)" : "(" + book.CoverIdea + ")")
+                                    @(book.CoverIdea.Length > 10 ? "(" + book.CoverIdea.Substring(0, 9) + "...)" : "(" + book.CoverIdea + ")")
                                 }
                             </div>
                         </div>
+
                         <div class="row">
-                            <div class="col-sm-6">
-                                <a class="nav-link" href="Book?bookid=@book.BookID&authorid=@book.AuthorID">Update Book Information</a>
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-1">Notes:</div>
+                            <div class="col-sm-3">
+                                <a target="_blank" href="#" onClick="window.open('DisplayText?field=description&bookid=@Html.Raw(book.BookID.ToString())&table=book','pagename','resizable,height=260,width=370'); return false;">View Notes</a>
                             </div>
-                            <div class="col-sm-6">
-                                <a href="UploadContent?bookid=@book.BookID&authorid=@book.AuthorID">Upload Book Manuscript and Images</a>
+                            <div class="col-sm-7">
+                                @if (book.Notes == null)
+                                {
+                                    <div>(No Notes)</div>
+                                }
+                                else
+                                {
+                                    @(book.Notes.Length > 10 ? "(" + book.Notes.Substring(0, 9) + "...)" : "(" + book.Notes + ")")
+                                }
                             </div>
                         </div>
-                        
 
                         <div style="height: 15px;"></div>
+
+                        <div class="row">
+                            <div class="col-sm-2" style="border-color: #e7f1ff;border-left-style: solid;border-top-style:solid; border-bottom-style: solid;">
+                                <a class="nav-link" href="Book?bookid=@book.BookID&authorid=@book.AuthorID">Update Book Information</a>
+                            </div>
+                            <div class="col-sm-2" style="border-color: #e7f1ff;border-right-style: solid;border-top-style:solid; border-bottom-style: solid;">
+                                <a class="nav-link" href="UploadContent?bookid=@book.BookID&authorid=@book.AuthorID">Upload Book Manuscript and Images</a>
+                            </div>
+                        </div>
+
+                        <div style="height: 15px;"></div>
+
                         <div class="row">
                             <div class="col-sm-1" style="font-weight: bold;">Book Sales:</div>
                         </div>
@@ -791,15 +805,15 @@
                         <div class="row">
                             <div class="col-sm-1"></div>
                             <div class="col-sm-1">
-                                @if (book.BookRoyalties != null && book.EBookRoyalties != null && book.AudioBookRoyalties != null)
-                                {
-                                    var royalties = book.BookRoyalties + book.EBookRoyalties + book.AudioBookRoyalties;
-                                    @(royalties > 0 ? royalties : "$ 0.00")
+                                @{
+                                book.BookRoyalties = book.BookRoyalties == null ? 0 : book.BookRoyalties;
+                                book.EBookRoyalties = book.EBookRoyalties == null ? 0 : book.EBookRoyalties;
+                                book.AudioBookRoyalties = book.AudioBookRoyalties == null ? 0 : book.AudioBookRoyalties;
+
+                                var royalties = book.BookRoyalties + book.EBookRoyalties + book.AudioBookRoyalties;
+                                
                                 }
-                                else
-                                {
-                                    @("$ 0.00")
-                                }
+                                $ @royalties
                             </div>
 
                         </div>
