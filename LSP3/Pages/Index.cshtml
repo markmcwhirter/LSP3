@@ -487,13 +487,13 @@
                         <div class="row">
                             <div class="col-sm-1"></div>
                             <div class="col-sm-1">Manuscript:</div>
-                            <div class="col-sm-10">@Html.Raw(book.Interior)</div>
+                            <div class="col-sm-10"><a target="_blank" href="#" onClick="window.open('Display?table=book&target=@Html.Raw(book.Interior)','pagename','resizable,height=260,width=370'); return false;">@Html.Raw(book.Interior)</a></div>
                         </div>
 
                         <div class="row">
                             <div class="col-sm-1"></div>
                             <div class="col-sm-1">Cover:</div>
-                            <div class="col-sm-10">@book.Cover</div>
+                            <div class="col-sm-10"><a target="_blank" href="#" onClick="window.open('Display?table=book&target=@Html.Raw(book.Cover)','pagename','resizable,height=260,width=370'); return false;">@Html.Raw(book.Cover)</a></div>
                         </div>
 
                         <div class="row">
@@ -510,7 +510,7 @@
                         <div class="row">
                             <div class="col-sm-1"></div>
                             <div class="col-sm-1">Author Photo:</div>
-                            <div class="col-sm-10">@book.AuthorPhoto</div>
+                            <div class="col-sm-10"><a target="_blank" href="#" onClick="window.open('Display?target=@Html.Raw(book.AuthorPhoto)&table=book','pagename','resizable,height=260,width=370'); return false;">@Html.Raw(book.AuthorPhoto)</a></div>
                         </div>
 
 
@@ -518,8 +518,7 @@
                             <div class="col-sm-1"></div>
                             <div class="col-sm-1">Author Bio:</div>
                             <div class="col-sm-3">
-                                <a target="_blank" href="#" onClick="window.open('DisplayText?field=authorbio&bookid=@Html.Raw(book.BookID.ToString())&table=book','pagename','resizable,height=260,width=370'); return false;">View Author Biography</a>
-
+                                <a target="_blank" href="#" onClick="window.open('Display?target=@Html.Raw(book.AuthorBio)&table=book','pagename','resizable,height=260,width=370'); return false;">@Html.Raw(book.AuthorBio)</a>
                             </div>
                             <div class="col-sm-7">
                                 @if (book.AuthorBio == null)
