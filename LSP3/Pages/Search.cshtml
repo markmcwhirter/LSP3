@@ -1,7 +1,7 @@
 ﻿@page
 @model LSP3.Pages.SearchModel
 @{
-    Layout = "_LayoutAdmin2";
+    Layout = "_Layout";
 }
 
 
@@ -77,9 +77,6 @@
         pagination: true,
         paginationPageSize: 20,
         rowHeight: 32.5,
-        //rowGroupPanelShow: "always",
-        //groupDisplayType: 'groupRows',
-        // pivotPanelShow: "always",
         defaultColDef: {
             filter: "agTextColumnFilter",
             floatingFilter: true,
@@ -93,8 +90,7 @@
 
         serverSideDatasource: {
             getRows: (params) => {
-
-                console.log("[Datasource] - rows requested by grid: ", params.request);
+                debugger;
                 const { startRow, endRow, sortModel } = params.request;
                 let sortColumn = "lastName";
                 let sortDirection = "ASC";
@@ -114,7 +110,6 @@
                 fetch(url)
                     .then(response => response.json())
                     .then(data => {
-                        //  Tell the grid we're done and provide total record count
                         params.success({ rowData: data, rowCount: data.totalRecords });  // Adjust 'totalRecords' if your API provides it
                     })
                     .catch(error => {

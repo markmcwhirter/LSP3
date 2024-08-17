@@ -71,7 +71,7 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
 
     }
 
-    public async Task<IActionResult> OnGet(int? bookid, int authorid=0)
+    public async Task<IActionResult> OnGet(int? bookid, int authorid = 0)
     {
 
 
@@ -90,27 +90,45 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
 
             IsReadOnly = false;
             Book = new BookDto();
+            string apiResponse = "";
+
 
             // see if this is an admin 
             IsAdmin = sessionhelper.IsAdmin(_httpContextAccessor);
 
-            if (IsAdmin)
-            { 
-            
+            if (IsAdmin && authorid != 0)
+            {
+                ListItems = new List<AuthorListItem>();
+                apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{authorid}");
+
+                if (!string.IsNullOrEmpty(apiResponse))
+                {
+
+                    AuthorListResults? author = System.Text.Json.JsonSerializer.Deserialize<AuthorListResults>(apiResponse, new JsonSerializerOptions
+                    {
+                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                    });
+                    ListItems.Add(new AuthorListItem { AuthorID = author.AuthorID, Name = $" Id - {author.AuthorID} Name: {author.LastName},{author.FirstName} Email: {author.EMail}" });
+
+                }
+            }
+            else if (IsAdmin && authorid == 0)
+            {
+
                 ListItems = new List<AuthorListItem>();
 
                 // retrieve author list
-                var apiResponse = await helper.Get(_appSettings.HostUrl + $"author/getall");
+                apiResponse = await helper.Get(_appSettings.HostUrl + $"author/getall");
 
                 if (!string.IsNullOrEmpty(apiResponse))
-                { 
-                    
+                {
+
                     authorlist = System.Text.Json.JsonSerializer.Deserialize<List<AuthorListResults>>(apiResponse, new JsonSerializerOptions
-                        {
-                            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                        });
+                    {
+                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                    });
                 }
-                foreach( var a in authorlist)
+                foreach (var a in authorlist)
                 {
                     ListItems.Add(new AuthorListItem { AuthorID = a.AuthorID, Name = $" Id - {a.AuthorID} Name: {a.LastName},{a.FirstName} Email: {a.EMail}" });
                 }
@@ -127,13 +145,11 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
             {
                 IsReadOnly = true;
 
-                var apiResponse = await helper.Get(_appSettings.HostUrl + $"book/{bookid}");
+                apiResponse = await helper.Get(_appSettings.HostUrl + $"book/{bookid}");
 
                 if (!string.IsNullOrEmpty(apiResponse))
                     Book = bookextensions.Deserialize(apiResponse);
             }
-
-
         }
         catch (Exception ex)
         {
@@ -151,7 +167,7 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
             Extensions<BookDto> bookextensions = new();
 
             if (!base.IsAuthenticated)
-                return Redirect("/Account/Login");          
+                return Redirect("/Account/Login");
 
             var apiResponse = await helper.PostAsync(_appSettings.HostUrl + "book/update", Book);
 
@@ -163,7 +179,7 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
             _logger.LogError(ex.Message);
         }
 
-        return RedirectToPage("/Index"); 
+        return RedirectToPage("/Index");
     }
 }
 

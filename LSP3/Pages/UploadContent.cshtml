@@ -39,7 +39,24 @@
                     <h3>Book Image and Document Uploads</h3>
                 </div>
             </div>
- 
+            @if (Model.IsAdmin)
+            {
+                <div style="height:20px;"></div>
+                <div class="mb-12">
+                    <label for="title" class="form-label">Select the Author</label>
+                    <select name="AuthorID" id="AuthorID" class="select">
+                        @{
+                            foreach (var a in Model.ListItems)
+                            {
+                                <option value="@a.AuthorID">@a.Name</option>
+                            }
+                        }
+                        <span class="focus"></span>
+                    </select>
+                </div>
+                <div style="height:20px;"></div>
+            }
+
             <div class="row" style="padding:10px;">
                 <div class="col-sm-3 form-control uploadBorder">
                     <label for="fileInput1" class="form-label" >Select Manuscript    </label>

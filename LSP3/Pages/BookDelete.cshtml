@@ -1,7 +1,7 @@
 ﻿@page
 @model LSP3.Pages.BookDeleteModel
 @{
-    Layout = "_LayoutAdmin";
+    Layout = "_Layout";
     ViewData["Title"] = "Delete Book";
 }
 
@@ -23,6 +23,7 @@
 <div class='container-fluid'>
     <div class='content formback'>
         <form method="post" id="bookform">
+            <div class="labelback" style="height:20px;"></div>
             <div class='row'>
                 <div class='col-sm-12 labelback'>Author ID: @Model.Results.AuthorID</div>
             </div>
@@ -42,7 +43,7 @@
             <div class='row'>
                 <div class='col-sm-12 labelback'>Description: @Model.Results.Description</div>
             </div>
-
+            <div class="labelback" style="height:20px;"></div>
             <div class='row whiteback'>
                 <div class='col-sm-2 '><button type="button" id="UpdateButton" onclick="return DeleteBookEventHandler(event,@Model.Results.BookID);" class="btn btn-primary">Delete</button></div>
                 <div class='col-sm-2 '><button type="button" id="CancelButton" onclick="return CancelEventHandler(event);" class="btn btn-secondary">Cancel</button></div>

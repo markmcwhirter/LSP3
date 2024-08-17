@@ -29,16 +29,58 @@ public class UploadContentModel(IOptions<AppSettings> appSettings, IHttpContextA
     public IFormFile fileInput4 { get; set; }
 
 
+    [BindProperty]
+    public bool IsAdmin { get; set; }
+
+    [BindProperty]
+    public List<AuthorListItem> ListItems { get; set; }
+
     private int? bookId;
     private int? authorId;
 
     public async Task<IActionResult> OnGet(int? bookid, int? authorid)
     {
+        SessionHelper sessionhelper = new();
+        HttpHelper helper = new();
+
+        Extensions<BookDto> bookextensions = new();
+        Extensions<AuthorListResultsModel> authorextensions = new();
+
+        List<AuthorListResults> authorlist = new();
+
+
         int authorId = authorid != null ? authorid.Value : base.AuthorId;
         int bookId = bookid != null ? bookid.Value : 0;
 
         TempData["AuthorId"] = authorId;
         TempData["BookId"] = bookId;
+
+        // see if this is an admin 
+        IsAdmin = sessionhelper.IsAdmin(_httpContextAccessor);
+
+        if (IsAdmin)
+        {
+
+            ListItems = new List<AuthorListItem>();
+
+            // retrieve author list
+            var apiResponse = await helper.Get(appSettings.Value.HostUrl + $"author/getall");
+
+            if (!string.IsNullOrEmpty(apiResponse))
+            {
+
+                authorlist = System.Text.Json.JsonSerializer.Deserialize<List<AuthorListResults>>(apiResponse, new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                });
+            }
+            foreach (var a in authorlist)
+            {
+                ListItems.Add(new AuthorListItem { AuthorID = a.AuthorID, Name = $" Id - {a.AuthorID} Name: {a.LastName},{a.FirstName} Email: {a.EMail}" });
+            }
+
+        }
+
 
         return Page();
     }

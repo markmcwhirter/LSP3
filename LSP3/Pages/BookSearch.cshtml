@@ -1,7 +1,7 @@
 ﻿@page
 @model LSP3.Pages.BookSearchModel
 @{
-    Layout = "_LayoutAdmin2";
+    Layout = "_Layout";
 }
 
 <div class="container-fluid">
@@ -42,6 +42,9 @@
         { field: 'subtitle', flex: 2, headerName: 'SubTitle' },
         { field: 'isbn', headerName: 'ISBN' },
         { field: 'notes', headerName: 'Notes' },
+        { field: 'editLink', headerName: 'Edit', sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='Book?" + params.value + "'>Edit</a>"; } },
+        { field: 'deleteLink', headerName: 'Delete', sortable: false, filter: false, editable: false, cellRenderer: params => { return "<a href='BookDelete?" + params.value + "'>Delete</a>"; } }
+
 
     ];
 
@@ -57,12 +60,13 @@
             sortable: true,
             flex: 1
         },
+
         rowModelType: 'serverSide',
 
-        // Datasource definition
+
         serverSideDatasource: {
-            getRows: (params) => { 
-                console.log("[Datasource] - rows requested by grid: ", params.request);
+            getRows: (params) => {
+                debugger;
                 const { startRow, endRow, sortModel } = params.request;
                 let sortColumn = "Author";
                 let sortDirection = "ASC";
@@ -73,6 +77,7 @@
                     sortColumn = sortModel[0].colId;
                     sortDirection = sortModel[0].sort;
                 }
+
                 sortColumn = sortColumn === "null" ? "Author" : sortColumn;
                 sortDirection = sortDirection === "asc" ? "ASC" : "DESC";
 
@@ -81,7 +86,7 @@
                 fetch(url)
                     .then(response => response.json())
                     .then(data => {
-                        params.success({ rowData: data, rowCount: data.length });  // Adjust 'totalRecords' if your API provides it
+                        params.success({ rowData: data, rowCount: data.totalRecords });  // Adjust 'totalRecords' if your API provides it
                     })
                     .catch(error => {
                         console.error("Error fetching data:", error);
@@ -89,7 +94,6 @@
                     });
             }
         }
-
     };
 
     // Create the grid instance
@@ -123,7 +127,7 @@
         document.querySelector("#savedFilters").textContent = '';
     }
     function currencyFormatter(currency) {
-        if (currency === undefined ) {
+        if (currency === undefined) {
             return "$0";
         }
         else {
@@ -133,5 +137,32 @@
             return "$" + `${sansDec}`;
         }
     }
+
+    gridApi.addEventListener('cellValueChanged', function (event) {
+    // get the updated row data
+    var updatedRowData = event.data;
+    delete updatedRowData.editLink;
+    delete updatedRowData.deleteLink;
+
+    let options = {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedRowData)
+    };
+
+    fetch(API_URL + "book/update", options)
+        .then(
+            response => {
+                $('#exampleModal').modal('show');
+            }
+        ).then(
+            html => console.log(html)
+        );
+
+});
+
 </script>
 
