@@ -74,7 +74,6 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
     public async Task<IActionResult> OnGet(int? bookid, int authorid = 0)
     {
 
-
         try
         {
             HttpHelper helper = new();

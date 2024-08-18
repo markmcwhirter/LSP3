@@ -1,14 +1,20 @@
 ﻿@page
 @model BookModel
-@{
-    Layout = "_Layout";
-    ViewData["Title"] = "Book";
+
+@section Scripts {
+
+    <script type="text/javascript">
+        window.addEventListener("load", evaluateInputAndUpdateButton);
+    </script>
+
+    <script type="text/javascript" src="~/Scripts/book.js"></script>
 }
+
 
 <div class="container-fluid">
     <div class="content" style="width:60%;">
         <div style="height:20px;"></div>
-        <form method="post" id="bookform"  onsubmit="return validateForm();">
+        <form method="post" id="bookform" onsubmit="return validateForm(bookid,UpdateButton);">
             <input type="hidden" id="bookid" name="bookid" value="@Model.Book.BookID">
             @if (!Model.IsAdmin)
             {
@@ -21,12 +27,12 @@
                 </div>
             </div>
 
-            @if(Model.IsAdmin)
+            @if (Model.IsAdmin)
             {
                 <div style="height:20px;"></div>
                 <div class="mb-12">
                     <label for="title" class="form-label">Select the Author</label>
-                    <select name="AuthorID" id="AuthorID"  class="select">
+                    <select name="AuthorID" id="AuthorID" class="select">
                         @{
                             foreach (var a in Model.ListItems)
                             {
@@ -105,7 +111,7 @@
                 <div class="col-sm-4">
                 </div>
                 <div class="col-sm-1">
-                    <button type="submit" id="UpdateButton" class="btn btn-primary" style="color: white">Add</button>
+                    <button type="submit" name="UpdateButton" id="UpdateButton" class="btn btn-primary" style="color: white">Add</button>
                 </div>
                 <div class="col-sm-1">
                     <button type="button" id="CancelButton" onclick="return CancelBookEventHandler(event);" class="btn btn-secondary" style="color: white">Cancel</button>
@@ -120,49 +126,4 @@
     </div>
 
 </div>
-
-<script type="text/javascript">
-
-    window.addEventListener("load", evaluateInputAndUpdateButton);
-
-    function validateForm() {
-
-        var checkbox = document.getElementById("tandc");
-        if (checkbox == null || !checkbox.checked) {
-            alert("Please check the checkbox before submitting.");
-            return false; // Prevent form submission
-        }
-        return true; // Allow form submission
-    }
-
-    function evaluateInputAndUpdateButton() {
-
-        const inputElement = document.getElementById("bookid");
-        const buttonElement = document.getElementById("UpdateButton");
-
-        const inputValue = inputElement.value;
-
-        if (inputValue === null || inputValue.trim() === "" || inputValue.trim() === "0") {
-            buttonElement.innerHTML = "Add";
-        } else {
-            buttonElement.innerHTML = "Update";
-        }
-
-    }
-
-
-    function CancelBookEventHandler() {
-
-        event.preventDefault();
-
-        return false;
-
-    }
-
-</script>
-
-
-
-
-
 

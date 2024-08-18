@@ -16,7 +16,7 @@ var configuration = new ConfigurationBuilder()
 var sequrl = configuration.GetValue<string>("Seq");
 
 Log.Logger = new LoggerConfiguration()
-    .WriteTo.Console()
+    // .WriteTo.Console()
     .Enrich.WithThreadId()
     .Enrich.WithProperty("Application", "LSP")
     .Enrich.WithProperty("Environment", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production")
@@ -27,10 +27,10 @@ Log.Logger = new LoggerConfiguration()
     .Enrich.WithEnvironmentUserName()
     .Enrich.WithClientIp()
     .Enrich.WithRequestHeader("User-Agent")
-    .WriteTo.File("logs/log-.txt",
-        rollingInterval: RollingInterval.Day,
-        rollOnFileSizeLimit: true)
-    .WriteTo.Seq(sequrl)
+    //.WriteTo.File("logs/log-.txt",
+    //    rollingInterval: RollingInterval.Day,
+    //    rollOnFileSizeLimit: true)
+    //.WriteTo.Seq(sequrl)
     .ReadFrom.Configuration(configuration)
     .CreateLogger();
 

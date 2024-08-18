@@ -3,30 +3,6 @@
 @{
     Layout = "_Layout";
 }
-<style>
-    input[type="file"]::file-selector-button {
-        border-radius: 4px;
-        padding: 0 16px;
-        height: 40px;
-        cursor: pointer;
-        background-color: white;
-        border: 1px solid rgba(0, 0, 0, 0.16);
-        box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
-        margin-right: 16px;
-        transition: background-color 200ms;
-    }
-
-        /* file upload button hover state */
-        input[type="file"]::file-selector-button:hover {
-            background-color: #f3f4f6;
-        }
-
-        /* file upload button active state */
-        input[type="file"]::file-selector-button:active {
-            background-color: #e5e7eb;
-        }
-
-</style>
 
 <div class="container-fluid">
     <div class="content" style="width:60%;">
@@ -71,13 +47,6 @@
                 </div>
             </div>
 
-@*             <div class="row" style="padding:10px;">
-                <div class="col-sm-3 form-control uploadBorder">
-                    <label class="form-label" >Select Interior    </label>
-                    <input type="file" id="fileInput3" name="fileInput3" />
-                </div>
-            </div> *@
-
             <div class="row" style="padding:10px;">
                 <div class="col-sm-3 form-control uploadBorder">
                     <label class="form-label" >Select Author   </label>
@@ -95,45 +64,3 @@
     </div>
 
 </div>
-@* <script type="text/javascript">
-
-    const uploadButton = document.getElementById("uploadButton");
-
-    uploadButton.addEventListener("click", () => {
-
-        debugger;
-        const fileInputs = [
-            document.getElementById("fileInput0"),
-            document.getElementById("fileInput1"),
-            document.getElementById("fileInput2"),
-            document.getElementById("fileInput3")
-        ];
-
-        fileInputs.forEach(input => {
-            const files = input.files;
-
-            if (files.length > 0) {
-                const formData = new FormData();
-                for (let i = 0; i < files.length; i++) {
-                    formData.append("files[]", files[i]);
-                }
-
-                // Replace with your actual server-side upload endpoint
-                const uploadUrl = "/your-upload-endpoint";
-
-                fetch(uploadUrl, {
-                    method: "POST",
-                    body: formData
-                })
-                    .then(response => {
-                        // Handle the server response (e.g., show success/error messages)
-                    })
-                    .catch(error => {
-                        console.error("Upload error:", error);
-                    });
-            }
-        });
-    });
-
-
-</script> *@

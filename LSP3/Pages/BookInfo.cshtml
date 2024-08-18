@@ -1,0 +1,92 @@
+﻿@page
+@model LSP3.Pages.BookInfoModel
+@{
+}
+
+<style>
+    #box {
+        width: 1000px;
+        /* height: 400px; */
+        border-radius: 20px; /* Adjust the value to change the roundness */
+        background-color: lightblue; /* You can change the background color */
+    }
+</style>
+
+<div style="height:20px;"></div>
+<div id="box">
+    <div class='container-fluid'>
+        <div class='content'>
+            <div style="height:20px;"></div>
+            <div class='row'>
+                <div class='col-sm-2'>Author ID:</div>
+                <div class='col-sm-10'>@Model.Results.AuthorID</div>
+            </div>
+            <div class='row'>
+                <div class='col-sm-2'>Author:</div>
+                <div class='col-sm-10'>@Model.Author.LastName,@Model.Author.FirstName</div>
+            </div>
+            <div class='row'>
+                <div class='col-sm-2'>Author EMail:</div>
+                <div class='col-sm-10'>@Model.Author.Email</div>
+            </div>
+            <div class='row'>
+                <div class='col-sm-2'>Book ID:</div>
+                <div class='col-sm-10'>@Model.Results.BookID</div>
+            </div>
+            <div class='row'>
+                <div class='col-sm-2'>Title:</div>
+                <div class='col-sm-10'>@Model.Results.Title</div>
+            </div>
+            <div class='row'>
+                <div class='col-sm-2'>SubTitle:</div>
+                <div class='col-sm-10'>@Model.Results.Subtitle</div>
+            </div>
+            <div class='row'>
+                <div class='col-sm-2'>ISBN:</div>
+                <div class='col-sm-10'>@Model.Results.ISBN</div>
+            </div>
+            <div class='row'>
+                <div class='col-sm-2'>Description:</div>
+                <div class='col-sm-10'>@Model.Results.Description</div>
+@*                 <div class='col-sm-12'>Description: @(Model.Results.Description.Length > 50 ? "(" + Model.Results.Description.Substring(0, 50) + "...)" : "(" + Model.Results.Description + ")")</div>
+ *@            </div>
+            <div class='row'>
+                <div class='col-sm-2'>Cover:</div>
+                <div class='col-sm-10'>@Model.Results.Cover</div>
+            </div>
+            <div class='row'>
+                <div class='col-sm-2'>Interior:</div>
+                <div class='col-sm-10'>@Model.Results.Interior</div>
+            </div>
+            <div class='row'>
+                <div class='col-sm-2'>Author Photo:</div>
+                <div class='col-sm-10'>@Model.Results.AuthorPhoto</div>
+            </div>
+            <div class='row'>
+                <div class='col-sm-2'>Author Bio:</div>
+                <div class='col-sm-10'>@Model.Results.AuthorBio</div>
+            </div>
+            <div class='row'>
+                <div class='col-sm-2'>Cover Idea:</div>
+                <div class='col-sm-10'>@Model.Results.CoverIdea</div>
+               @*  <div class='col-sm-12'>Cover Idea: @(Model.Results.CoverIdea.Length > 50 ? "(" + Model.Results.CoverIdea.Substring(0, 50) + "...)" : "(" + Model.Results.CoverIdea + ")")</div> *@
+            </div>
+            <div class='row'>
+                <div class='col-sm-2'>Notes:</div>
+                <div class='col-sm-10'>@Model.Results.Notes</div>
+@*                 <div class='col-sm-12'>Notes: @(Model.Results.Notes.Length > 50 ? "(" + Model.Results.Notes.Substring(0, 50) + "...)" : "(" + Model.Results.Notes + ")")</div>
+ *@            </div>
+            <div style="height:20px;"></div>
+            <div class='row'>
+                <div class='col-sm-2'>Date Created:</div>
+                <div class='col-sm-10'>@Model.Results.DateCreated</div>
+            </div>
+            <div class='row'>
+                <div class='col-sm-2'>Date Updated:</div>
+                <div class='col-sm-10'>@Model.Results.DateUpdated</div>
+            </div>
+
+            <div style="height:20px;"></div>
+            </<div>
+            </div>
+        </div>

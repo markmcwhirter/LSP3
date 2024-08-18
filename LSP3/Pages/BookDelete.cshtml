@@ -1,11 +1,7 @@
 ﻿@page
 @model LSP3.Pages.BookDeleteModel
-@{
-    Layout = "_Layout";
-    ViewData["Title"] = "Delete Book";
-}
 
-<link rel="stylesheet" href="css/AddAuthor.css" type="text/css" />
+
 <style>
     .labelback {
         background-color: lightgray;
@@ -18,61 +14,71 @@
     .whiteback {
         background-color: white;
     }
+
+    #box {
+        width: 500px;
+        height: 300px;
+        border-radius: 20px; /* Adjust the value to change the roundness */
+        background-color: lightblue; /* You can change the background color */
+    }
 </style>
 
-<div class='container-fluid'>
-    <div class='content formback'>
-        <form method="post" id="bookform">
-            <div class="labelback" style="height:20px;"></div>
-            <div class='row'>
-                <div class='col-sm-12 labelback'>Author ID: @Model.Results.AuthorID</div>
-            </div>
-            <div class='row'>
-                <div class='col-sm-12 labelback'>Book ID: @Model.Results.BookID</div>
-            </div>
-
-            <div class='row'>
-                <div class='col-sm-12  labelback'>Title: @Model.Results.Title</div>
-            </div>
-            <div class='row'>
-                <div class='col-sm-12  labelback'>SubTitle: @Model.Results.Subtitle</div>
-            </div>
-            <div class='row'>
-                <div class='col-sm-12  labelback'>ISBN: @Model.Results.ISBN</div>
-            </div>
-            <div class='row'>
-                <div class='col-sm-12 labelback'>Description: @Model.Results.Description</div>
-            </div>
-            <div class="labelback" style="height:20px;"></div>
-            <div class='row whiteback'>
-                <div class='col-sm-2 '><button type="button" id="UpdateButton" onclick="return DeleteBookEventHandler(event,@Model.Results.BookID);" class="btn btn-primary">Delete</button></div>
-                <div class='col-sm-2 '><button type="button" id="CancelButton" onclick="return CancelEventHandler(event);" class="btn btn-secondary">Cancel</button></div>
-            </div>
-        </form>
-    </<div>
+<div style="height:20px;"></div>
+<div id="box">
+    <div class='container-fluid'>
+        <div class='content'>
+            <form method="post" id="bookform">
+                <div  style="height:20px;"></div>
+                <div class='row'>
+                    <div class='col-sm-12'>Author ID: @Model.Results.AuthorID</div>
+                </div>
+                <div class='row'>
+                    <div class='col-sm-12'>Book ID: @Model.Results.BookID</div>
+                </div>
+                <div class='row'>
+                    <div class='col-sm-12 '>Title: @Model.Results.Title</div>
+                </div>
+                <div class='row'>
+                    <div class='col-sm-12 '>SubTitle: @Model.Results.Subtitle</div>
+                </div>
+                <div class='row'>
+                    <div class='col-sm-12 '>ISBN: @Model.Results.ISBN</div>
+                </div>
+                <div class='row'>
+                    <div class='col-sm-12'>Description: @Model.Results.Description</div>
+                </div>
+                <div style="height:20px;"></div>
+                <div class='row'>
+                    <div class='col-sm-3 '></div>
+                    <div class='col-sm-2 '><button type="button" id="UpdateButton" onclick="return DeleteBookEventHandler(event,@Model.Results.BookID);" class="btn btn-primary">Delete</button></div>
+                    <div class='col-sm-2 '><button type="button" id="CancelButton" onclick="return CancelEventHandler(event);" class="btn btn-secondary">Cancel</button></div>
+                </div>
+            </form>
+        </<div>
+    </div>
 </div>
 
 
-<script type="text/javascript">
-    function CancelEventHandler(event) {
-        event.preventDefault();
-        window.location.href = "Admin";
-        return false;
+        <script type="text/javascript">
+            function CancelEventHandler(event) {
+                event.preventDefault();
+                window.location.href = "Admin";
+                return false;
 
-    }
+            }
 
-    function DeleteBookEventHandler(event, id) {
-        event.preventDefault();
+            function DeleteBookEventHandler(event, id) {
+                event.preventDefault();
 
-        fetch(API_URL + "book/delete/" + id)
-            .then(
-                response => { return response.statusText() }
-            ).then(
-                html => console.log(html)
-            );
-        alert('Book has been deleted');
-        window.location.href = "Admin";
-        return false;
-    }
-</script>
+                fetch(API_URL + "book/delete/" + id)
+                    .then(
+                        response => { return response.statusText() }
+                    ).then(
+                        html => console.log(html)
+                    );
+                alert('Book has been deleted');
+                window.location.href = "Index";
+                return false;
+            }
+        </script>
 

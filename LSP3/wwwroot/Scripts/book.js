@@ -1,4 +1,19 @@
-﻿function AddBook(formdata) {
+﻿
+function evaluateInputAndUpdateButton() {
+    const inputElement = document.getElementById("bookid");
+    const buttonElement = document.getElementById("UpdateButton");
+
+    const inputValue = inputElement.value;
+
+    if (inputValue === null || inputValue.trim() === "" || inputValue.trim() === "0") {
+        buttonElement.innerHTML = "Add";
+    } else {
+        buttonElement.innerHTML = "Update";
+    }
+}
+
+
+function AddBook(formdata) {
 
     var data = JSON.stringify(Object.fromEntries(formdata));
 
@@ -20,4 +35,22 @@
         ).then(
             html => console.log(html)
         );
+}
+
+function validateForm() {
+
+    var checkbox = document.getElementById("tandc");
+    if (checkbox == null || !checkbox.checked) {
+        alert("Please check the checkbox before submitting.");
+        return false; // Prevent form submission
+    }
+    return true; // Allow form submission
+}
+
+function CancelBookEventHandler() {
+
+    event.preventDefault();
+
+    return false;
+
 }
