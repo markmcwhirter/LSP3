@@ -46,47 +46,156 @@
                 <div class='col-sm-10'>@Model.Results.ISBN</div>
             </div>
             <div class='row'>
-                <div class='col-sm-2'>Description:</div>
-                <div class='col-sm-10'>@Model.Results.Description</div>
-@*                 <div class='col-sm-12'>Description: @(Model.Results.Description.Length > 50 ? "(" + Model.Results.Description.Substring(0, 50) + "...)" : "(" + Model.Results.Description + ")")</div>
- *@            </div>
-            <div class='row'>
-                <div class='col-sm-2'>Cover:</div>
-                <div class='col-sm-10'>@Model.Results.Cover</div>
-            </div>
-            <div class='row'>
-                <div class='col-sm-2'>Interior:</div>
-                <div class='col-sm-10'>@Model.Results.Interior</div>
-            </div>
-            <div class='row'>
-                <div class='col-sm-2'>Author Photo:</div>
-                <div class='col-sm-10'>@Model.Results.AuthorPhoto</div>
-            </div>
-            <div class='row'>
-                <div class='col-sm-2'>Author Bio:</div>
-                <div class='col-sm-10'>@Model.Results.AuthorBio</div>
-            </div>
-            <div class='row'>
-                <div class='col-sm-2'>Cover Idea:</div>
-                <div class='col-sm-10'>@Model.Results.CoverIdea</div>
-               @*  <div class='col-sm-12'>Cover Idea: @(Model.Results.CoverIdea.Length > 50 ? "(" + Model.Results.CoverIdea.Substring(0, 50) + "...)" : "(" + Model.Results.CoverIdea + ")")</div> *@
-            </div>
-            <div class='row'>
-                <div class='col-sm-2'>Notes:</div>
-                <div class='col-sm-10'>@Model.Results.Notes</div>
-@*                 <div class='col-sm-12'>Notes: @(Model.Results.Notes.Length > 50 ? "(" + Model.Results.Notes.Substring(0, 50) + "...)" : "(" + Model.Results.Notes + ")")</div>
- *@            </div>
-            <div style="height:20px;"></div>
-            <div class='row'>
-                <div class='col-sm-2'>Date Created:</div>
-                <div class='col-sm-10'>@Model.Results.DateCreated</div>
-            </div>
-            <div class='row'>
-                <div class='col-sm-2'>Date Updated:</div>
-                <div class='col-sm-10'>@Model.Results.DateUpdated</div>
-            </div>
+                <div class="col-sm-2">Description:</div>
+                <div class="col-sm-3">
+                    @if (Model.Results.Description != null)
+                    {
+                        <a target="_blank" href="#" onClick="window.open('DisplayText?field=description&bookid=@Model.Results.BookID.ToString()&table=book','pagename','resizable,height=260,width=370'); return false;">View Description</a>
+                    }
+                    else
+                    {
+                        <text>No Description</text>
+                    }
+                </div>
+                <div class="col-sm-7">
+                    @if (Model.Results.Description != null)
+                    {
+                        if (Model.Results.Description.Length > 20)
+                        {
+                            @("(" + Model.Results.Description.Substring(0, 20) + "...)")
+                            ;
+                        }
+                        else
+                        {
+                            @("(" + Model.Results.Description + ")")
+                            ;
+                        }
+                    }
+                    else
+                    {
+                        <text></text>
+                    }
+                </div>
+                <div class='row'>
+                    <div class='col-sm-2'>Cover:</div>
+                    <div class="col-sm-10"><a target="_blank" href="#" onClick="window.open('Display?target=@Html.Raw(@Model.Results.Cover)&table=book','pagename','resizable,height=260,width=370'); return false;">@Html.Raw(Model.Results.Cover)</a></div>
+                </div>
+                <div class='row'>
+                    <div class='col-sm-2'>Manuscript:</div>
+                    <div class="col-sm-10"><a target="_blank" href="#" onClick="window.open('Display?table=book&target=@Html.Raw(@Model.Results.Interior)','pagename','resizable,height=260,width=370'); return false;">@Html.Raw(@Model.Results.Interior)</a></div>
+                </div>
+                <div class='row'>
+                    <div class='col-sm-2'>Author Photo:</div>
+                    <div class="col-sm-10"><a target="_blank" href="#" onClick="window.open('Display?target=@Html.Raw(@Model.Results.AuthorPhoto)&table=book','pagename','resizable,height=260,width=370'); return false;">@Html.Raw(Model.Results.AuthorPhoto)</a></div>
+                </div>
+                <div class='row'>
+                    <div class="col-sm-2">Author Bio:</div>
+                    <div class="col-sm-3">
+                        @if (Model.Results.AuthorBio != null)
+                        {
+                            <a target="_blank" href="#" onClick="window.open('DisplayText?field=authorbio&bookid=@Model.Results.BookID.ToString()&table=book','pagename','resizable,height=260,width=370'); return false;">View Author Bio</a>
+                        }
+                        else
+                        {
+                            <text>No Author Bio</text>
+                        }
+                    </div>
+                    <div class="col-sm-7">
+                        @if (Model.Results.AuthorBio != null)
+                        {
+                            if (Model.Results.AuthorBio.Length > 20)
+                            {
+                                @("(" + Model.Results.AuthorBio.Substring(0, 20) + "...)")
+                                ;
+                            }
+                            else
+                            {
+                                @("(" + Model.Results.AuthorBio + ")")
+                                ;
+                            }
+                        }
+                        else
+                        {
+                            <text></text>
+                        }
+                    </div>
 
-            <div style="height:20px;"></div>
-            </<div>
+                </div>
+                <div class='row'>
+                    <div class="col-sm-2">Cover Idea:</div>
+                    <div class="col-sm-3">
+                        @if (Model.Results.CoverIdea != null)
+                        {
+                            <a target="_blank" href="#" onClick="window.open('DisplayText?field=coveridea&bookid=@Model.Results.BookID.ToString()&table=book','pagename','resizable,height=260,width=370'); return false;">View Cover Idea</a>
+                        }
+                        else
+                        {
+                            <text>No Cover Idea</text>
+                        }
+                    </div>
+                    <div class="col-sm-7">
+                        @if (Model.Results.CoverIdea != null)
+                        {
+                            if (Model.Results.CoverIdea.Length > 20)
+                            {
+                                @("(" + Model.Results.CoverIdea.Substring(0, 20) + "...)")
+                                ;
+                            }
+                            else
+                            {
+                                @("(" + Model.Results.CoverIdea + ")")
+                                ;
+                            }
+                        }
+                        else
+                        {
+                            <text></text>
+                        }
+                    </div>
+
+                </div>
+                <div class='row'>
+                    <div class="col-sm-2">Notes:</div>
+                    <div class="col-sm-3">
+                        @if (Model.Results.Notes != null)
+                        {
+                            <a target="_blank" href="#" onClick="window.open('DisplayText?field=notes&bookid=@Model.Results.BookID.ToString()&table=book','pagename','resizable,height=260,width=370'); return false;">View Notes</a>
+                        }
+                        else
+                        {
+                            <text>No Notes</text>
+                        }
+                    </div>
+                    <div class="col-sm-7">
+                        @if (Model.Results.Notes != null)
+                        {
+                            if (Model.Results.Notes.Length > 20)
+                            {
+                                @("(" + Model.Results.Notes.Substring(0, 20) + "...)")
+                                ;
+                            }
+                            else
+                            {
+                                @("(" + Model.Results.Notes + ")");
+                            }
+                        }
+                        else
+                        {
+                            <text></text>
+                        }
+                    </div>
+                </div>
+                <div style="height:20px;"></div>
+                <div class='row'>
+                    <div class='col-sm-2'>Date Created:</div>
+                    <div class='col-sm-10'>@Model.Results.DateCreated</div>
+                </div>
+                <div class='row'>
+                    <div class='col-sm-2'>Date Updated:</div>
+                    <div class='col-sm-10'>@Model.Results.DateUpdated</div>
+                </div>
+
+                <div style="height:20px;"></div>
+                </<div>
+                </div>
             </div>
-        </div>
