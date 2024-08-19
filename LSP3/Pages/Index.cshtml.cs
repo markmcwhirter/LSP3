@@ -1,10 +1,15 @@
 ﻿using LSP3.Model;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Options;
+
+using System.Net.Http;
+
+using System.Net;
 
 namespace LSP3.Pages;
 
-public class IndexModel : MasterModel
+public class IndexModel(IHttpClientFactory httpClientFactory,IOptions<AppSettings> appSettings, ILogger<IndexModel> logger, IHttpContextAccessor httpContextAccessor) : MasterModel( httpContextAccessor)
 {
     [BindProperty]
     public bool IsAdmin { get; set; }
@@ -19,17 +24,10 @@ public class IndexModel : MasterModel
     public SalesSummaryModel Sales { get; set; }
 
 
-    private readonly ILogger<IndexModel> _logger;
+    private readonly ILogger<IndexModel> _logger = logger;
 
-    private readonly AppSettings _appSettings;
-    private readonly IHttpContextAccessor _httpContextAccessor;
-
-    public IndexModel(IOptions<AppSettings> appSettings, ILogger<IndexModel> logger, IHttpContextAccessor httpContextAccessor) : base( httpContextAccessor)
-    {
-        _appSettings = appSettings.Value;
-        _logger = logger;
-        _httpContextAccessor = httpContextAccessor;
-    }
+    private readonly AppSettings _appSettings = appSettings.Value;
+    private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
 
     public async Task<IActionResult> OnGet()
     {
@@ -50,12 +48,13 @@ public class IndexModel : MasterModel
 
              int authorId = int.Parse(sessionHelper.GetSessionString(_httpContextAccessor, "AuthorId"));
 
-            string apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{authorId}");
+            var client = httpClientFactory.CreateClient("apiClient");
+            var apiResponse = await helper.GetFactoryAsync(client, $"{_appSettings.HostUrl}author/{authorId}");
 
             if (!string.IsNullOrEmpty(apiResponse))
                 Author = authorextensions.Deserialize(apiResponse);
 
-            apiResponse = await helper.Get(_appSettings.HostUrl + $"book/author/{authorId}");
+            apiResponse = await helper.GetFactoryAsync(client, $"{_appSettings.HostUrl}book/author/{authorId}");
 
             if (!string.IsNullOrEmpty(apiResponse))
                 Books = bookextensions.Deserialize(apiResponse);

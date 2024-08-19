@@ -3,14 +3,12 @@ using LSP3.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
-using System.Text.Json;
 
-using System.Net;
-using Microsoft.AspNetCore.Mvc.TagHelpers;
+using System.Text.Json;
 
 namespace LSP3.Pages;
 
-public class AddBookImage : PageModel
+public class AddBookImage(IHttpClientFactory httpClientFactory, IOptions<AppSettings> appSettings, ILogger<AddBookImage> logger, IHttpContextAccessor httpContextAccessor) : PageModel
 {
     [BindProperty]
     public string Status { get; set; }
@@ -36,42 +34,20 @@ public class AddBookImage : PageModel
     [BindProperty]
     public string? Text { get; set; }
 
-    private readonly ILogger<AddBookImage> _logger;
+    private readonly AppSettings _appSettings = appSettings.Value;
+    private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
 
-    private readonly AppSettings _appSettings;
-    private readonly IHttpContextAccessor _httpContextAccessor;
-
-    public AddBookImage(IOptions<AppSettings> appSettings, ILogger<AddBookImage> logger, IHttpContextAccessor httpContextAccessor)
-    {
-        _appSettings = appSettings.Value;
-        _logger = logger;
-        _httpContextAccessor = httpContextAccessor;
-    }
+    private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
 
     public async Task<IActionResult> OnGet()
     {
         ImageType = System.Web.HttpUtility.HtmlDecode(Request.Query["type"].ToString().ToLower());
         BookId = int.Parse(System.Web.HttpUtility.HtmlDecode(Request.Query["bookid"].ToString()));
 
-        string apiResponse;
-
-        HttpHelper helper = new();
         SessionHelper sessionHelper = new();
-        Extensions<AuthorDto> authorextensions = new();
-        Extensions<BookDto> bookextensions = new();
 
-        try
-        {
-
-            if (!sessionHelper.IsAuthenticated(_httpContextAccessor))
-                return Redirect("/Account/Login");
-
-
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex.Message);
-        }
+        if (!sessionHelper.IsAuthenticated(_httpContextAccessor))
+            return Redirect("/Account/Login");
 
         return Page();
 
@@ -90,61 +66,51 @@ public class AddBookImage : PageModel
             return Page();
         }
 
+        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "data");
+        Directory.CreateDirectory(uploadsFolder); // Create if not exists
 
-        try
+        var ext = Path.GetExtension(File.FileName);
+
+        string randomfile = UidGenerator.GenerateHtmlFriendlyUid(24);
+
+        // Construct the full path for saving
+        var bookfilename = $"{BookId}_{randomfile}{ext}";
+        var filePath = Path.Combine(uploadsFolder, bookfilename);
+
+        if (!Directory.Exists(uploadsFolder))
         {
-            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "data");
-            Directory.CreateDirectory(uploadsFolder); // Create if not exists
-
-            var ext = Path.GetExtension(File.FileName);
-
-            string randomfile = UidGenerator.GenerateHtmlFriendlyUid(24);
-
-            // Construct the full path for saving
-            var bookfilename = $"{BookId}_{randomfile}{ext}";
-            var filePath = Path.Combine(uploadsFolder, bookfilename);
-
-            if (!Directory.Exists(uploadsFolder))
-            {
-                Directory.CreateDirectory(uploadsFolder);
-            }
-
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await File.CopyToAsync(stream);
-            }
-
-            Status = "File uploaded successfully!";
-
-            var apiResponse = await httphelper.Get(_appSettings.HostUrl + $"book/{BookId}");
-
-            if (!string.IsNullOrEmpty(apiResponse))
-                Book = bookextensions.Deserialize(apiResponse);
-
-
-            var image = System.Web.HttpUtility.HtmlDecode(Request.Query["type"].ToString().ToLower());
-
-            if (image == "cover")
-                Book.Cover = bookfilename;
-            else if(image == "interior")
-                Book.Interior = bookfilename;
-            else if(image == "author")
-                Book.AuthorPhoto = bookfilename;
-
-            string jsonString = JsonSerializer.Serialize(Book);
-
-            _ = await httphelper.PostAsync(_appSettings.HostUrl + "book/update", Book);
-
-
-            SessionHelper helper = new();
-
-            return  RedirectToPage("/Index");
-        }
-        catch (Exception ex)
-        {
-            Status = "File could not be uploaded. Error: " + ex.Message;
+            Directory.CreateDirectory(uploadsFolder);
         }
 
-        return Page();
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            await File.CopyToAsync(stream);
+        }
+
+        Status = "File uploaded successfully!";
+
+        var client = _httpClientFactory.CreateClient("apiClient");
+
+        var apiResponse = await httphelper.GetFactoryAsync(client, $"{_appSettings.HostUrl}book/{BookId}");
+
+        if (!string.IsNullOrEmpty(apiResponse))
+            Book = bookextensions.Deserialize(apiResponse);
+
+
+        var image = System.Web.HttpUtility.HtmlDecode(Request.Query["type"].ToString().ToLower());
+
+        if (image == "cover")
+            Book.Cover = bookfilename;
+        else if (image == "interior")
+            Book.Interior = bookfilename;
+        else if (image == "author")
+            Book.AuthorPhoto = bookfilename;
+
+        string jsonString = JsonSerializer.Serialize(Book);
+
+        _ = await httphelper.PostFactoryAsync(client, $"{_appSettings.HostUrl}book/update", Book);
+
+        return RedirectToPage("/Index");
+
     }
 }

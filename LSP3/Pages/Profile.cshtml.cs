@@ -1,53 +1,40 @@
 using LSP3.Model;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Options;
-
 using Newtonsoft.Json;
+
+using System.Net.Http;
+
+using System.Net;
 
 namespace LSP3.Pages;
 
-public class Profile : MasterModel
+public class Profile(IHttpClientFactory httpClientFactory, IOptions<AppSettings> appSettings, ILogger<Profile> logger, IHttpContextAccessor httpContextAccessor) : MasterModel(httpContextAccessor)
 {
-    private readonly ILogger<Profile> _logger;
-
-    readonly HttpHelper helper = new();
     public AuthorDto? Results { get; set; }
-    private readonly AppSettings _appSettings;
-
-    public Profile(IOptions<AppSettings> appSettings, ILogger<Profile> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
-    {
-        _appSettings = appSettings.Value;
-        _logger = logger;       
-    }
 
     public async Task OnGetAsync()
     {
 
-        try
+        string id = "";
+        HttpHelper httphelper = new();
+
+        if (!base.IsAuthenticated)
+            return;
+
+        Results = new AuthorDto();
+
+        if (!string.IsNullOrEmpty(Request.Query["id"]))
         {
-            string id = "";
+            id = Request.Query["id"].ToString();
 
-            if (!base.IsAuthenticated)
-                return;
+            var client = httpClientFactory.CreateClient("apiClient");
+            var apiResponse = await httphelper.GetFactoryAsync(client, $"{appSettings.Value.HostUrl}author/{id}");
 
-            Results = new AuthorDto();
-
-            if (!string.IsNullOrEmpty(Request.Query["id"]))
-            {
-                id = Request.Query["id"].ToString();
-
-                var response = await helper.Get(_appSettings.HostUrl + $"author/{id}");
-
-                if (response != null)
-                    Results = JsonConvert.DeserializeObject<AuthorDto>(response);
-            }
-
-
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex.Message);
+            if (apiResponse != null)
+                Results = JsonConvert.DeserializeObject<AuthorDto>(apiResponse);
         }
 
 

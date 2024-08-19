@@ -5,15 +5,18 @@ using Microsoft.Extensions.Options;
 
 using Newtonsoft.Json;
 
+using System.Net.Http;
+using System.Net;
+
 namespace LSP3.Pages;
 
 
-public class BookDeleteModel : MasterModel
+public class BookDeleteModel(IHttpClientFactory httpClientFactory,IOptions<AppSettings> appSettings, IHttpContextAccessor httpContextAccessor) : MasterModel(httpContextAccessor)
 {
 
-    readonly HttpHelper helper = new();
+    
     public BookDto? Results { get; set; }
-    private readonly AppSettings _appSettings;
+    private readonly AppSettings _appSettings = appSettings.Value;
 
     [BindProperty]
     public List<BookDto>? Books { get; set; }
@@ -21,24 +24,19 @@ public class BookDeleteModel : MasterModel
     [BindProperty]
     public int? BookCount { get; set; }
 
-    private readonly IHttpContextAccessor _httpContextAccessor;
-
-    public BookDeleteModel(IOptions<AppSettings> appSettings, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
-    {
-        _appSettings = appSettings.Value;
-        _httpContextAccessor = httpContextAccessor;
-    }
     public async Task OnGetAsync()
     {
 
-        HttpHelper helper = new();
+        HttpHelper httphelper = new();
 
         if (!base.IsAuthenticated) return;
         if (!base.IsAdmin) return;
 
         string id = Request.Query["bookid"].ToString();
 
-        var response = await helper.Get(_appSettings.HostUrl + $"book/{id}");
+        var client = httpClientFactory.CreateClient("apiClient");
+
+        var response = await httphelper.GetFactoryAsync(client, $"{_appSettings.HostUrl}book/{id}");
 
         if (!string.IsNullOrEmpty(response))
             Results = JsonConvert.DeserializeObject<BookDto>(response);

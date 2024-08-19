@@ -7,20 +7,20 @@ using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 
 using System.Text.Json;
+using System.Net.Http;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System.Net;
 
 
 namespace LSP3.Pages;
 
-public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> logger, IHttpContextAccessor httpContextAccessor,
+public class BookModel(IHttpClientFactory httpClientFactory, IOptions<AppSettings> appSettings, ILogger<BookModel> logger, IHttpContextAccessor httpContextAccessor,
     IWebHostEnvironment environment) : MasterModel(httpContextAccessor)
 {
     public bool IsReadOnly { get; set; }
 
     [BindProperty]
     public BookDto? Book { get; set; }
-
-    //[BindProperty]
-    //public int? AuthorId { get; set; }
 
     [BindProperty]
     public int? SelectedValue { get; set; }
@@ -76,7 +76,7 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
 
         try
         {
-            HttpHelper helper = new();
+            HttpHelper httphelper = new();
             SessionHelper sessionhelper = new();
 
             Extensions<BookDto> bookextensions = new();
@@ -91,6 +91,7 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
             Book = new BookDto();
             string apiResponse = "";
 
+            var client = httpClientFactory.CreateClient("apiClient");
 
             // see if this is an admin 
             IsAdmin = sessionhelper.IsAdmin(_httpContextAccessor);
@@ -98,7 +99,8 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
             if (IsAdmin && authorid != 0)
             {
                 ListItems = new List<AuthorListItem>();
-                apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{authorid}");
+
+                apiResponse = await httphelper.GetFactoryAsync(client, $"{_appSettings.HostUrl}author/{authorid}");
 
                 if (!string.IsNullOrEmpty(apiResponse))
                 {
@@ -117,7 +119,7 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
                 ListItems = new List<AuthorListItem>();
 
                 // retrieve author list
-                apiResponse = await helper.Get(_appSettings.HostUrl + $"author/getall");
+                apiResponse = await httphelper.GetFactoryAsync(client, $"{_appSettings.HostUrl}author/getall");
 
                 if (!string.IsNullOrEmpty(apiResponse))
                 {
@@ -144,7 +146,7 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
             {
                 IsReadOnly = true;
 
-                apiResponse = await helper.Get(_appSettings.HostUrl + $"book/{bookid}");
+                apiResponse = await httphelper.GetFactoryAsync(client, $"{_appSettings.HostUrl}book/{bookid}");
 
                 if (!string.IsNullOrEmpty(apiResponse))
                     Book = bookextensions.Deserialize(apiResponse);
@@ -160,23 +162,18 @@ public class BookModel(IOptions<AppSettings> appSettings, ILogger<BookModel> log
 
     public async Task<IActionResult> OnPostAsync()
     {
-        try
-        {
-            HttpHelper helper = new();
-            Extensions<BookDto> bookextensions = new();
+        HttpHelper httphelper = new();
 
-            if (!base.IsAuthenticated)
-                return Redirect("/Account/Login");
 
-            var apiResponse = await helper.PostAsync(_appSettings.HostUrl + "book/update", Book);
+        if (!base.IsAuthenticated)
+            return Redirect("/Account/Login");
 
-            UploadMessage = apiResponse.IsSuccessStatusCode ? "Book saved successfully!" : "Book could not be saved.";
+        var client = httpClientFactory.CreateClient("apiClient");
 
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex.Message);
-        }
+        var apiResponse = await httphelper.PostFactoryAsync(client, $"{_appSettings.HostUrl}book/update", Book);
+
+        UploadMessage = apiResponse.IsSuccessStatusCode ? "Book saved successfully!" : "Book could not be saved.";
+
 
         return RedirectToPage("/Index");
     }

@@ -5,51 +5,30 @@ using Microsoft.Extensions.Options;
 
 namespace LSP3.Pages;
 
-public class BookListModel : MasterModel
+public class BookListModel(IHttpClientFactory httpClientFactory, IOptions<AppSettings> appSettings, ILogger<BookListModel> logger, IHttpContextAccessor httpContextAccessor) : MasterModel(httpContextAccessor)
 {
     [BindProperty]
     public List<BookDto>? Books { get; set; }
 
-
-    private readonly ILogger<BookListModel> _logger;
-
-    private readonly AppSettings _appSettings;
-    private readonly IHttpContextAccessor _httpContextAccessor;
-
-
-    public BookListModel(IOptions<AppSettings> appSettings, ILogger<BookListModel> logger, IHttpContextAccessor httpContextAccessor) : base( httpContextAccessor)
-    {
-        _appSettings = appSettings.Value;
-        _logger = logger;
-        _httpContextAccessor = httpContextAccessor;
-    }
-
+    private readonly AppSettings _appSettings = appSettings.Value;
 
     public async Task<IActionResult> OnGet()
     {
 
-
-        try
-        {
-            HttpHelper helper = new();
-            SessionHelper sessionHelper = new();
-            Extensions<List<BookDto>> extensions = new();
+        HttpHelper httphelper = new();
+        Extensions<List<BookDto>> extensions = new();
 
 
-            if (!base.IsAuthenticated)
-                return Redirect("/Account/Login");
+        if (!base.IsAuthenticated)
+            return Redirect("/Account/Login");
 
-            if (!base.IsAdmin)
-                return Redirect("/Index");
+        if (!base.IsAdmin)
+            return Redirect("/Index");
 
+        var client = httpClientFactory.CreateClient("apiClient");
+        var apiResponse = await httphelper.GetFactoryAsync(client, $"{_appSettings.HostUrl}author/{Author.AuthorID}");
 
-            string apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{Author.AuthorID}");
-            Books = extensions.Deserialize(apiResponse);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Error: {ex.Message}: {ex.InnerException}: {ex.StackTrace}");
-        }
+        Books = extensions.Deserialize(apiResponse);
 
         return Page();
 

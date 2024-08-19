@@ -19,6 +19,16 @@ namespace LSP3.Pages
             return response;
         }
 
+        public async Task<HttpResponseMessage> PostFactoryAsync<T>(HttpClient httpClient, string url, T dto)
+        {
+            // Serialize the DTO object to JSON
+            var json = JsonConvert.SerializeObject(dto);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            // Send the POST request
+            return await httpClient.PostAsync(url, content);
+        }
+
 
         public async Task<string> Get(string url)
         {
@@ -27,11 +37,18 @@ namespace LSP3.Pages
 
 			response.EnsureSuccessStatusCode(); // Check for errors
 
-			string content = await response.Content.ReadAsStringAsync(); // Await again
-			return content;
+			return await response.Content.ReadAsStringAsync(); // Await again
+        }
+
+        public async Task<string> GetFactoryAsync(HttpClient httpClient, string url)
+        {
+            using HttpResponseMessage response = await httpClient.GetAsync(url);
+
+            response.EnsureSuccessStatusCode(); // Check for errors
+
+            return  await response.Content.ReadAsStringAsync(); // Await again
         }
 
 
-        
     }
 }

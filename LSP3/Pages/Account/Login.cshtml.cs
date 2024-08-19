@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 
+using SendGrid;
+
 namespace LSP3.Pages.Account;
 
 public class LoginModel : PageModel
@@ -21,10 +23,13 @@ public class LoginModel : PageModel
 	static readonly char[] padding = { '=' };
 
 	private bool IsAdmin = false;
+    private readonly IHttpClientFactory _httpClientFactory;
 
-	public LoginModel(IOptions<AppSettings> appSettings, ILogger<LoginModel> logger, IHttpContextAccessor httpContextAccessor)
+
+    public LoginModel(IHttpClientFactory httpClientFactory, IOptions<AppSettings> appSettings, ILogger<LoginModel> logger, IHttpContextAccessor httpContextAccessor)
 	{
-		_appSettings = appSettings.Value;
+        _httpClientFactory = httpClientFactory;
+        _appSettings = appSettings.Value;
 		_logger = logger;
 		_httpContextAccessor = httpContextAccessor;
 	}
@@ -60,11 +65,10 @@ public class LoginModel : PageModel
 			byte[]? arrencrypted = await new EncryptionService().EncryptAsync(password);
 			var encrypted = Convert.ToBase64String(arrencrypted).TrimEnd(padding).Replace('+', '-').Replace('/', '_');
 
+            var client = _httpClientFactory.CreateClient("apiClient");
+			var apiResponse = await helper.GetFactoryAsync(client, $"{_appSettings.HostUrl}author/{username}/{encrypted}");
 
-			string apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{username}/{encrypted}");
-
-
-			if (apiResponse != null)
+            if (apiResponse != null)
 			{
 				AuthorDto author = new Extensions<AuthorDto>().Deserialize(apiResponse);
 				if (author.AuthorID == 0)

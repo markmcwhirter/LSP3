@@ -2,9 +2,14 @@ using LSP3;
 using LSP3.Model;
 
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 
+using Polly;
+using Polly.Retry;
+
 using Serilog;
+
 
 
 var configuration = new ConfigurationBuilder()
@@ -50,6 +55,26 @@ builder.Services.AddTransient<EmailService>();
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromHours(1);
+});
+
+
+builder.Services.AddResiliencePipeline("default", x =>
+{
+    x.AddRetry(new RetryStrategyOptions
+    {
+        ShouldHandle = new PredicateBuilder().Handle<Exception>(),
+        Delay = TimeSpan.FromSeconds(2),
+        MaxRetryAttempts = 2,
+        BackoffType = DelayBackoffType.Exponential,
+        UseJitter = true
+    })
+      .AddTimeout(TimeSpan.FromSeconds(30));
+});
+
+builder.Services.AddHttpClient("apiClient", client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("AppSettings:HostUrl").ToString());
+    client.Timeout = TimeSpan.FromSeconds(30);
 });
 
 builder.Services.AddSingleton<HttpRequestAndCorrelationContextEnricher>();

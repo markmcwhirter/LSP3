@@ -1,49 +1,41 @@
 using LSP3.Model;
+
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Options;
 
 using Newtonsoft.Json;
 
+using System.Net;
+
 namespace LSP3.Pages;
 
 
-public class ProfileModify : MasterModel
+public class ProfileModify(IHttpClientFactory httpClientFactory, IOptions<AppSettings> appSettings, ILogger<Profile> logger, IHttpContextAccessor httpContextAccessor) : MasterModel(httpContextAccessor)
 {
-    private readonly ILogger<Profile> _logger;
+    private readonly ILogger<Profile> _logger = logger;
 
     readonly HttpHelper helper = new();
     public AuthorDto? Results { get; set; }
-    private readonly AppSettings _appSettings;
-    private readonly IHttpContextAccessor _httpContextAccessor;
-
-    public ProfileModify(IOptions<AppSettings> appSettings, ILogger<Profile> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
-    {
-        _appSettings = appSettings.Value;
-        _logger = logger;
-        _httpContextAccessor = httpContextAccessor;
-    }
+    private readonly AppSettings _appSettings = appSettings.Value;
+    private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
+    private readonly IHttpClientFactory _httpClientFactory;
 
     public async Task OnGetAsync()
     {
+        HttpHelper httphelper = new();
         SessionHelper sessionHelper = new();
 
         string id = Request.Query["id"].ToString();
 
-        try
-        {
 
-            if (!base.IsAuthenticated)
-                return;
+        if (!base.IsAuthenticated)
+            return;
 
-            var response = await helper.Get(_appSettings.HostUrl + $"author/{id}");
+        var client = _httpClientFactory.CreateClient("apiClient");
+        var apiResponse = await httphelper.GetFactoryAsync(client, $"{_appSettings.HostUrl}author/{id}");
 
-            if (response != null)
-                Results = JsonConvert.DeserializeObject<AuthorDto>(response);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Error: {ex.Message}: {ex.InnerException}: {ex.StackTrace}");
-        }
-
+        if (apiResponse != null)
+            Results = JsonConvert.DeserializeObject<AuthorDto>(apiResponse);
 
     }
 }

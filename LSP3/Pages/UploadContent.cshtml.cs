@@ -1,14 +1,16 @@
 using LSP3.Model;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Options;
 
+using System.Net;
 using System.Text.Json;
 
 
 namespace LSP3.Pages;
 
-public class UploadContentModel(IOptions<AppSettings> appSettings, IHttpContextAccessor httpContextAccessor) : MasterModel(httpContextAccessor)
+public class UploadContentModel(IHttpClientFactory httpClientFactory,IOptions<AppSettings> appSettings, IHttpContextAccessor httpContextAccessor) : MasterModel(httpContextAccessor)
 
 {
 
@@ -34,6 +36,11 @@ public class UploadContentModel(IOptions<AppSettings> appSettings, IHttpContextA
 
     [BindProperty]
     public List<AuthorListItem> ListItems { get; set; }
+
+    private readonly IHttpClientFactory _httpClientFactory;
+
+    
+
 
     private int? bookId;
     private int? authorId;
@@ -64,7 +71,8 @@ public class UploadContentModel(IOptions<AppSettings> appSettings, IHttpContextA
             ListItems = new List<AuthorListItem>();
 
             // retrieve author list
-            var apiResponse = await helper.Get(appSettings.Value.HostUrl + $"author/getall");
+            var client = _httpClientFactory.CreateClient("apiClient");
+            var apiResponse = await helper.GetFactoryAsync(client, $"{appSettings.Value.HostUrl}author/getall");            
 
             if (!string.IsNullOrEmpty(apiResponse))
             {
@@ -127,7 +135,8 @@ public class UploadContentModel(IOptions<AppSettings> appSettings, IHttpContextA
             }
 
             // update document path in the database
-            var apiResponse = await httphelper.Get(_appSettings.HostUrl + $"book/{bookId}");
+            var client = _httpClientFactory.CreateClient("apiClient");
+            var apiResponse = await httphelper.GetFactoryAsync(client, $"{appSettings.Value.HostUrl}book/{bookId}");
 
             if (!string.IsNullOrEmpty(apiResponse))
                 Book = bookextensions.Deserialize(apiResponse);
@@ -140,7 +149,8 @@ public class UploadContentModel(IOptions<AppSettings> appSettings, IHttpContextA
                 Book.AuthorPhoto = filename;
 
             string jsonString = JsonSerializer.Serialize(Book);
-            _ = await httphelper.PostAsync(_appSettings.HostUrl + "book/update", Book);
+
+            _ = await httphelper.PostFactoryAsync(client, $"{_appSettings.HostUrl}book/update", Book);
         }
 
     }

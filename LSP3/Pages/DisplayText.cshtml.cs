@@ -2,11 +2,16 @@ using LSP3.Model;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Options;
+
+using System.Net.Http;
+
+using System.Net;
 
 namespace LSP3.Pages;
 
-public class DisplayTextModel : PageModel
+public class DisplayTextModel(IHttpClientFactory httpClientFactory, IOptions<AppSettings> appSettings, ILogger<DisplayTextModel> logger, IHttpContextAccessor httpContextAccessor) : PageModel
 {
     [BindProperty]
     public AuthorDto? Author { get; set; }
@@ -18,17 +23,10 @@ public class DisplayTextModel : PageModel
     [BindProperty]
     public string? Text { get; set; }
 
-    private readonly ILogger<DisplayTextModel> _logger;
+    private readonly ILogger<DisplayTextModel> _logger = logger;
 
-    private readonly AppSettings _appSettings;
-    private readonly IHttpContextAccessor _httpContextAccessor;
-
-    public DisplayTextModel(IOptions<AppSettings> appSettings, ILogger<DisplayTextModel> logger, IHttpContextAccessor httpContextAccessor) 
-    {
-        _appSettings = appSettings.Value;
-        _logger = logger;
-        _httpContextAccessor = httpContextAccessor;
-    }
+    private readonly AppSettings _appSettings = appSettings.Value;
+    private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
 
     public async Task<IActionResult> OnGet()
     {
@@ -40,55 +38,51 @@ public class DisplayTextModel : PageModel
         string apiResponse;
 
         HttpHelper helper = new();
-        SessionHelper   sessionHelper = new();
+        SessionHelper sessionHelper = new();
         Extensions<AuthorDto> authorextensions = new();
         Extensions<BookDto> bookextensions = new();
 
-        try
+
+        if (!sessionHelper.IsAuthenticated(_httpContextAccessor))
+            return Redirect("/Account/Login");
+
+        var client = httpClientFactory.CreateClient("apiClient");
+
+
+        if (table.Equals("author", StringComparison.CurrentCultureIgnoreCase))
         {
+            apiResponse = await helper.GetFactoryAsync(client, $"{_appSettings.HostUrl}author/{authorid}");
 
-            if (!sessionHelper.IsAuthenticated(_httpContextAccessor))
-                return Redirect("/Account/Login");
+            if (!string.IsNullOrEmpty(apiResponse))
+                Author = authorextensions.Deserialize(apiResponse);
+        }
+        else
+        {
+            apiResponse = await helper.GetFactoryAsync(client, $"{_appSettings.HostUrl}book/{bookid}");
 
-            if (table.Equals("author", StringComparison.CurrentCultureIgnoreCase))
-            {
-                apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{authorid}");
-
-                if (!string.IsNullOrEmpty(apiResponse))
-                    Author = authorextensions.Deserialize(apiResponse);
-            }
-            else
-            {
-                apiResponse = await helper.Get(_appSettings.HostUrl + $"book/{bookid}");
-
-                if (!string.IsNullOrEmpty(apiResponse))
-                    Book = bookextensions.Deserialize(apiResponse);
-
-            }
-            field = field.ToLower();
-
-            switch(field)
-            {
-                case "coveridea":
-                    Text = Book.CoverIdea ?? "No CoverIdea available";
-                    break;
-                case "authorbio":
-                    Text = Book.AuthorBio ?? "No Biography available";
-                    break;
-                case "description":
-                    Text = Book.Description ?? "No Description available";
-                    break;
-                case "notes":
-                    Text = Book.Notes ?? "No Notes available";
-                    break;
-
-            }
+            if (!string.IsNullOrEmpty(apiResponse))
+                Book = bookextensions.Deserialize(apiResponse);
 
         }
-        catch (Exception ex)
+        field = field.ToLower();
+
+        switch (field)
         {
-            _logger.LogError(ex.Message);
+            case "coveridea":
+                Text = Book.CoverIdea ?? "No CoverIdea available";
+                break;
+            case "authorbio":
+                Text = Book.AuthorBio ?? "No Biography available";
+                break;
+            case "description":
+                Text = Book.Description ?? "No Description available";
+                break;
+            case "notes":
+                Text = Book.Notes ?? "No Notes available";
+                break;
+
         }
+
 
         return Page();
 

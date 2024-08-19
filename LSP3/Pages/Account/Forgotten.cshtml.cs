@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 
 using System.Net;
+using System.Net.Http;
 using System.Net.Mail;
 using System.Text;
 
@@ -19,11 +20,12 @@ public class ForgottenModel : PageModel
 	private readonly ILogger<ForgottenModel> _logger;
 	private readonly AppSettings _appSettings;
 	private readonly EmailService _emailService;
+    private readonly IHttpClientFactory _httpClientFactory;
 
-
-	public ForgottenModel(IOptions<AppSettings> appSettings, ILogger<ForgottenModel> logger, IHttpContextAccessor httpContextAccessor,EmailService emailservice)
+    public ForgottenModel(IHttpClientFactory httpClientFactory,IOptions<AppSettings> appSettings, ILogger<ForgottenModel> logger, IHttpContextAccessor httpContextAccessor,EmailService emailservice)
 	{
-		_appSettings = appSettings.Value;
+        _httpClientFactory = httpClientFactory;
+        _appSettings = appSettings.Value;
 		_logger = logger;
 		_emailService = emailservice;
 	}
@@ -45,7 +47,9 @@ public class ForgottenModel : PageModel
 			else
 				RedirectToPage("Login");
 
-			string email = await helper.Get(_appSettings.HostUrl + $"User/username/{username}");
+            var client = _httpClientFactory.CreateClient("apiClient");
+
+            string email = await helper.GetFactoryAsync(client,$"{_appSettings.HostUrl}User/username/{username}");
 
 			if (string.IsNullOrEmpty(email))
 				return RedirectToPage("Login");
@@ -57,7 +61,7 @@ public class ForgottenModel : PageModel
 
 			string encrypted = Convert.ToBase64String(Encoding.UTF8.GetBytes(username));
 
-			sb.AppendLine("http://143.110.232.75/Account/Reset?username=" + encrypted);
+			sb.AppendLine($"{_appSettings.HostUrl}/Account/Reset?username=" + encrypted);
 
 			sb.AppendLine();
 

@@ -4,27 +4,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 
-using System.Text;
-using System.Text.Encodings;
-using System.Text.Unicode;
+using System.Net;
 
 namespace LSP3.Pages.Account;
 
-public class ResetModel(IOptions<AppSettings> appSettings, ILogger<ResetModel> logger, IHttpContextAccessor httpContextAccessor) : PageModel
+public class ResetModel(IHttpClientFactory httpClientFactory, IOptions<AppSettings> appSettings, ILogger<ResetModel> logger, IHttpContextAccessor httpContextAccessor) : PageModel
 {
     [BindProperty]
     public string? Username { get; set; }
 
     [BindProperty]
     public string? Password { get; set; }
-
-    private readonly ILogger<ResetModel> _logger = logger;
     private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
     private readonly AppSettings _appSettings = appSettings.Value;
 
     static readonly char[] padding = ['='];
-
-    private readonly bool IsAdmin = false;
 
     public async Task<IActionResult> OnPost()
     {
@@ -41,37 +35,30 @@ public class ResetModel(IOptions<AppSettings> appSettings, ILogger<ResetModel> l
     public async Task OnGetauthor(string? username, string? password)
     {
 
-        HttpHelper helper = new();
+        HttpHelper httphelper = new();
         SessionHelper sessionHelper = new();
 
         if (username == null || password == null) return;
 
-        try
+        byte[]? arrencrypted = await new EncryptionService().EncryptAsync(password);
+        var encrypted = Convert.ToBase64String(arrencrypted).TrimEnd(padding).Replace('+', '-').Replace('/', '_');
+
+        var client = httpClientFactory.CreateClient("apiClient");
+
+        var apiResponse = await httphelper.GetFactoryAsync(client, $"{_appSettings.HostUrl}author/{username}/{encrypted}");
+
+        if (apiResponse != null)
         {
-            byte[]? arrencrypted = await new EncryptionService().EncryptAsync(password);
-            var encrypted = Convert.ToBase64String(arrencrypted).TrimEnd(padding).Replace('+', '-').Replace('/', '_');
+            AuthorDto author = new Extensions<AuthorDto>().Deserialize(apiResponse);
 
 
-            string apiResponse = await helper.Get(_appSettings.HostUrl + $"author/{username}/{encrypted}");
+            sessionHelper.SetSessionString(_httpContextAccessor, "Authenticated", "true");
 
-
-            if (apiResponse != null)
-            {
-                AuthorDto author = new Extensions<AuthorDto>().Deserialize(apiResponse);
-
-
-                sessionHelper.SetSessionString(_httpContextAccessor, "Authenticated", "true");
-
-                var isAdmin = author.Admin == "1" ? "true" : "false";
-                sessionHelper.SetSessionString(_httpContextAccessor, "Admin", isAdmin);
-
-            }
+            var isAdmin = author.Admin == "1" ? "true" : "false";
+            sessionHelper.SetSessionString(_httpContextAccessor, "Admin", isAdmin);
 
         }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex.Message);
-        }
+
 
     }
 }

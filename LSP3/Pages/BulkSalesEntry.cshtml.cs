@@ -1,29 +1,19 @@
 using LSP3.Model;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 
 using System.Globalization;
-using System.Net.Http.Headers;
 using System.Text;
 
 namespace LSP3.Pages;
 
-public class BulkSalesEntryModel : MasterModel
+public class BulkSalesEntryModel(IHttpClientFactory httpClientFactory, IOptions<AppSettings> appSettings, IWebHostEnvironment environment, IHttpContextAccessor httpContextAccessor) : MasterModel(httpContextAccessor)
 {
 
-    private readonly IWebHostEnvironment _environment;
-    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IWebHostEnvironment _environment = environment;
 
-    private readonly AppSettings _appSettings;
-
-    public BulkSalesEntryModel(IOptions<AppSettings> appSettings, IWebHostEnvironment environment, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
-    {
-        _appSettings = appSettings.Value;
-        _environment = environment;
-        _httpContextAccessor = httpContextAccessor;
-    }
+    private readonly AppSettings _appSettings = appSettings.Value;
 
     [BindProperty]
     public IFormFile? Upload { get; set; }
@@ -36,7 +26,7 @@ public class BulkSalesEntryModel : MasterModel
     {
         List<SalePostModel> salelist = new();
 
-        HttpHelper helper = new();
+        HttpHelper httphelper = new();
         SessionHelper sessionHelper = new();
 
         if (!base.IsAuthenticated)
@@ -142,13 +132,15 @@ public class BulkSalesEntryModel : MasterModel
                     strbooktype = "";
                     input = "";
 
-                    
+
                     count++;
                 }
+                var client = httpClientFactory.CreateClient("apiClient");
 
-                var response = await helper.PostAsync(_appSettings.HostUrl + $"sale", salelist);
+                var response = await httphelper.PostFactoryAsync(client, $"{_appSettings.HostUrl}sale", salelist);
 
             }
+
             sb.AppendLine("</div></div>");
             Status = sb.ToString();
         }
