@@ -68,7 +68,7 @@ builder.Services.AddResiliencePipeline("default", x =>
         BackoffType = DelayBackoffType.Exponential,
         UseJitter = true
     })
-      .AddTimeout(TimeSpan.FromSeconds(30));
+      .AddTimeout(TimeSpan.FromSeconds(60));
 });
 
 builder.Services.AddHttpClient("apiClient", client =>

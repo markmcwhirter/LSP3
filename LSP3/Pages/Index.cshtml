@@ -503,7 +503,14 @@
                                 <a target="_blank" href="#" onClick="window.open('DisplayText?field=description&bookid=@Html.Raw(book.BookID.ToString())&table=book','pagename','resizable,height=260,width=370'); return false;">View Description</a>
                             </div>
                             <div class="col-sm-7">
-                                @(book.Description.Length > 10 ? "(" + book.Description.Substring(0, 10) + "...)" : "(" + book.Description + ")")
+                                @if (book.Description != null)
+                                {
+                                    @(book.Description.Length > 10 ? "(" + book.Description.Substring(0, 10) + "...)" : "(" + book.Description + ")")
+                                }
+                                else
+                                {
+                                    <div>(No Description)</div>
+                                }
                             </div>
                         </div>
 
@@ -773,12 +780,12 @@
                             <div class="col-sm-1"></div>
                             <div class="col-sm-1">
                                 @{
-                                book.BookRoyalties = book.BookRoyalties == null ? 0 : book.BookRoyalties;
-                                book.EBookRoyalties = book.EBookRoyalties == null ? 0 : book.EBookRoyalties;
-                                book.AudioBookRoyalties = book.AudioBookRoyalties == null ? 0 : book.AudioBookRoyalties;
+                                    book.BookRoyalties = book.BookRoyalties == null ? 0 : book.BookRoyalties;
+                                    book.EBookRoyalties = book.EBookRoyalties == null ? 0 : book.EBookRoyalties;
+                                    book.AudioBookRoyalties = book.AudioBookRoyalties == null ? 0 : book.AudioBookRoyalties;
 
-                                var royalties = book.BookRoyalties + book.EBookRoyalties + book.AudioBookRoyalties;
-                                
+                                    var royalties = book.BookRoyalties + book.EBookRoyalties + book.AudioBookRoyalties;
+
                                 }
                                 $ @royalties
                             </div>
