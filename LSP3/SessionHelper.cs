@@ -44,7 +44,7 @@ public class SessionHelper
         var isAuthenticated = GetSessionString(ctx, "Admin");
 
 
-        return (!string.IsNullOrEmpty(isAuthenticated) && isAuthenticated == "true") ? true : false;
+        return (!string.IsNullOrEmpty(isAuthenticated) && isAuthenticated == "true");
     }
     public int GetAuthorId(IHttpContextAccessor ctx)
     {

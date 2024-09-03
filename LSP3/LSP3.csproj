@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <NoWarn>1701;1702;8602;8618;0108;S6667</NoWarn>
+    <NoWarn>1701;1702;8602;8618;0108;S6667;6385</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <NoWarn>1701;1702;8602;8618;0108;S6667</NoWarn>
+    <NoWarn>1701;1702;8602;8618;0108;S6667;6385</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

@@ -35,7 +35,7 @@ Log.Logger = new LoggerConfiguration()
     //.WriteTo.File("logs/log-.txt",
     //    rollingInterval: RollingInterval.Day,
     //    rollOnFileSizeLimit: true)
-    //.WriteTo.Seq(sequrl)
+    .WriteTo.Seq(sequrl)
     .ReadFrom.Configuration(configuration)
     .CreateLogger();
 
