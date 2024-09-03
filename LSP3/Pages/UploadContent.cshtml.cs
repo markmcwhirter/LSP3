@@ -71,7 +71,7 @@ public class UploadContentModel(IHttpClientFactory httpClientFactory,IOptions<Ap
             ListItems = new List<AuthorListItem>();
 
             // retrieve author list
-            var client = _httpClientFactory.CreateClient("apiClient");
+            var client = httpClientFactory.CreateClient("apiClient");
             var apiResponse = await helper.GetFactoryAsync(client, $"{appSettings.Value.HostUrl}author/getall");            
 
             if (!string.IsNullOrEmpty(apiResponse))
@@ -135,7 +135,7 @@ public class UploadContentModel(IHttpClientFactory httpClientFactory,IOptions<Ap
             }
 
             // update document path in the database
-            var client = _httpClientFactory.CreateClient("apiClient");
+            var client = httpClientFactory.CreateClient("apiClient");
             var apiResponse = await httphelper.GetFactoryAsync(client, $"{appSettings.Value.HostUrl}book/{bookId}");
 
             if (!string.IsNullOrEmpty(apiResponse))
