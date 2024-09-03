@@ -85,8 +85,7 @@
     List<string> GetLinks()
     {
         var menulist = new List<String>();
-        int authorid = 0;
-        int bookid = 0;
+        int authorid = 0;;
         bool admin = false;
 
         @if (Context.Session.GetString("AuthorId") != null)
@@ -102,7 +101,6 @@
         {
             new MenuItem { DisplayName = "LSP Home", LinkUrl = "http://www.lightswitchpress.com", Admin = false },
             new MenuItem { DisplayName = "Author Information", LinkUrl = "Index", Admin = false },
-           // new MenuItem { DisplayName = "Upload Book Images", LinkUrl = "UploadContent", Admin = false },
             new MenuItem { DisplayName = "Author Search", LinkUrl = "Search", Admin = true },
             new MenuItem { DisplayName = "New Author", LinkUrl = "Account/Register", Admin = true },
             new MenuItem { DisplayName = "Book Search", LinkUrl = "BookSearch", Admin = true },

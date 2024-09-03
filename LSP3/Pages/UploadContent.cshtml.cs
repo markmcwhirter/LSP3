@@ -36,22 +36,13 @@ public class UploadContentModel(IHttpClientFactory httpClientFactory,IOptions<Ap
 
     [BindProperty]
     public List<AuthorListItem> ListItems { get; set; }
-
-    private readonly IHttpClientFactory _httpClientFactory;
-
-    
-
-
-    private int? bookId;
-    private int? authorId;
+ 
 
     public async Task<IActionResult> OnGet(int? bookid, int? authorid)
     {
         SessionHelper sessionhelper = new();
         HttpHelper helper = new();
 
-        Extensions<BookDto> bookextensions = new();
-        Extensions<AuthorListResultsModel> authorextensions = new();
 
         List<AuthorListResults> authorlist = new();
 
@@ -77,7 +68,7 @@ public class UploadContentModel(IHttpClientFactory httpClientFactory,IOptions<Ap
             if (!string.IsNullOrEmpty(apiResponse))
             {
 
-                authorlist = System.Text.Json.JsonSerializer.Deserialize<List<AuthorListResults>>(apiResponse, new JsonSerializerOptions
+                authorlist = JsonSerializer.Deserialize<List<AuthorListResults>>(apiResponse, new JsonSerializerOptions
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
@@ -95,8 +86,6 @@ public class UploadContentModel(IHttpClientFactory httpClientFactory,IOptions<Ap
 
     public async Task<IActionResult> OnPostAsync()
     {
-        SessionHelper helper = new();
-
         await UploadFile(fileInput1, "manuscript");
         await UploadFile(fileInput2, "cover");
         await UploadFile(fileInput4, "author");
@@ -115,9 +104,8 @@ public class UploadContentModel(IHttpClientFactory httpClientFactory,IOptions<Ap
             var _appSettings = appSettings.Value;
 
             int bookId = TempData["BookId"] != null ? Convert.ToInt32(TempData["BookId"]) : 0;
-            int authorId = TempData["AuthorId"] != null ? Convert.ToInt32(TempData["AuthorId"]) : 0;
 
-            if (!Directory.Exists(_appSettings.ImageData))
+            if (!string.IsNullOrEmpty(_appSettings.ImageData) && !Directory.Exists(_appSettings.ImageData))
             {
                 Directory.CreateDirectory(_appSettings.ImageData);
             }
@@ -147,8 +135,6 @@ public class UploadContentModel(IHttpClientFactory httpClientFactory,IOptions<Ap
                 Book.Cover = filename;
             else if (filetype == "author")
                 Book.AuthorPhoto = filename;
-
-            string jsonString = JsonSerializer.Serialize(Book);
 
             _ = await httphelper.PostFactoryAsync(client, $"{_appSettings.HostUrl}book/update", Book);
         }

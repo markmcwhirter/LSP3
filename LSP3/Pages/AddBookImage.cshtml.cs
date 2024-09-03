@@ -39,7 +39,7 @@ public class AddBookImage(IHttpClientFactory httpClientFactory, IOptions<AppSett
 
     private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
 
-    public async Task<IActionResult> OnGet()
+    public IActionResult OnGet()
     {
         ImageType = System.Web.HttpUtility.HtmlDecode(Request.Query["type"].ToString().ToLower());
         BookId = int.Parse(System.Web.HttpUtility.HtmlDecode(Request.Query["bookid"].ToString()));

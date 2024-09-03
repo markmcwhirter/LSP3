@@ -17,19 +17,12 @@ public class Book2Model(IOptions<AppSettings> appSettings, ILogger<Book2Model> l
     [BindProperty]
     public IFormFile File { get; set; }
 
-
-    private readonly ILogger<Book2Model> _logger = logger;
-
     private readonly AppSettings _appSettings = appSettings.Value;
 
-    private readonly int? bookId;
-    private readonly int? authorId;
+    private int? bookId = 0;
 
     public async Task<IActionResult> OnGet(int? bookid, int? authorid)
     {
-        int authorId = authorid != null ? authorid.Value : base.AuthorId;
-        int bookId = bookid != null ? bookid.Value : 0;
-
         return Page();
     }
 
@@ -44,7 +37,7 @@ public class Book2Model(IOptions<AppSettings> appSettings, ILogger<Book2Model> l
 
         try
         {
-            if (!Directory.Exists(_appSettings.ImageData))
+            if ( !string.IsNullOrEmpty(_appSettings.ImageData) && !Directory.Exists(_appSettings.ImageData))
             {
                 Directory.CreateDirectory(_appSettings.ImageData);
             }
@@ -74,9 +67,6 @@ public class Book2Model(IOptions<AppSettings> appSettings, ILogger<Book2Model> l
 
 public async Task<ActionResult> FileUpload(IFormFile file)
     {
-        string path = "";
-        bool iscopied = false;
-
         try
         {
             if (file.Length > 0)
@@ -97,14 +87,6 @@ public async Task<ActionResult> FileUpload(IFormFile file)
                     await File.CopyToAsync(fileStream);
                 }
 
-
-                //string filename = Guid.NewGuid() + Path.GetExtension(file.FileName);
-                //path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "Upload"));
-                //using (var filestream = new FileStream(Path.Combine(path, filename), FileMode.Create))
-                //{
-                //    await file.CopyToAsync(filestream);
-                //}
-                iscopied = true;
             }
         }
         catch (Exception ex)
