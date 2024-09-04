@@ -136,7 +136,9 @@ public class UploadContentModel(IHttpClientFactory httpClientFactory,IOptions<Ap
             else if (filetype == "author")
                 Book.AuthorPhoto = filename;
 
-            _ = await httphelper.PostFactoryAsync(client, $"{_appSettings.HostUrl}book/update", Book);
+            var response = await httphelper.PostFactoryAsync(client, $"{_appSettings.HostUrl}book/update", Book);
+            var message = response.IsSuccessStatusCode ? "Upload saved successfully!" : "Upload could not be saved.";
+
         }
 
     }

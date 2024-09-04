@@ -170,9 +170,9 @@ public class BookModel(IHttpClientFactory httpClientFactory, IOptions<AppSetting
 
         var client = httpClientFactory.CreateClient("apiClient");
 
-        var apiResponse = await httphelper.PostFactoryAsync(client, $"{_appSettings.HostUrl}book/update", Book);
+        var response = await httphelper.PostFactoryAsync(client, $"{_appSettings.HostUrl}book/update", Book);
 
-        UploadMessage = apiResponse.IsSuccessStatusCode ? "Book saved successfully!" : "Book could not be saved.";
+        var message = response.IsSuccessStatusCode ? "Book saved successfully!" : "Book could not be saved.";
 
 
         return RedirectToPage("/Index");
