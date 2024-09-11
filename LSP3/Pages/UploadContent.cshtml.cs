@@ -10,9 +10,17 @@ using System.Text.Json;
 
 namespace LSP3.Pages;
 
-public class UploadContentModel(IHttpClientFactory httpClientFactory,IOptions<AppSettings> appSettings, IHttpContextAccessor httpContextAccessor) : MasterModel(httpContextAccessor)
+public class UploadContentModel : MasterModel
 
 {
+    private readonly IHttpClientFactory httpClientFactory;
+    private readonly IOptions<AppSettings> appSettings;
+
+    public UploadContentModel(IHttpClientFactory httpClientFactory,IOptions<AppSettings> appSettings, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+    {
+        this.httpClientFactory = httpClientFactory;
+        this.appSettings = appSettings;
+    }
 
     [BindProperty]
     public string Status { get; set; }
