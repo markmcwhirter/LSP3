@@ -38,7 +38,7 @@
     <PackageReference Include="Serilog.Enrichers.AspNetCore" Version="1.0.0" />
     <PackageReference Include="Serilog.Enrichers.CallerInfo" Version="1.0.4" />
     <PackageReference Include="Serilog.Enrichers.ClassName" Version="0.2.0" />
-    <PackageReference Include="Serilog.Enrichers.ClientInfo" Version="2.0.3" />
+    <PackageReference Include="Serilog.Enrichers.ClientInfo" Version="2.1.1" />
     <PackageReference Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
     <PackageReference Include="Serilog.Enrichers.ExceptionData" Version="1.0.0" />
