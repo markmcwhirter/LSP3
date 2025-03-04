@@ -3,7 +3,7 @@ async function CheckAuthor(username) {
     var data;
  
     try {
-        const response = await fetch(API_URL + 'user/' + username);
+        const response = await fetch('http://localhost:5253/api/user/' + username);
         data = await response.json(); // Assuming the response is JSON
         console.log(data);
     } catch (error) {
@@ -44,35 +44,24 @@ function DeleteAuthor(id) {
         );
 }
 
-function AddAuthor(data) {
+//async function AddAuthor(adddata) {
+//    debugger;
 
-    const author = JSON.parse(data);
-    deleteFromObject('__RequestVerificationToken', author);
+//    adddata.AuthorID = 0;
+//    adddata.DateCreated = '';
+//    adddata.DateUpdated = '';
+//    adddata.Admin = '';
+//    adddata.Bio = '';
 
-    author.AuthorID = 0;
-    author.DateCreated = '';
-    author.DateUpdated = '';
-    author.Admin = '';
-    author.Bio = '';
+//    const response = await fetch("http://localhost:5253/api/author/add", {
+//        method: 'POST',
+//        body: adddata
+//    });
 
-    let options = {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(author)
-    };
+//    data = await response.json(); // Assuming the response is JSON
+//    console.log(data);
 
-    fetch(API_URL + "author/add", options)
-        .then(
-            response => {
-                return console.log(response)
-            }
-        ).then(
-            html => console.log(html)
-        );
-}
+//}
 
 function UpdateAuthorEventHandler(event) {
 

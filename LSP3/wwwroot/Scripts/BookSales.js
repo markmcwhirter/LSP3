@@ -49,6 +49,7 @@ const gridOptions = {
             sortDirection = sortDirection === "asc" ? "ASC" : "DESC";
 
             // Build your API request URL
+            //debugger;
             const url = API_URL + `sale/gridsearch?startRow=${startRow}&endRow=${endRow}&sortColumn=${sortColumn}&sortDirection=${sortDirection}&filter=${filter}`;
             fetch(url)
                 .then(response => response.json())
