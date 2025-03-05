@@ -1,10 +1,9 @@
 async function CheckAuthor(username) {
 
-    var data;
- 
+
     try {
         const response = await fetch('http://localhost:5253/api/user/' + username);
-        data = await response.json(); // Assuming the response is JSON
+        var data = await response.json(); 
         console.log(data);
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -44,24 +43,6 @@ function DeleteAuthor(id) {
         );
 }
 
-//async function AddAuthor(adddata) {
-//    debugger;
-
-//    adddata.AuthorID = 0;
-//    adddata.DateCreated = '';
-//    adddata.DateUpdated = '';
-//    adddata.Admin = '';
-//    adddata.Bio = '';
-
-//    const response = await fetch("http://localhost:5253/api/author/add", {
-//        method: 'POST',
-//        body: adddata
-//    });
-
-//    data = await response.json(); // Assuming the response is JSON
-//    console.log(data);
-
-//}
 
 function UpdateAuthorEventHandler(event) {
 
