@@ -27,6 +27,7 @@
                             <fieldset id="fieldset" name="fieldset" disabled>
 
                                 <input type="hidden" id="authorid" name="authorid" value="@Model.Author.AuthorID">
+                                <input type="hidden" id="password" name="password" value="@Model.Author.Password">
                                 <div class="row">
                                     <div class="col-sm-1">
                                         <label for="prefix" class="form-label align-middle align-middle">Prefix:</label>
@@ -833,7 +834,7 @@
 
     }
 
-    function UpdateAuthorEventHandler(event) {
+    async function UpdateAuthorEventHandler(event) {
 
         event.preventDefault();
 
@@ -850,12 +851,23 @@
 
         if (!Validate('firstname', 'Please supply your first name')) return false;
         if (!Validate('lastname', 'Please supply your last name')) return false;
-        var formData = new FormData(document.getElementById("authorform"));
 
+        debugger;
 
-        var data = JSON.stringify(Object.fromEntries(formData));
+        var f = document.getElementById("authorform");
+        var formData = new FormData(f);
+        var jsonFormData = formDataToJson(formData);
 
-        var result = UpdateAuthor(data);
+        //const response = await fetch("http://64.23.161.76:2173/api/author/update", {
+
+        const response = await fetch("http://localhost:5253/api/author/update", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: jsonFormData
+
+        });
 
 
         document.getElementById("fieldset").disabled = true;
@@ -863,8 +875,6 @@
         var txt = elem.textContent || elem.innerText;
         elem.innerText = 'Update';
         return;
-
-        return false;
     }
 
     function Validate(field, message) {
@@ -877,25 +887,25 @@
         return true;
     }
 
-    function UpdateAuthor(data) {
-        const author = JSON.parse(data);
+    function formDataToJson(formData) {
+        const obj = {};
+        formData.forEach((value, key) => {
+            // If the key already exists, convert the value to an array
+            if (obj.hasOwnProperty(key)) {
+                // If the existing value is not an array, convert it to an array
+                if (!Array.isArray(obj[key])) {
+                    obj[key] = [obj[key]];
+                }
+                // Push the new value into the array
+                obj[key].push(value);
+            } else {
+                // Otherwise, just set the value
+                obj[key] = value;
+            }
+        }
+    );
 
-        let options = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(author)
-        };
-
-        fetch(API_URL + "author/update", options)
-            .then(
-                response => { return 'Success'; }
-            ).then(
-                html => console.log(html)
-            );
-    }
-
+    return JSON.stringify(obj); // Convert the object to a JSON string
+}
 
 </script>

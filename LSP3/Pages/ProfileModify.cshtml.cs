@@ -1,11 +1,7 @@
 using LSP3.Model;
 
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Options;
-
 using Newtonsoft.Json;
-
-using System.Net;
 
 namespace LSP3.Pages;
 

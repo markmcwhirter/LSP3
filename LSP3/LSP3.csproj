@@ -24,6 +24,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\css\node_modules\.package-lock.json" />
+    <Content Include="wwwroot\css\node_modules\nice-forms.css\dist\nice-forms-reset.css" />
+    <Content Include="wwwroot\css\node_modules\nice-forms.css\dist\nice-forms.css" />
+    <Content Include="wwwroot\css\node_modules\nice-forms.css\docs\css\index.css" />
+    <Content Include="wwwroot\css\node_modules\nice-forms.css\docs\css\reset-only.css" />
+    <Content Include="wwwroot\css\node_modules\nice-forms.css\docs\index.html" />
+    <Content Include="wwwroot\css\node_modules\nice-forms.css\docs\reset.html" />
+    <Content Include="wwwroot\css\node_modules\nice-forms.css\package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="LinqKit" Version="1.2.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
@@ -57,6 +68,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\css\node_modules\nice-forms.css\docs\scss\index.scss" />
+    <None Include="wwwroot\css\node_modules\nice-forms.css\docs\scss\reset-only.scss" />
+    <None Include="wwwroot\css\node_modules\nice-forms.css\docs\scss\_demo.scss" />
+    <None Include="wwwroot\css\node_modules\nice-forms.css\docs\scss\_reset.scss" />
+    <None Include="wwwroot\css\node_modules\nice-forms.css\gulpfile.js" />
+    <None Include="wwwroot\css\node_modules\nice-forms.css\LICENSE" />
+    <None Include="wwwroot\css\node_modules\nice-forms.css\README.md" />
+    <None Include="wwwroot\css\node_modules\nice-forms.css\src\nice-forms-reset.scss" />
+    <None Include="wwwroot\css\node_modules\nice-forms.css\src\nice-forms.scss" />
     <None Include="wwwroot\Scripts\UploadFile.js" />
   </ItemGroup>
 

@@ -13,7 +13,8 @@ async function CheckAuthor(username) {
 }
 
 function UpdateAuthor(data) {
- 
+
+    debugger;
     const author = JSON.parse(data);
     deleteFromObject('__RequestVerificationToken', author);
 
@@ -28,7 +29,7 @@ function UpdateAuthor(data) {
 
     fetch(API_URL + "author/update", options)
         .then(
-            response => { return response.statusText() }
+            response => { html => console.log(html) }
         ).then(
             html => console.log(html)
         );
@@ -47,13 +48,14 @@ function DeleteAuthor(id) {
 function UpdateAuthorEventHandler(event) {
 
     event.preventDefault();
-
+    debugger;
 
     if (document.getElementById("fieldset").disabled == true) {
         document.getElementById("fieldset").disabled = false;
         var elem = document.getElementById('UpdateButton');
         var txt = elem.textContent || elem.innerText;
         elem.innerText = 'Save';
+        return;
     }
 
     if (!Validate('username', 'Please supply your username')) return false;
