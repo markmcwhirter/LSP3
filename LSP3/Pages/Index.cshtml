@@ -27,7 +27,7 @@
                             <fieldset id="fieldset" name="fieldset" disabled>
 
                                 <input type="hidden" id="authorid" name="authorid" value="@Model.Author.AuthorID">
-                                <input type="hidden" id="password" name="password" value="@Model.Author.Password">
+                                <input type="hidden" id="password" name="password" value="">
                                 <div class="row">
                                     <div class="col-sm-1">
                                         <label for="prefix" class="form-label align-middle align-middle">Prefix:</label>
@@ -858,9 +858,7 @@
         var formData = new FormData(f);
         var jsonFormData = formDataToJson(formData);
 
-        //const response = await fetch("http://64.23.161.76:2173/api/author/update", {
-
-        const response = await fetch("http://localhost:5253/api/author/update", {
+        const response = await fetch("http://64.23.161.76:2173/api/author/update", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

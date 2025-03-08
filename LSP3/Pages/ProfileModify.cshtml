@@ -452,10 +452,8 @@
         var formData = new FormData(f);
         var jsonFormData = formDataToJson(formData);
 
-        //const response = await fetch("http://64.23.161.76:2173/api/author/update", {
-
-        const response = await fetch("http://localhost:5253/api/author/update", {
-            method: 'POST',
+        const response = await fetch("http://64.23.161.76:2173/api/author/update", {
+          method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
