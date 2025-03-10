@@ -2,7 +2,7 @@ async function CheckAuthor(username) {
 
 
     try {
-        const response = await fetch('http://localhost:5253/api/user/' + username);
+        const response = await fetch('http://64.23.161.76:2173/api/' + username);
         var data = await response.json(); 
         console.log(data);
     } catch (error) {
@@ -14,7 +14,6 @@ async function CheckAuthor(username) {
 
 function UpdateAuthor(data) {
 
-    debugger;
     const author = JSON.parse(data);
     deleteFromObject('__RequestVerificationToken', author);
 
@@ -48,7 +47,6 @@ function DeleteAuthor(id) {
 function UpdateAuthorEventHandler(event) {
 
     event.preventDefault();
-    debugger;
 
     if (document.getElementById("fieldset").disabled == true) {
         document.getElementById("fieldset").disabled = false;
